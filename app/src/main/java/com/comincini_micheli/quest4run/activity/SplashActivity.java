@@ -1,9 +1,11 @@
-package com.comincini_micheli.quest4run;
+package com.comincini_micheli.quest4run.activity;
 
 import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.comincini_micheli.quest4run.R;
 
 public class SplashActivity extends AppCompatActivity {
 
