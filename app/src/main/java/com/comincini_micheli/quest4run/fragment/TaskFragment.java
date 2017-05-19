@@ -11,6 +11,7 @@ import android.widget.ListView;
 
 import com.comincini_micheli.quest4run.R;
 import com.comincini_micheli.quest4run.objects.Task;
+import com.comincini_micheli.quest4run.other.DatabaseHandler;
 import com.comincini_micheli.quest4run.other.TaskAdapter;
 
 import java.util.ArrayList;
@@ -76,8 +77,6 @@ public class TaskFragment extends Fragment
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
 
-        taskList = new ArrayList<Task>();
-
     }
 
     @Override
@@ -85,7 +84,21 @@ public class TaskFragment extends Fragment
                              Bundle savedInstanceState)
     {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_task, container, false);
+        View v = inflater.inflate(R.layout.fragment_task, container, false);
+        DatabaseHandler db = new DatabaseHandler(getContext());
+        Task t = new Task();
+        t.setName("Corsa 1");
+        t.setIdTaskType(55);
+        t.setObjective("5 km");
+        db.addTask(new Task());
+        List<Task> taskList = db.getAllTasks();
+        list=(ListView)getActivity().findViewById(R.id.list);
+
+        // Getting adapter by passing xml data ArrayList
+        adapter=new TaskAdapter(getActivity(), taskList);
+        list.setAdapter(adapter);
+        return v;
+
     }
 
     // TODO: Rename method, update argument and hook method into UI event
