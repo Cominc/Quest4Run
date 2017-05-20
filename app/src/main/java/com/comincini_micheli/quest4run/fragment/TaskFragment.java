@@ -35,6 +35,7 @@ public class TaskFragment extends Fragment
     {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_task, container, false);
+        /*
         DatabaseHandler db = new DatabaseHandler(getContext());
         Task t = new Task();
         t.setName("Corsa 1");
@@ -42,11 +43,13 @@ public class TaskFragment extends Fragment
         t.setObjective("5 km");
         db.addTask(new Task());
         List<Task> taskList = db.getAllTasks();
-        list=(ListView)getActivity().findViewById(R.id.list);
+
+        list=(ListView)getView().findViewById(R.id.list);
 
         // Getting adapter by passing xml data ArrayList
         adapter=new TaskAdapter(getActivity(), taskList);
         list.setAdapter(adapter);
+        */
         return v;
 
     }
@@ -54,5 +57,17 @@ public class TaskFragment extends Fragment
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        DatabaseHandler db = new DatabaseHandler(getContext());
+        Task t = new Task();
+        t.setName("Corsa 1");
+        t.setIdTaskType(55);
+        t.setObjective("5 km");
+        db.addTask(t);
+        List<Task> taskList = db.getAllTasks();
+        list=(ListView)getView().findViewById(R.id.list);
+
+        // Getting adapter by passing xml data ArrayList
+        adapter=new TaskAdapter(getActivity(), taskList);
+        list.setAdapter(adapter);
     }
 }
