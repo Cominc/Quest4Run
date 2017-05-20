@@ -3,6 +3,7 @@ package com.comincini_micheli.quest4run.activity;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.View;
@@ -17,6 +18,7 @@ import android.view.MenuItem;
 
 import com.comincini_micheli.quest4run.R;
 import com.comincini_micheli.quest4run.fragment.TaskFragment;
+import com.comincini_micheli.quest4run.fragment.TestFragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -86,15 +88,13 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
         Log.w("a","a"+id);
 
-        TaskFragment fragment = new TaskFragment();
-        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.fragment_container, fragment);
-        fragmentTransaction.commit();
+        Fragment fragment = null;
+
 
         if (id == R.id.nav_camera) {
-            // Handle the camera action
+            fragment = new TaskFragment();
         } else if (id == R.id.nav_gallery) {
-
+            fragment = new TestFragment();
         } else if (id == R.id.nav_slideshow) {
 
         } else if (id == R.id.nav_manage) {
@@ -103,6 +103,13 @@ public class MainActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_send) {
 
+        }
+
+        if(fragment!= null)
+        {
+            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.fragment_container, fragment);
+            fragmentTransaction.commit();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
