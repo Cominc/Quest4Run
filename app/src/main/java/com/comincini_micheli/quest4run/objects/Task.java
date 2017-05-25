@@ -10,38 +10,49 @@ public class Task
     private String name;
     private int reward;
     private int idTaskType;
-    private String objective;
+    private String goal;
     private boolean completed;
     private boolean active;
 
-    public Task(int id, String name, int reward, int idTaskType, String objective, boolean completed, boolean active)
+    public Task(int id, String name, int reward, int idTaskType, String goal, boolean completed, boolean active)
     {
         this.id = id;
         this.name = name;
         this.reward = reward;
         this.idTaskType = idTaskType;
-        this.objective = objective;
+        this.goal = goal;
         this.completed = completed;
         this.active = active;
     }
 
-    public Task(String name, int reward, int idTaskType, String objective, boolean completed, boolean active)
+    public Task(String name, int reward, int idTaskType, String goal, boolean completed, boolean active)
     {
         this.name = name;
         this.reward = reward;
         this.idTaskType = idTaskType;
-        this.objective = objective;
+        this.goal = goal;
         this.completed = completed;
         this.active = active;
     }
 
-    public Task(int id, String name, int reward, int idTaskType, String objective)
+    public String getGoal()
+    {
+        return goal;
+    }
+
+    public void setGoal(String goal)
+    {
+        this.goal = goal;
+    }
+
+    public Task(int id, String name, int reward, int idTaskType, String goal)
     {
         this.id = id;
         this.name = name;
         this.reward = reward;
         this.idTaskType = idTaskType;
-        this.objective = objective;
+        this.goal = goal;
+
         this.completed = false;
         this.active = true;
     }
@@ -58,16 +69,6 @@ public class Task
     public void setName(String name)
     {
         this.name = name;
-    }
-
-    public String getObjective()
-    {
-        return objective;
-    }
-
-    public void setObjective(String objective)
-    {
-        this.objective = objective;
     }
 
     public int getReward()

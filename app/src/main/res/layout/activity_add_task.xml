@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:padding="5dp">
+
+    <EditText
+        android:id="@+id/nameTask"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_weight="1"
+        android:ems="10"
+        android:hint="@string/name_hint"
+        android:inputType="textPersonName"
+        />
+
+    <TextView
+        android:id="@+id/taskTypeSpinnerLabel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/nameTask"
+        android:layout_marginTop="27dp"
+        android:text="@string/spinner_task_type_label"
+        android:textSize="18dp"/>
+
+    <Spinner
+        android:id="@+id/taskTypeSpinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="13dp"
+        android:layout_below="@+id/taskTypeSpinnerLabel"
+        android:layout_alignParentStart="true"
+        style="@android:style/Widget.Holo.Light.Spinner"/>
+
+    <TextView
+        android:id="@+id/taskGoalSpinnerLabel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="27dp"
+        android:text="@string/spinner_task_goal_label"
+        android:textSize="18dp"
+        android:layout_below="@+id/taskTypeSpinner"
+        android:layout_alignParentStart="true"/>
+
+    <Spinner
+        android:id="@+id/taskGoalSpinner"
+        style="@android:style/Widget.Holo.Light.Spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/taskGoalSpinnerLabel"
+        android:layout_marginTop="14dp"/>
+
+    <TextView
+        android:id="@+id/taskRewardSpinnerLabel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/taskGoalSpinner"
+        android:layout_marginTop="50dp"
+        android:text="@string/spinner_task_reward_label"
+        android:textSize="18dp"/>
+
+    <Spinner
+        android:id="@+id/taskRewardSpinner"
+        style="@android:style/Widget.Holo.Light.Spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/taskRewardSpinnerLabel"
+        android:layout_marginTop="20dp"/>
+
+    <Button
+        android:id="@+id/btnAddTask"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/btn_add_label"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"/>
+
+</RelativeLayout>

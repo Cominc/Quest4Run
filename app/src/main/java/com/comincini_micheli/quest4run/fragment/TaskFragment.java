@@ -1,5 +1,6 @@
 package com.comincini_micheli.quest4run.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -17,6 +18,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.comincini_micheli.quest4run.R;
+import com.comincini_micheli.quest4run.activity.AddTaskActivity;
 import com.comincini_micheli.quest4run.objects.Task;
 import com.comincini_micheli.quest4run.other.DatabaseHandler;
 import com.comincini_micheli.quest4run.other.TaskAdapter;
@@ -121,7 +123,7 @@ public class TaskFragment extends Fragment
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                /*Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
                 Task t = new Task();
                 t.setName("Corsa add");
@@ -129,7 +131,9 @@ public class TaskFragment extends Fragment
                 t.setObjective("5 km");
                 DatabaseHandler db = new DatabaseHandler(getContext());
                 db.addTask(t);
-                db.close();
+                db.close();*/
+                Intent intent = new Intent(getActivity(), AddTaskActivity.class);
+                startActivity(intent);
             }
         });
 

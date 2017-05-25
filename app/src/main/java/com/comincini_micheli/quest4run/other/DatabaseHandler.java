@@ -87,7 +87,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         values.put(KEY_NAME, task.getName());
         values.put(KEY_REWARD, task.getReward());
         values.put(KEY_IDTASKTYPE, task.getIdTaskType());
-        values.put(KEY_OBJECTIVE, task.getObjective());
+        values.put(KEY_OBJECTIVE, task.getGoal());
         values.put(KEY_COMPLETED, task.isCompleted());
         values.put(KEY_ACTIVE, task.isActive());
 
@@ -131,7 +131,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 task.setName(cursor.getString(1));
                 task.setReward(Integer.parseInt(cursor.getString(2)));
                 task.setIdTaskType(Integer.parseInt(cursor.getString(3)));
-                task.setObjective(cursor.getString(4));
+                task.setGoal(cursor.getString(4));
                 task.setCompleted(Boolean.parseBoolean(cursor.getString(5)));
                 task.setActive(Boolean.parseBoolean(cursor.getString(6)));
                 // Adding Task to list
@@ -151,7 +151,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         values.put(KEY_NAME, task.getName());
         values.put(KEY_REWARD, task.getReward());
         values.put(KEY_IDTASKTYPE, task.getIdTaskType());
-        values.put(KEY_OBJECTIVE, task.getObjective());
+        values.put(KEY_OBJECTIVE, task.getGoal());
         values.put(KEY_COMPLETED, task.isCompleted());
         values.put(KEY_ACTIVE, task.isActive());
 

@@ -20,6 +20,30 @@
     <string name="menu_delete">Cancella</string>
     <string name="task_delete">Task rimosso</string>
 
+    <!-- Task Creation -->
+    <string name="name_hint">Nome</string>
+    <string name="spinner_task_type_label">Seleziona il tipo di Task</string>
+    <string name="spinner_task_goal_label">Seleziona l\'obbiettivo</string>
+    <string name="spinner_task_reward_label">Seleziona la ricompensa</string>
+    <string name="btn_add_label">Crea</string>
+    <string name="add_task_activity_title">Crea Task</string>
+    <string-array name="task_type_spinner">
+        <item>Distanza</item>
+        <item>Ritmo</item>
+        <item>Costanza</item>
+    </string-array>
+    <string-array name="task_goal_spinner">
+        <item>5</item>
+        <item>10</item>
+        <item>15</item>
+    </string-array>
+    <string-array name="task_reward_spinner">
+        <item>5</item>
+        <item>10</item>
+        <item>15</item>
+    </string-array>
+    <string name="task_added">Task aggiunto</string>
+
     <!-- Toolbar titles when navigation menu item is selected -->
     <string-array name="nav_item_activity_titles">
         <item>Home</item>

@@ -74,7 +74,7 @@ public class TaskAdapter extends BaseAdapter
         //TODO Va bene mettere le stringe fisse così oppure bisognerebbe usare 2 PlainText separati?
         name.setText(task.getName());
         type.setText(String.valueOf(task.getIdTaskType()));
-        objective.setText(task.getObjective());
+        objective.setText(task.getGoal());
 
         return vi;
     }
