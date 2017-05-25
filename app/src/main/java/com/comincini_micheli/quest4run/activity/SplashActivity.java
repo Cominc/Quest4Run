@@ -9,7 +9,7 @@ import com.comincini_micheli.quest4run.R;
 
 public class SplashActivity extends AppCompatActivity {
 
-    int TIMEOUT_SPLASH = 2500;
+    int TIMEOUT_SPLASH = 1000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
