@@ -7,8 +7,8 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="colorControlNormal">#c5c5c5</item>
-        <item name="colorControlActivated">#959595</item>
-        <item name="colorControlHighlight">#959595</item>
+        <item name="colorControlActivated">#b0afaf</item>
+        <item name="colorControlHighlight">#b0afaf</item>
     </style>
 
     <style name="SplashTheme" parent="Theme.AppCompat.Light.NoActionBar">

@@ -153,7 +153,12 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         values.put(KEY_IDTASKTYPE, task.getIdTaskType());
         values.put(KEY_OBJECTIVE, task.getGoal());
         values.put(KEY_COMPLETED, task.isCompleted());
-        values.put(KEY_ACTIVE, task.isActive());
+
+        //TODO forse non funziona
+        int active_t = 0;
+        if(task.isActive())
+            active_t = 1;
+        values.put(KEY_ACTIVE, active_t);
 
         // updating row
         return db.update(TABLE_TASK, values, KEY_ID + " = ?",

@@ -8,13 +8,13 @@
         android:id="@+id/nameTask"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
         android:layout_weight="1"
         android:ems="10"
         android:hint="@string/name_hint"
         android:inputType="textPersonName"
-        />
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="19dp"/>
 
     <TextView
         android:id="@+id/taskTypeSpinnerLabel"
@@ -58,11 +58,11 @@
         android:id="@+id/taskRewardSpinnerLabel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/taskGoalSpinner"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="27dp"
         android:text="@string/spinner_task_reward_label"
-        android:textSize="18dp"/>
+        android:textSize="18dp"
+        android:layout_below="@+id/taskGoalSpinner"
+        android:layout_alignParentStart="true"/>
 
     <Spinner
         android:id="@+id/taskRewardSpinner"

@@ -1,10 +1,12 @@
 package com.comincini_micheli.quest4run.objects;
 
+import java.io.Serializable;
+
 /**
  * Created by Gianmaria on 19/05/2017.
  */
 
-public class Task
+public class Task implements Serializable
 {
     private int id;
     private String name;
