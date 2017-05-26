@@ -1,12 +1,9 @@
 package com.comincini_micheli.quest4run.activity;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -80,12 +77,15 @@ public class MainActivity extends AppCompatActivity
         Log.w("a","a"+id);
 
         Fragment fragment = null;
+        String title = "";
 
 
-        if (id == R.id.nav_camera) {
+        if (id == R.id.nav_task) {
             fragment = new TaskFragment();
+            title = getResources().getString(R.string.task_fragment_title);
         } else if (id == R.id.nav_gallery) {
             fragment = new TestFragment();
+            title = getResources().getString(R.string.test_fragment_title);
         } else if (id == R.id.nav_slideshow) {
 
         } else if (id == R.id.nav_manage) {
@@ -101,6 +101,7 @@ public class MainActivity extends AppCompatActivity
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.fragment_container, fragment);
             fragmentTransaction.commit();
+            this.setTitle(title);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

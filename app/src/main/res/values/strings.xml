@@ -7,12 +7,16 @@
     <string name="closeDrawer">close_drawer</string>
 
     <!-- Navigation Drawer menu labels -->
-    <string name="nav_home">Home</string>
+    <string name="nav_task">Task</string>
     <string name="nav_photos">Photos</string>
     <string name="nav_movies">Movies</string>
     <string name="nav_notifications">Notifications</string>
     <string name="nav_settings">Settings</string>
     <string name="nav_about_us">About Us</string>
+
+    <!-- Fragments titles -->
+    <string name="task_fragment_title">I tuoi tasks</string>
+    <string name="test_fragment_title">I tuo test</string>
 
 
     <!-- Context Menu TaskList -->
