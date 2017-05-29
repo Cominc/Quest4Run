@@ -81,7 +81,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     //TASK METHODS
 
     //Add Task
-    public void addTask(Task task) {
+    public int addTask(Task task) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
@@ -93,8 +93,9 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         values.put(KEY_ACTIVE, task.isActive());
 
         // Inserting Row
-        db.insert(TABLE_TASK, null, values);
+        int id = (int) db.insert(TABLE_TASK, null, values);
         db.close(); // Closing database connection
+        return id;
     }
 
     //Getting single Task

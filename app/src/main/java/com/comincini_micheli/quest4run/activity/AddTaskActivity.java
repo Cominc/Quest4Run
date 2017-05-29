@@ -66,8 +66,9 @@ public class AddTaskActivity extends AppCompatActivity
                     t.setIdTaskType(spinnerType.getSelectedItemPosition());
                     t.setGoal(Integer.toString(spinnerGoal.getSelectedItemPosition()));
                     t.setReward(spinnerReward.getSelectedItemPosition());
-                    db.addTask(t);
+                    int newTaskId = db.addTask(t);
                     db.close();
+                    t.setId(newTaskId);
                     Intent resultIntent = new Intent();
                     resultIntent.putExtra(Constants.TASK_ADDED, t);
                     setResult(RESULT_OK, resultIntent);
