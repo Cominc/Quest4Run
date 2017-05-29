@@ -16,6 +16,7 @@ import android.view.MenuItem;
 import com.comincini_micheli.quest4run.R;
 import com.comincini_micheli.quest4run.fragment.TaskFragment;
 import com.comincini_micheli.quest4run.fragment.TestFragment;
+import com.comincini_micheli.quest4run.other.DatabaseHandler;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -63,6 +64,7 @@ public class MainActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            //TODO RIMUOVERE TUTTI I TASK
             return true;
         }
 

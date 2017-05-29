@@ -55,7 +55,7 @@ public class TaskAdapter extends BaseAdapter
         return position;
     }
 
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         View vi=convertView;
         if(convertView==null)
             vi = inflater.inflate(R.layout.task_list_row2, null);
@@ -66,7 +66,9 @@ public class TaskAdapter extends BaseAdapter
         TextView reward = (TextView)vi.findViewById(R.id.task_reward);
         final Switch active = (Switch) vi.findViewById(R.id.task_switch_active);
 
+        Log.w("position", position+"/"+data.size());
         task_actual = data.get(position);
+        Log.w("nome", task_actual.getName());
 
         // Setting all values in listview
         //TODO Va bene mettere le stringe fisse così oppure bisognerebbe usare 2 PlainText separati?
@@ -80,12 +82,18 @@ public class TaskAdapter extends BaseAdapter
             @Override
             public void onClick(View v)
             {
+                task_actual = data.get(position);
+                Log.w("position", position +"");
+                Log.w("valore task prima", "" + task_actual.isActive());
+                Log.w("nome", task_actual.getName());
+                Log.w("nome", v.toString());
+                Log.w("valore db prima", "" + db.getTask(task_actual.getId()).isActive());
                 task_actual.setActive(active.isChecked());
                 //TODO update di active nel db non funziona
                 Log.w("Valore return update",""+db.updateTask(task_actual));
                 Log.w("valore switch", "" + active.isChecked());
-                Log.w("valore task_actual", "" + task_actual.isActive());
-                Log.w("valore db", "" + db.getTask(task_actual.getId()).isActive());
+                Log.w("valore task_actual dopo", "" + task_actual.isActive());
+                Log.w("valore db dopo", "" + db.getTask(task_actual.getId()).isActive());
             }
         });
 

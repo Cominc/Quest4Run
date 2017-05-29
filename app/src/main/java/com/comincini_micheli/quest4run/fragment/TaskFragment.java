@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
@@ -43,6 +44,7 @@ public class TaskFragment extends Fragment
                              Bundle savedInstanceState)
     {
         // Inflate the layout for this fragment
+        Log.w("fragment create","");
         View v = inflater.inflate(R.layout.fragment_task, container, false);
         return v;
 
@@ -87,6 +89,7 @@ public class TaskFragment extends Fragment
         super.onViewCreated(view, savedInstanceState);
         db = new DatabaseHandler(getContext());
 
+        Log.w("lista riletta db","");
         taskList = db.getAllTasks();
         list=(ListView)getView().findViewById(R.id.list);
         registerForContextMenu(list);
