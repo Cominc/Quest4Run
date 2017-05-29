@@ -6,6 +6,11 @@
     <string name="openDrawer">open_drawer</string>
     <string name="closeDrawer">close_drawer</string>
 
+    <!-- Confirm options -->
+    <string name="yes">Sì</string>
+    <string name="cancel">Annulla</string>
+
+
     <!-- Navigation Drawer menu labels -->
     <string name="nav_task">Task</string>
     <string name="nav_photos">Photos</string>
@@ -14,15 +19,22 @@
     <string name="nav_settings">Settings</string>
     <string name="nav_about_us">About Us</string>
 
+
     <!-- Fragments titles -->
     <string name="task_fragment_title">I tuoi tasks</string>
     <string name="test_fragment_title">I tuo test</string>
 
 
     <!-- Context Menu TaskList -->
-    <string name="menu_edit">Modifica</string>
+    <string name="menu_complete">Completa</string>
     <string name="menu_delete">Cancella</string>
     <string name="task_delete">Task rimosso</string>
+
+    <!-- Option Menu TaskList -->
+    <string name="delete_all">Cancella tutto</string>
+    <string name="delete_confirmation">Sei sicuro di voler cancellare tutti i Task?</string>
+    <string name="number_task_deleted">Rimossi %d Task</string>
+    <string name="show_history">Task Completati</string>
 
     <!-- Task Creation -->
     <string name="name_hint">Nome</string>
@@ -68,6 +80,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_main">MainActivity</string>
+    <string name="title_task_history_activity">Task Completati</string>
 
     <string name="action_settings">Settings</string>
 </resources>

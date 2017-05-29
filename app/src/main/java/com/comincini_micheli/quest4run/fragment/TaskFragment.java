@@ -1,13 +1,16 @@
 package com.comincini_micheli.quest4run.fragment;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,6 +21,7 @@ import android.widget.Toast;
 
 import com.comincini_micheli.quest4run.R;
 import com.comincini_micheli.quest4run.activity.AddTaskActivity;
+import com.comincini_micheli.quest4run.activity.TaskHistoryActivity;
 import com.comincini_micheli.quest4run.objects.Task;
 import com.comincini_micheli.quest4run.other.Constants;
 import com.comincini_micheli.quest4run.other.DatabaseHandler;
@@ -40,6 +44,63 @@ public class TaskFragment extends Fragment
     }
 
     @Override
+    public void onCreate(@Nullable Bundle savedInstanceState)
+    {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.task_option_menu, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        int id = item.getItemId();
+
+        switch (id)
+        {
+            case R.id.action_settings:
+
+                break;
+
+            case R.id.action_delete_all:
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                builder.setMessage(R.string.delete_confirmation)
+                        .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                int deleted = db.deleteAllTasks();
+                                taskList.clear();
+                                adapter.notifyDataSetChanged();
+                                Toast.makeText(getContext(), String.format(getResources().getString(R.string.number_task_deleted), deleted), Toast.LENGTH_SHORT).show();
+                            }
+                        })
+                        .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                // User cancelled the dialog
+                            }
+                        });
+                // Create the AlertDialog object and return it
+                builder.create();
+                builder.show();
+                break;
+
+            case R.id.action_show_history:
+                Intent intent = new Intent(getActivity(), TaskHistoryActivity.class);
+                startActivity(intent);
+                break;
+
+            default:
+
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState)
     {
@@ -54,7 +115,7 @@ public class TaskFragment extends Fragment
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo)
     {
         super.onCreateContextMenu(menu, v, menuInfo);
-        if (v.getId()==R.id.list) {
+        if (v.getId()==R.id.listTask) {
             MenuInflater inflater = getActivity().getMenuInflater();
             inflater.inflate(R.menu.menu_tasklist, menu);
         }
@@ -71,6 +132,10 @@ public class TaskFragment extends Fragment
             case R.id.edit:
                 // edit stuff here
                 //TODO EDIT CONTESTUALE TASK
+                taskList.get(info.position).setCompleted(true);
+                db.updateTask(taskList.get(info.position));
+                taskList.remove(info.position);
+                adapter.notifyDataSetChanged();
                 return true;
             case R.id.delete:
                 // remove stuff here
@@ -89,9 +154,8 @@ public class TaskFragment extends Fragment
         super.onViewCreated(view, savedInstanceState);
         db = new DatabaseHandler(getContext());
 
-        Log.w("lista riletta db","");
-        taskList = db.getAllTasks();
-        list=(ListView)getView().findViewById(R.id.list);
+        taskList = db.getTasks(false);
+        list=(ListView)getView().findViewById(R.id.listTask);
         registerForContextMenu(list);
 
         FloatingActionButton fab = (FloatingActionButton) getActivity().findViewById(R.id.fab);

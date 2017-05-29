@@ -5,7 +5,6 @@ package com.comincini_micheli.quest4run.other;
     import android.database.Cursor;
     import android.database.sqlite.SQLiteDatabase;
     import android.database.sqlite.SQLiteOpenHelper;
-    import android.util.Log;
 
     import com.comincini_micheli.quest4run.objects.Equipment;
     import com.comincini_micheli.quest4run.objects.Task;
@@ -20,7 +19,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     // All Static variables
     // Database Version
-    private static final int DATABASE_VERSION = 4;
+    private static final int DATABASE_VERSION = 6;
 
     // Database Name
     private static final String DATABASE_NAME = "Quest4Run";
@@ -37,7 +36,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String KEY_MGC = "magic";
     private static final String KEY_PRICE = "price";
     private static final String KEY_ICON = "icon";
-    private static final String KEY_OBJECTIVE = "objective";
+    private static final String KEY_GOAL = "objective";
     private static final String KEY_REWARD = "reward";
     private static final String KEY_IDTASKTYPE = "idTaskType";
     private static final String KEY_COMPLETED = "completed";
@@ -51,7 +50,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String CREATE_TASK_TABLE = "CREATE TABLE " + TABLE_TASK + "("
             + KEY_ID + " INTEGER PRIMARY KEY," + KEY_NAME + " TEXT,"
             + KEY_REWARD + " INTEGER," + KEY_IDTASKTYPE + " INTEGER,"
-            + KEY_OBJECTIVE + " NUMERIC," + KEY_COMPLETED + " INTEGER,"
+            + KEY_GOAL + " NUMERIC," + KEY_COMPLETED + " INTEGER,"
             + KEY_ACTIVE + " INTEGER" +
              ")";
 
@@ -88,7 +87,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         values.put(KEY_NAME, task.getName());
         values.put(KEY_REWARD, task.getReward());
         values.put(KEY_IDTASKTYPE, task.getIdTaskType());
-        values.put(KEY_OBJECTIVE, task.getGoal());
+        values.put(KEY_GOAL, task.getGoal());
         values.put(KEY_COMPLETED, task.isCompleted());
         values.put(KEY_ACTIVE, task.isActive());
 
@@ -103,7 +102,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
 
         Cursor cursor = db.query(TABLE_TASK, new String[] { KEY_ID,
-                        KEY_NAME, KEY_REWARD, KEY_IDTASKTYPE, KEY_OBJECTIVE, KEY_COMPLETED, KEY_ACTIVE }, KEY_ID + "=?",
+                        KEY_NAME, KEY_REWARD, KEY_IDTASKTYPE, KEY_GOAL, KEY_COMPLETED, KEY_ACTIVE }, KEY_ID + "=?",
                 new String[] { String.valueOf(id) }, null, null, null, null);
         if (cursor != null)
             cursor.moveToFirst();
@@ -111,7 +110,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         Task task = new Task(Integer.parseInt(cursor.getString(0)),
                 cursor.getString(1), Integer.parseInt(cursor.getString(2)),
                 Integer.parseInt(cursor.getString(3)),cursor.getString(4),
-                Boolean.parseBoolean(cursor.getString(5)),castStringToBoolean(cursor.getString(6)));
+                castStringToBoolean(cursor.getString(5)),castStringToBoolean(cursor.getString(6)));
         // return Task
         return task;
     }
@@ -134,7 +133,40 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 task.setReward(Integer.parseInt(cursor.getString(2)));
                 task.setIdTaskType(Integer.parseInt(cursor.getString(3)));
                 task.setGoal(cursor.getString(4));
-                task.setCompleted(Boolean.parseBoolean(cursor.getString(5)));
+                task.setCompleted(castStringToBoolean(cursor.getString(5)));
+                task.setActive(castStringToBoolean(cursor.getString(6)));
+                // Adding Task to list
+                taskList.add(task);
+            } while (cursor.moveToNext());
+        }
+
+        // return Task list
+        return taskList;
+    }
+
+    public List<Task> getTasks(boolean show_completed) {
+        List<Task> taskList = new ArrayList<Task>();
+        String _completed;
+        if(show_completed)
+            _completed = "1";
+        else
+            _completed = "0";
+
+        String selectQuery = "SELECT  * FROM " + TABLE_TASK + " WHERE " + KEY_COMPLETED + " == " + _completed;
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+                Task task = new Task();
+                task.setId(Integer.parseInt(cursor.getString(0)));
+                task.setName(cursor.getString(1));
+                task.setReward(Integer.parseInt(cursor.getString(2)));
+                task.setIdTaskType(Integer.parseInt(cursor.getString(3)));
+                task.setGoal(cursor.getString(4));
+                task.setCompleted(castStringToBoolean(cursor.getString(5)));
                 task.setActive(castStringToBoolean(cursor.getString(6)));
                 // Adding Task to list
                 taskList.add(task);
@@ -161,10 +193,13 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         values.put(KEY_NAME, task.getName());
         values.put(KEY_REWARD, task.getReward());
         values.put(KEY_IDTASKTYPE, task.getIdTaskType());
-        values.put(KEY_OBJECTIVE, task.getGoal());
-        values.put(KEY_COMPLETED, task.isCompleted());
+        values.put(KEY_GOAL, task.getGoal());
 
-        //TODO forse non funziona
+        int completed_t = 0;
+        if(task.isCompleted())
+            completed_t = 1;
+        values.put(KEY_COMPLETED, completed_t);
+
         int active_t = 0;
         if(task.isActive())
             active_t = 1;
@@ -181,6 +216,14 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         db.delete(TABLE_TASK, KEY_ID + " = ?",
                 new String[]{String.valueOf(task.getId())});
         db.close();
+    }
+
+    public int deleteAllTasks()
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        int deleted = db.delete(TABLE_TASK, "1" , null);
+        db.close();
+        return deleted;
     }
 
 

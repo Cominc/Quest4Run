@@ -24,7 +24,13 @@
             android:name=".activity.MainActivity"
             android:label="@string/title_activity_main"
             android:theme="@style/AppTheme.NoActionBar"/>
-        <activity android:name=".activity.AddTaskActivity" android:label="@string/add_task_activity_title">
+        <activity
+            android:name=".activity.AddTaskActivity"
+            android:label="@string/add_task_activity_title">
+        </activity>
+        <activity
+            android:name=".activity.TaskHistoryActivity"
+            android:label="@string/title_task_history_activity">
         </activity>
     </application>
 
