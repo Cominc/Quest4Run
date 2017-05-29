@@ -82,7 +82,7 @@ public class TaskAdapter extends BaseAdapter
             {
                 task_actual.setActive(active.isChecked());
                 //TODO update di active nel db non funziona
-                db.updateTask(task_actual);
+                Log.w("Valore return update",""+db.updateTask(task_actual));
                 Log.w("valore switch", "" + active.isChecked());
                 Log.w("valore task_actual", "" + task_actual.isActive());
                 Log.w("valore db", "" + db.getTask(task_actual.getId()).isActive());

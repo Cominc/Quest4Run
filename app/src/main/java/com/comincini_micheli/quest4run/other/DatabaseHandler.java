@@ -5,6 +5,7 @@ package com.comincini_micheli.quest4run.other;
     import android.database.Cursor;
     import android.database.sqlite.SQLiteDatabase;
     import android.database.sqlite.SQLiteOpenHelper;
+    import android.util.Log;
 
     import com.comincini_micheli.quest4run.objects.Equipment;
     import com.comincini_micheli.quest4run.objects.Task;
@@ -133,6 +134,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 task.setIdTaskType(Integer.parseInt(cursor.getString(3)));
                 task.setGoal(cursor.getString(4));
                 task.setCompleted(Boolean.parseBoolean(cursor.getString(5)));
+                Log.w("Active",cursor.getString(6));
+                Log.w("Active cast boolean",Boolean.parseBoolean(cursor.getString(6))+"");
                 task.setActive(Boolean.parseBoolean(cursor.getString(6)));
                 // Adding Task to list
                 taskList.add(task);
