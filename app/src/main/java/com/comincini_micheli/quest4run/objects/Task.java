@@ -61,6 +61,8 @@ public class Task implements Serializable
 
     public Task()
     {
+        this.completed = false;
+        this.active = true;
     }
 
     public String getName()

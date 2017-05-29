@@ -110,7 +110,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         Task task = new Task(Integer.parseInt(cursor.getString(0)),
                 cursor.getString(1), Integer.parseInt(cursor.getString(2)),
                 Integer.parseInt(cursor.getString(3)),cursor.getString(4),
-                Boolean.parseBoolean(cursor.getString(5)),Boolean.parseBoolean(cursor.getString(6)));
+                Boolean.parseBoolean(cursor.getString(5)),castStringToBoolean(cursor.getString(6)));
         // return Task
         return task;
     }
@@ -134,9 +134,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 task.setIdTaskType(Integer.parseInt(cursor.getString(3)));
                 task.setGoal(cursor.getString(4));
                 task.setCompleted(Boolean.parseBoolean(cursor.getString(5)));
-                Log.w("Active",cursor.getString(6));
-                Log.w("Active cast boolean",Boolean.parseBoolean(cursor.getString(6))+"");
-                task.setActive(Boolean.parseBoolean(cursor.getString(6)));
+                task.setActive(castStringToBoolean(cursor.getString(6)));
                 // Adding Task to list
                 taskList.add(task);
             } while (cursor.moveToNext());
@@ -144,6 +142,14 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
         // return Task list
         return taskList;
+    }
+
+    private boolean castStringToBoolean(String s)
+    {
+        if(s.equals("1"))
+            return true;
+        else
+            return false;
     }
 
     // Updating single Task
