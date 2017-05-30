@@ -14,9 +14,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.comincini_micheli.quest4run.R;
+import com.comincini_micheli.quest4run.fragment.CharacterFragment;
+import com.comincini_micheli.quest4run.fragment.RunFragment;
 import com.comincini_micheli.quest4run.fragment.TaskFragment;
 import com.comincini_micheli.quest4run.fragment.TestFragment;
-import com.comincini_micheli.quest4run.other.DatabaseHandler;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -91,7 +92,7 @@ public class MainActivity extends AppCompatActivity
                 title = getResources().getString(R.string.nav_quest);
                 break;
             case R.id.nav_run:
-                fragment = new TestFragment();
+                fragment = new RunFragment();
                 title = getResources().getString(R.string.nav_run);
                 break;
             case R.id.nav_shop:
@@ -99,7 +100,7 @@ public class MainActivity extends AppCompatActivity
                 title = getResources().getString(R.string.nav_shop);
                 break;
             case R.id.nav_character:
-                fragment = new TestFragment();
+                fragment = new CharacterFragment();
                 title = getResources().getString(R.string.nav_character);
                 break;
             case R.id.nav_share:
