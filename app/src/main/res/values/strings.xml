@@ -66,6 +66,10 @@
     <string name="task_added">Task aggiunto</string>
     <string name="name_empty_error">Inserire il nome del Task</string>
 
+    <!-- Character Creation -->
+
+
+
     <!-- Toolbar titles when navigation menu item is selected -->
     <string-array name="nav_item_activity_titles">
         <item>Home</item>
@@ -86,6 +90,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="title_task_history_activity">Task Completati</string>
+    <string name="title_create_character">Crea il personaggio</string>
 
     <string name="action_settings">Settings</string>
 </resources>

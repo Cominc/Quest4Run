@@ -32,6 +32,10 @@
             android:name=".activity.TaskHistoryActivity"
             android:label="@string/title_task_history_activity">
         </activity>
+        <activity
+            android:name=".activity.CreateCharacterActivity"
+            android:label="@string/title_create_character">
+        </activity>
     </application>
 
 </manifest>
