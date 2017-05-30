@@ -75,28 +75,51 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
-        int id = item.getItemId();
-        Log.w("a","a"+id);
+        int idNavigationItemSelected = item.getItemId();
 
         Fragment fragment = null;
         String title = "";
 
-
-        if (id == R.id.nav_task) {
-            fragment = new TaskFragment();
-            title = getResources().getString(R.string.task_fragment_title);
-        } else if (id == R.id.nav_gallery) {
-            fragment = new TestFragment();
-            title = getResources().getString(R.string.test_fragment_title);
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
+        switch(idNavigationItemSelected)
+        {
+            case R.id.nav_task:
+                fragment = new TaskFragment();
+                title = getResources().getString(R.string.task_fragment_title);
+                break;
+            case R.id.nav_quest:
+                fragment = new TestFragment();
+                title = getResources().getString(R.string.nav_quest);
+                break;
+            case R.id.nav_run:
+                fragment = new TestFragment();
+                title = getResources().getString(R.string.nav_run);
+                break;
+            case R.id.nav_shop:
+                fragment = new TestFragment();
+                title = getResources().getString(R.string.nav_shop);
+                break;
+            case R.id.nav_character:
+                fragment = new TestFragment();
+                title = getResources().getString(R.string.nav_character);
+                break;
+            case R.id.nav_share:
+                fragment = new TestFragment();
+                title = getResources().getString(R.string.nav_share);
+                break;
+            case R.id.nav_send:
+                fragment = new TestFragment();
+                title = getResources().getString(R.string.nav_send);
+                break;
+            case R.id.nav_about_us:
+                fragment = new TestFragment();
+                title = getResources().getString(R.string.nav_about_us);
+                break;
+            default:
+                fragment = new TestFragment();
+                title = getResources().getString(R.string.test_fragment_title);
+                break;
         }
+
 
         if(fragment!= null)
         {

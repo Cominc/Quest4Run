@@ -12,12 +12,17 @@
 
 
     <!-- Navigation Drawer menu labels -->
+    <string name="nav_run">Corsa</string>
     <string name="nav_task">Task</string>
-    <string name="nav_photos">Photos</string>
-    <string name="nav_movies">Movies</string>
-    <string name="nav_notifications">Notifications</string>
-    <string name="nav_settings">Settings</string>
-    <string name="nav_about_us">About Us</string>
+
+    <string name="nav_character">Personaggio</string>
+    <string name="nav_quest">Missioni</string>
+    <string name="nav_shop">Negozio</string>
+
+
+    <string name="nav_share">Condividi</string>
+    <string name="nav_send">Invia</string>
+    <string name="nav_about_us">Chi siamo</string>
 
 
     <!-- Fragments titles -->
