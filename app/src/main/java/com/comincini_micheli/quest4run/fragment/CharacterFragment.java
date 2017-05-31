@@ -1,5 +1,6 @@
 package com.comincini_micheli.quest4run.fragment;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -11,6 +12,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.comincini_micheli.quest4run.R;
+import com.comincini_micheli.quest4run.other.Constants;
 import com.comincini_micheli.quest4run.other.DatabaseHandler;
 import com.comincini_micheli.quest4run.objects.Character;
 
@@ -34,10 +36,8 @@ public class CharacterFragment extends Fragment
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         DatabaseHandler db = new DatabaseHandler(getContext());
-        //TODO attivare caricamento da db
-        //SharedPreferences settings = getActivity().getSharedPreferences(PREFS_NAME, 0);
-        //Character myCharacter = db.getCharacter(settings.getInt());
-        Character myCharacter = new Character();
+        SharedPreferences settings = getActivity().getSharedPreferences(Constants.NAME_PREFS, Context.MODE_PRIVATE);
+        Character myCharacter = db.getCharacter(settings.getInt(Constants.CHAR_ID_PREFERENCE,-1));
 
         TextView name = (TextView)getActivity().findViewById(R.id.character_name);
         name.setText(myCharacter.getName());

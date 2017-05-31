@@ -14,6 +14,7 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.comincini_micheli.quest4run.R;
+import com.comincini_micheli.quest4run.objects.Character;
 import com.comincini_micheli.quest4run.other.Constants;
 import com.comincini_micheli.quest4run.other.DatabaseHandler;
 
@@ -141,10 +142,14 @@ public class CreateCharacterActivity extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-                if(nameTextEdit.getText().toString().trim().length() != 0)
+                String newCharacterName = nameTextEdit.getText().toString().trim();
+                if(newCharacterName.length() != 0)
                 {
+                    DatabaseHandler db = new DatabaseHandler(getApplicationContext());
+                    Character newCharacter = new Character(newCharacterName,0);
+                    int newCharacterID = db.addCharacter(newCharacter);
                     SharedPreferences.Editor firstLaunchSetting = getSharedPreferences(Constants.NAME_PREFS, MODE_PRIVATE).edit();
-                    firstLaunchSetting.putInt(Constants.CHAR_ID_PREFERENCE, -1);
+                    firstLaunchSetting.putInt(Constants.CHAR_ID_PREFERENCE, newCharacterID);
                     if(firstLaunchSetting.commit())
                     {
                         Intent i = new Intent(CreateCharacterActivity.this, MainActivity.class);

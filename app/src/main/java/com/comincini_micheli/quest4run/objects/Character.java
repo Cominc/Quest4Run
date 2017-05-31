@@ -12,6 +12,7 @@ public class Character {
     private int gender;
     private int exp;
     private int attack, defence, magic;
+    //TODO gestione avatar
 
     public Character() {
         this.name = "Ciao";
@@ -22,13 +23,14 @@ public class Character {
         this.magic = 1;
     }
 
-    public Character(String name, int gender, int exp, int attack, int defence, int magic) {
+    public Character(String name, int gender) {
         this.name = name;
         this.gender = gender;
-        this.exp = exp;
-        this.attack = attack;
-        this.defence = defence;
-        this.magic = magic;
+        this.exp = 0;
+        //TODO da impostare come costanti
+        this.attack = 3;
+        this.defence = 3;
+        this.magic = 3;
     }
 
     public Character(int id, String name, int gender, int exp, int attack, int defence, int magic) {

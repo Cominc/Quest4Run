@@ -250,7 +250,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     //CHARACTER METHODS
 
-    public void addCharacter(Character character) {
+    public int addCharacter(Character character) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
@@ -265,8 +265,9 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         //values.put(KEY_ICON, character.getIcon());
 
         // Inserting Row
-        db.insert(TABLE_CHARACTER, null, values);
+        int addedCharacterId = (int) db.insert(TABLE_CHARACTER, null, values);
         db.close(); // Closing database connection
+        return addedCharacterId;
     }
 
     //Getting single Character
