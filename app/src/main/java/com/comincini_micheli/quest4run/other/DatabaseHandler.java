@@ -20,7 +20,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     // All Static variables
     // Database Version
-    private static final int DATABASE_VERSION = 6;
+    private static final int DATABASE_VERSION = 7;
 
     // Database Name
     private static final String DATABASE_NAME = "Quest4Run";
@@ -60,8 +60,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             + KEY_ACTIVE + " INTEGER" +
              ")";
     private static final String CREATE_CHARACTER_TABLE = "CREATE TABLE " + TABLE_CHARACTER + "("
-            + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + KEY_NAME + " TEXT," + " INTEGER," + KEY_GENDER + " INTEGER,"
-            + KEY_EXP + KEY_ATK + " INTEGER," + KEY_DEF + " INTEGER," + KEY_MGC + " INTEGER," + KEY_ICON + " TEXT"
+            + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + KEY_NAME + " TEXT," + KEY_GENDER + " INTEGER,"
+            + KEY_EXP + " INTEGER, " + KEY_ATK + " INTEGER," + KEY_DEF + " INTEGER," + KEY_MGC + " INTEGER," + KEY_ICON + " TEXT"
             + ")";
 
     public DatabaseHandler(Context context) {
@@ -73,6 +73,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(CREATE_EQUIPMENT_TABLE);
         db.execSQL(CREATE_TASK_TABLE);
+        db.execSQL(CREATE_CHARACTER_TABLE);
     }
 
     // Upgrading database

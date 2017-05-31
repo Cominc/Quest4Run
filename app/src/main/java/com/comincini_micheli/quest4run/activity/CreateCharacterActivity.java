@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
@@ -107,7 +108,7 @@ public class CreateCharacterActivity extends AppCompatActivity
             }
         });
 
-        RadioGroup radioGroup = (RadioGroup) findViewById(R.id.radio_gender_selection);
+        final RadioGroup radioGroup = (RadioGroup) findViewById(R.id.radio_gender_selection);
 
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
         {
@@ -146,7 +147,14 @@ public class CreateCharacterActivity extends AppCompatActivity
                 if(newCharacterName.length() != 0)
                 {
                     DatabaseHandler db = new DatabaseHandler(getApplicationContext());
-                    Character newCharacter = new Character(newCharacterName,0);
+
+                    int gender;
+                    if(radioGroup.getCheckedRadioButtonId() == R.id.create_character_male_radiobtn)
+                        gender = 0;
+                    else
+                        gender = 1;
+
+                    Character newCharacter = new Character(newCharacterName, gender);
                     int newCharacterID = db.addCharacter(newCharacter);
                     SharedPreferences.Editor firstLaunchSetting = getSharedPreferences(Constants.NAME_PREFS, MODE_PRIVATE).edit();
                     firstLaunchSetting.putInt(Constants.CHAR_ID_PREFERENCE, newCharacterID);
