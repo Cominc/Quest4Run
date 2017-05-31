@@ -43,6 +43,8 @@ public class CharacterFragment extends Fragment
         TextView name = (TextView) getActivity().findViewById(R.id.character_name);
         name.setText(myCharacter.getName());
 
+        ImageView gender = (ImageView) getActivity().findViewById(R.id.character_gender_icon);
+
         ImageView avatar = (ImageView) getActivity().findViewById(R.id.character_avatar);
         int[] femaleAvatar = {
                 R.drawable.f_0,
@@ -55,16 +57,19 @@ public class CharacterFragment extends Fragment
                 R.drawable.m_1,
                 R.drawable.m_2,
         };
-        int resIdAvatar;
+        int resIdAvatar,resIdGender;
         if(myCharacter.getGender()==0)
         {
             resIdAvatar = maleAvatar[myCharacter.getAvatar()];
+            resIdGender = R.drawable.ic_gender_male_black_24dp;
         }
         else
         {
             resIdAvatar = femaleAvatar[myCharacter.getAvatar()];
+            resIdGender = R.drawable.ic_gender_female_black_24dp;
         }
         avatar.setImageResource(resIdAvatar);
+        gender.setImageResource(resIdGender);
 
 
         ProgressBar exp_bar = (ProgressBar) getActivity().findViewById(R.id.character_exp_bar);
