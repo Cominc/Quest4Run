@@ -16,13 +16,13 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:text="Nome personaggio"
-            android:textSize="21dp" />
+            android:text="@string/name_hint"
+            android:textSize="21sp" />
 
         <ImageView
             android:id="@+id/character_avatar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
             android:layout_below="@+id/character_name"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="18dp"
@@ -54,7 +54,7 @@
             android:layout_below="@+id/character_exp_bar"
             android:layout_marginTop="34dp"
             android:text="Statistiche"
-            android:textSize="18dp" />
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/character_attack_label"

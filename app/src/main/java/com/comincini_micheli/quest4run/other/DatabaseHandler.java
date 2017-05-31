@@ -5,6 +5,7 @@ package com.comincini_micheli.quest4run.other;
     import android.database.Cursor;
     import android.database.sqlite.SQLiteDatabase;
     import android.database.sqlite.SQLiteOpenHelper;
+    import android.util.Log;
 
     import com.comincini_micheli.quest4run.objects.Task;
     import com.comincini_micheli.quest4run.objects.Character;
@@ -20,7 +21,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     // All Static variables
     // Database Version
-    private static final int DATABASE_VERSION = 8;
+    private static final int DATABASE_VERSION = 1;
 
     // Database Name
     private static final String DATABASE_NAME = "Quest4Run";
@@ -46,7 +47,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String KEY_ACTIVE = "active";
 
     private static final String KEY_GENDER = "gender";
-    private static final String KEY_AVATAR = "exp";
+    private static final String KEY_AVATAR = "avatar";
     private static final String KEY_EXP = "exp";
 
     //Create QUERIES
@@ -55,7 +56,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             + KEY_ATK + " INTEGER," + KEY_DEF + " INTEGER," + KEY_MGC + " INTEGER," + KEY_PRICE + " INTEGER," + KEY_ICON + " TEXT"
             + ")";
     private static final String CREATE_TASK_TABLE = "CREATE TABLE " + TABLE_TASK + "("
-            + KEY_ID + " INTEGER PRIMARY KEY," + KEY_NAME + " TEXT,"
+            + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + KEY_NAME + " TEXT,"
             + KEY_REWARD + " INTEGER," + KEY_IDTASKTYPE + " INTEGER,"
             + KEY_GOAL + " NUMERIC," + KEY_COMPLETED + " INTEGER,"
             + KEY_ACTIVE + " INTEGER" +
@@ -72,8 +73,11 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     // Creating Tables
     @Override
     public void onCreate(SQLiteDatabase db) {
+        Log.w("equipment: ", CREATE_EQUIPMENT_TABLE);
         db.execSQL(CREATE_EQUIPMENT_TABLE);
+        Log.w("task: ", CREATE_TASK_TABLE);
         db.execSQL(CREATE_TASK_TABLE);
+        Log.w("character: ", CREATE_CHARACTER_TABLE);
         db.execSQL(CREATE_CHARACTER_TABLE);
     }
 
@@ -124,6 +128,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 cursor.getString(1), Integer.parseInt(cursor.getString(2)),
                 Integer.parseInt(cursor.getString(3)),cursor.getString(4),
                 castStringToBoolean(cursor.getString(5)),castStringToBoolean(cursor.getString(6)));
+        cursor.close();
         // return Task
         return task;
     }
@@ -152,6 +157,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 taskList.add(task);
             } while (cursor.moveToNext());
         }
+        cursor.close();
 
         // return Task list
         return taskList;
@@ -185,17 +191,14 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 taskList.add(task);
             } while (cursor.moveToNext());
         }
+        cursor.close();
 
         // return Task list
         return taskList;
     }
 
-    private boolean castStringToBoolean(String s)
-    {
-        if(s.equals("1"))
-            return true;
-        else
-            return false;
+    private boolean castStringToBoolean(String s) {
+        return s.equals("1");
     }
 
     // Updating single Task
@@ -231,8 +234,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         db.close();
     }
 
-    public int deleteAllTasks()
-    {
+    public int deleteAllTasks() {
         SQLiteDatabase db = this.getWritableDatabase();
         int deleted = db.delete(TABLE_TASK, "1" , null);
         db.close();
@@ -283,8 +285,9 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         Character character = new Character(Integer.parseInt(cursor.getString(0)),
                 cursor.getString(1), Integer.parseInt(cursor.getString(2)),
                 Integer.parseInt(cursor.getString(3)),Integer.parseInt(cursor.getString(4)),
-                Integer.parseInt(cursor.getString(5)),Integer.parseInt(cursor.getString(5)),
-                Integer.parseInt(cursor.getString(6)));
+                Integer.parseInt(cursor.getString(5)),Integer.parseInt(cursor.getString(6)),
+                Integer.parseInt(cursor.getString(7)));
+        cursor.close();
         // return Character
         return character;
     }
@@ -303,11 +306,11 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         values.put(KEY_MGC, character.getMagic());
 
         // updating row
-        return db.update(TABLE_EQUIPMENT, values, KEY_ID + " = ?",
+        return db.update(TABLE_CHARACTER, values, KEY_ID + " = ?",
                 new String[] { String.valueOf(character.getId()) });
     }
 
-    // Deleting single Equipment
+    // Deleting single Character
     public void deleteCharacter(Character character) {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TABLE_CHARACTER, KEY_ID + " = ?",
@@ -349,6 +352,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 cursor.getString(1), Integer.parseInt(cursor.getString(2)),
                 Integer.parseInt(cursor.getString(3)),Integer.parseInt(cursor.getString(4)),
                 Integer.parseInt(cursor.getString(5)),cursor.getString(6));
+        cursor.close();
         // return Equipment
         return equipment;
     }
@@ -378,6 +382,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             } while (cursor.moveToNext());
         }
 
+        cursor.close();
         // return Equipment list
         return equipmentList;
     }

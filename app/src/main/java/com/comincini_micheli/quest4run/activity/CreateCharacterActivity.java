@@ -21,7 +21,6 @@ import com.comincini_micheli.quest4run.other.DatabaseHandler;
 
 public class CreateCharacterActivity extends AppCompatActivity
 {
-
     private int[] femaleAvatar = {
             R.drawable.f_0,
             R.drawable.f_1,
@@ -48,7 +47,6 @@ public class CreateCharacterActivity extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_character);
-
         femaleAvatarTag = getResources().getStringArray(R.array.female_avatar_tag);
         maleAvatarTag = getResources().getStringArray(R.array.male_avatar_tag);
 
@@ -147,17 +145,19 @@ public class CreateCharacterActivity extends AppCompatActivity
                 String newCharacterName = nameTextEdit.getText().toString().trim();
                 if(newCharacterName.length() != 0)
                 {
-                    DatabaseHandler db = new DatabaseHandler(getApplicationContext());
+
 
                     int gender;
                     if(radioGroup.getCheckedRadioButtonId() == R.id.create_character_male_radiobtn)
                         gender = 0;
                     else
                         gender = 1;
-                    int avatar;
 
 
                     Character newCharacter = new Character(newCharacterName, gender, avatarIndex);
+                    Log.w("avatarId", avatarIndex+"");
+
+                    DatabaseHandler db = new DatabaseHandler(getApplicationContext());
                     int newCharacterID = db.addCharacter(newCharacter);
                     SharedPreferences.Editor firstLaunchSetting = getSharedPreferences(Constants.NAME_PREFS, MODE_PRIVATE).edit();
                     firstLaunchSetting.putInt(Constants.CHAR_ID_PREFERENCE, newCharacterID);
