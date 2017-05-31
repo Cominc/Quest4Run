@@ -43,6 +43,7 @@
 
     <!-- Task Creation -->
     <string name="name_hint">Nome</string>
+
     <string name="spinner_task_type_label">Seleziona il tipo di Task</string>
     <string name="spinner_task_goal_label">Seleziona l\'obbiettivo</string>
     <string name="spinner_task_reward_label">Seleziona la ricompensa</string>
@@ -64,10 +65,33 @@
         <item>15 &#162;</item>
     </string-array>
     <string name="task_added">Task aggiunto</string>
-    <string name="name_empty_error">Inserire il nome del Task</string>
+    <string name="name_empty_task_error">Inserire il nome del Task</string>
 
     <!-- Character Creation -->
+    <string name="name_empty_character_error">Inserire il nome del personaggio</string>
 
+    <string name="gender_selection_question">Scegli il genere:</string>
+
+    <string name="gender_male">Maschio</string>
+    <string name="gender_female">Femmina</string>
+    <string-array name="gender">
+        <item>@string/gender_male</item>
+        <item>@string/gender_female</item>
+    </string-array>
+
+    <string name="default_female_avatar_tag">f_0</string>
+    <string-array name="female_avatar_tag">
+        <item>@string/default_female_avatar_tag</item>
+        <item>f_1</item>
+        <item>f_2</item>
+    </string-array>
+
+    <string name="default_male_avatar_tag">m_0</string>
+    <string-array name="male_avatar_tag">
+        <item>@string/default_male_avatar_tag</item>
+        <item>m_1</item>
+        <item>m_2</item>
+    </string-array>
 
 
     <!-- Toolbar titles when navigation menu item is selected -->

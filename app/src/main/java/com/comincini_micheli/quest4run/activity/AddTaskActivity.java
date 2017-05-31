@@ -78,7 +78,7 @@ public class AddTaskActivity extends AppCompatActivity
                 }
                 else
                 {
-                    nameTextEdit.setError("Inserire il nome");
+                    nameTextEdit.setError(getResources().getString(R.string.name_empty_task_error));
                 }
             }
         });
