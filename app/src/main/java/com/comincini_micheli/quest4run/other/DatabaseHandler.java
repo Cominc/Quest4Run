@@ -6,8 +6,9 @@ package com.comincini_micheli.quest4run.other;
     import android.database.sqlite.SQLiteDatabase;
     import android.database.sqlite.SQLiteOpenHelper;
 
-    import com.comincini_micheli.quest4run.objects.Equipment;
     import com.comincini_micheli.quest4run.objects.Task;
+    import com.comincini_micheli.quest4run.objects.Character;
+    import com.comincini_micheli.quest4run.objects.Equipment;
 
     import java.util.ArrayList;
     import java.util.List;
@@ -27,6 +28,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     // List table name
     private static final String TABLE_EQUIPMENT = "equipment";
     private static final String TABLE_TASK = "task";
+    private static final String TABLE_CHARACTER = "character";
 
     // EQUIPMENT Table Columns names
     private static final String KEY_ID = "id";
@@ -36,11 +38,15 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String KEY_MGC = "magic";
     private static final String KEY_PRICE = "price";
     private static final String KEY_ICON = "icon";
+
     private static final String KEY_GOAL = "objective";
     private static final String KEY_REWARD = "reward";
     private static final String KEY_IDTASKTYPE = "idTaskType";
     private static final String KEY_COMPLETED = "completed";
     private static final String KEY_ACTIVE = "active";
+
+    private static final String KEY_GENDER = "gender";
+    private static final String KEY_EXP = "exp";
 
     //Create QUERIES
     private static final String CREATE_EQUIPMENT_TABLE = "CREATE TABLE " + TABLE_EQUIPMENT + "("
@@ -53,6 +59,10 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             + KEY_GOAL + " NUMERIC," + KEY_COMPLETED + " INTEGER,"
             + KEY_ACTIVE + " INTEGER" +
              ")";
+    private static final String CREATE_CHARACTER_TABLE = "CREATE TABLE " + TABLE_CHARACTER + "("
+            + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + KEY_NAME + " TEXT," + " INTEGER," + KEY_GENDER + " INTEGER,"
+            + KEY_EXP + KEY_ATK + " INTEGER," + KEY_DEF + " INTEGER," + KEY_MGC + " INTEGER," + KEY_ICON + " TEXT"
+            + ")";
 
     public DatabaseHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -238,6 +248,72 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return cursor.getCount();
     }
 
+    //CHARACTER METHODS
+
+    public void addCharacter(Character character) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(KEY_NAME, character.getName());
+        values.put(KEY_GENDER, character.getGender());
+        values.put(KEY_EXP, character.getExp());
+        values.put(KEY_ATK, character.getAttack());
+        values.put(KEY_DEF, character.getDefence());
+        values.put(KEY_MGC, character.getMagic());
+
+        //TODO gestione avatar
+        //values.put(KEY_ICON, character.getIcon());
+
+        // Inserting Row
+        db.insert(TABLE_CHARACTER, null, values);
+        db.close(); // Closing database connection
+    }
+
+    //Getting single Character
+    public Character getCharacter(int id) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.query(TABLE_CHARACTER, new String[] { KEY_ID,
+                        KEY_NAME, KEY_GENDER, KEY_EXP, KEY_ATK, KEY_DEF, KEY_MGC, KEY_ICON }, KEY_ID + "=?",
+                new String[] { String.valueOf(id) }, null, null, null, null);
+        if (cursor != null)
+            cursor.moveToFirst();
+        //TODO gestione avatar
+        Character character = new Character(Integer.parseInt(cursor.getString(0)),
+                cursor.getString(1), Integer.parseInt(cursor.getString(2)),
+                Integer.parseInt(cursor.getString(3)),Integer.parseInt(cursor.getString(4)),
+                Integer.parseInt(cursor.getString(5)),Integer.parseInt(cursor.getString(5)));
+        // return Character
+        return character;
+    }
+
+    // Updating single Character
+    public int updateCharacter(Character character) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(KEY_NAME, character.getName());
+        values.put(KEY_GENDER, character.getGender());
+        values.put(KEY_EXP, character.getExp());
+        values.put(KEY_ATK, character.getAttack());
+        values.put(KEY_DEF, character.getDefence());
+        values.put(KEY_MGC, character.getMagic());
+
+        //TODO gestione avatar
+        //values.put(KEY_ICON, equipment.getIcon());
+
+        // updating row
+        return db.update(TABLE_EQUIPMENT, values, KEY_ID + " = ?",
+                new String[] { String.valueOf(character.getId()) });
+    }
+
+    // Deleting single Equipment
+    public void deleteCharacter(Character character) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(TABLE_CHARACTER, KEY_ID + " = ?",
+                new String[]{String.valueOf(character.getId())});
+        db.close();
+    }
 
 
     //EQUIPMENT METHODS
