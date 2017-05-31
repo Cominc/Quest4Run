@@ -39,6 +39,7 @@ public class CreateCharacterActivity extends AppCompatActivity
 
     private int[] avatarRes;
     private String[] avatarTag;
+    private int avatarIndex;
 
     TextView nameTextEdit;
 
@@ -53,6 +54,7 @@ public class CreateCharacterActivity extends AppCompatActivity
 
         avatarRes = maleAvatar;
         avatarTag = maleAvatarTag;
+        avatarIndex = 0;
 
         ImageButton btn_left = (ImageButton) findViewById(R.id.update_characher_left_btn);
         ImageButton btn_right = (ImageButton) findViewById(R.id.update_character_right_btn);
@@ -66,19 +68,18 @@ public class CreateCharacterActivity extends AppCompatActivity
                 String nomeTag = String.valueOf(avatar.getTag());
                 if(nomeTag.equals(avatarTag[0]))
                 {
-                    avatar.setImageResource(avatarRes[2]);
-                    avatar.setTag(avatarTag[2]);
+                    avatarIndex = 2;
                 }
                 else if(nomeTag.equals(avatarTag[1]))
                 {
-                    avatar.setImageResource(avatarRes[0]);
-                    avatar.setTag(avatarTag[0]);
+                    avatarIndex = 0;
                 }
                 else if(nomeTag.equals(avatarTag[2]))
                 {
-                    avatar.setImageResource(avatarRes[1]);
-                    avatar.setTag(avatarTag[1]);
+                    avatarIndex = 1;
                 }
+                avatar.setImageResource(avatarRes[avatarIndex]);
+                avatar.setTag(avatarTag[avatarIndex]);
             }
         });
 
@@ -92,19 +93,18 @@ public class CreateCharacterActivity extends AppCompatActivity
 
                 if(nomeTag.equals(avatarTag[0]))
                 {
-                    avatar.setImageResource(avatarRes[1]);
-                    avatar.setTag(avatarTag[1]);
+                    avatarIndex = 1;
                 }
                 else if(nomeTag.equals(avatarTag[1]))
                 {
-                    avatar.setImageResource(avatarRes[2]);
-                    avatar.setTag(avatarTag[2]);
+                    avatarIndex = 2;
                 }
                 else if(nomeTag.equals(avatarTag[2]))
                 {
-                    avatar.setImageResource(avatarRes[0]);
-                    avatar.setTag(avatarTag[0]);
+                    avatarIndex = 0;
                 }
+                avatar.setImageResource(avatarRes[avatarIndex]);
+                avatar.setTag(avatarTag[avatarIndex]);
             }
         });
 
@@ -129,9 +129,10 @@ public class CreateCharacterActivity extends AppCompatActivity
                     default:
                         break;
                 }
+                avatarIndex = 0;
                 ImageView avatar = (ImageView) findViewById(R.id.create_character_avatar_img);
-                avatar.setImageResource(avatarRes[0]);
-                avatar.setTag(avatarTag[0]);
+                avatar.setImageResource(avatarRes[avatarIndex]);
+                avatar.setTag(avatarTag[avatarIndex]);
             }
         });
 
@@ -153,8 +154,10 @@ public class CreateCharacterActivity extends AppCompatActivity
                         gender = 0;
                     else
                         gender = 1;
+                    int avatar;
 
-                    Character newCharacter = new Character(newCharacterName, gender);
+
+                    Character newCharacter = new Character(newCharacterName, gender, avatarIndex);
                     int newCharacterID = db.addCharacter(newCharacter);
                     SharedPreferences.Editor firstLaunchSetting = getSharedPreferences(Constants.NAME_PREFS, MODE_PRIVATE).edit();
                     firstLaunchSetting.putInt(Constants.CHAR_ID_PREFERENCE, newCharacterID);

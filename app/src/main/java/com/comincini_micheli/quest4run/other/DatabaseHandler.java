@@ -20,7 +20,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     // All Static variables
     // Database Version
-    private static final int DATABASE_VERSION = 7;
+    private static final int DATABASE_VERSION = 8;
 
     // Database Name
     private static final String DATABASE_NAME = "Quest4Run";
@@ -46,6 +46,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String KEY_ACTIVE = "active";
 
     private static final String KEY_GENDER = "gender";
+    private static final String KEY_AVATAR = "exp";
     private static final String KEY_EXP = "exp";
 
     //Create QUERIES
@@ -60,8 +61,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             + KEY_ACTIVE + " INTEGER" +
              ")";
     private static final String CREATE_CHARACTER_TABLE = "CREATE TABLE " + TABLE_CHARACTER + "("
-            + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + KEY_NAME + " TEXT," + KEY_GENDER + " INTEGER,"
-            + KEY_EXP + " INTEGER, " + KEY_ATK + " INTEGER," + KEY_DEF + " INTEGER," + KEY_MGC + " INTEGER," + KEY_ICON + " TEXT"
+            + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + KEY_NAME + " TEXT," + KEY_GENDER + " INTEGER," + KEY_AVATAR + " INTEGER,"
+            + KEY_EXP + " INTEGER, " + KEY_ATK + " INTEGER," + KEY_DEF + " INTEGER," + KEY_MGC + " INTEGER"
             + ")";
 
     public DatabaseHandler(Context context) {
@@ -82,6 +83,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         // Drop older table if existed
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_EQUIPMENT);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_TASK);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_CHARACTER);
 
         // Create tables again
         onCreate(db);
@@ -237,7 +239,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return deleted;
     }
 
-
     // Getting Task Count
     public int getTaskCount() {
         String countQuery = "SELECT  * FROM " + TABLE_TASK;
@@ -257,13 +258,11 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put(KEY_NAME, character.getName());
         values.put(KEY_GENDER, character.getGender());
+        values.put(KEY_AVATAR, character.getAvatar());
         values.put(KEY_EXP, character.getExp());
         values.put(KEY_ATK, character.getAttack());
         values.put(KEY_DEF, character.getDefence());
         values.put(KEY_MGC, character.getMagic());
-
-        //TODO gestione avatar
-        //values.put(KEY_ICON, character.getIcon());
 
         // Inserting Row
         int addedCharacterId = (int) db.insert(TABLE_CHARACTER, null, values);
@@ -276,15 +275,16 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
 
         Cursor cursor = db.query(TABLE_CHARACTER, new String[] { KEY_ID,
-                        KEY_NAME, KEY_GENDER, KEY_EXP, KEY_ATK, KEY_DEF, KEY_MGC, KEY_ICON }, KEY_ID + "=?",
+                        KEY_NAME, KEY_GENDER, KEY_AVATAR, KEY_EXP, KEY_ATK, KEY_DEF, KEY_MGC }, KEY_ID + "=?",
                 new String[] { String.valueOf(id) }, null, null, null, null);
         if (cursor != null)
             cursor.moveToFirst();
-        //TODO gestione avatar
+
         Character character = new Character(Integer.parseInt(cursor.getString(0)),
                 cursor.getString(1), Integer.parseInt(cursor.getString(2)),
                 Integer.parseInt(cursor.getString(3)),Integer.parseInt(cursor.getString(4)),
-                Integer.parseInt(cursor.getString(5)),Integer.parseInt(cursor.getString(5)));
+                Integer.parseInt(cursor.getString(5)),Integer.parseInt(cursor.getString(5)),
+                Integer.parseInt(cursor.getString(6)));
         // return Character
         return character;
     }
@@ -296,13 +296,11 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put(KEY_NAME, character.getName());
         values.put(KEY_GENDER, character.getGender());
+        values.put(KEY_AVATAR, character.getAvatar());
         values.put(KEY_EXP, character.getExp());
         values.put(KEY_ATK, character.getAttack());
         values.put(KEY_DEF, character.getDefence());
         values.put(KEY_MGC, character.getMagic());
-
-        //TODO gestione avatar
-        //values.put(KEY_ICON, equipment.getIcon());
 
         // updating row
         return db.update(TABLE_EQUIPMENT, values, KEY_ID + " = ?",

@@ -10,33 +10,25 @@ public class Character {
     private int id;
     private String name;
     private int gender;
+    private int avatar;
     private int exp;
     private int attack, defence, magic;
-    //TODO gestione avatar
 
-    public Character() {
-        this.name = "Ciao";
-        this.gender = 1;
-        this.exp = 75;
-        this.attack = 5;
-        this.defence = 3;
-        this.magic = 1;
-    }
-
-    public Character(String name, int gender) {
+    public Character(String name, int gender, int avatar) {
         this.name = name;
         this.gender = gender;
+        this.avatar = avatar;
         this.exp = 0;
-        //TODO da impostare come costanti
         this.attack = 3;
         this.defence = 3;
         this.magic = 3;
     }
 
-    public Character(int id, String name, int gender, int exp, int attack, int defence, int magic) {
+    public Character(int id, String name, int gender, int avatar, int exp, int attack, int defence, int magic) {
         this.id = id;
         this.name = name;
         this.gender = gender;
+        this.avatar = avatar;
         this.exp = exp;
         this.attack = attack;
         this.defence = defence;
@@ -65,6 +57,14 @@ public class Character {
 
     public void setGender(int gender) {
         this.gender = gender;
+    }
+
+    public int getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(int avatar) {
+        this.avatar = avatar;
     }
 
     public int getExp() {

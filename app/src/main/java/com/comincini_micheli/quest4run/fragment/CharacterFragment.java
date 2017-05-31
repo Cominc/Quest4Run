@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -39,23 +40,47 @@ public class CharacterFragment extends Fragment
         SharedPreferences settings = getActivity().getSharedPreferences(Constants.NAME_PREFS, Context.MODE_PRIVATE);
         Character myCharacter = db.getCharacter(settings.getInt(Constants.CHAR_ID_PREFERENCE,-1));
 
-        TextView name = (TextView)getActivity().findViewById(R.id.character_name);
+        TextView name = (TextView) getActivity().findViewById(R.id.character_name);
         name.setText(myCharacter.getName());
 
-        TextView level = (TextView)getActivity().findViewById(R.id.character_level_value);
-        level.setText(String.valueOf(myCharacter.getLevel()));
+        ImageView avatar = (ImageView) getActivity().findViewById(R.id.character_avatar);
+        int[] femaleAvatar = {
+                R.drawable.f_0,
+                R.drawable.f_1,
+                R.drawable.f_2,
+        };
 
-        TextView attack = (TextView)getActivity().findViewById(R.id.character_attack_value);
-        attack.setText(String.valueOf(myCharacter.getAttack()));
+        int[] maleAvatar = {
+                R.drawable.m_0,
+                R.drawable.m_1,
+                R.drawable.m_2,
+        };
+        int resIdAvatar;
+        if(myCharacter.getGender()==0)
+        {
+            resIdAvatar = maleAvatar[myCharacter.getAvatar()];
+        }
+        else
+        {
+            resIdAvatar = femaleAvatar[myCharacter.getAvatar()];
+        }
+        avatar.setImageResource(resIdAvatar);
 
-        TextView defense = (TextView)getActivity().findViewById(R.id.character_defense_value);
-        defense.setText(String.valueOf(myCharacter.getDefence()));
 
-        TextView magic = (TextView)getActivity().findViewById(R.id.character_magic_value);
-        magic.setText(String.valueOf(myCharacter.getMagic()));
-
-        ProgressBar exp_bar = (ProgressBar)getActivity().findViewById(R.id.character_exp_bar);
+        ProgressBar exp_bar = (ProgressBar) getActivity().findViewById(R.id.character_exp_bar);
         exp_bar.setMax(EXP_FOR_NEXT_LEVEL);
         exp_bar.setProgress(myCharacter.getExp()%EXP_FOR_NEXT_LEVEL);
+
+        TextView level = (TextView) getActivity().findViewById(R.id.character_level_value);
+        level.setText(String.valueOf(myCharacter.getLevel()));
+
+        TextView attack = (TextView) getActivity().findViewById(R.id.character_attack_value);
+        attack.setText(String.valueOf(myCharacter.getAttack()));
+
+        TextView defense = (TextView) getActivity().findViewById(R.id.character_defense_value);
+        defense.setText(String.valueOf(myCharacter.getDefence()));
+
+        TextView magic = (TextView) getActivity().findViewById(R.id.character_magic_value);
+        magic.setText(String.valueOf(myCharacter.getMagic()));
     }
 }
