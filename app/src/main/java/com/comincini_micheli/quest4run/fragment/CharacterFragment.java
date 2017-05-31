@@ -1,5 +1,6 @@
 package com.comincini_micheli.quest4run.fragment;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -33,6 +34,9 @@ public class CharacterFragment extends Fragment
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         DatabaseHandler db = new DatabaseHandler(getContext());
+        //TODO attivare caricamento da db
+        //SharedPreferences settings = getActivity().getSharedPreferences(PREFS_NAME, 0);
+        //Character myCharacter = db.getCharacter(settings.getInt());
         Character myCharacter = new Character();
 
         TextView name = (TextView)getActivity().findViewById(R.id.character_name);
