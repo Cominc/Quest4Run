@@ -143,8 +143,6 @@ public class CreateCharacterActivity extends AppCompatActivity
             {
                 if(nameTextEdit.getText().toString().trim().length() != 0)
                 {
-                    DatabaseHandler db = new DatabaseHandler(getApplicationContext());
-
                     SharedPreferences.Editor firstLaunchSetting = getSharedPreferences(Constants.NAME_PREFS, MODE_PRIVATE).edit();
                     firstLaunchSetting.putInt(Constants.CHAR_ID_PREFERENCE, -1);
                     if(firstLaunchSetting.commit())
