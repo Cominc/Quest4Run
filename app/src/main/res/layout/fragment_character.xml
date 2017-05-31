@@ -63,7 +63,7 @@
             android:layout_alignStart="@+id/textView4"
             android:layout_below="@+id/textView4"
             android:layout_marginTop="27dp"
-            android:text="Attacco" />
+            android:text="@string/attack_label"/>
 
         <TextView
             android:id="@+id/character_defence_label"
@@ -72,7 +72,7 @@
             android:layout_alignStart="@+id/character_attack_label"
             android:layout_below="@+id/character_attack_label"
             android:layout_marginTop="17dp"
-            android:text="Difesa" />
+            android:text="@string/defense_label"/>
 
         <TextView
             android:id="@+id/character_magic_label"
@@ -81,7 +81,7 @@
             android:layout_alignStart="@+id/character_defence_label"
             android:layout_below="@+id/character_defence_label"
             android:layout_marginTop="21dp"
-            android:text="Magia" />
+            android:text="@string/magic_label"/>
 
         <TextView
             android:id="@+id/character_attack_value"

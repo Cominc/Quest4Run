@@ -105,10 +105,7 @@ public class TaskFragment extends Fragment
                              Bundle savedInstanceState)
     {
         // Inflate the layout for this fragment
-        Log.w("fragment create","");
-        View v = inflater.inflate(R.layout.fragment_task, container, false);
-        return v;
-
+        return inflater.inflate(R.layout.fragment_task, container, false);
     }
 
     @Override
