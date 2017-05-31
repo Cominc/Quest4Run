@@ -61,12 +61,12 @@ public class CharacterFragment extends Fragment
         if(myCharacter.getGender()==0)
         {
             resIdAvatar = maleAvatar[myCharacter.getAvatar()];
-            resIdGender = R.drawable.ic_gender_male_black_24dp;
+            resIdGender = R.drawable.ic_gender_male_grey600_24dp;
         }
         else
         {
             resIdAvatar = femaleAvatar[myCharacter.getAvatar()];
-            resIdGender = R.drawable.ic_gender_female_black_24dp;
+            resIdGender = R.drawable.ic_gender_female_grey600_24dp;
         }
         avatar.setImageResource(resIdAvatar);
         gender.setImageResource(resIdGender);
