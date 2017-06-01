@@ -6,7 +6,6 @@ package com.comincini_micheli.quest4run.other;
 
 import android.app.Activity;
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,7 +16,6 @@ import android.widget.TextView;
 import java.util.List;
 
 import com.comincini_micheli.quest4run.R;
-import com.comincini_micheli.quest4run.fragment.TaskFragment;
 import com.comincini_micheli.quest4run.objects.Task;
 
 public class TaskAdapter extends BaseAdapter
@@ -26,7 +24,6 @@ public class TaskAdapter extends BaseAdapter
     private Activity activity;
     private List<Task> data;
     private static LayoutInflater inflater=null;
-    private TaskFragment fragment;
     private String [] task_type;
     private String [] task_goal;
     private String [] task_reward;
@@ -58,7 +55,7 @@ public class TaskAdapter extends BaseAdapter
     public View getView(final int position, View convertView, ViewGroup parent) {
         View vi=convertView;
         if(convertView==null)
-            vi = inflater.inflate(R.layout.task_list_row2, null);
+            vi = inflater.inflate(R.layout.task_list_row, null);
 
         TextView name = (TextView)vi.findViewById(R.id.task_name);
         TextView type = (TextView)vi.findViewById(R.id.task_type);

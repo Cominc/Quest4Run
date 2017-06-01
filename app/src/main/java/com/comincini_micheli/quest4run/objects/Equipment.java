@@ -11,6 +11,12 @@ public class Equipment {
     String icon;
 
     public Equipment() {
+        this.name = "Test";
+        this.atk = 5;
+        this.def = 4;
+        this.mgc = 3;
+        this.price = 2;
+        this.icon = "boh";
     }
 
     public Equipment(int id, String name, int atk, int def, int mgc, int price, String icon) {

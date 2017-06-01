@@ -165,6 +165,7 @@ public class CreateCharacterActivity extends AppCompatActivity
                     {
                         Intent i = new Intent(CreateCharacterActivity.this, MainActivity.class);
                         startActivity(i);
+                        finish();
                     }
                     else
                     {

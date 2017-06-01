@@ -5,11 +5,18 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.comincini_micheli.quest4run.R;
+import com.comincini_micheli.quest4run.objects.Equipment;
+import com.comincini_micheli.quest4run.other.Constants;
+import com.comincini_micheli.quest4run.other.DatabaseHandler;
+import com.comincini_micheli.quest4run.other.ViewPagerAdapter;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -32,8 +39,28 @@ public class ShopFragment extends Fragment
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState)
     {
         super.onViewCreated(view, savedInstanceState);
+        //-----------------------------------------------------
+        DatabaseHandler db = new DatabaseHandler(getContext());
+        Equipment e = new Equipment();
+        db.addEquipment(e);
+        //-----------------------------------------------------
         TabLayout tabLayout = (TabLayout) getActivity().findViewById(R.id.shop_tab_layout);
+        ViewPager shopViewPager = (ViewPager) getActivity().findViewById(R.id.shop_view_pager);
+        setupViewPager(shopViewPager);
+        tabLayout.setupWithViewPager(shopViewPager);
+    }
 
-
+    private void setupViewPager(ViewPager viewPager) {
+        ViewPagerAdapter adapter = new ViewPagerAdapter(getActivity().getSupportFragmentManager());
+        ShopListFragment shopListFragmentAttack = new ShopListFragment();
+        shopListFragmentAttack.setEquipmentTypeId(Constants.ID_TYPE_ATTACK);
+        adapter.addFragment(shopListFragmentAttack, getResources().getString(R.string.attack_label));
+        ShopListFragment shopListFragmenDefense = new ShopListFragment();
+        shopListFragmenDefense.setEquipmentTypeId(Constants.ID_TYPE_DEFENSE);
+        adapter.addFragment(shopListFragmenDefense,  getResources().getString(R.string.defense_label));
+        ShopListFragment shopListFragmentMagic = new ShopListFragment();
+        shopListFragmentMagic.setEquipmentTypeId(Constants.ID_TYPE_MAGIC);
+        adapter.addFragment(shopListFragmentMagic,  getResources().getString(R.string.magic_label));
+        viewPager.setAdapter(adapter);
     }
 }

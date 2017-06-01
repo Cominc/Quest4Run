@@ -11,4 +11,8 @@ public class Constants
    public static final int EXP_FOR_NEXT_LEVEL = 100;
    public static final String CHAR_ID_PREFERENCE = "characterId";
    public static final String NAME_PREFS = "myPrefs";
+
+   public static final int ID_TYPE_ATTACK = 0;
+   public static final int ID_TYPE_DEFENSE = 1;
+   public static final int ID_TYPE_MAGIC = 2;
 }

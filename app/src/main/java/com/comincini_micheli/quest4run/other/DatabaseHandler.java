@@ -387,6 +387,36 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return equipmentList;
     }
 
+    public List<Equipment> getAllEquipments(int typeId, boolean bought) {
+        List<Equipment> equipmentList = new ArrayList<Equipment>();
+        // Select All Query
+        //TODO sistemare query con WHERE
+        String selectQuery = "SELECT  * FROM " + TABLE_EQUIPMENT;
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+                Equipment equipment = new Equipment();
+                equipment.setId(Integer.parseInt(cursor.getString(0)));
+                equipment.setName(cursor.getString(1));
+                equipment.setAtk(Integer.parseInt(cursor.getString(2)));
+                equipment.setDef(Integer.parseInt(cursor.getString(3)));
+                equipment.setMgc(Integer.parseInt(cursor.getString(4)));
+                equipment.setPrice(Integer.parseInt(cursor.getString(5)));
+                equipment.setIcon(cursor.getString(6));
+                // Adding Equipment to list
+                equipmentList.add(equipment);
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        // return Equipment list
+        return equipmentList;
+    }
+
     // Updating single Equipment
     public int updateEquipment(Equipment equipment) {
         SQLiteDatabase db = this.getWritableDatabase();
