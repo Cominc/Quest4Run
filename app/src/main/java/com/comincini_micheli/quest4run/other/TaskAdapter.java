@@ -79,7 +79,6 @@ public class TaskAdapter extends BaseAdapter
             {
                 task_actual = data.get(position);
                 task_actual.setActive(active.isChecked());
-                //TODO update di active nel db non funziona
                 db.updateTask(task_actual);
             }
         });

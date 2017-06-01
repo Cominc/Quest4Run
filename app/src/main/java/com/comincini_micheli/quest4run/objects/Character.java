@@ -13,6 +13,7 @@ public class Character {
     private int avatar;
     private int exp;
     private int attack, defence, magic;
+    private int wallet;
 
     public Character(String name, int gender, int avatar) {
         this.name = name;
@@ -22,9 +23,10 @@ public class Character {
         this.attack = 3;
         this.defence = 3;
         this.magic = 3;
+        this.wallet = 0;
     }
 
-    public Character(int id, String name, int gender, int avatar, int exp, int attack, int defence, int magic) {
+    public Character(int id, String name, int gender, int avatar, int exp, int attack, int defence, int magic, int wallet) {
         this.id = id;
         this.name = name;
         this.gender = gender;
@@ -33,6 +35,7 @@ public class Character {
         this.attack = attack;
         this.defence = defence;
         this.magic = magic;
+        this.wallet = wallet;
     }
 
     public int getId() {
@@ -97,6 +100,16 @@ public class Character {
 
     public void setMagic(int magic) {
         this.magic = magic;
+    }
+
+    public int getWallet()
+    {
+        return wallet;
+    }
+
+    public void setWallet(int wallet)
+    {
+        this.wallet = wallet;
     }
 
     public int getLevel(){ return (int)Math.round(exp/EXP_FOR_NEXT_LEVEL);}
