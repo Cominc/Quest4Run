@@ -4,38 +4,41 @@ package com.comincini_micheli.quest4run.objects;
  * Created by Daniele on 17/05/2017.
  */
 public class Equipment {
-    int id;
-    String name;
-    int atk, def, mgc;
-    int price;
-    String icon;
+    private int id;
+    private String name;
+    private int idType;
+    private int atk, def, mgc;
+    private int price;
+    private String icon;
+    private boolean bought, equipped;
 
     public Equipment() {
-        this.name = "Test";
-        this.atk = 5;
-        this.def = 4;
-        this.mgc = 3;
-        this.price = 2;
-        this.icon = "boh";
+
     }
 
-    public Equipment(int id, String name, int atk, int def, int mgc, int price, String icon) {
+    public Equipment(String name, int idType, int atk, int def, int mgc, int price, String icon) {
+        this.name = name;
+        this.idType = idType;
+        this.atk = atk;
+        this.def = def;
+        this.mgc = mgc;
+        this.price = price;
+        this.icon = icon;
+        this.bought = false;
+        this.equipped = false;
+    }
+
+    public Equipment(int id, String name, int idType, int atk, int def, int mgc, int price, String icon, boolean bought, boolean equipped) {
         this.id = id;
         this.name = name;
+        this.idType = idType;
         this.atk = atk;
         this.def = def;
         this.mgc = mgc;
         this.price = price;
         this.icon = icon;
-    }
-
-    public Equipment(String name, int atk, int def, int mgc, int price, String icon) {
-        this.name = name;
-        this.atk = atk;
-        this.def = def;
-        this.mgc = mgc;
-        this.price = price;
-        this.icon = icon;
+        this.bought = bought;
+        this.equipped = equipped;
     }
 
     public int getId() {
@@ -52,6 +55,14 @@ public class Equipment {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public int getIdType() {
+        return idType;
+    }
+
+    public void setIdType(int idType) {
+        this.idType = idType;
     }
 
     public int getAtk() {
@@ -92,6 +103,22 @@ public class Equipment {
 
     public void setIcon(String icon) {
         this.icon = icon;
+    }
+
+    public boolean isBought() {
+        return bought;
+    }
+
+    public void setBought(boolean bought) {
+        this.bought = bought;
+    }
+
+    public boolean isEquipped() {
+        return equipped;
+    }
+
+    public void setEquipped(boolean equipped) {
+        this.equipped = equipped;
     }
 }
 

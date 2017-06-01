@@ -21,7 +21,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     // All Static variables
     // Database Version
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 3;
 
     // Database Name
     private static final String DATABASE_NAME = "Quest4Run";
@@ -42,7 +42,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     private static final String KEY_GOAL = "objective";
     private static final String KEY_REWARD = "reward";
-    private static final String KEY_IDTASKTYPE = "idTaskType";
+    private static final String KEY_ID_TASK_TYPE = "idTaskType";
     private static final String KEY_COMPLETED = "completed";
     private static final String KEY_ACTIVE = "active";
 
@@ -50,14 +50,20 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String KEY_AVATAR = "avatar";
     private static final String KEY_EXP = "exp";
 
+    private static final String KEY_ID_EQUIPMENT_TYPE = "idEquipmentType";
+    private static final String KEY_BOUGHT = "bought";
+    private static final String KEY_EQUIPPED = "equipped";
+
     //Create QUERIES
     private static final String CREATE_EQUIPMENT_TABLE = "CREATE TABLE " + TABLE_EQUIPMENT + "("
             + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + KEY_NAME + " TEXT,"
-            + KEY_ATK + " INTEGER," + KEY_DEF + " INTEGER," + KEY_MGC + " INTEGER," + KEY_PRICE + " INTEGER," + KEY_ICON + " TEXT"
+            + KEY_ID_EQUIPMENT_TYPE + " INTEGER," + KEY_ATK + " INTEGER," + KEY_DEF + " INTEGER,"
+            + KEY_MGC + " INTEGER," + KEY_PRICE + " INTEGER," + KEY_ICON + " TEXT,"
+            + KEY_BOUGHT + " INTEGER," + KEY_EQUIPPED + " INTEGER"
             + ")";
     private static final String CREATE_TASK_TABLE = "CREATE TABLE " + TABLE_TASK + "("
             + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + KEY_NAME + " TEXT,"
-            + KEY_REWARD + " INTEGER," + KEY_IDTASKTYPE + " INTEGER,"
+            + KEY_REWARD + " INTEGER," + KEY_ID_TASK_TYPE + " INTEGER,"
             + KEY_GOAL + " NUMERIC," + KEY_COMPLETED + " INTEGER,"
             + KEY_ACTIVE + " INTEGER" +
              ")";
@@ -103,7 +109,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put(KEY_NAME, task.getName());
         values.put(KEY_REWARD, task.getReward());
-        values.put(KEY_IDTASKTYPE, task.getIdTaskType());
+        values.put(KEY_ID_TASK_TYPE, task.getIdTaskType());
         values.put(KEY_GOAL, task.getGoal());
         values.put(KEY_COMPLETED, task.isCompleted());
         values.put(KEY_ACTIVE, task.isActive());
@@ -119,7 +125,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
 
         Cursor cursor = db.query(TABLE_TASK, new String[] { KEY_ID,
-                        KEY_NAME, KEY_REWARD, KEY_IDTASKTYPE, KEY_GOAL, KEY_COMPLETED, KEY_ACTIVE }, KEY_ID + "=?",
+                        KEY_NAME, KEY_REWARD, KEY_ID_TASK_TYPE, KEY_GOAL, KEY_COMPLETED, KEY_ACTIVE }, KEY_ID + "=?",
                 new String[] { String.valueOf(id) }, null, null, null, null);
         if (cursor != null)
             cursor.moveToFirst();
@@ -165,17 +171,16 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     public List<Task> getTasks(boolean show_completed) {
         List<Task> taskList = new ArrayList<Task>();
-        String _completed;
+        int _completed;
         if(show_completed)
-            _completed = "1";
+            _completed = 1;
         else
-            _completed = "0";
+            _completed = 0;
 
         String selectQuery = "SELECT  * FROM " + TABLE_TASK + " WHERE " + KEY_COMPLETED + " == " + _completed;
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
-
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
             do {
@@ -192,7 +197,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             } while (cursor.moveToNext());
         }
         cursor.close();
-
+        Log.w("N row",taskList.size()+"");
         // return Task list
         return taskList;
     }
@@ -208,7 +213,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put(KEY_NAME, task.getName());
         values.put(KEY_REWARD, task.getReward());
-        values.put(KEY_IDTASKTYPE, task.getIdTaskType());
+        values.put(KEY_ID_TASK_TYPE, task.getIdTaskType());
         values.put(KEY_GOAL, task.getGoal());
 
         int completed_t = 0;
@@ -327,11 +332,14 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
         ContentValues values = new ContentValues();
         values.put(KEY_NAME, equipment.getName());
+        values.put(KEY_ID_EQUIPMENT_TYPE, equipment.getName());
         values.put(KEY_ATK, equipment.getAtk());
         values.put(KEY_DEF, equipment.getDef());
         values.put(KEY_MGC, equipment.getMgc());
         values.put(KEY_PRICE, equipment.getPrice());
         values.put(KEY_ICON, equipment.getIcon());
+        values.put(KEY_BOUGHT, equipment.getIcon());
+        values.put(KEY_EQUIPPED, equipment.getIcon());
 
         // Inserting Row
         db.insert(TABLE_EQUIPMENT, null, values);
@@ -343,7 +351,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
 
         Cursor cursor = db.query(TABLE_EQUIPMENT, new String[] { KEY_ID,
-                        KEY_NAME, KEY_ATK, KEY_DEF, KEY_MGC, KEY_PRICE, KEY_ICON }, KEY_ID + "=?",
+                        KEY_NAME, KEY_ID_EQUIPMENT_TYPE, KEY_ATK, KEY_DEF, KEY_MGC, KEY_PRICE, KEY_ICON, KEY_BOUGHT, KEY_EQUIPPED }, KEY_ID + "=?",
                 new String[] { String.valueOf(id) }, null, null, null, null);
         if (cursor != null)
             cursor.moveToFirst();
@@ -351,7 +359,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         Equipment equipment = new Equipment(Integer.parseInt(cursor.getString(0)),
                 cursor.getString(1), Integer.parseInt(cursor.getString(2)),
                 Integer.parseInt(cursor.getString(3)),Integer.parseInt(cursor.getString(4)),
-                Integer.parseInt(cursor.getString(5)),cursor.getString(6));
+                Integer.parseInt(cursor.getString(5)),Integer.parseInt(cursor.getString(6)),cursor.getString(7),
+                castStringToBoolean(cursor.getString(8)),castStringToBoolean(cursor.getString(9)));
         cursor.close();
         // return Equipment
         return equipment;
@@ -372,11 +381,14 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 Equipment equipment = new Equipment();
                 equipment.setId(Integer.parseInt(cursor.getString(0)));
                 equipment.setName(cursor.getString(1));
-                equipment.setAtk(Integer.parseInt(cursor.getString(2)));
-                equipment.setDef(Integer.parseInt(cursor.getString(3)));
-                equipment.setMgc(Integer.parseInt(cursor.getString(4)));
-                equipment.setPrice(Integer.parseInt(cursor.getString(5)));
-                equipment.setIcon(cursor.getString(6));
+                equipment.setIdType(Integer.parseInt(cursor.getString(2)));
+                equipment.setAtk(Integer.parseInt(cursor.getString(3)));
+                equipment.setDef(Integer.parseInt(cursor.getString(4)));
+                equipment.setMgc(Integer.parseInt(cursor.getString(5)));
+                equipment.setPrice(Integer.parseInt(cursor.getString(6)));
+                equipment.setIcon(cursor.getString(7));
+                equipment.setBought(castStringToBoolean(cursor.getString(8)));
+                equipment.setEquipped(castStringToBoolean(cursor.getString(9)));
                 // Adding Equipment to list
                 equipmentList.add(equipment);
             } while (cursor.moveToNext());
@@ -387,11 +399,17 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return equipmentList;
     }
 
-    public List<Equipment> getAllEquipments(int typeId, boolean bought) {
+    public List<Equipment> getAllEquipments(int idType, boolean bought) {
         List<Equipment> equipmentList = new ArrayList<Equipment>();
+        int _bought;
+        if(bought)
+            _bought = 1;
+        else
+            _bought = 0;
         // Select All Query
-        //TODO sistemare query con WHERE
-        String selectQuery = "SELECT  * FROM " + TABLE_EQUIPMENT;
+        String selectQuery = "SELECT  * FROM " + TABLE_EQUIPMENT
+                + " WHERE " + KEY_ID_EQUIPMENT_TYPE + " = " + idType
+                + " AND " + KEY_BOUGHT + " = " + _bought;
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
@@ -402,11 +420,14 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 Equipment equipment = new Equipment();
                 equipment.setId(Integer.parseInt(cursor.getString(0)));
                 equipment.setName(cursor.getString(1));
-                equipment.setAtk(Integer.parseInt(cursor.getString(2)));
-                equipment.setDef(Integer.parseInt(cursor.getString(3)));
-                equipment.setMgc(Integer.parseInt(cursor.getString(4)));
-                equipment.setPrice(Integer.parseInt(cursor.getString(5)));
-                equipment.setIcon(cursor.getString(6));
+                equipment.setIdType(Integer.parseInt(cursor.getString(2)));
+                equipment.setAtk(Integer.parseInt(cursor.getString(3)));
+                equipment.setDef(Integer.parseInt(cursor.getString(4)));
+                equipment.setMgc(Integer.parseInt(cursor.getString(5)));
+                equipment.setPrice(Integer.parseInt(cursor.getString(6)));
+                equipment.setIcon(cursor.getString(7));
+                equipment.setBought(castStringToBoolean(cursor.getString(8)));
+                equipment.setEquipped(castStringToBoolean(cursor.getString(9)));
                 // Adding Equipment to list
                 equipmentList.add(equipment);
             } while (cursor.moveToNext());
@@ -423,12 +444,14 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
         ContentValues values = new ContentValues();
         values.put(KEY_NAME, equipment.getName());
+        values.put(KEY_ID_EQUIPMENT_TYPE, equipment.getIdType());
         values.put(KEY_ATK, equipment.getAtk());
         values.put(KEY_DEF, equipment.getDef());
         values.put(KEY_MGC, equipment.getMgc());
         values.put(KEY_PRICE, equipment.getPrice());
         values.put(KEY_ICON, equipment.getIcon());
-
+        values.put(KEY_BOUGHT, equipment.isBought());
+        values.put(KEY_EQUIPPED, equipment.isEquipped());
         // updating row
         return db.update(TABLE_EQUIPMENT, values, KEY_ID + " = ?",
                 new String[] { String.valueOf(equipment.getId()) });
