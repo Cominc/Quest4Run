@@ -21,7 +21,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     // All Static variables
     // Database Version
-    private static final int DATABASE_VERSION = 3;
+    private static final int DATABASE_VERSION = 4;
 
     // Database Name
     private static final String DATABASE_NAME = "Quest4Run";
@@ -49,6 +49,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String KEY_GENDER = "gender";
     private static final String KEY_AVATAR = "avatar";
     private static final String KEY_EXP = "exp";
+    private static final String KEY_WALLET = "wallet";
 
     private static final String KEY_ID_EQUIPMENT_TYPE = "idEquipmentType";
     private static final String KEY_BOUGHT = "bought";
@@ -69,7 +70,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
              ")";
     private static final String CREATE_CHARACTER_TABLE = "CREATE TABLE " + TABLE_CHARACTER + "("
             + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + KEY_NAME + " TEXT," + KEY_GENDER + " INTEGER," + KEY_AVATAR + " INTEGER,"
-            + KEY_EXP + " INTEGER, " + KEY_ATK + " INTEGER," + KEY_DEF + " INTEGER," + KEY_MGC + " INTEGER"
+            + KEY_EXP + " INTEGER, " + KEY_ATK + " INTEGER," + KEY_DEF + " INTEGER," + KEY_MGC + " INTEGER," + KEY_WALLET + " INTEGER"
             + ")";
 
     public DatabaseHandler(Context context) {
@@ -197,7 +198,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             } while (cursor.moveToNext());
         }
         cursor.close();
-        Log.w("N row",taskList.size()+"");
         // return Task list
         return taskList;
     }
@@ -270,6 +270,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         values.put(KEY_ATK, character.getAttack());
         values.put(KEY_DEF, character.getDefence());
         values.put(KEY_MGC, character.getMagic());
+        values.put(KEY_WALLET, character.getWallet());
 
         // Inserting Row
         int addedCharacterId = (int) db.insert(TABLE_CHARACTER, null, values);
@@ -282,7 +283,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
 
         Cursor cursor = db.query(TABLE_CHARACTER, new String[] { KEY_ID,
-                        KEY_NAME, KEY_GENDER, KEY_AVATAR, KEY_EXP, KEY_ATK, KEY_DEF, KEY_MGC }, KEY_ID + "=?",
+                        KEY_NAME, KEY_GENDER, KEY_AVATAR, KEY_EXP, KEY_ATK, KEY_DEF, KEY_MGC, KEY_WALLET }, KEY_ID + "=?",
                 new String[] { String.valueOf(id) }, null, null, null, null);
         if (cursor != null)
             cursor.moveToFirst();
@@ -291,7 +292,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 cursor.getString(1), Integer.parseInt(cursor.getString(2)),
                 Integer.parseInt(cursor.getString(3)),Integer.parseInt(cursor.getString(4)),
                 Integer.parseInt(cursor.getString(5)),Integer.parseInt(cursor.getString(6)),
-                Integer.parseInt(cursor.getString(7)));
+                Integer.parseInt(cursor.getString(7)),Integer.parseInt(cursor.getString(8)));
         cursor.close();
         // return Character
         return character;
@@ -309,6 +310,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         values.put(KEY_ATK, character.getAttack());
         values.put(KEY_DEF, character.getDefence());
         values.put(KEY_MGC, character.getMagic());
+        values.put(KEY_WALLET, character.getWallet());
 
         // updating row
         return db.update(TABLE_CHARACTER, values, KEY_ID + " = ?",
@@ -332,14 +334,14 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
         ContentValues values = new ContentValues();
         values.put(KEY_NAME, equipment.getName());
-        values.put(KEY_ID_EQUIPMENT_TYPE, equipment.getName());
+        values.put(KEY_ID_EQUIPMENT_TYPE, equipment.getIdType());
         values.put(KEY_ATK, equipment.getAtk());
         values.put(KEY_DEF, equipment.getDef());
         values.put(KEY_MGC, equipment.getMgc());
         values.put(KEY_PRICE, equipment.getPrice());
         values.put(KEY_ICON, equipment.getIcon());
-        values.put(KEY_BOUGHT, equipment.getIcon());
-        values.put(KEY_EQUIPPED, equipment.getIcon());
+        values.put(KEY_BOUGHT, equipment.isBought());
+        values.put(KEY_EQUIPPED, equipment.isEquipped());
 
         // Inserting Row
         db.insert(TABLE_EQUIPMENT, null, values);
@@ -432,7 +434,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 equipmentList.add(equipment);
             } while (cursor.moveToNext());
         }
-
         cursor.close();
         // return Equipment list
         return equipmentList;
