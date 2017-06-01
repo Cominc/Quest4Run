@@ -93,6 +93,10 @@
         <item>m_2</item>
     </string-array>
 
+    <!-- Character Creation -->
+    <string name="character_wallet_label">Monete</string>
+    <string name="character_stats_label">Statistiche</string>
+    <string name="character_level_label">Livello</string>
 
     <!-- Shop -->
     <string name="attack_label">Attacco</string>
