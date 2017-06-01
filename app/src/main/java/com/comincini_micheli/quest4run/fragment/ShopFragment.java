@@ -40,16 +40,18 @@ public class ShopFragment extends Fragment
     {
         super.onViewCreated(view, savedInstanceState);
         //-----------------------------------------------------
-        /*DatabaseHandler db = new DatabaseHandler(getContext());
-        Equipment e_A = new Equipment("Attacco",0,5,4,3,2,"icon_A");
+        DatabaseHandler db = new DatabaseHandler(getContext());
+        Equipment e_A = new Equipment("Attacco",0,5,4,3,50,"icon_A");
+        Equipment e_A2 = new Equipment("Attacco3",0,5,4,3,70,"icon_A3");
         Equipment e_D = new Equipment("Difesa",1,5,4,3,20,"icon_D");
         Equipment e_M = new Equipment("Magia",2,5,4,3,200,"icon_M");
         Equipment e_B = new Equipment("Attacco2",0,5,4,3,2,"icon_A2");
         e_B.setBought(true);
         db.addEquipment(e_A);
+        db.addEquipment(e_A2);
         db.addEquipment(e_D);
         db.addEquipment(e_M);
-        db.addEquipment(e_B);*/
+        db.addEquipment(e_B);
         //-----------------------------------------------------
         TabLayout tabLayout = (TabLayout) getActivity().findViewById(R.id.shop_tab_layout);
         ViewPager shopViewPager = (ViewPager) getActivity().findViewById(R.id.shop_view_pager);

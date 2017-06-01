@@ -23,7 +23,7 @@ public class Character {
         this.attack = 3;
         this.defence = 3;
         this.magic = 3;
-        this.wallet = 0;
+        this.wallet = 100;
     }
 
     public Character(int id, String name, int gender, int avatar, int exp, int attack, int defence, int magic, int wallet) {

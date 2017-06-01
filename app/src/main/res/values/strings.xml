@@ -6,6 +6,8 @@
     <string name="openDrawer">open_drawer</string>
     <string name="closeDrawer">close_drawer</string>
 
+    <string name="cents_symbol_label"> &#162;</string>
+
     <!-- Confirm options -->
     <string name="yes">Sì</string>
     <string name="cancel">Annulla</string>
@@ -103,6 +105,9 @@
     <string name="defense_label">Difesa</string>
     <string name="magic_label">Magia</string>
     <string name="buy_button_label">Compra</string>
+    <string name="bought_label">Comprato</string>
+    <!-- TODO capire come usare con string format-->
+    <!--<string name="buy_confirmation">Vuoi acquistare %s per %d &#162; ?</string>-->
     <string name="buy_confirmation">Vuoi acquistare  per  &#162; ?</string>
 
     <!-- Toolbar titles when navigation menu item is selected -->

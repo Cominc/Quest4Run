@@ -87,16 +87,23 @@ public class EquipmentAdapter extends BaseAdapter {
                 {
                     equipment_actual = data.get(position);
                     AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-                    builder.setMessage(R.string.buy_confirmation)
+                    //TODO come usare resources
+                    builder.setMessage(String.format("Vuoi acquistare %s per %d " + activity.getResources().getString(R.string.cents_symbol_label) + " ?",equipment_actual.getName(),equipment_actual.getPrice()))
                             .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener()
                             {
                                 public void onClick(DialogInterface dialog, int id)
                                 {
-                                    //int deleted = db.deleteAllTasks();
-                                    //data.remove(position);
-                                    Toast.makeText(activity.getApplicationContext(), "comprato", Toast.LENGTH_SHORT).show();
-                                    //notifyDataSetChanged();
-                                    //Toast.makeText(activity.getApplicationContext(), String.format(activity.getResources().getString(R.string.number_task_deleted), deleted), Toast.LENGTH_SHORT).show();
+                                    equipment_actual.setBought(true);
+                                    db.updateEquipment(equipment_actual);
+                                    data.remove(position);
+                                    SharedPreferences settings = activity.getSharedPreferences(Constants.NAME_PREFS, Context.MODE_PRIVATE);
+                                    Character myCharacter = db.getCharacter(settings.getInt(Constants.CHAR_ID_PREFERENCE,-1));
+                                    wallet-=equipment_actual.getPrice();
+                                    myCharacter.setWallet(wallet);
+                                    db.updateCharacter(myCharacter);
+                                    Toast.makeText(activity.getApplicationContext(), activity.getResources().getString(R.string.bought_label), Toast.LENGTH_SHORT).show();
+
+                                    notifyDataSetChanged();
                                 }
                             })
                             .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener()
