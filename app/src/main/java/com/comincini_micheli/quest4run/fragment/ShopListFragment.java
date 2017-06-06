@@ -50,9 +50,8 @@ public class ShopListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        equipmentList = new ArrayList<>();
-        Equipment e_A = new Equipment("Item " + equipmentTypeId, 0, 5, 4, 3, 50, "icon_A");
-        equipmentList.add(e_A);
+        DatabaseHandler db = new DatabaseHandler(getContext());
+        equipmentList = db.getAllEquipments(equipmentTypeId,false);
         return inflater.inflate(R.layout.fragment_shop_list, container, false);
     }
 
