@@ -18,24 +18,29 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".activity.AboutUsActivity"/>
-        <activity android:name=".activity.PrivacyPolicyActivity"/>
+        <activity
+            android:name=".activity.AboutUsActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".activity.PrivacyPolicyActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.MainActivity"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_main"
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".activity.AddTaskActivity"
-            android:label="@string/add_task_activity_title">
-        </activity>
+            android:screenOrientation="portrait"
+            android:label="@string/add_task_activity_title" />
         <activity
             android:name=".activity.TaskHistoryActivity"
-            android:label="@string/title_task_history_activity">
-        </activity>
+            android:screenOrientation="portrait"
+            android:label="@string/title_task_history_activity" />
         <activity
             android:name=".activity.CreateCharacterActivity"
-            android:label="@string/title_create_character">
-        </activity>
+            android:screenOrientation="portrait"
+            android:label="@string/title_create_character" />
     </application>
 
 </manifest>
