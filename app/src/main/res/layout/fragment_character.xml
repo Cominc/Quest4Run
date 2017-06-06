@@ -34,7 +34,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="14dp"
             android:text="@string/character_level_label"
-            android:layout_below="@+id/btn_attack"
+            android:layout_below="@+id/image_btn_attack"
             android:layout_alignParentStart="true"
             android:layout_marginTop="11dp" />
 
@@ -119,15 +119,15 @@
             android:text="TextView" />
 
         <ImageButton
-            android:id="@+id/btn_attack"
+            android:id="@+id/image_btn_attack"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignStart="@+id/character_level_label"
-            android:layout_alignTop="@+id/btn_defense"
+            android:layout_alignTop="@+id/image_btn_defense"
             app:srcCompat="@drawable/ic_sword_grey600_48dp" />
 
         <ImageButton
-            android:id="@+id/btn_defense"
+            android:id="@+id/image_btn_defense"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:srcCompat="@drawable/ic_shield_half_full_grey600_48dp"
@@ -136,11 +136,11 @@
             android:layout_marginTop="13dp" />
 
         <ImageButton
-            android:id="@+id/btn_magic"
+            android:id="@+id/image_btn_magic"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:layout_alignTop="@+id/btn_defense"
+            android:layout_alignTop="@+id/image_btn_defense"
             android:layout_marginEnd="11dp"
             app:srcCompat="@drawable/ic_auto_fix_grey600_48dp" />
 

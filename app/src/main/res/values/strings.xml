@@ -95,10 +95,15 @@
         <item>m_2</item>
     </string-array>
 
-    <!-- Character Creation -->
+    <!-- Character profile -->
     <string name="character_wallet_label">Monete</string>
     <string name="character_stats_label">Statistiche</string>
     <string name="character_level_label">Livello</string>
+
+    <!-- Inventory -->
+    <string name="inventory_attack">Inventario attacco</string>
+    <string name="inventory_defense">Inventario difesa</string>
+    <string name="inventory_magic">Inventario magia</string>
 
     <!-- Shop -->
     <string name="attack_label">Attacco</string>

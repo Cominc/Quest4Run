@@ -1,6 +1,7 @@
 package com.comincini_micheli.quest4run.fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -8,11 +9,14 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.comincini_micheli.quest4run.R;
+import com.comincini_micheli.quest4run.activity.AddTaskActivity;
+import com.comincini_micheli.quest4run.activity.EquipmentActivity;
 import com.comincini_micheli.quest4run.other.Constants;
 import com.comincini_micheli.quest4run.other.DatabaseHandler;
 import com.comincini_micheli.quest4run.objects.Character;
@@ -90,5 +94,41 @@ public class CharacterFragment extends Fragment
 
         TextView magic = (TextView) getActivity().findViewById(R.id.character_magic_value);
         magic.setText(String.valueOf(myCharacter.getMagic()));
+
+        ImageButton attackEquipment = (ImageButton) getActivity().findViewById(R.id.image_btn_attack);
+        attackEquipment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), EquipmentActivity.class);
+                Bundle b = new Bundle();
+                b.putInt("type", Constants.ID_TYPE_ATTACK);
+                intent.putExtras(b);
+                startActivityForResult(intent, Constants.OPEN_ATTACK_EQUIPMENTS);
+            }
+        });
+
+        ImageButton defenceEquipment = (ImageButton) getActivity().findViewById(R.id.image_btn_defense);
+        defenceEquipment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), EquipmentActivity.class);
+                Bundle b = new Bundle();
+                b.putInt("type", Constants.ID_TYPE_DEFENSE);
+                intent.putExtras(b);
+                startActivityForResult(intent, Constants.OPEN_DEFENSE_EQUIPMENTS);
+            }
+        });
+
+        ImageButton magicEquipment = (ImageButton) getActivity().findViewById(R.id.image_btn_magic);
+        magicEquipment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), EquipmentActivity.class);
+                Bundle b = new Bundle();
+                b.putInt("type", Constants.ID_TYPE_MAGIC);
+                intent.putExtras(b);
+                startActivityForResult(intent, Constants.OPEN_MAGIC_EQUIPMENTS);
+            }
+        });
     }
 }
