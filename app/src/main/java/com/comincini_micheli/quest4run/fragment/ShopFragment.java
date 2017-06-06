@@ -5,18 +5,13 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
-import android.util.Log;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.comincini_micheli.quest4run.R;
-import com.comincini_micheli.quest4run.objects.Equipment;
 import com.comincini_micheli.quest4run.other.Constants;
-import com.comincini_micheli.quest4run.other.DatabaseHandler;
-import com.comincini_micheli.quest4run.other.ViewPagerAdapter;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -39,9 +34,14 @@ public class ShopFragment extends Fragment
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState)
     {
         super.onViewCreated(view, savedInstanceState);
+        ShopListFragment shopListFragment = new ShopListFragment();
+        shopListFragment.setEquipmentTypeId(Constants.ID_TYPE_ATTACK);
+        FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.fragment_shop_container, shopListFragment);
+        fragmentTransaction.commit();
         //-----------------------------------------------------
-        DatabaseHandler db = new DatabaseHandler(getContext());
-        Equipment e_A = new Equipment("Attacco",0,5,4,3,50,"icon_A");
+        //DatabaseHandler db = new DatabaseHandler(getContext());
+        /*Equipment e_A = new Equipment("Attacco",0,5,4,3,50,"icon_A");
         Equipment e_A2 = new Equipment("Attacco3",0,5,4,3,70,"icon_A3");
         Equipment e_D = new Equipment("Difesa",1,5,4,3,20,"icon_D");
         Equipment e_M = new Equipment("Magia",2,5,4,3,200,"icon_M");
@@ -52,24 +52,29 @@ public class ShopFragment extends Fragment
         db.addEquipment(e_D);
         db.addEquipment(e_M);
         db.addEquipment(e_B);
+        */
         //-----------------------------------------------------
         TabLayout tabLayout = (TabLayout) getActivity().findViewById(R.id.shop_tab_layout);
-        ViewPager shopViewPager = (ViewPager) getActivity().findViewById(R.id.shop_view_pager);
-        setupViewPager(shopViewPager);
-        tabLayout.setupWithViewPager(shopViewPager);
+        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                ShopListFragment shopListFragment = new ShopListFragment();
+                shopListFragment.setEquipmentTypeId(tab.getPosition());
+                FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.fragment_shop_container, shopListFragment);
+                fragmentTransaction.commit();
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
     }
 
-    private void setupViewPager(ViewPager viewPager) {
-        ViewPagerAdapter adapter = new ViewPagerAdapter(getActivity().getSupportFragmentManager());
-        ShopListFragment shopListFragmentAttack = new ShopListFragment();
-        shopListFragmentAttack.setEquipmentTypeId(Constants.ID_TYPE_ATTACK);
-        adapter.addFragment(shopListFragmentAttack, getResources().getString(R.string.attack_label));
-        ShopListFragment shopListFragmenDefense = new ShopListFragment();
-        shopListFragmenDefense.setEquipmentTypeId(Constants.ID_TYPE_DEFENSE);
-        adapter.addFragment(shopListFragmenDefense,  getResources().getString(R.string.defense_label));
-        ShopListFragment shopListFragmentMagic = new ShopListFragment();
-        shopListFragmentMagic.setEquipmentTypeId(Constants.ID_TYPE_MAGIC);
-        adapter.addFragment(shopListFragmentMagic,  getResources().getString(R.string.magic_label));
-        viewPager.setAdapter(adapter);
-    }
 }

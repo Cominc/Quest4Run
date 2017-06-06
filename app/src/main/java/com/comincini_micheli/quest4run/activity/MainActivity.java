@@ -20,6 +20,8 @@ import com.comincini_micheli.quest4run.fragment.ShopFragment;
 import com.comincini_micheli.quest4run.fragment.TaskFragment;
 import com.comincini_micheli.quest4run.fragment.TestFragment;
 
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 

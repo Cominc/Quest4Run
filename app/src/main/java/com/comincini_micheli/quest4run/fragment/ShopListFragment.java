@@ -6,10 +6,12 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.comincini_micheli.quest4run.R;
 import com.comincini_micheli.quest4run.activity.AddTaskActivity;
@@ -19,6 +21,7 @@ import com.comincini_micheli.quest4run.other.DatabaseHandler;
 import com.comincini_micheli.quest4run.other.EquipmentAdapter;
 import com.comincini_micheli.quest4run.other.TaskAdapter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -47,6 +50,9 @@ public class ShopListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        equipmentList = new ArrayList<>();
+        Equipment e_A = new Equipment("Item " + equipmentTypeId, 0, 5, 4, 3, 50, "icon_A");
+        equipmentList.add(e_A);
         return inflater.inflate(R.layout.fragment_shop_list, container, false);
     }
 
@@ -55,14 +61,13 @@ public class ShopListFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         db = new DatabaseHandler(getContext());
 
-        equipmentList = db.getAllEquipments(equipmentTypeId,false);
-        list=(ListView)getView().findViewById(R.id.listEquipmentShop);
+        //equipmentList = db.getAllEquipments(equipmentTypeId,false);
 
+        list = (ListView) getView().findViewById(R.id.listEquipmentShop);
 
 
         // Getting adapter by passing xml data ArrayList
-        adapter=new EquipmentAdapter(getActivity(), equipmentList, db);
+        adapter = new EquipmentAdapter(getActivity(), equipmentList, db);
         list.setAdapter(adapter);
     }
-
 }
