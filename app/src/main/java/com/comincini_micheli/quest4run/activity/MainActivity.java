@@ -1,5 +1,6 @@
 package com.comincini_micheli.quest4run.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -115,8 +116,8 @@ public class MainActivity extends AppCompatActivity
                 title = getResources().getString(R.string.nav_send);
                 break;
             case R.id.nav_about_us:
-                fragment = new TestFragment();
-                title = getResources().getString(R.string.nav_about_us);
+                Intent i = new Intent(MainActivity.this, AboutUsActivity.class);
+                startActivity(i);
                 break;
             default:
                 fragment = new TestFragment();

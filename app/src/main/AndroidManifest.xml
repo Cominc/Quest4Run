@@ -20,7 +20,9 @@
         </activity>
         <activity
             android:name=".activity.AboutUsActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:label="@string/nav_about_us"/>
+        <!-- TODO definire un'altra stringa?-->
         <activity
             android:name=".activity.PrivacyPolicyActivity"
             android:screenOrientation="portrait" />
