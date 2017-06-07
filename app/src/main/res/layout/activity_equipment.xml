@@ -6,4 +6,8 @@
     android:layout_height="match_parent"
     tools:context="com.comincini_micheli.quest4run.activity.EquipmentActivity">
 
+    <ListView
+        android:id="@+id/list_equipment_inventory"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 </android.support.constraint.ConstraintLayout>

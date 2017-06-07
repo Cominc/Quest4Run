@@ -23,7 +23,7 @@ import java.util.List;
  * Created by Daniele on 01/06/2017.
  */
 
-public class EquipmentAdapter extends BaseAdapter {
+public class EquipmentShopAdapter extends BaseAdapter {
     private Activity activity;
     private List<Equipment> data;
     private static LayoutInflater inflater=null;
@@ -32,7 +32,7 @@ public class EquipmentAdapter extends BaseAdapter {
     private Equipment equipment_actual;
     DatabaseHandler db;
 
-    public EquipmentAdapter(Activity a, List<Equipment> d, DatabaseHandler db) {
+    public EquipmentShopAdapter(Activity a, List<Equipment> d, DatabaseHandler db) {
         activity = a;
         data=d;
         this.db = db;

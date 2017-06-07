@@ -5,7 +5,7 @@
     tools:context="com.comincini_micheli.quest4run.fragment.ShopListFragment">
 
     <ListView
-        android:id="@+id/listEquipmentShop"
+        android:id="@+id/list_equipment_shop"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

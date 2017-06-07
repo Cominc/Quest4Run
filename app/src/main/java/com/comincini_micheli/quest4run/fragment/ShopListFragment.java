@@ -1,27 +1,19 @@
 package com.comincini_micheli.quest4run.fragment;
 
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.comincini_micheli.quest4run.R;
-import com.comincini_micheli.quest4run.activity.AddTaskActivity;
 import com.comincini_micheli.quest4run.objects.Equipment;
-import com.comincini_micheli.quest4run.other.Constants;
 import com.comincini_micheli.quest4run.other.DatabaseHandler;
-import com.comincini_micheli.quest4run.other.EquipmentAdapter;
-import com.comincini_micheli.quest4run.other.TaskAdapter;
+import com.comincini_micheli.quest4run.other.EquipmentShopAdapter;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -30,7 +22,7 @@ import java.util.List;
 public class ShopListFragment extends Fragment {
     private int equipmentTypeId;
     ListView list;
-    EquipmentAdapter adapter;
+    EquipmentShopAdapter adapter;
     List<Equipment> equipmentList;
     DatabaseHandler db;
 
@@ -62,11 +54,11 @@ public class ShopListFragment extends Fragment {
 
         //equipmentList = db.getAllEquipments(equipmentTypeId,false);
 
-        list = (ListView) getView().findViewById(R.id.listEquipmentShop);
+        list = (ListView) getView().findViewById(R.id.list_equipment_shop);
 
 
         // Getting adapter by passing xml data ArrayList
-        adapter = new EquipmentAdapter(getActivity(), equipmentList, db);
+        adapter = new EquipmentShopAdapter(getActivity(), equipmentList, db);
         list.setAdapter(adapter);
     }
 }
