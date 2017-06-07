@@ -32,28 +32,28 @@ public class AddTaskActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_task);
 
-        spinnerType = (Spinner) findViewById(R.id.taskTypeSpinner);
+        spinnerType = (Spinner) findViewById(R.id.task_type_spinner);
         //spinner.setOnItemClickListener();
         List<String> listType = Arrays.asList(getResources().getStringArray(R.array.task_type));
         ArrayAdapter<String> adapterType = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, listType);
         spinnerType.setAdapter(adapterType);
 
-        spinnerGoal = (Spinner) findViewById(R.id.taskGoalSpinner);
+        spinnerGoal = (Spinner) findViewById(R.id.task_goal_spinner);
         //spinner.setOnItemClickListener();
         List<String> listGoal = Arrays.asList(getResources().getStringArray(R.array.task_goal));
         ArrayAdapter<String> adapterGoal = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, listGoal);
         spinnerGoal.setAdapter(adapterGoal);
 
-        spinnerReward = (Spinner) findViewById(R.id.taskRewardSpinner);
+        spinnerReward = (Spinner) findViewById(R.id.task_reward_spinner);
         //spinner.setOnItemClickListener();
         List<String> listReward = Arrays.asList(getResources().getStringArray(R.array.task_reward));
         ArrayAdapter<String> adapterReward = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, listReward);
         spinnerReward.setAdapter(adapterReward);
 
-        nameTextEdit = (TextView)findViewById(R.id.nameTask);
+        nameTextEdit = (TextView)findViewById(R.id.name_task);
 
 
-        createButton = (Button) findViewById(R.id.btnAddTask);
+        createButton = (Button) findViewById(R.id.btn_add_task);
         createButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

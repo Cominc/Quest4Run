@@ -5,7 +5,7 @@
               android:padding="5dp">
 
     <EditText
-        android:id="@+id/nameTask"
+        android:id="@+id/name_task"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
@@ -17,68 +17,68 @@
         android:layout_marginTop="19dp"/>
 
     <TextView
-        android:id="@+id/taskTypeSpinnerLabel"
+        android:id="@+id/task_type_spinner_label"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/nameTask"
+        android:layout_below="@+id/name_task"
         android:layout_marginTop="27dp"
         android:text="@string/spinner_task_type_label"
         android:textSize="18dp"/>
 
     <Spinner
-        android:id="@+id/taskTypeSpinner"
+        android:id="@+id/task_type_spinner"
+        style="@android:style/Widget.Holo.Light.Spinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="13dp"
-        android:layout_below="@+id/taskTypeSpinnerLabel"
         android:layout_alignParentStart="true"
-        style="@android:style/Widget.Holo.Light.Spinner"/>
+        android:layout_below="@+id/task_type_spinner_label"
+        android:layout_marginTop="13dp"/>
 
     <TextView
-        android:id="@+id/taskGoalSpinnerLabel"
+        android:id="@+id/task_goal_spinner_label"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="27dp"
         android:text="@string/spinner_task_goal_label"
         android:textSize="18dp"
-        android:layout_below="@+id/taskTypeSpinner"
+        android:layout_below="@+id/task_type_spinner"
         android:layout_alignParentStart="true"/>
 
     <Spinner
-        android:id="@+id/taskGoalSpinner"
+        android:id="@+id/task_goal_spinner"
         style="@android:style/Widget.Holo.Light.Spinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/taskGoalSpinnerLabel"
+        android:layout_below="@+id/task_goal_spinner_label"
         android:layout_marginTop="14dp"/>
 
     <TextView
-        android:id="@+id/taskRewardSpinnerLabel"
+        android:id="@+id/task_reward_spinner_label"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="27dp"
         android:text="@string/spinner_task_reward_label"
         android:textSize="18dp"
-        android:layout_below="@+id/taskGoalSpinner"
+        android:layout_below="@+id/task_goal_spinner"
         android:layout_alignParentStart="true"/>
 
     <Spinner
-        android:id="@+id/taskRewardSpinner"
+        android:id="@+id/task_reward_spinner"
         style="@android:style/Widget.Holo.Light.Spinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/taskRewardSpinnerLabel"
+        android:layout_below="@+id/task_reward_spinner_label"
         android:layout_marginTop="20dp"/>
 
     <Button
-        android:id="@+id/btnAddTask"
+        android:id="@+id/btn_add_task"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/btn_add_label"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"/>
+        android:layout_alignParentEnd="true"
+        android:text="@string/btn_add_label"/>
 
 </RelativeLayout>
