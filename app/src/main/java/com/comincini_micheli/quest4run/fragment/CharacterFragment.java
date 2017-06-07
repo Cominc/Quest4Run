@@ -15,12 +15,12 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.comincini_micheli.quest4run.R;
-import com.comincini_micheli.quest4run.activity.AddTaskActivity;
 import com.comincini_micheli.quest4run.activity.EquipmentActivity;
 import com.comincini_micheli.quest4run.other.Constants;
 import com.comincini_micheli.quest4run.other.DatabaseHandler;
 import com.comincini_micheli.quest4run.objects.Character;
 
+import static android.app.Activity.RESULT_OK;
 import static com.comincini_micheli.quest4run.other.Constants.EXP_FOR_NEXT_LEVEL;
 
 
@@ -36,6 +36,48 @@ public class CharacterFragment extends Fragment
         return inflater.inflate(R.layout.fragment_character, container, false);
 
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        DatabaseHandler db = new DatabaseHandler(getContext());
+        SharedPreferences settings = getActivity().getSharedPreferences(Constants.NAME_PREFS, Context.MODE_PRIVATE);
+        Character myCharacter = db.getCharacter(settings.getInt(Constants.CHAR_ID_PREFERENCE,-1));
+
+        TextView attack = (TextView) getActivity().findViewById(R.id.character_attack_value);
+        attack.setText(String.valueOf(myCharacter.getAttack()));
+
+        TextView defense = (TextView) getActivity().findViewById(R.id.character_defense_value);
+        defense.setText(String.valueOf(myCharacter.getDefense()));
+
+        TextView magic = (TextView) getActivity().findViewById(R.id.character_magic_value);
+        magic.setText(String.valueOf(myCharacter.getMagic()));
+    }
+
+    /*
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == Constants.OPEN_ATTACK_EQUIPMENTS||requestCode == Constants.OPEN_DEFENSE_EQUIPMENTS||requestCode == Constants.OPEN_MAGIC_EQUIPMENTS)
+        {
+            if(resultCode == RESULT_OK)
+            {
+                DatabaseHandler db = new DatabaseHandler(getContext());
+                SharedPreferences settings = getActivity().getSharedPreferences(Constants.NAME_PREFS, Context.MODE_PRIVATE);
+                Character myCharacter = db.getCharacter(settings.getInt(Constants.CHAR_ID_PREFERENCE,-1));
+
+                TextView attack = (TextView) getActivity().findViewById(R.id.character_attack_value);
+                attack.setText(String.valueOf(myCharacter.getAttack()));
+
+                TextView defense = (TextView) getActivity().findViewById(R.id.character_defense_value);
+                defense.setText(String.valueOf(myCharacter.getDefense()));
+
+                TextView magic = (TextView) getActivity().findViewById(R.id.character_magic_value);
+                magic.setText(String.valueOf(myCharacter.getMagic()));
+            }
+        }
+    }
+    */
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
@@ -90,7 +132,7 @@ public class CharacterFragment extends Fragment
         attack.setText(String.valueOf(myCharacter.getAttack()));
 
         TextView defense = (TextView) getActivity().findViewById(R.id.character_defense_value);
-        defense.setText(String.valueOf(myCharacter.getDefence()));
+        defense.setText(String.valueOf(myCharacter.getDefense()));
 
         TextView magic = (TextView) getActivity().findViewById(R.id.character_magic_value);
         magic.setText(String.valueOf(myCharacter.getMagic()));
@@ -101,9 +143,9 @@ public class CharacterFragment extends Fragment
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), EquipmentActivity.class);
                 Bundle b = new Bundle();
-                b.putInt("type", Constants.ID_TYPE_ATTACK);
+                b.putInt(Constants.ID_EQUIPMENT_TYPE, Constants.ID_TYPE_ATTACK);
                 intent.putExtras(b);
-                startActivityForResult(intent, Constants.OPEN_ATTACK_EQUIPMENTS);
+                startActivity(intent);
             }
         });
 
@@ -113,9 +155,9 @@ public class CharacterFragment extends Fragment
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), EquipmentActivity.class);
                 Bundle b = new Bundle();
-                b.putInt("type", Constants.ID_TYPE_DEFENSE);
+                b.putInt(Constants.ID_EQUIPMENT_TYPE, Constants.ID_TYPE_DEFENSE);
                 intent.putExtras(b);
-                startActivityForResult(intent, Constants.OPEN_DEFENSE_EQUIPMENTS);
+                startActivity(intent);
             }
         });
 
@@ -125,10 +167,12 @@ public class CharacterFragment extends Fragment
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), EquipmentActivity.class);
                 Bundle b = new Bundle();
-                b.putInt("type", Constants.ID_TYPE_MAGIC);
+                b.putInt(Constants.ID_EQUIPMENT_TYPE, Constants.ID_TYPE_MAGIC);
                 intent.putExtras(b);
-                startActivityForResult(intent, Constants.OPEN_MAGIC_EQUIPMENTS);
+                startActivity(intent);
             }
         });
+
+
     }
 }

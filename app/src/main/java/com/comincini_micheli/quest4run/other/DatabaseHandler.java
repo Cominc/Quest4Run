@@ -268,7 +268,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         values.put(KEY_AVATAR, character.getAvatar());
         values.put(KEY_EXP, character.getExp());
         values.put(KEY_ATK, character.getAttack());
-        values.put(KEY_DEF, character.getDefence());
+        values.put(KEY_DEF, character.getDefense());
         values.put(KEY_MGC, character.getMagic());
         values.put(KEY_WALLET, character.getWallet());
 
@@ -308,7 +308,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         values.put(KEY_AVATAR, character.getAvatar());
         values.put(KEY_EXP, character.getExp());
         values.put(KEY_ATK, character.getAttack());
-        values.put(KEY_DEF, character.getDefence());
+        values.put(KEY_DEF, character.getDefense());
         values.put(KEY_MGC, character.getMagic());
         values.put(KEY_WALLET, character.getWallet());
 
@@ -329,24 +329,21 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     {
         SQLiteDatabase db = this.getWritableDatabase();
         updateEquipment(equipment);
-        String query = "UPDATE " + TABLE_CHARACTER
-            + " SET " + KEY_ATK + " = " + KEY_ATK + " + " + equipment.getAtk() + ","
-            + KEY_DEF + " = " + KEY_DEF + " + " + equipment.getDef() + ","
-            + KEY_MGC + " = " + KEY_MGC + " + " + equipment.getMgc()
-            + " WHERE " + KEY_ID + " = " + idCharacter;
-        db.rawQuery(query, null);
+        Character me = getCharacter(idCharacter);
+        me.setAttack(me.getAttack()+equipment.getAtk());
+        me.setDefense(me.getDefense()+equipment.getDef());
+        me.setMagic(me.getMagic()+equipment.getMgc());
+        updateCharacter(me);
     }
 
     public void unequipEquipment(Equipment equipment, int idCharacter)
     {
-        SQLiteDatabase db = this.getWritableDatabase();
         updateEquipment(equipment);
-        String query = "UPDATE " + TABLE_CHARACTER
-                + " SET " + KEY_ATK + " = " + KEY_ATK + " - " + equipment.getAtk() + ","
-                + KEY_DEF + " = " + KEY_DEF + " - " + equipment.getDef() + ","
-                + KEY_MGC + " = " + KEY_MGC + " - " + equipment.getMgc()
-                + " WHERE " + KEY_ID + " = " + idCharacter;
-        db.rawQuery(query, null);
+        Character me = getCharacter(idCharacter);
+        me.setAttack(me.getAttack()-equipment.getAtk());
+        me.setDefense(me.getDefense()-equipment.getDef());
+        me.setMagic(me.getMagic()-equipment.getMgc());
+        updateCharacter(me);
     }
 
 
@@ -480,17 +477,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         // updating row
         return db.update(TABLE_EQUIPMENT, values, KEY_ID + " = ?",
                 new String[] { String.valueOf(equipment.getId()) });
-    }
-
-    // Set equip = false at all equipments
-    public void unequipAllEquipments(int idEquipmentType) {
-        String selectQuery = "UPDATE " + TABLE_EQUIPMENT
-                + " SET " + KEY_EQUIPPED + " = " + "0"
-                + " WHERE " + KEY_ID_EQUIPMENT_TYPE + " = " + idEquipmentType
-                + " AND " + KEY_BOUGHT + " = " + "1";
-
-        SQLiteDatabase db = this.getWritableDatabase();
-        db.rawQuery(selectQuery, null);
     }
 
     // Deleting single Equipment

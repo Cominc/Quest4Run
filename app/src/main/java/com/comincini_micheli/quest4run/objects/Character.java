@@ -12,7 +12,7 @@ public class Character {
     private int gender;
     private int avatar;
     private int exp;
-    private int attack, defence, magic;
+    private int attack, defense, magic;
     private int wallet;
 
     public Character(String name, int gender, int avatar) {
@@ -21,19 +21,19 @@ public class Character {
         this.avatar = avatar;
         this.exp = 0;
         this.attack = 3;
-        this.defence = 3;
+        this.defense = 3;
         this.magic = 3;
         this.wallet = 100;
     }
 
-    public Character(int id, String name, int gender, int avatar, int exp, int attack, int defence, int magic, int wallet) {
+    public Character(int id, String name, int gender, int avatar, int exp, int attack, int defense, int magic, int wallet) {
         this.id = id;
         this.name = name;
         this.gender = gender;
         this.avatar = avatar;
         this.exp = exp;
         this.attack = attack;
-        this.defence = defence;
+        this.defense = defense;
         this.magic = magic;
         this.wallet = wallet;
     }
@@ -86,12 +86,12 @@ public class Character {
         this.attack = attack;
     }
 
-    public int getDefence() {
-        return defence;
+    public int getDefense() {
+        return defense;
     }
 
-    public void setDefence(int defence) {
-        this.defence = defence;
+    public void setDefense(int defense) {
+        this.defense = defense;
     }
 
     public int getMagic() {
