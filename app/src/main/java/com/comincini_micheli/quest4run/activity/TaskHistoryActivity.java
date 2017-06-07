@@ -31,7 +31,7 @@ public class TaskHistoryActivity extends AppCompatActivity
         DatabaseHandler db = new DatabaseHandler(this);
 
         taskList = db.getTasks(true);
-        list=(ListView) findViewById(R.id.listTaskCompleted);
+        list=(ListView) findViewById(R.id.list_task_completed);
 
         // Getting adapter by passing xml data ArrayList
         adapter=new TaskHistoryAdapter(this, taskList, getResources().getStringArray(R.array.task_type),

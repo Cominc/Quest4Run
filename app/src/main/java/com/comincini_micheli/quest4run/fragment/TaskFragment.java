@@ -111,7 +111,7 @@ public class TaskFragment extends Fragment
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo)
     {
         super.onCreateContextMenu(menu, v, menuInfo);
-        if (v.getId()==R.id.listTask) {
+        if (v.getId()==R.id.list_task) {
             MenuInflater inflater = getActivity().getMenuInflater();
             inflater.inflate(R.menu.menu_tasklist, menu);
         }
@@ -151,10 +151,10 @@ public class TaskFragment extends Fragment
         db = new DatabaseHandler(getContext());
 
         taskList = db.getTasks(false);
-        list=(ListView)getView().findViewById(R.id.listTask);
+        list=(ListView)getView().findViewById(R.id.list_task);
         registerForContextMenu(list);
 
-        FloatingActionButton fab = (FloatingActionButton) getActivity().findViewById(R.id.fab);
+        FloatingActionButton fab = (FloatingActionButton) getActivity().findViewById(R.id.btn_create_task);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
