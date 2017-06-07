@@ -11,7 +11,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.comincini_micheli.quest4run.R;
+import com.comincini_micheli.quest4run.objects.Equipment;
 import com.comincini_micheli.quest4run.other.Constants;
+import com.comincini_micheli.quest4run.other.DatabaseHandler;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -40,11 +42,12 @@ public class ShopFragment extends Fragment
         fragmentTransaction.replace(R.id.fragment_shop_container, shopListFragment);
         fragmentTransaction.commit();
         //-----------------------------------------------------
-        //DatabaseHandler db = new DatabaseHandler(getContext());
-        /*Equipment e_A = new Equipment("Attacco",0,5,4,3,50,"icon_A");
+        /*
+        DatabaseHandler db = new DatabaseHandler(getContext());
+        Equipment e_A = new Equipment("Attacco",0,5,4,3,50,"icon_A");
         Equipment e_A2 = new Equipment("Attacco3",0,5,4,3,70,"icon_A3");
         Equipment e_D = new Equipment("Difesa",1,5,4,3,20,"icon_D");
-        Equipment e_M = new Equipment("Magia",2,5,4,3,200,"icon_M");
+        Equipment e_M = new Equipment("Magia",2,5,4,3,30,"icon_M");
         Equipment e_B = new Equipment("Attacco2",0,5,4,3,2,"icon_A2");
         e_B.setBought(true);
         db.addEquipment(e_A);

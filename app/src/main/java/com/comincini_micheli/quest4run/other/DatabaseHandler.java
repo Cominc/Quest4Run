@@ -458,6 +458,17 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 new String[] { String.valueOf(equipment.getId()) });
     }
 
+    // Set equip = false at all equipments
+    public void unequipAllEquipments(int idEquipmentType) {
+        String selectQuery = "UPDATE " + TABLE_EQUIPMENT
+                + " SET " + KEY_EQUIPPED + " = " + "0"
+                + " WHERE " + KEY_ID_EQUIPMENT_TYPE + " = " + idEquipmentType
+                + " AND " + KEY_BOUGHT + " = " + "1";
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.rawQuery(selectQuery, null);
+    }
+
     // Deleting single Equipment
     public void deleteEquipment(Equipment equipment) {
         SQLiteDatabase db = this.getWritableDatabase();

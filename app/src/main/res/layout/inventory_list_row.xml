@@ -25,28 +25,63 @@
         android:layout_toEndOf="@+id/inventory_equipment_icon" />
 
     <TextView
-        android:id="@+id/inventory_equipment_attack"
+        android:id="@+id/inventory_equipment_attack_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toEndOf="@+id/inventory_equipment_icon"
         android:layout_alignBottom="@+id/inventory_equipment_icon"
-        android:text="TextView" />
+        android:text="@string/attack_label" />
+
+    <TextView
+        android:id="@+id/inventory_equipment_attack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@+id/inventory_equipment_attack_label"
+        android:layout_alignBottom="@+id/inventory_equipment_icon"
+        android:layout_marginStart="5dp"
+        android:text="0" />
+
+    <TextView
+        android:id="@+id/inventory_equipment_defense_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@+id/inventory_equipment_attack"
+        android:layout_marginStart="20dp"
+        android:layout_alignBottom="@+id/inventory_equipment_icon"
+        android:text="@string/defense_label" />
 
     <TextView
         android:id="@+id/inventory_equipment_defense"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
+        android:text="0"
         android:layout_alignBottom="@+id/inventory_equipment_icon"
-        android:layout_toEndOf="@+id/inventory_equipment_attack"
-        android:layout_marginStart="20dp" />
+        android:layout_toEndOf="@+id/inventory_equipment_defense_label"
+        android:layout_marginStart="5dp" />
+
+    <TextView
+        android:id="@+id/inventory_equipment_magic_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@+id/inventory_equipment_defense"
+        android:layout_marginStart="20dp"
+        android:layout_alignBottom="@+id/inventory_equipment_icon"
+        android:text="@string/magic_label" />
 
     <TextView
         android:id="@+id/inventory_equipment_magic"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
+        android:text="0"
         android:layout_alignBottom="@+id/inventory_equipment_icon"
-        android:layout_toEndOf="@+id/inventory_equipment_defense"
-        android:layout_marginStart="20dp" />
+        android:layout_toEndOf="@+id/inventory_equipment_magic_label"
+        android:layout_marginStart="5dp" />
+
+    <CheckBox
+        android:id="@+id/check_box_equipped"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true" />
+
 </RelativeLayout>

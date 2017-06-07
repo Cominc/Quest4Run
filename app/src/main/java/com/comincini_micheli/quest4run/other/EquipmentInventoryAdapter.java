@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,6 +30,7 @@ public class EquipmentInventoryAdapter extends BaseAdapter {
     private static LayoutInflater inflater=null;
 
     private Equipment equipment_actual;
+    private int indexEquipmentEquipped;
     DatabaseHandler db;
 
     public EquipmentInventoryAdapter(Activity a, List<Equipment> d, DatabaseHandler db) {
@@ -36,6 +38,7 @@ public class EquipmentInventoryAdapter extends BaseAdapter {
         data=d;
         this.db = db;
         inflater = (LayoutInflater)activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        indexEquipmentEquipped = -1;
     }
 
     public int getCount() {
@@ -60,6 +63,7 @@ public class EquipmentInventoryAdapter extends BaseAdapter {
         TextView attack = (TextView)vi.findViewById(R.id.inventory_equipment_attack);
         TextView defense = (TextView)vi.findViewById(R.id.inventory_equipment_defense);
         TextView magic = (TextView)vi.findViewById(R.id.inventory_equipment_magic);
+        CheckBox equipped = (CheckBox)vi.findViewById(R.id.check_box_equipped);
 
         equipment_actual = data.get(position);
 
@@ -68,6 +72,33 @@ public class EquipmentInventoryAdapter extends BaseAdapter {
         attack.setText(String.valueOf(equipment_actual.getAtk()));
         defense.setText(String.valueOf(equipment_actual.getDef()));
         magic.setText(String.valueOf(equipment_actual.getMgc()));
+        equipped.setChecked(equipment_actual.isEquipped());
+        if(equipment_actual.isEquipped())
+            indexEquipmentEquipped = position;
+
+        equipped.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                CheckBox checkbox_equipped = (CheckBox)view;
+                if(checkbox_equipped.isChecked()&&indexEquipmentEquipped!=-1)
+                {
+                    Equipment previusEquippedEquipment = data.get(indexEquipmentEquipped);
+                    previusEquippedEquipment.setEquipped(false);
+                    db.updateEquipment(previusEquippedEquipment);
+                    data.set(indexEquipmentEquipped,previusEquippedEquipment);
+                    indexEquipmentEquipped = position;
+                }
+                else
+                    indexEquipmentEquipped = -1;
+
+                equipment_actual = data.get(position);
+                equipment_actual.setEquipped(checkbox_equipped.isChecked());
+                db.updateEquipment(equipment_actual);
+                data.set(position,equipment_actual);
+
+                notifyDataSetChanged();
+            }
+        });
 
         return vi;
     }
