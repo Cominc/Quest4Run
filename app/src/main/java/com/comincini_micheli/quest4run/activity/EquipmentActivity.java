@@ -24,7 +24,7 @@ public class EquipmentActivity extends AppCompatActivity {
         int equipmentTypeId = -1;
         String title = "";
         if(b != null)
-            equipmentTypeId = b.getInt("type");
+            equipmentTypeId = b.getInt(Constants.ID_EQUIPMENT_TYPE);
         switch(equipmentTypeId)
         {
             case Constants.ID_TYPE_ATTACK:
