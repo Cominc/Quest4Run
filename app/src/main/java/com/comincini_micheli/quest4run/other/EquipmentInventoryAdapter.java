@@ -31,6 +31,7 @@ public class EquipmentInventoryAdapter extends BaseAdapter {
 
     private Equipment equipment_actual;
     private int indexEquipmentEquipped;
+    private int idCharacter;
     DatabaseHandler db;
 
     public EquipmentInventoryAdapter(Activity a, List<Equipment> d, DatabaseHandler db) {
@@ -39,6 +40,8 @@ public class EquipmentInventoryAdapter extends BaseAdapter {
         this.db = db;
         inflater = (LayoutInflater)activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         indexEquipmentEquipped = -1;
+        SharedPreferences settings = activity.getSharedPreferences(Constants.NAME_PREFS, Context.MODE_PRIVATE);
+        idCharacter = settings.getInt(Constants.CHAR_ID_PREFERENCE,-1);
     }
 
     public int getCount() {
@@ -80,21 +83,30 @@ public class EquipmentInventoryAdapter extends BaseAdapter {
             @Override
             public void onClick(View view) {
                 CheckBox checkbox_equipped = (CheckBox)view;
-                if(checkbox_equipped.isChecked()&&indexEquipmentEquipped!=-1)
+                if(checkbox_equipped.isChecked())
                 {
-                    Equipment previusEquippedEquipment = data.get(indexEquipmentEquipped);
-                    previusEquippedEquipment.setEquipped(false);
-                    db.updateEquipment(previusEquippedEquipment);
-                    data.set(indexEquipmentEquipped,previusEquippedEquipment);
+                    if(indexEquipmentEquipped != -1)
+                    {
+                        Equipment previusEquippedEquipment = data.get(indexEquipmentEquipped);
+                        previusEquippedEquipment.setEquipped(false);
+                        db.unequipEquipment(previusEquippedEquipment, idCharacter);
+                        data.set(indexEquipmentEquipped,previusEquippedEquipment);
+                    }
+
+                    equipment_actual = data.get(position);
+                    equipment_actual.setEquipped(checkbox_equipped.isChecked());
+                    db.equipEquipment(equipment_actual, idCharacter);
+                    data.set(position,equipment_actual);
                     indexEquipmentEquipped = position;
                 }
                 else
+                {
+                    Equipment previusEquippedEquipment = data.get(indexEquipmentEquipped);
+                    previusEquippedEquipment.setEquipped(false);
+                    db.unequipEquipment(previusEquippedEquipment, idCharacter);
+                    data.set(indexEquipmentEquipped,previusEquippedEquipment);
                     indexEquipmentEquipped = -1;
-
-                equipment_actual = data.get(position);
-                equipment_actual.setEquipped(checkbox_equipped.isChecked());
-                db.updateEquipment(equipment_actual);
-                data.set(position,equipment_actual);
+                }
 
                 notifyDataSetChanged();
             }

@@ -325,6 +325,30 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         db.close();
     }
 
+    public void equipEquipment(Equipment equipment, int idCharacter)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        updateEquipment(equipment);
+        String query = "UPDATE " + TABLE_CHARACTER
+            + " SET " + KEY_ATK + " = " + KEY_ATK + " + " + equipment.getAtk() + ","
+            + KEY_DEF + " = " + KEY_DEF + " + " + equipment.getDef() + ","
+            + KEY_MGC + " = " + KEY_MGC + " + " + equipment.getMgc()
+            + " WHERE " + KEY_ID + " = " + idCharacter;
+        db.rawQuery(query, null);
+    }
+
+    public void unequipEquipment(Equipment equipment, int idCharacter)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        updateEquipment(equipment);
+        String query = "UPDATE " + TABLE_CHARACTER
+                + " SET " + KEY_ATK + " = " + KEY_ATK + " - " + equipment.getAtk() + ","
+                + KEY_DEF + " = " + KEY_DEF + " - " + equipment.getDef() + ","
+                + KEY_MGC + " = " + KEY_MGC + " - " + equipment.getMgc()
+                + " WHERE " + KEY_ID + " = " + idCharacter;
+        db.rawQuery(query, null);
+    }
+
 
     //EQUIPMENT METHODS
 
