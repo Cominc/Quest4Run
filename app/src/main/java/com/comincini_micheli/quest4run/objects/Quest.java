@@ -35,6 +35,19 @@ public class Quest
         this.dateFinish = dateFinish;
     }
 
+    public Quest(String title, String description, int minAttack, int minDefense, int minMagic, int expReward, int duration)
+    {
+        this.title = title;
+        this.description = description;
+        this.minAttack = minAttack;
+        this.minDefense = minDefense;
+        this.minMagic = minMagic;
+        this.expReward = expReward;
+        this.duration = duration;
+        this.completed = false;
+        this.active = false;
+    }
+
     public Quest()
     {
 

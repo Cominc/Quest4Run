@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -33,6 +34,7 @@ public class QuestAdapter extends BaseAdapter
     private int indexActiveQuest;
     private int idCharacter;
     DatabaseHandler db;
+    Quest previusActiveQuest;
 
     public QuestAdapter(Activity a, List<Quest> d, DatabaseHandler db) {
         activity = a;
@@ -40,6 +42,7 @@ public class QuestAdapter extends BaseAdapter
         this.db = db;
         inflater = (LayoutInflater)activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         indexActiveQuest = -1;
+        previusActiveQuest = null;
         SharedPreferences settings = activity.getSharedPreferences(Constants.NAME_PREFS, Context.MODE_PRIVATE);
         idCharacter = settings.getInt(Constants.CHAR_ID_PREFERENCE,-1);
     }
@@ -81,6 +84,20 @@ public class QuestAdapter extends BaseAdapter
         if(questActual.isActive())
             indexActiveQuest = position;
 
+        /*active.setOnTouchListener(new View.OnTouchListener()
+        {
+            @Override
+            public boolean onTouch(View v, MotionEvent event)
+            {
+                if(event.getAction() == MotionEvent.ACTION_DOWN)
+                {
+                    CheckBox c = (CheckBox) v;
+                    Log.w("boh", c.isChecked() + "");
+                    return true;
+                }
+                return false;
+            }
+        });*/
         active.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -89,7 +106,7 @@ public class QuestAdapter extends BaseAdapter
                 {
                     if(indexActiveQuest != -1)
                     {
-                        final Quest previusActiveQuest = data.get(indexActiveQuest);
+                        previusActiveQuest = data.get(indexActiveQuest);
                         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
                         String request = String.format(activity.getResources().getString(R.string.request_change_active_quest),previusActiveQuest.getTitle());
                         builder.setMessage(request)
@@ -105,11 +122,12 @@ public class QuestAdapter extends BaseAdapter
                                         db.updateQuest(questActual);
                                         data.set(position, questActual);
                                         indexActiveQuest = position;
+                                        notifyDataSetChanged();
                                     }
                                 })
                                 .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int id) {
-                                        // User cancelled the dialog
+                                        notifyDataSetChanged();
                                     }
                                 });
                         // Create the AlertDialog object and return it
@@ -123,11 +141,12 @@ public class QuestAdapter extends BaseAdapter
                         db.updateQuest(questActual);
                         data.set(position, questActual);
                         indexActiveQuest = position;
+                        notifyDataSetChanged();
                     }
                 }
                 else
                 {
-                    final Quest previusActiveQuest = data.get(indexActiveQuest);
+                    previusActiveQuest = data.get(position);
                     AlertDialog.Builder builder = new AlertDialog.Builder(activity);
                     builder.setMessage(R.string.request_deactive_quest)
                             .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
@@ -137,19 +156,18 @@ public class QuestAdapter extends BaseAdapter
                                     db.updateQuest(previusActiveQuest);
                                     data.set(indexActiveQuest,previusActiveQuest);
                                     indexActiveQuest = -1;
+                                    notifyDataSetChanged();
                                 }
                             })
                             .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int id) {
-                                    // User cancelled the dialog
+                                    notifyDataSetChanged();
                                 }
                             });
                     // Create the AlertDialog object and return it
                     builder.create();
                     builder.show();
                 }
-
-                notifyDataSetChanged();
             }
         });
 

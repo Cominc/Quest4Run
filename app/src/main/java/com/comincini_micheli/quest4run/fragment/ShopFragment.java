@@ -42,8 +42,7 @@ public class ShopFragment extends Fragment
         fragmentTransaction.replace(R.id.fragment_shop_container, shopListFragment);
         fragmentTransaction.commit();
         //-----------------------------------------------------
-        /*
-        DatabaseHandler db = new DatabaseHandler(getContext());
+        /*DatabaseHandler db = new DatabaseHandler(getContext());
         Equipment e_A = new Equipment("Attacco",0,5,4,3,50,"icon_A");
         Equipment e_A2 = new Equipment("Attacco3",0,5,4,3,70,"icon_A3");
         Equipment e_D = new Equipment("Difesa",1,5,4,3,20,"icon_D");
@@ -54,8 +53,7 @@ public class ShopFragment extends Fragment
         db.addEquipment(e_A2);
         db.addEquipment(e_D);
         db.addEquipment(e_M);
-        db.addEquipment(e_B);
-        */
+        db.addEquipment(e_B);*/
         //-----------------------------------------------------
         TabLayout tabLayout = (TabLayout) getActivity().findViewById(R.id.shop_tab_layout);
         tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
