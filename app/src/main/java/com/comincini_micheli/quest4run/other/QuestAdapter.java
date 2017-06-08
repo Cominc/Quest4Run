@@ -84,21 +84,88 @@ public class QuestAdapter extends BaseAdapter
         if(questActual.isActive())
             indexActiveQuest = position;
 
-        /*active.setOnTouchListener(new View.OnTouchListener()
+        active.setOnTouchListener(new View.OnTouchListener()
         {
             @Override
             public boolean onTouch(View v, MotionEvent event)
             {
                 if(event.getAction() == MotionEvent.ACTION_DOWN)
                 {
-                    CheckBox c = (CheckBox) v;
-                    Log.w("boh", c.isChecked() + "");
+                    CheckBox checkBoxActive = (CheckBox) v;
+                    Log.w("boh", checkBoxActive.isChecked() + "");
+                    if(!checkBoxActive.isChecked())
+                    {
+                        if(indexActiveQuest != -1)
+                        {
+                            previusActiveQuest = data.get(indexActiveQuest);
+                            AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+                            String request = String.format(activity.getResources().getString(R.string.request_change_active_quest),previusActiveQuest.getTitle());
+                            builder.setMessage(request)
+                                    .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int id)
+                                        {
+                                            previusActiveQuest.setActive(false);
+                                            db.updateQuest(previusActiveQuest);
+                                            data.set(indexActiveQuest,previusActiveQuest);
+
+                                            questActual = data.get(position);
+                                            questActual.setActive(true);
+                                            db.updateQuest(questActual);
+                                            data.set(position, questActual);
+                                            indexActiveQuest = position;
+                                            notifyDataSetChanged();
+                                        }
+                                    })
+                                    .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int id) {
+                                            notifyDataSetChanged();
+                                        }
+                                    });
+                            // Create the AlertDialog object and return it
+                            builder.create();
+                            builder.show();
+                        }
+                        else
+                        {
+                            questActual = data.get(position);
+                            questActual.setActive(true);
+                            db.updateQuest(questActual);
+                            data.set(position, questActual);
+                            indexActiveQuest = position;
+                            notifyDataSetChanged();
+                        }
+                    }
+                    else
+                    {
+                        previusActiveQuest = data.get(position);
+                        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+                        builder.setMessage(R.string.request_deactive_quest)
+                                .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id)
+                                    {
+                                        previusActiveQuest.setActive(false);
+                                        db.updateQuest(previusActiveQuest);
+                                        data.set(indexActiveQuest,previusActiveQuest);
+                                        indexActiveQuest = -1;
+                                        notifyDataSetChanged();
+                                    }
+                                })
+                                .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        notifyDataSetChanged();
+                                    }
+                                });
+                        // Create the AlertDialog object and return it
+                        builder.create();
+                        builder.show();
+                    }
                     return true;
                 }
                 return false;
             }
-        });*/
-        active.setOnClickListener(new View.OnClickListener() {
+        });
+
+        /*active.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 CheckBox checkBoxActive = (CheckBox)view;
@@ -169,7 +236,7 @@ public class QuestAdapter extends BaseAdapter
                     builder.show();
                 }
             }
-        });
+        });*/
 
         return vi;
     }
