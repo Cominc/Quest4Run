@@ -16,6 +16,7 @@ import android.view.MenuItem;
 
 import com.comincini_micheli.quest4run.R;
 import com.comincini_micheli.quest4run.fragment.CharacterFragment;
+import com.comincini_micheli.quest4run.fragment.QuestFragment;
 import com.comincini_micheli.quest4run.fragment.RunFragment;
 import com.comincini_micheli.quest4run.fragment.ShopFragment;
 import com.comincini_micheli.quest4run.fragment.TaskFragment;
@@ -92,7 +93,7 @@ public class MainActivity extends AppCompatActivity
                 title = getResources().getString(R.string.task_fragment_title);
                 break;
             case R.id.nav_quest:
-                fragment = new TestFragment();
+                fragment = new QuestFragment();
                 title = getResources().getString(R.string.nav_quest);
                 break;
             case R.id.nav_run:

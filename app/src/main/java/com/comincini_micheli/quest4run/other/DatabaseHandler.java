@@ -7,6 +7,7 @@ package com.comincini_micheli.quest4run.other;
     import android.database.sqlite.SQLiteOpenHelper;
     import android.util.Log;
 
+    import com.comincini_micheli.quest4run.objects.Quest;
     import com.comincini_micheli.quest4run.objects.Task;
     import com.comincini_micheli.quest4run.objects.Character;
     import com.comincini_micheli.quest4run.objects.Equipment;
@@ -30,6 +31,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String TABLE_EQUIPMENT = "equipment";
     private static final String TABLE_TASK = "task";
     private static final String TABLE_CHARACTER = "character";
+    private static final String TABLE_QUEST = "quest";
 
     // EQUIPMENT Table Columns names
     private static final String KEY_ID = "id";
@@ -55,6 +57,15 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String KEY_BOUGHT = "bought";
     private static final String KEY_EQUIPPED = "equipped";
 
+    private static final String KEY_TITLE = "title";
+    private static final String KEY_DURATION = "duration";
+    private static final String KEY_START_DATE = "startDate";
+    private static final String KEY_FINISH_DATE = "finishDate";
+    private static final String KEY_DESCRIPTION = "description";
+    private static final String KEY_EXP_REWARD = "expReward";
+
+
+
     //Create QUERIES
     private static final String CREATE_EQUIPMENT_TABLE = "CREATE TABLE " + TABLE_EQUIPMENT + "("
             + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + KEY_NAME + " TEXT,"
@@ -73,6 +84,12 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             + KEY_EXP + " INTEGER, " + KEY_ATK + " INTEGER," + KEY_DEF + " INTEGER," + KEY_MGC + " INTEGER," + KEY_WALLET + " INTEGER"
             + ")";
 
+    private static final String CREATE_QUEST_TABLE = " CREATE TABLE " + TABLE_QUEST + "("
+            + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + KEY_TITLE + " TEXT," + KEY_DESCRIPTION + " TEXT," + KEY_COMPLETED + " INTEGER,"
+            + KEY_ACTIVE + " INTEGER," + KEY_ATK + " INTEGER," + KEY_DEF + " INTEGER," + KEY_MGC + " INTEGER," + KEY_EXP_REWARD + " INTEGER,"
+            + KEY_DURATION + " INTEGER," + KEY_START_DATE + " INTEGER," + KEY_FINISH_DATE + " INTEGER"
+            + ")";
+
     public DatabaseHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
@@ -86,6 +103,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         db.execSQL(CREATE_TASK_TABLE);
         Log.w("character: ", CREATE_CHARACTER_TABLE);
         db.execSQL(CREATE_CHARACTER_TABLE);
+        Log.w("character: ", CREATE_QUEST_TABLE);
+        db.execSQL(CREATE_QUEST_TABLE);
     }
 
     // Upgrading database
@@ -95,9 +114,14 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_EQUIPMENT);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_TASK);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_CHARACTER);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_QUEST);
 
         // Create tables again
         onCreate(db);
+    }
+
+    private boolean castStringToBoolean(String s) {
+        return s.equals("1");
     }
 
 
@@ -200,10 +224,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         cursor.close();
         // return Task list
         return taskList;
-    }
-
-    private boolean castStringToBoolean(String s) {
-        return s.equals("1");
     }
 
     // Updating single Task
@@ -491,6 +511,174 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     // Getting Equipment Count
     public int getEquipmentCount() {
         String countQuery = "SELECT  * FROM " + TABLE_EQUIPMENT;
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(countQuery, null);
+        cursor.close();
+
+        // return count
+        return cursor.getCount();
+    }
+
+
+    //QUEST
+
+    public int addQuest(Quest quest) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(KEY_TITLE, quest.getTitle());
+        values.put(KEY_DESCRIPTION, quest.getDescription());
+        values.put(KEY_COMPLETED, quest.isCompleted());
+        values.put(KEY_ACTIVE, quest.isActive());
+        values.put(KEY_ATK, quest.getMinAttack());
+        values.put(KEY_DEF, quest.getMinDefense());
+        values.put(KEY_MGC, quest.getMinMagic());
+        values.put(KEY_EXP_REWARD, quest.getExpReward());
+        values.put(KEY_DURATION, quest.getDuration());
+        values.put(KEY_START_DATE, quest.getDateStart());
+        values.put(KEY_FINISH_DATE, quest.getDateFinish());
+
+        // Inserting Row
+        int id = (int) db.insert(TABLE_QUEST, null, values);
+        db.close(); // Closing database connection
+        return id;
+    }
+
+    //Getting single Task
+    Quest getQuest(int id) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.query(TABLE_QUEST, new String[] { KEY_ID,
+                        KEY_TITLE, KEY_DESCRIPTION, KEY_COMPLETED, KEY_ACTIVE, KEY_ATK, KEY_DEF, KEY_MGC, KEY_EXP_REWARD,
+                        KEY_DURATION, KEY_START_DATE, KEY_FINISH_DATE}, KEY_ID + "=?",
+                new String[] { String.valueOf(id) }, null, null, null, null);
+        if (cursor != null)
+            cursor.moveToFirst();
+
+        Quest quest = new Quest(Integer.parseInt(cursor.getString(0)),
+                cursor.getString(1), cursor.getString(2),
+                castStringToBoolean(cursor.getString(3)),castStringToBoolean(cursor.getString(4)),
+                Integer.parseInt(cursor.getString(5)),Integer.parseInt(cursor.getString(6)),
+                Integer.parseInt(cursor.getString(7)),Integer.parseInt(cursor.getString(8)),
+                Integer.parseInt(cursor.getString(9)),Integer.parseInt(cursor.getString(10)),
+                Integer.parseInt(cursor.getString(11)));
+        cursor.close();
+        return quest;
+    }
+
+    // Getting All tasks
+    public List<Quest> getAllQuests() {
+        List<Quest> questList = new ArrayList<Quest>();
+        // Select All Query
+        String selectQuery = "SELECT  * FROM " + TABLE_QUEST;
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+                Quest quest = new Quest();
+                quest.setId(Integer.parseInt(cursor.getString(0)));
+                quest.setTitle(cursor.getString(1));
+                quest.setDescription(cursor.getString(2));
+                quest.setCompleted(castStringToBoolean(cursor.getString(3)));
+                quest.setActive(castStringToBoolean(cursor.getString(4)));
+                quest.setMinAttack(Integer.parseInt(cursor.getString(5)));
+                quest.setMinDefense(Integer.parseInt(cursor.getString(6)));
+                quest.setMinMagic(Integer.parseInt(cursor.getString(7)));
+                quest.setExpReward(Integer.parseInt(cursor.getString(8)));
+                quest.setDuration(Integer.parseInt(cursor.getString(9)));
+                quest.setDateStart(Integer.parseInt(cursor.getString(10)));
+                quest.setDateFinish(Integer.parseInt(cursor.getString(11)));
+
+                questList.add(quest);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+
+        // return Task list
+        return questList;
+    }
+
+    public List<Quest> getQuests(boolean show_completed) {
+        List<Quest> questList = new ArrayList<Quest>();
+        int _completed;
+        if(show_completed)
+            _completed = 1;
+        else
+            _completed = 0;
+
+        String selectQuery = "SELECT  * FROM " + TABLE_QUEST + " WHERE " + KEY_COMPLETED + " == " + _completed;
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+                Quest quest = new Quest();
+                quest.setId(Integer.parseInt(cursor.getString(0)));
+                quest.setTitle(cursor.getString(1));
+                quest.setDescription(cursor.getString(2));
+                quest.setCompleted(castStringToBoolean(cursor.getString(3)));
+                quest.setActive(castStringToBoolean(cursor.getString(4)));
+                quest.setMinAttack(Integer.parseInt(cursor.getString(5)));
+                quest.setMinDefense(Integer.parseInt(cursor.getString(6)));
+                quest.setMinMagic(Integer.parseInt(cursor.getString(7)));
+                quest.setExpReward(Integer.parseInt(cursor.getString(8)));
+                quest.setDuration(Integer.parseInt(cursor.getString(9)));
+                quest.setDateStart(Integer.parseInt(cursor.getString(10)));
+                quest.setDateFinish(Integer.parseInt(cursor.getString(11)));
+
+                questList.add(quest);
+
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        // return Task list
+        return questList;
+    }
+
+    // Updating single Task
+    public int updateQuest(Quest quest) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+
+        values.put(KEY_TITLE, quest.getTitle());
+        values.put(KEY_DESCRIPTION, quest.getDescription());
+        values.put(KEY_COMPLETED, quest.isCompleted());
+        values.put(KEY_ACTIVE, quest.isActive());
+        values.put(KEY_ATK, quest.getMinAttack());
+        values.put(KEY_DEF, quest.getMinDefense());
+        values.put(KEY_MGC, quest.getMinMagic());
+        values.put(KEY_EXP_REWARD, quest.getExpReward());
+        values.put(KEY_DURATION, quest.getDuration());
+        values.put(KEY_START_DATE, quest.getDateStart());
+        values.put(KEY_FINISH_DATE, quest.getDateFinish());
+
+        // updating row
+        return db.update(TABLE_QUEST, values, KEY_ID + " = ?",
+                new String[] { String.valueOf(quest.getId()) });
+    }
+
+    public void deleteQuest(Quest quest) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(TABLE_QUEST, KEY_ID + " = ?",
+                new String[]{String.valueOf(quest.getId())});
+        db.close();
+    }
+
+    public int deleteAllQuests() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        int deleted = db.delete(TABLE_QUEST, "1" , null);
+        db.close();
+        return deleted;
+    }
+
+
+    public int getQuestCount() {
+        String countQuery = "SELECT  * FROM " + TABLE_QUEST;
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(countQuery, null);
         cursor.close();
