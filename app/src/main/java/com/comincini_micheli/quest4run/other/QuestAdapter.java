@@ -92,7 +92,6 @@ public class QuestAdapter extends BaseAdapter
                 if(event.getAction() == MotionEvent.ACTION_DOWN)
                 {
                     CheckBox checkBoxActive = (CheckBox) v;
-                    Log.w("boh", checkBoxActive.isChecked() + "");
                     if(!checkBoxActive.isChecked())
                     {
                         if(indexActiveQuest != -1)
