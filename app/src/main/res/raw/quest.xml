@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<quests>
+    <quest>
+        <title>quest 1</title>
+        <description>description</description>
+        <attack>4</attack>
+        <defense>1</defense>
+        <magic>2</magic>
+        <expReward>15</expReward>
+        <duration>4</duration>
+    </quest>
+    <quest>
+        <title>quest 2</title>
+        <description>description</description>
+        <attack>1</attack>
+        <defense>1</defense>
+        <magic>1</magic>
+        <expReward>1</expReward>
+        <duration>1</duration>
+    </quest>
+</quests>

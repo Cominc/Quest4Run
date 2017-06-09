@@ -15,7 +15,8 @@ public class Equipment {
     //TODO minLevel
 
     public Equipment() {
-
+        this.bought = false;
+        this.equipped = false;
     }
 
     public Equipment(String name, int idType, int atk, int def, int mgc, int price, String icon) {

@@ -50,7 +50,8 @@ public class Quest
 
     public Quest()
     {
-
+        this.completed = false;
+        this.active = false;
     }
 
     public int getId()

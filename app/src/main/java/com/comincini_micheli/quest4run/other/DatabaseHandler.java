@@ -121,6 +121,12 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         Log.w("character: ", CREATE_QUEST_TABLE);
         db.execSQL(CREATE_QUEST_TABLE);
 
+        loadEquipmentfromXml();
+        loadQuestfromXml();
+    }
+
+    private void loadEquipmentfromXml()
+    {
         XMLParser parser = new XMLParser();
         String equipmentXml = parser.getStringfromXml(context.getResources().openRawResource(R.raw.equipment));
         Document equipmentDoc = parser.getDomElement(equipmentXml);
@@ -133,13 +139,39 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         {
             e = (Element) nl.item(i);
             equipment = new Equipment();
-            equipment.setName(parser.getValue((Element) nl.item(i), "name"));
-            equipment.setAtk(Integer.parseInt(parser.getValue((Element) nl.item(i), "attack")));
-            equipment.setDef(Integer.parseInt(parser.getValue((Element) nl.item(i), "defense")));
-            equipment.setMgc(Integer.parseInt(parser.getValue((Element) nl.item(i), "magic")));
-            equipment.setPrice(Integer.parseInt(parser.getValue((Element) nl.item(i), "price")));
-            equipment.setIdType(Integer.parseInt(parser.getValue((Element) nl.item(i), "type")));
+            equipment.setName(parser.getValue(e, KEY_NAME));
+            equipment.setAtk(Integer.parseInt(parser.getValue(e, KEY_ATK)));
+            equipment.setDef(Integer.parseInt(parser.getValue(e, KEY_DEF)));
+            equipment.setMgc(Integer.parseInt(parser.getValue(e, KEY_MGC)));
+            equipment.setPrice(Integer.parseInt(parser.getValue(e, KEY_PRICE)));
+            equipment.setIdType(Integer.parseInt(parser.getValue(e, KEY_ID_EQUIPMENT_TYPE)));
             addEquipment(equipment);
+        }
+
+    }
+
+    private void loadQuestfromXml()
+    {
+        XMLParser parser = new XMLParser();
+        String questXml = parser.getStringfromXml(context.getResources().openRawResource(R.raw.quest));
+        Document questDoc = parser.getDomElement(questXml);
+
+        NodeList nl = questDoc.getElementsByTagName("quest");
+        Element e;
+        Quest quest;
+
+        for(int i = 0; i < nl.getLength(); i++)
+        {
+            e = (Element) nl.item(i);
+            quest = new Quest();
+            quest.setTitle(parser.getValue(e, KEY_TITLE));
+            quest.setDescription(parser.getValue(e, KEY_DESCRIPTION));
+            quest.setMinAttack(Integer.parseInt(parser.getValue(e, KEY_ATK)));
+            quest.setMinDefense(Integer.parseInt(parser.getValue(e, KEY_DEF)));
+            quest.setMinMagic(Integer.parseInt(parser.getValue(e, KEY_MGC)));
+            quest.setExpReward(Integer.parseInt(parser.getValue(e, KEY_EXP_REWARD)));
+            quest.setDuration(Integer.parseInt(parser.getValue(e, KEY_DURATION)));
+            addQuest(quest);
         }
 
     }

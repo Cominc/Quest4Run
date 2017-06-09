@@ -6,7 +6,7 @@
         <defense>1</defense>
         <magic>-2</magic>
         <price>15</price>
-        <type>0</type>
+        <idEquipmentType>0</idEquipmentType>
     </equipment>
     <equipment>
         <name>Scudo</name>
@@ -14,7 +14,7 @@
         <defense>5</defense>
         <magic>1</magic>
         <price>10</price>
-        <type>1</type>
+        <idEquipmentType>1</idEquipmentType>
     </equipment>
     <equipment>
         <name>Scettro</name>
@@ -22,6 +22,6 @@
         <defense>0</defense>
         <magic>6</magic>
         <price>25</price>
-        <type>2</type>
+        <idEquipmentType>2</idEquipmentType>
     </equipment>
 </equipments>
