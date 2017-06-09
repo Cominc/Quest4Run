@@ -35,7 +35,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     // All Static variables
     // Database Version
-    private static final int DATABASE_VERSION = 5;
+    private static final int DATABASE_VERSION = 6;
 
     // Database Name
     private static final String DATABASE_NAME = "Quest4Run";
@@ -120,12 +120,9 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         db.execSQL(CREATE_CHARACTER_TABLE);
         Log.w("character: ", CREATE_QUEST_TABLE);
         db.execSQL(CREATE_QUEST_TABLE);
-
-        loadEquipmentfromXml();
-        loadQuestfromXml();
     }
 
-    private void loadEquipmentfromXml()
+    public void loadEquipmentfromXml()
     {
         XMLParser parser = new XMLParser();
         String equipmentXml = parser.getStringfromXml(context.getResources().openRawResource(R.raw.equipment));
@@ -147,10 +144,9 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             equipment.setIdType(Integer.parseInt(parser.getValue(e, KEY_ID_EQUIPMENT_TYPE)));
             addEquipment(equipment);
         }
-
     }
 
-    private void loadQuestfromXml()
+    public void loadQuestfromXml()
     {
         XMLParser parser = new XMLParser();
         String questXml = parser.getStringfromXml(context.getResources().openRawResource(R.raw.quest));

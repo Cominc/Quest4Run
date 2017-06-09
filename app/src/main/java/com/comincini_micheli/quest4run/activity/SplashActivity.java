@@ -9,6 +9,7 @@ import android.util.Log;
 
 import com.comincini_micheli.quest4run.R;
 import com.comincini_micheli.quest4run.other.Constants;
+import com.comincini_micheli.quest4run.other.DatabaseHandler;
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -27,6 +28,9 @@ public class SplashActivity extends AppCompatActivity {
                 int characterId = firstLaunchSetting.getInt(Constants.CHAR_ID_PREFERENCE, -1);
                 if(characterId == -1)
                 {
+                    DatabaseHandler db = new DatabaseHandler(getApplicationContext());
+                    db.loadEquipmentfromXml();
+                    db.loadQuestfromXml();
                     Intent i = new Intent(SplashActivity.this, CreateCharacterActivity.class);
                     startActivity(i);
                 }
