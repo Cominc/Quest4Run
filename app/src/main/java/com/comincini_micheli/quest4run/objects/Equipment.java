@@ -12,6 +12,8 @@ public class Equipment {
     private String icon;
     private boolean bought, equipped;
 
+    //TODO minLevel
+
     public Equipment() {
 
     }

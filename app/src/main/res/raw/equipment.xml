@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<equipments>
+    <equipment>
+        <name>Spada</name>
+        <attack>4</attack>
+        <defense>1</defense>
+        <magic>-2</magic>
+        <price>15</price>
+        <type>0</type>
+    </equipment>
+    <equipment>
+        <name>Scudo</name>
+        <attack>0</attack>
+        <defense>5</defense>
+        <magic>1</magic>
+        <price>10</price>
+        <type>1</type>
+    </equipment>
+    <equipment>
+        <name>Scettro</name>
+        <attack>-1</attack>
+        <defense>0</defense>
+        <magic>6</magic>
+        <price>25</price>
+        <type>2</type>
+    </equipment>
+</equipments>

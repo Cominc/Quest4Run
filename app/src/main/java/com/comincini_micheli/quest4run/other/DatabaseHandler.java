@@ -7,11 +7,22 @@ package com.comincini_micheli.quest4run.other;
     import android.database.sqlite.SQLiteOpenHelper;
     import android.util.Log;
 
+    import com.comincini_micheli.quest4run.R;
     import com.comincini_micheli.quest4run.objects.Quest;
     import com.comincini_micheli.quest4run.objects.Task;
     import com.comincini_micheli.quest4run.objects.Character;
     import com.comincini_micheli.quest4run.objects.Equipment;
 
+    import org.w3c.dom.Document;
+    import org.w3c.dom.Element;
+    import org.w3c.dom.NodeList;
+    import org.xmlpull.v1.XmlPullParser;
+    import org.xmlpull.v1.XmlPullParserException;
+
+    import java.io.ByteArrayOutputStream;
+    import java.io.IOException;
+    import java.io.InputStream;
+    import java.io.UnsupportedEncodingException;
     import java.util.ArrayList;
     import java.util.List;
 
@@ -19,6 +30,8 @@ package com.comincini_micheli.quest4run.other;
  * Created by Daniele on 17/05/2017.
  */
 public class DatabaseHandler extends SQLiteOpenHelper {
+
+    private Context context;
 
     // All Static variables
     // Database Version
@@ -90,8 +103,10 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             + KEY_DURATION + " INTEGER," + KEY_START_DATE + " INTEGER," + KEY_FINISH_DATE + " INTEGER"
             + ")";
 
-    public DatabaseHandler(Context context) {
+    public DatabaseHandler(Context context)
+    {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
+        this.context = context;
     }
 
     // Creating Tables
@@ -105,6 +120,28 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         db.execSQL(CREATE_CHARACTER_TABLE);
         Log.w("character: ", CREATE_QUEST_TABLE);
         db.execSQL(CREATE_QUEST_TABLE);
+
+        XMLParser parser = new XMLParser();
+        String equipmentXml = parser.getStringfromXml(context.getResources().openRawResource(R.raw.equipment));
+        Document equipmentDoc = parser.getDomElement(equipmentXml);
+
+        NodeList nl = equipmentDoc.getElementsByTagName("equipment");
+        Element e;
+        Equipment equipment;
+
+        for(int i = 0; i < nl.getLength(); i++)
+        {
+            e = (Element) nl.item(i);
+            equipment = new Equipment();
+            equipment.setName(parser.getValue((Element) nl.item(i), "name"));
+            equipment.setAtk(Integer.parseInt(parser.getValue((Element) nl.item(i), "attack")));
+            equipment.setDef(Integer.parseInt(parser.getValue((Element) nl.item(i), "defense")));
+            equipment.setMgc(Integer.parseInt(parser.getValue((Element) nl.item(i), "magic")));
+            equipment.setPrice(Integer.parseInt(parser.getValue((Element) nl.item(i), "price")));
+            equipment.setIdType(Integer.parseInt(parser.getValue((Element) nl.item(i), "type")));
+            addEquipment(equipment);
+        }
+
     }
 
     // Upgrading database
