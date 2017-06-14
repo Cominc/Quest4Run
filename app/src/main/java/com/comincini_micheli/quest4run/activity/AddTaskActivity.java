@@ -3,6 +3,7 @@ package com.comincini_micheli.quest4run.activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -31,6 +32,8 @@ public class AddTaskActivity extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_task);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         spinnerType = (Spinner) findViewById(R.id.task_type_spinner);
         //spinner.setOnItemClickListener();
@@ -82,5 +85,16 @@ public class AddTaskActivity extends AppCompatActivity
                 }
             }
         });
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            // Respond to the action bar's Up/Home button
+            case android.R.id.home:
+                finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

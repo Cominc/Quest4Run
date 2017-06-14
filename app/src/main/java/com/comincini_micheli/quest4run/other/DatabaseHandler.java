@@ -666,6 +666,31 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return questList;
     }
 
+    public Quest getActiveQuest()
+    {
+        String selectQuery = "SELECT  * FROM " + TABLE_QUEST + " WHERE " + KEY_ACTIVE + " == " + 1;
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        if(cursor.moveToFirst())
+        {
+            Quest quest = new Quest();
+            quest.setId(Integer.parseInt(cursor.getString(0)));
+            quest.setTitle(cursor.getString(1));
+            quest.setDescription(cursor.getString(2));
+            quest.setCompleted(castStringToBoolean(cursor.getString(3)));
+            quest.setActive(castStringToBoolean(cursor.getString(4)));
+            quest.setMinAttack(Integer.parseInt(cursor.getString(5)));
+            quest.setMinDefense(Integer.parseInt(cursor.getString(6)));
+            quest.setMinMagic(Integer.parseInt(cursor.getString(7)));
+            quest.setExpReward(Integer.parseInt(cursor.getString(8)));
+            quest.setDuration(Integer.parseInt(cursor.getString(9)));
+            quest.setDateStart(Integer.parseInt(cursor.getString(10)));
+            quest.setDateFinish(Integer.parseInt(cursor.getString(11)));
+            return quest;
+        }
+        else return null;
+    }
+
     public List<Quest> getQuests(boolean show_completed) {
         List<Quest> questList = new ArrayList<Quest>();
         int _completed;

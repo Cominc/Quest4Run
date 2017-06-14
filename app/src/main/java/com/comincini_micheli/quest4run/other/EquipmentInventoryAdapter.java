@@ -2,7 +2,9 @@ package com.comincini_micheli.quest4run.other;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,7 +14,9 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 
 import com.comincini_micheli.quest4run.R;
+import com.comincini_micheli.quest4run.objects.Character;
 import com.comincini_micheli.quest4run.objects.Equipment;
+import com.comincini_micheli.quest4run.objects.Quest;
 
 import java.util.List;
 
@@ -97,11 +101,55 @@ public class EquipmentInventoryAdapter extends BaseAdapter {
                 }
                 else
                 {
-                    Equipment previusEquippedEquipment = data.get(indexEquipmentEquipped);
-                    previusEquippedEquipment.setEquipped(false);
-                    db.unequipEquipment(previusEquippedEquipment, idCharacter);
-                    data.set(indexEquipmentEquipped,previusEquippedEquipment);
-                    indexEquipmentEquipped = -1;
+                    final Equipment previousEquippedEquipment = data.get(indexEquipmentEquipped);
+                    final Quest quest = db.getActiveQuest();
+                    if(quest != null)
+                    {
+                        Character  character = db.getCharacter(idCharacter);
+                        int charAttackUpdated = character.getAttack() - previousEquippedEquipment.getAtk();
+                        int charDefenseUpdated = character.getDefense() - previousEquippedEquipment.getDef();
+                        int charMagicUpdated = character.getMagic() - previousEquippedEquipment.getMgc();
+                        if((quest.getMinAttack() <= charAttackUpdated) && (quest.getMinDefense() <= charDefenseUpdated) && (quest.getMinMagic() <= charMagicUpdated))
+                        {
+                            previousEquippedEquipment.setEquipped(false);
+                            db.unequipEquipment(previousEquippedEquipment, idCharacter);
+                            data.set(indexEquipmentEquipped,previousEquippedEquipment);
+                            indexEquipmentEquipped = -1;
+                        }
+                        else
+                        {
+                            AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+                            String request = String.format(activity.getResources().getString(R.string.request_remove_quest_unequipping), quest.getTitle());
+                            builder.setMessage(request)
+                                    .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int id)
+                                        {
+                                            previousEquippedEquipment.setEquipped(false);
+                                            db.unequipEquipment(previousEquippedEquipment, idCharacter);
+                                            data.set(indexEquipmentEquipped,previousEquippedEquipment);
+                                            indexEquipmentEquipped = -1;
+                                            quest.setActive(false);
+                                            db.updateQuest(quest);
+                                            notifyDataSetChanged();
+                                        }
+                                    })
+                                    .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int id) {
+                                            notifyDataSetChanged();
+                                        }
+                                    });
+                            // Create the AlertDialog object and return it
+                            builder.create();
+                            builder.show();
+                        }
+                    }
+                    else
+                    {
+                        previousEquippedEquipment.setEquipped(false);
+                        db.unequipEquipment(previousEquippedEquipment, idCharacter);
+                        data.set(indexEquipmentEquipped,previousEquippedEquipment);
+                        indexEquipmentEquipped = -1;
+                    }
                 }
 
                 notifyDataSetChanged();

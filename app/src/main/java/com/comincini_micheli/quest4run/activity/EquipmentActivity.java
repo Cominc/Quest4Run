@@ -3,6 +3,7 @@ package com.comincini_micheli.quest4run.activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.widget.ImageButton;
 import android.widget.ListView;
 
@@ -20,6 +21,9 @@ public class EquipmentActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_equipment);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         Bundle b = getIntent().getExtras();
         int equipmentTypeId = -1;
         String title = "";
@@ -47,5 +51,16 @@ public class EquipmentActivity extends AppCompatActivity {
         // Getting adapter by passing xml data ArrayList
         EquipmentInventoryAdapter adapter = new EquipmentInventoryAdapter(this, equipmentList, db);
         list.setAdapter(adapter);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            // Respond to the action bar's Up/Home button
+            case android.R.id.home:
+                finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

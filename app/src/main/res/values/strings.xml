@@ -105,6 +105,7 @@
     <string name="inventory_attack">Inventario attacco</string>
     <string name="inventory_defense">Inventario difesa</string>
     <string name="inventory_magic">Inventario magia</string>
+    <string name="request_remove_quest_unequipping">Togliere l\'equipaggiamento disattiverà la missione %s, vuoi continuare?</string>
 
     <!-- Shop -->
     <string name="attack_label">Attacco</string>
@@ -121,6 +122,7 @@
     <string name="exp_label"> EXP</string>
     <string name="request_change_active_quest">Missione %s attiva, vuoi cambiarla?</string>
     <string name="request_deactive_quest">Vuoi disattivare questa Missione?</string>
+    <string name="impossible_active_quest">Statistiche troppo basse, impossibile attivare la Missione</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

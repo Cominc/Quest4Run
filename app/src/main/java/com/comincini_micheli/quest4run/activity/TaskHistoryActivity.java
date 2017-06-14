@@ -5,6 +5,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
 
@@ -28,6 +29,9 @@ public class TaskHistoryActivity extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_task_history);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         DatabaseHandler db = new DatabaseHandler(this);
 
         taskList = db.getTasks(true);
@@ -37,5 +41,16 @@ public class TaskHistoryActivity extends AppCompatActivity
         adapter=new TaskHistoryAdapter(this, taskList, getResources().getStringArray(R.array.task_type),
                 getResources().getStringArray(R.array.task_goal), getResources().getStringArray(R.array.task_reward));
         list.setAdapter(adapter);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            // Respond to the action bar's Up/Home button
+            case android.R.id.home:
+                finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
