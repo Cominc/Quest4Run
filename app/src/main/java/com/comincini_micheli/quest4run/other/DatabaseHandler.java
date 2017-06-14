@@ -331,6 +331,19 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return deleted;
     }
 
+    public int deleteAllTasks(boolean completed) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String _completed;
+        if(completed)
+            _completed = "1";
+        else
+            _completed = "0";
+        String[] whereArgs = {_completed};
+        int deleted = db.delete(TABLE_TASK, KEY_COMPLETED+" = ?" , whereArgs);
+        db.close();
+        return deleted;
+    }
+
     // Getting Task Count
     public int getTaskCount() {
         String countQuery = "SELECT  * FROM " + TABLE_TASK;

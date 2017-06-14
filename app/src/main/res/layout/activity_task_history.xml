@@ -26,6 +26,8 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintVertical_bias="0.0"/>
 
-    <include layout="@layout/empty_list" />
+    <include layout="@layout/empty_list"
+        tools:layout_editor_absoluteY="255dp"
+        tools:layout_editor_absoluteX="135dp" />
 
 </android.support.constraint.ConstraintLayout>

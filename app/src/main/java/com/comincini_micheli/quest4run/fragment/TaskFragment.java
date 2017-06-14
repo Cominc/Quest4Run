@@ -72,7 +72,7 @@ public class TaskFragment extends Fragment
                 builder.setMessage(R.string.delete_confirmation)
                         .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
-                                int deleted = db.deleteAllTasks();
+                                int deleted = db.deleteAllTasks(false);
                                 taskList.clear();
                                 adapter.notifyDataSetChanged();
                                 Toast.makeText(getContext(), String.format(getResources().getString(R.string.number_task_deleted), deleted), Toast.LENGTH_SHORT).show();
