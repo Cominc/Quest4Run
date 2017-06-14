@@ -51,6 +51,7 @@ public class EquipmentActivity extends AppCompatActivity {
         // Getting adapter by passing xml data ArrayList
         EquipmentInventoryAdapter adapter = new EquipmentInventoryAdapter(this, equipmentList, db);
         list.setAdapter(adapter);
+        list.setEmptyView(findViewById(R.id.empty_list));
     }
 
     @Override

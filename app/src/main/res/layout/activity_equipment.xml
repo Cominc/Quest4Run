@@ -10,4 +10,6 @@
         android:id="@+id/list_equipment_inventory"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
+
+    <include layout="@layout/empty_list" />
 </android.support.constraint.ConstraintLayout>

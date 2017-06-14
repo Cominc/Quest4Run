@@ -41,6 +41,7 @@ public class TaskHistoryActivity extends AppCompatActivity
         adapter=new TaskHistoryAdapter(this, taskList, getResources().getStringArray(R.array.task_type),
                 getResources().getStringArray(R.array.task_goal), getResources().getStringArray(R.array.task_reward));
         list.setAdapter(adapter);
+        list.setEmptyView(findViewById(R.id.empty_list));
     }
 
     @Override

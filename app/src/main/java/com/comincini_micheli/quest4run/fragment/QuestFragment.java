@@ -59,5 +59,6 @@ public class QuestFragment extends Fragment
         list=(ListView)getView().findViewById(R.id.quest_list_view);
         adapter = new QuestAdapter(getActivity(), questList, db);
         list.setAdapter(adapter);
+        list.setEmptyView(getActivity().findViewById(R.id.empty_list));
     }
 }

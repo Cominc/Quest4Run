@@ -61,5 +61,6 @@ public class ShopListFragment extends Fragment {
         // Getting adapter by passing xml data ArrayList
         adapter = new EquipmentShopAdapter(getActivity(), equipmentList, db);
         list.setAdapter(adapter);
+        list.setEmptyView(getActivity().findViewById(R.id.empty_list));
     }
 }
