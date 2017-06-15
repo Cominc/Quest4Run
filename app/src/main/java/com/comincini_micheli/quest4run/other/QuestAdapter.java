@@ -81,7 +81,6 @@ public class QuestAdapter extends BaseAdapter
         TextView defense = (TextView)vi.findViewById(R.id.quest_min_defense);
         TextView magic = (TextView)vi.findViewById(R.id.quest_min_magic);
         TextView expReward = (TextView) vi.findViewById(R.id.quest_exp_reward);
-        //CheckBox active = (CheckBox)vi.findViewById(R.id.quest_active_check_box);
         RadioButton active = (RadioButton)vi.findViewById(R.id.quest_active_radiobutton);
 
         questActual = data.get(position);
@@ -196,80 +195,6 @@ public class QuestAdapter extends BaseAdapter
                 }
             });
         }
-
-        /*active.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                CheckBox checkBoxActive = (CheckBox)view;
-                if(checkBoxActive.isChecked())
-                {
-                    if(indexActiveQuest != -1)
-                    {
-                        previusActiveQuest = data.get(indexActiveQuest);
-                        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-                        String request = String.format(activity.getResources().getString(R.string.request_change_active_quest),previusActiveQuest.getTitle());
-                        builder.setMessage(request)
-                                .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int id)
-                                    {
-                                        previusActiveQuest.setActive(false);
-                                        db.updateQuest(previusActiveQuest);
-                                        data.set(indexActiveQuest,previusActiveQuest);
-
-                                        questActual = data.get(position);
-                                        questActual.setActive(true);
-                                        db.updateQuest(questActual);
-                                        data.set(position, questActual);
-                                        indexActiveQuest = position;
-                                        notifyDataSetChanged();
-                                    }
-                                })
-                                .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int id) {
-                                        notifyDataSetChanged();
-                                    }
-                                });
-                        // Create the AlertDialog object and return it
-                        builder.create();
-                        builder.show();
-                    }
-                    else
-                    {
-                        questActual = data.get(position);
-                        questActual.setActive(true);
-                        db.updateQuest(questActual);
-                        data.set(position, questActual);
-                        indexActiveQuest = position;
-                        notifyDataSetChanged();
-                    }
-                }
-                else
-                {
-                    previusActiveQuest = data.get(position);
-                    AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-                    builder.setMessage(R.string.request_deactive_quest)
-                            .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int id)
-                                {
-                                    previusActiveQuest.setActive(false);
-                                    db.updateQuest(previusActiveQuest);
-                                    data.set(indexActiveQuest,previusActiveQuest);
-                                    indexActiveQuest = -1;
-                                    notifyDataSetChanged();
-                                }
-                            })
-                            .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int id) {
-                                    notifyDataSetChanged();
-                                }
-                            });
-                    // Create the AlertDialog object and return it
-                    builder.create();
-                    builder.show();
-                }
-            }
-        });*/
-
         return vi;
     }
 }
