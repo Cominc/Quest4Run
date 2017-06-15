@@ -1,14 +1,19 @@
 package com.comincini_micheli.quest4run.fragment;
 
 
+import android.graphics.Point;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.comincini_micheli.quest4run.R;
 import com.comincini_micheli.quest4run.objects.Equipment;
@@ -20,6 +25,10 @@ import com.comincini_micheli.quest4run.other.DatabaseHandler;
  */
 public class ShopFragment extends Fragment
 {
+    float x1 = 0;
+    float x2 = 0;
+    int width;
+
     public ShopFragment()
     {
         // Required empty public constructor
@@ -29,7 +38,87 @@ public class ShopFragment extends Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_shop, container, false);
+        View view = inflater.inflate(R.layout.fragment_shop, container, false);
+        DisplayMetrics metrics = new DisplayMetrics();
+        getActivity().getWindowManager().getDefaultDisplay().getMetrics(metrics);
+        width =(int) Math.floor(metrics.widthPixels/Constants.PERCENT_SCREEN_SWIPE);
+
+        view.setOnTouchListener(new View.OnTouchListener() {
+            public boolean onTouch(View v, MotionEvent event) {
+
+                switch(event.getAction())
+                {
+                    case MotionEvent.ACTION_DOWN:
+                        x1 = event.getX();
+//                        Log.w("down",x1+"");
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        x2 = event.getX();
+//                        Log.w("up",x1 + ", " +x2+"");
+                        float deltaX = x2 - x1;
+                        if (deltaX < -width)
+                        {
+                            TabLayout tabLayout = (TabLayout) getActivity().findViewById(R.id.shop_tab_layout);
+                            int pos = tabLayout.getSelectedTabPosition();
+                            int newPos = -1;
+                            switch (pos)
+                            {
+                                case 0:
+                                    newPos = 1;
+                                    break;
+                                case 1:
+                                    newPos = 2;
+                                    break;
+                                case 2:
+                                    break;
+                                default:
+                                    break;
+                            }
+                            if(newPos > -1)
+                            {
+                                changeTab(tabLayout, newPos);
+                            }
+                        }
+                        else if(deltaX > width)
+                        {
+                            TabLayout tabLayout = (TabLayout) getActivity().findViewById(R.id.shop_tab_layout);
+                            int pos = tabLayout.getSelectedTabPosition();
+                            int newPos = -1;
+                            switch (pos)
+                            {
+                                case 0:
+                                    break;
+                                case 1:
+                                    newPos = 0;
+                                    break;
+                                case 2:
+                                    newPos = 1;
+                                    break;
+                                default:
+                                    break;
+                            }
+                            if(newPos > -1)
+                            {
+                                changeTab(tabLayout, newPos);
+                            }
+                        }
+                        break;
+                }
+                return true;
+            }
+        });
+        return view;
+    }
+
+    private void changeTab(TabLayout tabLayout, int newPos)
+    {
+        TabLayout.Tab tab = tabLayout.getTabAt(newPos);
+        tab.select();
+        ShopListFragment shopListFragment = new ShopListFragment();
+        shopListFragment.setEquipmentTypeId(tab.getPosition());
+        FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.fragment_shop_container, shopListFragment);
+        fragmentTransaction.commit();
     }
 
     @Override
@@ -77,5 +166,4 @@ public class ShopFragment extends Fragment
             }
         });
     }
-
 }

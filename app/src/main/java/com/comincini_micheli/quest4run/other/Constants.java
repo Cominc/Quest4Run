@@ -16,4 +16,9 @@ public class Constants
    public static final int ID_TYPE_ATTACK = 0;
    public static final int ID_TYPE_DEFENSE = 1;
    public static final int ID_TYPE_MAGIC = 2;
+
+   /*public static final int MIN_DISTANCE = 250;
+   public static final int MIN_NEG_DISTANCE = -250;*/
+
+   public static final float PERCENT_SCREEN_SWIPE = 5;
 }
