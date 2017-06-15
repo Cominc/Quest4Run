@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -80,7 +81,8 @@ public class QuestAdapter extends BaseAdapter
         TextView defense = (TextView)vi.findViewById(R.id.quest_min_defense);
         TextView magic = (TextView)vi.findViewById(R.id.quest_min_magic);
         TextView expReward = (TextView) vi.findViewById(R.id.quest_exp_reward);
-        CheckBox active = (CheckBox)vi.findViewById(R.id.quest_active_check_box);
+        //CheckBox active = (CheckBox)vi.findViewById(R.id.quest_active_check_box);
+        RadioButton active = (RadioButton)vi.findViewById(R.id.quest_active_radiobutton);
 
         questActual = data.get(position);
 
@@ -104,8 +106,8 @@ public class QuestAdapter extends BaseAdapter
                 {
                     if(event.getAction() == MotionEvent.ACTION_DOWN)
                     {
-                        CheckBox checkBoxActive = (CheckBox) v;
-                        if(!checkBoxActive.isChecked())
+                        RadioButton radioButtonActive = (RadioButton) v;
+                        if(!radioButtonActive.isChecked())
                         {
                             if(indexActiveQuest != -1)
                             {
