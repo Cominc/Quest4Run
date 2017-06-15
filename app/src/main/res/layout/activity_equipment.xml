@@ -8,14 +8,10 @@
 
     <ListView
         android:id="@+id/list_equipment_inventory"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        tools:layout_editor_absoluteY="8dp"
-        tools:layout_editor_absoluteX="8dp" />
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
     <include layout="@layout/empty_list"
-        android:layout_height="0dp"
-        android:layout_width="0dp"
-        tools:layout_editor_absoluteY="0dp"
-        tools:layout_editor_absoluteX="0dp" />
+        android:layout_height="match_parent"
+        android:layout_width="match_parent" />
 </android.support.constraint.ConstraintLayout>

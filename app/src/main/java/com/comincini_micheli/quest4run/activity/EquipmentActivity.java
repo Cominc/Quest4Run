@@ -3,6 +3,7 @@ package com.comincini_micheli.quest4run.activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.ImageButton;
 import android.widget.ListView;
@@ -52,6 +53,7 @@ public class EquipmentActivity extends AppCompatActivity {
         EquipmentInventoryAdapter adapter = new EquipmentInventoryAdapter(this, equipmentList, db);
         list.setAdapter(adapter);
         list.setEmptyView(findViewById(R.id.empty_list));
+        Log.w("elementi",""+equipmentList.size());
     }
 
     @Override

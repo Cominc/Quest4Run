@@ -37,6 +37,7 @@ public class EquipmentInventoryAdapter extends BaseAdapter {
     public EquipmentInventoryAdapter(Activity a, List<Equipment> d, DatabaseHandler db) {
         activity = a;
         data=d;
+        Log.w("adapter",""+data.size());
         this.db = db;
         inflater = (LayoutInflater)activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         indexEquipmentEquipped = -1;
