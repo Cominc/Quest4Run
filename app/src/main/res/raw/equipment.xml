@@ -9,6 +9,14 @@
         <idEquipmentType>0</idEquipmentType>
     </equipment>
     <equipment>
+        <name>Spada fuffa</name>
+        <attack>-1</attack>
+        <defense>-1</defense>
+        <magic>-1</magic>
+        <price>1</price>
+        <idEquipmentType>0</idEquipmentType>
+    </equipment>
+    <equipment>
         <name>Scudo</name>
         <attack>0</attack>
         <defense>5</defense>
@@ -17,11 +25,27 @@
         <idEquipmentType>1</idEquipmentType>
     </equipment>
     <equipment>
+        <name>Scudo fuffa</name>
+        <attack>-1</attack>
+        <defense>-1</defense>
+        <magic>-1</magic>
+        <price>1</price>
+        <idEquipmentType>1</idEquipmentType>
+    </equipment>
+    <equipment>
         <name>Scettro</name>
         <attack>-1</attack>
         <defense>0</defense>
         <magic>6</magic>
         <price>25</price>
+        <idEquipmentType>2</idEquipmentType>
+    </equipment>
+    <equipment>
+        <name>Scettro fuffa</name>
+        <attack>-1</attack>
+        <defense>-1</defense>
+        <magic>-1</magic>
+        <price>1</price>
         <idEquipmentType>2</idEquipmentType>
     </equipment>
 </equipments>

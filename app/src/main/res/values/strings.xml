@@ -107,6 +107,9 @@
     <string name="inventory_defense">Inventario difesa</string>
     <string name="inventory_magic">Inventario magia</string>
     <string name="request_remove_quest_unequipping">Togliere l\'equipaggiamento disattiverà la missione %s, vuoi continuare?</string>
+    <string name="request_change_quest_unequipping">Cambiare l\'equipaggiamento disattiverà la missione %s, vuoi continuare?</string>
+    <string name="request_equip_quest_unequipping">Equipaggiare l\'equipaggiamento disattiverà la missione %s, vuoi continuare?</string>
+
 
     <!-- Shop -->
     <string name="attack_label">Attacco</string>

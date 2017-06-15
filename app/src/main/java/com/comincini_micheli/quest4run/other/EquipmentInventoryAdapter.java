@@ -83,22 +83,139 @@ public class EquipmentInventoryAdapter extends BaseAdapter {
         equipped.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                CheckBox checkbox_equipped = (CheckBox)view;
+                final CheckBox checkbox_equipped = (CheckBox)view;
                 if(checkbox_equipped.isChecked())
                 {
-                    if(indexEquipmentEquipped != -1)
+                    if (indexEquipmentEquipped != -1)
                     {
-                        Equipment previusEquippedEquipment = data.get(indexEquipmentEquipped);
-                        previusEquippedEquipment.setEquipped(false);
-                        db.unequipEquipment(previusEquippedEquipment, idCharacter);
-                        data.set(indexEquipmentEquipped,previusEquippedEquipment);
-                    }
+                        final Equipment previousEquippedEquipment = data.get(indexEquipmentEquipped);
+                        equipment_actual = data.get(position);
 
-                    equipment_actual = data.get(position);
-                    equipment_actual.setEquipped(checkbox_equipped.isChecked());
-                    db.equipEquipment(equipment_actual, idCharacter);
-                    data.set(position,equipment_actual);
-                    indexEquipmentEquipped = position;
+                        final Quest quest = db.getActiveQuest();
+                        if (quest != null)
+                        {
+                            Character character = db.getCharacter(idCharacter);
+                            int charAttackUpdated = character.getAttack() - previousEquippedEquipment.getAtk() + equipment_actual.getAtk();
+                            int charDefenseUpdated = character.getDefense() - previousEquippedEquipment.getDef() + equipment_actual.getDef();
+                            int charMagicUpdated = character.getMagic() - previousEquippedEquipment.getMgc() + equipment_actual.getMgc();
+                            if ((quest.getMinAttack() <= charAttackUpdated) && (quest.getMinDefense() <= charDefenseUpdated) && (quest.getMinMagic() <= charMagicUpdated))
+                            {
+                                previousEquippedEquipment.setEquipped(false);
+                                db.unequipEquipment(previousEquippedEquipment, idCharacter);
+                                data.set(indexEquipmentEquipped, previousEquippedEquipment);
+
+                                equipment_actual.setEquipped(checkbox_equipped.isChecked());
+                                db.equipEquipment(equipment_actual, idCharacter);
+                                data.set(position, equipment_actual);
+                                indexEquipmentEquipped = position;
+                            }
+                            else
+                            {
+                                AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+                                String request = String.format(activity.getResources().getString(R.string.request_change_quest_unequipping), quest.getTitle());
+                                builder.setMessage(request)
+                                        .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener()
+                                        {
+                                            public void onClick(DialogInterface dialog, int id)
+                                            {
+                                                previousEquippedEquipment.setEquipped(false);
+                                                db.unequipEquipment(previousEquippedEquipment, idCharacter);
+                                                data.set(indexEquipmentEquipped, previousEquippedEquipment);
+
+                                                equipment_actual.setEquipped(true);
+                                                db.equipEquipment(equipment_actual, idCharacter);
+                                                data.set(position, equipment_actual);
+                                                indexEquipmentEquipped = position;
+
+                                                quest.setActive(false);
+                                                db.updateQuest(quest);
+
+                                                notifyDataSetChanged();
+                                            }
+                                        })
+                                        .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener()
+                                        {
+                                            public void onClick(DialogInterface dialog, int id)
+                                            {
+                                                equipment_actual = previousEquippedEquipment;
+                                                notifyDataSetChanged();
+                                            }
+                                        });
+                                // Create the AlertDialog object and return it
+                                builder.create();
+                                builder.show();
+                            }
+                        }
+                        else
+                        {
+                            previousEquippedEquipment.setEquipped(false);
+                            db.unequipEquipment(previousEquippedEquipment, idCharacter);
+                            data.set(indexEquipmentEquipped, previousEquippedEquipment);
+
+                            equipment_actual.setEquipped(checkbox_equipped.isChecked());
+                            db.equipEquipment(equipment_actual, idCharacter);
+                            data.set(position, equipment_actual);
+                            indexEquipmentEquipped = position;
+                        }
+                    }
+                    else
+                    {
+                        equipment_actual = data.get(position);
+
+                        final Quest quest = db.getActiveQuest();
+                        if (quest != null)
+                        {
+                            Character character = db.getCharacter(idCharacter);
+                            int charAttackUpdated = character.getAttack() + equipment_actual.getAtk();
+                            int charDefenseUpdated = character.getDefense()  + equipment_actual.getDef();
+                            int charMagicUpdated = character.getMagic()  + equipment_actual.getMgc();
+                            if ((quest.getMinAttack() <= charAttackUpdated) && (quest.getMinDefense() <= charDefenseUpdated) && (quest.getMinMagic() <= charMagicUpdated))
+                            {
+                                equipment_actual.setEquipped(checkbox_equipped.isChecked());
+                                db.equipEquipment(equipment_actual, idCharacter);
+                                data.set(position, equipment_actual);
+                                indexEquipmentEquipped = position;
+                            }
+                            else
+                            {
+                                AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+                                String request = String.format(activity.getResources().getString(R.string.request_equip_quest_unequipping), quest.getTitle());
+                                builder.setMessage(request)
+                                        .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener()
+                                        {
+                                            public void onClick(DialogInterface dialog, int id)
+                                            {
+
+                                                equipment_actual.setEquipped(true);
+                                                db.equipEquipment(equipment_actual, idCharacter);
+                                                data.set(position, equipment_actual);
+                                                indexEquipmentEquipped = position;
+                                                quest.setActive(false);
+                                                db.updateQuest(quest);
+
+                                                notifyDataSetChanged();
+                                            }
+                                        })
+                                        .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener()
+                                        {
+                                            public void onClick(DialogInterface dialog, int id)
+                                            {
+                                                notifyDataSetChanged();
+                                            }
+                                        });
+                                // Create the AlertDialog object and return it
+                                builder.create();
+                                builder.show();
+                            }
+                        }
+                        else
+                        {
+                            equipment_actual.setEquipped(checkbox_equipped.isChecked());
+                            db.equipEquipment(equipment_actual, idCharacter);
+                            data.set(position, equipment_actual);
+                            indexEquipmentEquipped = position;
+                        }
+                    }
                 }
                 else
                 {
