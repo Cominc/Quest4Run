@@ -7,17 +7,37 @@
     <!-- TODO: Update blank fragment layout -->
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:padding="5dp">
 
         <Button
-            android:id="@+id/button_gps"
-            android:layout_width="wrap_content"
+            android:id="@+id/button_gps_start"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginStart="128dp"
-            android:layout_marginTop="70dp"
-            android:text="Button" />
+            android:layout_marginBottom="47dp"
+            android:background="#00FF00"
+            android:text="START"
+            android:layout_above="@+id/button_gps_stop"
+            android:layout_alignParentStart="true" />
+
+        <Button
+            android:id="@+id/button_gps_stop"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            android:text="STOP"
+            android:background="#FF0000"
+            android:layout_above="@+id/button_gps_delete_all"
+            android:layout_alignParentStart="true" />
+
+        <Button
+            android:id="@+id/button_gps_delete_all"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="30dp"
+            android:text="CANCELLA TUTTI"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true" />
 
         <TextView
             android:id="@+id/textview_location"

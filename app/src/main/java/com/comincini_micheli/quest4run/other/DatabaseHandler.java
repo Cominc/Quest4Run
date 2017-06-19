@@ -8,6 +8,7 @@ package com.comincini_micheli.quest4run.other;
     import android.util.Log;
 
     import com.comincini_micheli.quest4run.R;
+    import com.comincini_micheli.quest4run.objects.Gps;
     import com.comincini_micheli.quest4run.objects.Quest;
     import com.comincini_micheli.quest4run.objects.Task;
     import com.comincini_micheli.quest4run.objects.Character;
@@ -46,6 +47,9 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String TABLE_CHARACTER = "character";
     private static final String TABLE_QUEST = "quest";
 
+    // Temporary table
+    private static final String TABLE_GPS = "gps";
+
     // EQUIPMENT Table Columns names
     private static final String KEY_ID = "id";
     private static final String KEY_NAME = "name";
@@ -77,6 +81,12 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String KEY_DESCRIPTION = "description";
     private static final String KEY_EXP_REWARD = "expReward";
 
+    private static final String KEY_LATITUDE = "latitude";
+    private static final String KEY_LONGITUDE = "longitude";
+    private static final String KEY_ALTITUDE = "altitude";
+    private static final String KEY_TIME = "time";
+
+
 
 
     //Create QUERIES
@@ -103,6 +113,11 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             + KEY_DURATION + " INTEGER," + KEY_START_DATE + " INTEGER," + KEY_FINISH_DATE + " INTEGER"
             + ")";
 
+    private static final String CREATE_GPS_TABLE = " CREATE TABLE " + TABLE_GPS + "("
+            + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + KEY_LATITUDE + " TEXT," + KEY_LONGITUDE + " TEXT," + KEY_ALTITUDE + " INTEGER,"
+            + KEY_TIME + " INTEGER"
+            + ")";
+
     public DatabaseHandler(Context context)
     {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -118,8 +133,11 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         db.execSQL(CREATE_TASK_TABLE);
         Log.w("character: ", CREATE_CHARACTER_TABLE);
         db.execSQL(CREATE_CHARACTER_TABLE);
-        Log.w("character: ", CREATE_QUEST_TABLE);
+        Log.w("quest: ", CREATE_QUEST_TABLE);
         db.execSQL(CREATE_QUEST_TABLE);
+
+        Log.w("gps: ", CREATE_GPS_TABLE);
+        db.execSQL(CREATE_GPS_TABLE);
     }
 
     public void loadEquipmentfromXml()
@@ -181,6 +199,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_CHARACTER);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_QUEST);
 
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_GPS);
         // Create tables again
         onCreate(db);
     }
@@ -597,7 +616,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return cursor.getCount();
     }
 
-
     //QUEST
 
     public int addQuest(Quest quest) {
@@ -785,6 +803,110 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(countQuery, null);
         cursor.close();
+
+        // return count
+        return cursor.getCount();
+    }
+
+    //GPS
+
+    public int addGps(Gps gps) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(KEY_LATITUDE, gps.getLatitude());
+        values.put(KEY_LONGITUDE, gps.getLongitude());
+        values.put(KEY_ALTITUDE, gps.getAltitude());
+        values.put(KEY_TIME, gps.getTime());
+
+        // Inserting Row
+        int id = (int) db.insert(TABLE_GPS, null, values);
+        db.close(); // Closing database connection
+        return id;
+    }
+
+    //Getting single Task
+    Gps getGps(int id) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.query(TABLE_GPS, new String[] { KEY_ID,
+                        KEY_LATITUDE, KEY_LONGITUDE, KEY_ALTITUDE, KEY_TIME}, KEY_ID + "=?",
+                new String[] { String.valueOf(id) }, null, null, null, null);
+        if (cursor != null)
+            cursor.moveToFirst();
+
+        Gps gps = new Gps(Integer.parseInt(cursor.getString(0)), cursor.getString(1),
+                cursor.getString(2), Integer.parseInt(cursor.getString(3)),
+                Integer.parseInt(cursor.getString(4)));
+        cursor.close();
+        return gps;
+    }
+
+    // Getting All tasks
+    public List<Gps> getAllGps() {
+        List<Gps> gpsList = new ArrayList<Gps>();
+        // Select All Query
+        String selectQuery = "SELECT  * FROM " + TABLE_GPS;
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+                Gps gps = new Gps();
+                gps.setId(Integer.parseInt(cursor.getString(0)));
+                gps.setLatitude(cursor.getString(1));
+                gps.setLongitude(cursor.getString(2));
+                gps.setAltitude(Integer.parseInt(cursor.getString(3)));
+                gps.setTime(Integer.parseInt(cursor.getString(4)));
+
+                gpsList.add(gps);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+
+        // return Gps list
+        return gpsList;
+    }
+
+    // Updating single Gps
+    public int updateGps(Gps gps) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+
+        values.put(KEY_LATITUDE, gps.getLatitude());
+        values.put(KEY_LONGITUDE, gps.getLongitude());
+        values.put(KEY_ALTITUDE, gps.getAltitude());
+        values.put(KEY_TIME, gps.getTime());
+
+        // updating row
+        return db.update(TABLE_GPS, values, KEY_ID + " = ?",
+                new String[] { String.valueOf(gps.getId()) });
+    }
+
+    public void deleteGps(Gps gps) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(TABLE_GPS, KEY_ID + " = ?",
+                new String[]{String.valueOf(gps.getId())});
+        db.close();
+    }
+
+    public int deleteAllGps() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        int deleted = db.delete(TABLE_GPS, "1" , null);
+        db.close();
+        return deleted;
+    }
+
+
+    public int getGpsCount() {
+        String countQuery = "SELECT  * FROM " + TABLE_GPS;
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(countQuery, null);
+        //cursor.close();
+        //TODO attenzione se chiudo il cursor e poi ci applico in metodo ottengo crash!!! (DA CORREGGERE ANCHE NEGLI ALTRI METODI)
 
         // return count
         return cursor.getCount();

@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.database.DatabaseErrorHandler;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -21,11 +22,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.comincini_micheli.quest4run.R;
+import com.comincini_micheli.quest4run.objects.Gps;
+import com.comincini_micheli.quest4run.other.DatabaseHandler;
 
 
 public class RunFragment extends Fragment {
 
     static Location previusLocation = null;
+    boolean active = false;
 
     public RunFragment() {
     }
@@ -39,17 +43,14 @@ public class RunFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
         final TextView textViewLocation = (TextView) getView().findViewById(R.id.textview_location);
+        final DatabaseHandler db = new DatabaseHandler(getContext());
 
         LocationManager locationManager = (LocationManager) getContext().getSystemService(Context.LOCATION_SERVICE);
-        previusLocation = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-        if(previusLocation != null) {
-            textViewLocation.setText("Latitudine: " + previusLocation.getLatitude() + "\n" +
-                    "Longitudine: " + previusLocation.getLongitude() + "\n" +
-                    "Altitudine: " + previusLocation.getAltitude() + "\n" +
-                    "Velocità: " + previusLocation.getSpeed() + " (" + previusLocation.hasSpeed() + ")\n" +
-                    "Pendenza: " + previusLocation.getBearing() + " (" + previusLocation.hasBearing() + ")");
-        }
+        previusLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+        if(previusLocation == null)
+            previusLocation = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
         LocationListener locationListener = new LocationListener() {
             public void onLocationChanged(Location location) {
                 // Called when a new location is found by the network location provider.
@@ -59,9 +60,15 @@ public class RunFragment extends Fragment {
                         "Longitudine: "+location.getLongitude()+"\n"+
                         "Altitudine: "+location.getAltitude()+"\n"+
                         "Velocità: "+location.getSpeed()+" ("+location.hasSpeed()+")\n"+
-                        "Pendenza: "+location.getBearing()+" ("+location.hasBearing()+")");
+                        "Pendenza: "+location.getBearing()+" ("+location.hasBearing()+")\n"+
+                        "Provider: "+location.getProvider());
 
                 previusLocation = location;
+
+                if(active){
+                    Gps newPoint = new Gps();
+                    db.addGps(newPoint);
+                }
             }
 
             public void onStatusChanged(String provider, int status, Bundle extras) {
@@ -80,17 +87,36 @@ public class RunFragment extends Fragment {
             Toast.makeText(getContext(), "Permessi GPS mancanti", Toast.LENGTH_SHORT).show();
         }
         else {
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
             locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
-            //locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
         }
 
 
-        Button btnGPS = (Button) getView().findViewById(R.id.button_gps);
-        btnGPS.setOnClickListener(new View.OnClickListener() {
+        Button btnGPS_start = (Button) getView().findViewById(R.id.button_gps_start);
+        btnGPS_start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                TextView t = (TextView) getActivity().findViewById(R.id.textview_location);
-                t.setText("ciao");
+                Toast.makeText( getContext(),"Inizio attività",Toast.LENGTH_SHORT).show();
+                active = true;
+            }
+        });
+
+        Button btnGPS_stop = (Button) getView().findViewById(R.id.button_gps_stop);
+        btnGPS_stop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText( getContext(),"Fine attività",Toast.LENGTH_SHORT).show();
+                active = false;
+                Toast.makeText( getContext(),"GPS points: "+db.getGpsCount(),Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        Button btnGPS_delete_all = (Button) getView().findViewById(R.id.button_gps_delete_all);
+        btnGPS_delete_all.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText( getContext(),"Cancellati tutti i GPS points ("+db.getGpsCount()+")",Toast.LENGTH_SHORT).show();
+                db.deleteAllGps();
             }
         });
     }
