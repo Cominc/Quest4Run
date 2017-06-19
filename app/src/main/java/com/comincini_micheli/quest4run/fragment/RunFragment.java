@@ -30,6 +30,7 @@ public class RunFragment extends Fragment {
 
     static Location previusLocation = null;
     boolean active = false;
+    float totalDistance = 0, intermediateDistance = 0;
 
     public RunFragment() {
     }
@@ -47,56 +48,65 @@ public class RunFragment extends Fragment {
         final TextView textViewLocation = (TextView) getView().findViewById(R.id.textview_location);
         final DatabaseHandler db = new DatabaseHandler(getContext());
 
-        LocationManager locationManager = (LocationManager) getContext().getSystemService(Context.LOCATION_SERVICE);
-        previusLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-        if(previusLocation == null)
-            previusLocation = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-        LocationListener locationListener = new LocationListener() {
+        final LocationManager locationManager = (LocationManager) getContext().getSystemService(Context.LOCATION_SERVICE);
+
+        final LocationListener locationListener = new LocationListener() {
             public void onLocationChanged(Location location) {
                 // Called when a new location is found by the network location provider.
                 Toast.makeText(getContext(), "Location changed!", Toast.LENGTH_SHORT).show();
-                location.setSpeed(location.distanceTo(previusLocation)/((previusLocation.getTime()-location.getTime())/1000));
-                textViewLocation.setText("Latitudine: "+ location.getLatitude()+"\n"+
-                        "Longitudine: "+location.getLongitude()+"\n"+
-                        "Altitudine: "+location.getAltitude()+"\n"+
-                        "Velocità: "+location.getSpeed()+" ("+location.hasSpeed()+")\n"+
-                        "Pendenza: "+location.getBearing()+" ("+location.hasBearing()+")\n"+
-                        "Provider: "+location.getProvider());
+                if(previusLocation!=null) {
+                    intermediateDistance = location.distanceTo(previusLocation);
+                    location.setSpeed(intermediateDistance / ((previusLocation.getTime() - location.getTime()) / 1000));
+                }
+                textViewLocation.setText("Latitudine: " + location.getLatitude() + "\n" +
+                        "Longitudine: " + location.getLongitude() + "\n" +
+                        "Altitudine: " + location.getAltitude() + "\n" +
+                        "Velocità: " + location.getSpeed() + " (" + location.hasSpeed() + ")\n" +
+                        "Pendenza: " + location.getBearing() + " (" + location.hasBearing() + ")\n" +
+                        "Provider: " + location.getProvider() + "\n\n" +
+                        "Distanza percorsa: " + totalDistance + " m"
+                );
 
                 previusLocation = location;
 
-                if(active){
+                if (active) {
                     Gps newPoint = new Gps();
                     db.addGps(newPoint);
+                    totalDistance += intermediateDistance;
                 }
             }
 
             public void onStatusChanged(String provider, int status, Bundle extras) {
-                Toast.makeText( getContext(),"Status change",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Status change", Toast.LENGTH_SHORT).show();
             }
 
             public void onProviderEnabled(String provider) {
-                Toast.makeText( getContext(),"GPS is working",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "GPS is working", Toast.LENGTH_SHORT).show();
             }
 
             public void onProviderDisabled(String provider) {
-                Toast.makeText( getContext(),"GPS is not working", Toast.LENGTH_SHORT ).show();
+                Toast.makeText(getContext(), "GPS is not working", Toast.LENGTH_SHORT).show();
             }
         };
-        if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            Toast.makeText(getContext(), "Permessi GPS mancanti", Toast.LENGTH_SHORT).show();
-        }
-        else {
-            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
-            locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
-        }
 
 
         Button btnGPS_start = (Button) getView().findViewById(R.id.button_gps_start);
         btnGPS_start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText( getContext(),"Inizio attività",Toast.LENGTH_SHORT).show();
+                if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                    Toast.makeText(getContext(), "Permessi GPS mancanti", Toast.LENGTH_SHORT).show();
+                } else {
+                    locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
+                    locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
+                    /*
+                    previusLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+                    if(previusLocation == null)
+                        previusLocation = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+                    */
+                    previusLocation = null;
+                }
+                Toast.makeText(getContext(), "Inizio attività", Toast.LENGTH_SHORT).show();
                 active = true;
             }
         });
@@ -108,6 +118,8 @@ public class RunFragment extends Fragment {
                 Toast.makeText( getContext(),"Fine attività",Toast.LENGTH_SHORT).show();
                 active = false;
                 Toast.makeText( getContext(),"GPS points: "+db.getGpsCount(),Toast.LENGTH_SHORT).show();
+                Toast.makeText( getContext(),"Distanza (m): "+totalDistance,Toast.LENGTH_SHORT).show();
+                locationManager.removeUpdates(locationListener);
             }
         });
 
