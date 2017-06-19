@@ -25,6 +25,8 @@ import com.comincini_micheli.quest4run.R;
 
 public class RunFragment extends Fragment {
 
+    static Location previusLocation = null;
+
     public RunFragment() {
     }
 
@@ -40,22 +42,38 @@ public class RunFragment extends Fragment {
         final TextView textViewLocation = (TextView) getView().findViewById(R.id.textview_location);
 
         LocationManager locationManager = (LocationManager) getContext().getSystemService(Context.LOCATION_SERVICE);
+        previusLocation = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+        if(previusLocation != null) {
+            textViewLocation.setText("Latitudine: " + previusLocation.getLatitude() + "\n" +
+                    "Longitudine: " + previusLocation.getLongitude() + "\n" +
+                    "Altitudine: " + previusLocation.getAltitude() + "\n" +
+                    "Velocità: " + previusLocation.getSpeed() + " (" + previusLocation.hasSpeed() + ")\n" +
+                    "Pendenza: " + previusLocation.getBearing() + " (" + previusLocation.hasBearing() + ")");
+        }
         LocationListener locationListener = new LocationListener() {
             public void onLocationChanged(Location location) {
                 // Called when a new location is found by the network location provider.
                 Toast.makeText(getContext(), "Location changed!", Toast.LENGTH_SHORT).show();
-                textViewLocation.setText("Latitudine: "+ location.getLatitude()+"\n"+"Longitudine: "+location.getLongitude()+"\n"+"Altitudine: "+location.getAltitude()+"\n");
-                location.getAltitude();
-                //makeUseOfNewLocation(location);
+                location.setSpeed(location.distanceTo(previusLocation)/((previusLocation.getTime()-location.getTime())/1000));
+                textViewLocation.setText("Latitudine: "+ location.getLatitude()+"\n"+
+                        "Longitudine: "+location.getLongitude()+"\n"+
+                        "Altitudine: "+location.getAltitude()+"\n"+
+                        "Velocità: "+location.getSpeed()+" ("+location.hasSpeed()+")\n"+
+                        "Pendenza: "+location.getBearing()+" ("+location.hasBearing()+")");
+
+                previusLocation = location;
             }
 
             public void onStatusChanged(String provider, int status, Bundle extras) {
+                Toast.makeText( getContext(),"Status change",Toast.LENGTH_SHORT).show();
             }
 
             public void onProviderEnabled(String provider) {
+                Toast.makeText( getContext(),"GPS is working",Toast.LENGTH_SHORT).show();
             }
 
             public void onProviderDisabled(String provider) {
+                Toast.makeText( getContext(),"GPS is not working", Toast.LENGTH_SHORT ).show();
             }
         };
         if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
