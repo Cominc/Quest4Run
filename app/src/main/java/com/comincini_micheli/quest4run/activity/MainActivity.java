@@ -113,8 +113,8 @@ public class MainActivity extends AppCompatActivity
                 title = getResources().getString(R.string.nav_share);
                 break;
             case R.id.nav_send:
-                fragment = new TestFragment();
-                title = getResources().getString(R.string.nav_send);
+                Intent i2 = new Intent(MainActivity.this, MapsActivity.class);
+                startActivity(i2);
                 break;
             case R.id.nav_about_us:
                 Intent i = new Intent(MainActivity.this, AboutUsActivity.class);

@@ -2,6 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.comincini_micheli.quest4run">
 
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <!-- Needed only if your app targets Android 5.0 (API level 21) or higher. -->
+    <uses-feature android:name="android.hardware.location.gps" />
+    <uses-feature android:name="android.hardware.location.network" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -20,9 +25,9 @@
         </activity>
         <activity
             android:name=".activity.AboutUsActivity"
-            android:screenOrientation="portrait"
-            android:label="@string/nav_about_us"/>
-        <!-- TODO definire un'altra stringa?-->
+            android:label="@string/nav_about_us"
+            android:screenOrientation="portrait" />
+        <!-- TODO definire un'altra stringa? -->
         <activity
             android:name=".activity.PrivacyPolicyActivity"
             android:screenOrientation="portrait" />
@@ -46,9 +51,21 @@
         <activity
             android:name=".activity.EquipmentActivity"
             android:screenOrientation="portrait" />
+        <!--
+             The API key for Google Maps-based APIs is defined as a string resource.
+             (See the file "res/values/google_maps_api.xml").
+             Note that the API key is linked to the encryption key used to sign the APK.
+             You need a different API key for each encryption key, including the release key that is used to
+             sign the APK for publishing.
+             You can define the keys for the debug and release targets in src/debug/ and src/release/. 
+        -->
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
+
+        <activity
+            android:name=".activity.MapsActivity"
+            android:label="@string/title_activity_maps"></activity>
     </application>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <!-- Needed only if your app targets Android 5.0 (API level 21) or higher. -->
-    <uses-feature android:name="android.hardware.location.gps" />
-    <uses-feature android:name="android.hardware.location.network" />
+
 </manifest>
