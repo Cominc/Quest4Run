@@ -1,8 +1,12 @@
 package com.comincini_micheli.quest4run.activity;
 
+import android.graphics.Color;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.util.Log;
 
+import com.comincini_micheli.quest4run.objects.Gps;
+import com.comincini_micheli.quest4run.other.DatabaseHandler;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -11,6 +15,9 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import com.comincini_micheli.quest4run.R;
+import com.google.android.gms.maps.model.PolylineOptions;
+
+import java.util.List;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
@@ -39,10 +46,33 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+        DatabaseHandler db = new DatabaseHandler(getApplicationContext());
+        List<Gps> gpsList = db.getAllGps();
+        PolylineOptions line= new PolylineOptions().width(5).color(Color.RED);
+        LatLng point = null;
+        Double meanLat = 0.0, meanLng = 0.0;
+        Double d = Double.parseDouble(
+                gpsList.get(0).getLatitude()
+        );
+        Log.w("test gps","("+gpsList.get(0).getLatitude()+")"+d);
+        for(int i=0; i<gpsList.size(); i++){
+            point = new LatLng(
+                    Double.parseDouble(
+                            gpsList.get(i).getLatitude()
+                    ),
+                    Double.parseDouble(
+                            gpsList.get(i).getLongitude()
+                    ));
+            mMap.addMarker(new MarkerOptions().position(point).title(i+""));
+            line.add(point);
+            meanLat += point.latitude;
+            meanLng += point.longitude;
+        }
 
-        // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        meanLat/=gpsList.size();
+        meanLng/=gpsList.size();
+
+        mMap.addPolyline(line);
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(meanLat,meanLng),18));
     }
 }

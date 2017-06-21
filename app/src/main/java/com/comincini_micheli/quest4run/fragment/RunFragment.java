@@ -70,7 +70,7 @@ public class RunFragment extends Fragment {
                 previusLocation = location;
 
                 if (active) {
-                    Gps newPoint = new Gps();
+                    Gps newPoint = new Gps(location.getLatitude()+"", location.getLongitude()+"", (int) Math.round(location.getAltitude()), (int)location.getTime());
                     db.addGps(newPoint);
                     totalDistance += intermediateDistance;
                 }
