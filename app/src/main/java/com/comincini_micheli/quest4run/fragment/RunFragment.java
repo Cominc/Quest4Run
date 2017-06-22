@@ -112,8 +112,11 @@ public class RunFragment extends Fragment {
                     totalDistance += intermediateDistance;
                     //******************
                     LatLng newPoisition = new LatLng(location.getLatitude(),location.getLongitude());
-                    mMapGoogle.addMarker(new MarkerOptions().position(newPoisition).icon(BitmapDescriptorFactory.fromResource(R.drawable.point_black)));
-                    CameraPosition cameraPosition = new CameraPosition.Builder().target(newPoisition).zoom(18).build();
+                    mMapGoogle.addMarker(new MarkerOptions().position(newPoisition).anchor(0.5f, 0.5f).icon(BitmapDescriptorFactory.fromResource(R.drawable.point_black)));
+                    PolylineOptions line= new PolylineOptions().width(5).color(Color.RED);
+                    line.add(newPoisition);
+                    mMapGoogle.addPolyline(line);
+                    CameraPosition cameraPosition = new CameraPosition.Builder().target(newPoisition).zoom(18).bearing(location.getBearing()).build();
                     mMapGoogle.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
                     //******************
                 }
