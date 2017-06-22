@@ -55,7 +55,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 gpsList.get(0).getLatitude()
         );
         Log.w("test gps","("+gpsList.get(0).getLatitude()+")"+d);
+
+        double interLat = 0, interLng = 0;
+        int counter = 0;
         for(int i=0; i<gpsList.size(); i++){
+            if(i>0&&i<(gpsList.size()-1)) {
+                interLat = (Double.parseDouble(gpsList.get(i - 1).getLatitude()) + Double.parseDouble(gpsList.get(i + 1).getLatitude())) / 2;
+                interLng = (Double.parseDouble(gpsList.get(i - 1).getLongitude()) + Double.parseDouble(gpsList.get(i + 1).getLongitude())) / 2;
+            }
             point = new LatLng(
                     Double.parseDouble(
                             gpsList.get(i).getLatitude()
@@ -63,16 +70,26 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     Double.parseDouble(
                             gpsList.get(i).getLongitude()
                     ));
-            mMap.addMarker(new MarkerOptions().position(point).title(i+""));
-            line.add(point);
-            meanLat += point.latitude;
-            meanLng += point.longitude;
+            LatLng interPoint = new LatLng(interLat,interLng);
+            if(i>0&&i<(gpsList.size()-1)&&checkPoint(point, interPoint)){
+                mMap.addMarker(new MarkerOptions().position(point).title(i+""));
+                line.add(point);
+                meanLat += point.latitude;
+                meanLng += point.longitude;
+                counter++;
+            }
         }
 
-        meanLat/=gpsList.size();
-        meanLng/=gpsList.size();
+        meanLat/=counter;
+        meanLng/=counter;
 
         mMap.addPolyline(line);
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(meanLat,meanLng),18));
     }
+
+    private boolean checkPoint(LatLng realPoint, LatLng calculatedPoint){
+        //TODO eventualmente implementare logica altrimenti rimuovere
+        return true;
+    }
+
 }
