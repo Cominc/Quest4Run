@@ -165,8 +165,12 @@ public class TaskFragment extends Fragment
         });
 
         // Getting adapter by passing xml data ArrayList
+        String [][] taskGoals = {getResources().getStringArray(R.array.task_distance_goal),
+                                getResources().getStringArray(R.array.task_rithm_goal),
+                                getResources().getStringArray(R.array.task_constance_goal)};
+
         adapter=new TaskAdapter(getActivity(), taskList, getResources().getStringArray(R.array.task_type),
-                                getResources().getStringArray(R.array.task_goal), getResources().getStringArray(R.array.task_reward), db);
+                                taskGoals, getResources().getStringArray(R.array.task_reward), db);
         list.setAdapter(adapter);
         list.setEmptyView(getActivity().findViewById(R.id.empty_list));
     }

@@ -24,11 +24,11 @@ public class TaskHistoryAdapter extends BaseAdapter
     private List<Task> data;
     private static LayoutInflater inflater=null;
     private String [] task_type;
-    private String [] task_goal;
+    private String [][] task_goal;
     private String [] task_reward;
     private Task task_actual;
 
-    public TaskHistoryAdapter(Activity a, List<Task> d, String [] task_type, String [] task_goal, String [] task_reward) {
+    public TaskHistoryAdapter(Activity a, List<Task> d, String [] task_type, String [][] task_goal, String [] task_reward) {
         activity = a;
         data=d;
         this.task_type = task_type;
@@ -65,7 +65,7 @@ public class TaskHistoryAdapter extends BaseAdapter
         //TODO Va bene mettere le stringe fisse così oppure bisognerebbe usare 2 PlainText separati?
         name.setText(task_actual.getName());
         type.setText(task_type[task_actual.getIdTaskType()]);
-        goal.setText(task_goal[Integer.parseInt(task_actual.getGoal())]);
+        goal.setText(task_goal[task_actual.getIdTaskType()][Integer.parseInt(task_actual.getGoal())]);
         reward.setText(task_reward[task_actual.getReward()]);
 
         return vi;

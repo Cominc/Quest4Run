@@ -38,8 +38,12 @@ public class TaskHistoryActivity extends AppCompatActivity
         list=(ListView) findViewById(R.id.list_task_completed);
 
         // Getting adapter by passing xml data ArrayList
+        String [][] taskGoals = {getResources().getStringArray(R.array.task_distance_goal),
+                getResources().getStringArray(R.array.task_rithm_goal),
+                getResources().getStringArray(R.array.task_constance_goal)};
+
         adapter=new TaskHistoryAdapter(this, taskList, getResources().getStringArray(R.array.task_type),
-                getResources().getStringArray(R.array.task_goal), getResources().getStringArray(R.array.task_reward));
+                taskGoals, getResources().getStringArray(R.array.task_reward));
         list.setAdapter(adapter);
         list.setEmptyView(findViewById(R.id.empty_list));
     }

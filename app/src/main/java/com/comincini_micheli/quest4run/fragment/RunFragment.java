@@ -93,7 +93,7 @@ public class RunFragment extends Fragment {
                 Toast.makeText(getContext(), "Location changed!", Toast.LENGTH_SHORT).show();
                 if(previusLocation!=null) {
                     intermediateDistance = location.distanceTo(previusLocation);
-                    location.setSpeed(intermediateDistance / ((previusLocation.getTime() - location.getTime()) / 1000));
+                    location.setSpeed(intermediateDistance / ((location.getTime() - previusLocation.getTime()) / 1000));
                 }
                 textViewLocation.setText("Latitudine: " + location.getLatitude() + "\n" +
                         "Longitudine: " + location.getLongitude() + "\n" +

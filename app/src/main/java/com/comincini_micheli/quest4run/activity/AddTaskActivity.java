@@ -1,10 +1,12 @@
 package com.comincini_micheli.quest4run.activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
@@ -43,9 +45,39 @@ public class AddTaskActivity extends AppCompatActivity
 
         spinnerGoal = (Spinner) findViewById(R.id.task_goal_spinner);
         //spinner.setOnItemClickListener();
-        List<String> listGoal = Arrays.asList(getResources().getStringArray(R.array.task_goal));
+        List<String> listGoal = Arrays.asList(getResources().getStringArray(R.array.task_distance_goal));
         ArrayAdapter<String> adapterGoal = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, listGoal);
         spinnerGoal.setAdapter(adapterGoal);
+
+        final Context context = this;
+
+        spinnerType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                List<String> listGoal = null;
+                switch (position)
+                {
+                    case 0:
+                        listGoal = Arrays.asList(getResources().getStringArray(R.array.task_distance_goal));
+                        break;
+                    case 1:
+                        listGoal = Arrays.asList(getResources().getStringArray(R.array.task_rithm_goal));
+                        break;
+                    case 2:
+                        listGoal = Arrays.asList(getResources().getStringArray(R.array.task_constance_goal));
+                        break;
+                    default:
+                        break;
+                }
+                ArrayAdapter<String> adapterGoal = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, listGoal);
+                spinnerGoal.setAdapter(adapterGoal);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+            }
+
+        });
 
         spinnerReward = (Spinner) findViewById(R.id.task_reward_spinner);
         //spinner.setOnItemClickListener();
