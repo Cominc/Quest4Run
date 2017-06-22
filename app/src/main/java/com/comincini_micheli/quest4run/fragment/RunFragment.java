@@ -5,6 +5,7 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.database.DatabaseErrorHandler;
+import android.graphics.Color;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -25,6 +26,17 @@ import com.comincini_micheli.quest4run.R;
 import com.comincini_micheli.quest4run.objects.Gps;
 import com.comincini_micheli.quest4run.other.Constants;
 import com.comincini_micheli.quest4run.other.DatabaseHandler;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapView;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.CameraPosition;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.PolylineOptions;
+
+import java.util.List;
 
 
 public class RunFragment extends Fragment {
@@ -33,6 +45,9 @@ public class RunFragment extends Fragment {
     boolean active = false;
     float totalDistance = 0, intermediateDistance = 0;
 
+    private MapView mMapView;
+    private GoogleMap mMapGoogle;
+
     public RunFragment() {
     }
 
@@ -40,12 +55,32 @@ public class RunFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_run, container, false);
+
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        //MAPPA***************************************************************************
+        mMapView = (MapView) getActivity().findViewById(R.id.map2);
+        mMapView.onCreate(savedInstanceState);
+        mMapView.onResume();
 
+
+        mMapView.getMapAsync(new OnMapReadyCallback() {
+            @Override
+            public void onMapReady(GoogleMap googleMap) {
+                mMapGoogle = googleMap;
+                /*
+                LatLng sydeney = new LatLng(-34,151);
+                mMapGoogle.addMarker(new MarkerOptions().position(sydeney));
+                CameraPosition cameraPosition = new CameraPosition.Builder().target(sydeney).zoom(12).build();
+                mMapGoogle.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+                */
+            }
+        });
+
+        //********************************************************************************
         final TextView textViewLocation = (TextView) getView().findViewById(R.id.textview_location);
         final DatabaseHandler db = new DatabaseHandler(getContext());
 
@@ -74,6 +109,12 @@ public class RunFragment extends Fragment {
                     Gps newPoint = new Gps(location.getLatitude()+"", location.getLongitude()+"", (int) Math.round(location.getAltitude()), (int)location.getTime());
                     db.addGps(newPoint);
                     totalDistance += intermediateDistance;
+                    //******************
+                    LatLng newPoisition = new LatLng(location.getLatitude(),location.getLongitude());
+                    mMapGoogle.addMarker(new MarkerOptions().position(newPoisition));
+                    CameraPosition cameraPosition = new CameraPosition.Builder().target(newPoisition).zoom(18).build();
+                    mMapGoogle.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+                    //******************
                 }
             }
 
