@@ -104,8 +104,6 @@ public class RunFragment extends Fragment {
                         "Distanza percorsa: " + totalDistance + " m"
                 );
 
-                previusLocation = location;
-
                 if (active) {
                     Gps newPoint = new Gps(location.getLatitude()+"", location.getLongitude()+"", (int) Math.round(location.getAltitude()), (int)location.getTime());
                     db.addGps(newPoint);
@@ -114,12 +112,17 @@ public class RunFragment extends Fragment {
                     LatLng newPoisition = new LatLng(location.getLatitude(),location.getLongitude());
                     mMapGoogle.addMarker(new MarkerOptions().position(newPoisition).anchor(0.5f, 0.5f).icon(BitmapDescriptorFactory.fromResource(R.drawable.point_black)));
                     PolylineOptions line= new PolylineOptions().width(5).color(Color.RED);
+                    if(previusLocation!=null) {
+                        line.add(new LatLng(previusLocation.getLatitude(), previusLocation.getLongitude()));
+                    }
                     line.add(newPoisition);
                     mMapGoogle.addPolyline(line);
                     CameraPosition cameraPosition = new CameraPosition.Builder().target(newPoisition).zoom(18).bearing(location.getBearing()).build();
                     mMapGoogle.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
                     //******************
                 }
+
+                previusLocation = location;
             }
 
             public void onStatusChanged(String provider, int status, Bundle extras) {
