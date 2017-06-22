@@ -31,6 +31,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -98,7 +99,7 @@ public class RunFragment extends Fragment {
                         "Longitudine: " + location.getLongitude() + "\n" +
                         "Altitudine: " + location.getAltitude() + "\n" +
                         "Velocità: " + location.getSpeed() + " (" + location.hasSpeed() + ")\n" +
-                        "Pendenza: " + location.getBearing() + " (" + location.hasBearing() + ")\n" +
+                        "Direzione: " + location.getBearing() + " (" + location.hasBearing() + ")\n" +
                         "Provider: " + location.getProvider() + "\n\n" +
                         "Distanza percorsa: " + totalDistance + " m"
                 );
@@ -111,7 +112,7 @@ public class RunFragment extends Fragment {
                     totalDistance += intermediateDistance;
                     //******************
                     LatLng newPoisition = new LatLng(location.getLatitude(),location.getLongitude());
-                    mMapGoogle.addMarker(new MarkerOptions().position(newPoisition));
+                    mMapGoogle.addMarker(new MarkerOptions().position(newPoisition).icon(BitmapDescriptorFactory.fromResource(R.drawable.point_black)));
                     CameraPosition cameraPosition = new CameraPosition.Builder().target(newPoisition).zoom(18).build();
                     mMapGoogle.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
                     //******************

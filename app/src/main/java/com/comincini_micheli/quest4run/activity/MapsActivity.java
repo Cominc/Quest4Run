@@ -11,6 +11,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
@@ -72,7 +73,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     ));
             LatLng interPoint = new LatLng(interLat,interLng);
             if(i>0&&i<(gpsList.size()-1)&&checkPoint(point, interPoint)){
-                mMap.addMarker(new MarkerOptions().position(point).title(i+""));
+                mMap.addMarker(new MarkerOptions().position(point).title(i+"").icon(BitmapDescriptorFactory.fromResource(R.drawable.point_black)));
                 line.add(point);
                 meanLat += point.latitude;
                 meanLng += point.longitude;
