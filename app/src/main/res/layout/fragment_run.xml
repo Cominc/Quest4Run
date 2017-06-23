@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     tools:context="com.comincini_micheli.quest4run.fragment.RunFragment">
 
-    <!-- TODO: Update blank fragment layout -->
+    <!-- TODO: capire e rimuovere riga vuota in fondo allo schermo (tipo padding) -->
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -12,7 +12,7 @@
         <com.google.android.gms.maps.MapView
             android:id="@+id/map2"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"/>
 
         <Button
             android:id="@+id/button_gps_start"
