@@ -182,7 +182,7 @@ public class RunFragment extends Fragment {
                 tasks_distance = db.getTasks(false, Constants.DISTANCE_TYPE_TASK);
                 for(int i=0; i<tasks_distance.size(); i++){
                     String s = getActivity().getResources().getStringArray(R.array.task_distance_goal).toString();
-                    double goalValue = Double.parseDouble(s.substring(0, s.length() - 3));
+                    double goalValue = Double.parseDouble(s.substring(0, s.length() - 3))*Constants.FROM_KM_TO_M;
                     if((tasks_distance.get(i).getProgress()+totalDistance) > goalValue)
                         tasks_distance.get(i).setCompleted(true);
                     else
