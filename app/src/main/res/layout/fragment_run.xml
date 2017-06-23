@@ -18,20 +18,18 @@
             android:id="@+id/button_gps_start"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_above="@+id/button_gps_stop"
-            android:layout_marginBottom="10dp"
-            android:background="#00FF00"
-            android:text="START"
+            android:background="@color/green"
+            android:text="@string/btn_label_start_run"
+            android:layout_alignParentBottom="true"
             android:layout_alignParentStart="true" />
 
         <Button
             android:id="@+id/button_gps_stop"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="19dp"
-            android:text="STOP"
-            android:background="#FF0000"
-            android:layout_above="@+id/button_gps_delete_all"
+            android:text="@string/btn_label_stop_run"
+            android:background="@color/red"
+            android:layout_alignParentBottom="true"
             android:layout_alignParentStart="true" />
 
         <Button
@@ -39,17 +37,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="CANCELLA TUTTI"
-            android:layout_alignParentBottom="true"
+            android:layout_marginTop="77dp"
+            android:layout_alignParentTop="true"
             android:layout_alignParentStart="true" />
 
         <TextView
             android:id="@+id/textview_location"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="@string/hello_blank_fragment"
             android:layout_alignParentTop="true"
-            android:layout_alignParentStart="true"
-            android:layout_above="@+id/button_gps_start" />
+            android:layout_alignParentStart="true" />
     </RelativeLayout>
 
 </FrameLayout>

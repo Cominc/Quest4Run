@@ -7,7 +7,6 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -18,7 +17,7 @@ import com.comincini_micheli.quest4run.R;
 import com.comincini_micheli.quest4run.objects.Equipment;
 import com.comincini_micheli.quest4run.other.Constants;
 import com.comincini_micheli.quest4run.other.DatabaseHandler;
-import com.comincini_micheli.quest4run.other.EquipmentShopAdapter;
+import com.comincini_micheli.quest4run.adapter.EquipmentShopAdapter;
 
 import java.util.List;
 

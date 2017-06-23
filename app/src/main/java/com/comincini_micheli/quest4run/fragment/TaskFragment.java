@@ -7,7 +7,6 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
-import android.util.Log;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -17,7 +16,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.comincini_micheli.quest4run.R;
@@ -26,7 +24,7 @@ import com.comincini_micheli.quest4run.activity.TaskHistoryActivity;
 import com.comincini_micheli.quest4run.objects.Task;
 import com.comincini_micheli.quest4run.other.Constants;
 import com.comincini_micheli.quest4run.other.DatabaseHandler;
-import com.comincini_micheli.quest4run.other.TaskAdapter;
+import com.comincini_micheli.quest4run.adapter.TaskAdapter;
 
 import java.util.List;
 

@@ -144,6 +144,12 @@
     <string name="title_task_history_activity">Task Completati</string>
     <string name="title_create_character">Crea il personaggio</string>
 
+
+    <!-- Task run -->
+    <string name="btn_label_start_run">START</string>
+    <string name="btn_label_stop_run">STOP</string>
+
+
     <string name="action_settings">Settings</string>
     <string name="title_activity_maps">Map</string>
 </resources>

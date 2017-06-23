@@ -82,6 +82,10 @@ public class RunFragment extends Fragment {
         });
 
         //********************************************************************************
+        final Button btnGPS_start = (Button) getView().findViewById(R.id.button_gps_start);
+        final Button btnGPS_stop = (Button) getView().findViewById(R.id.button_gps_stop);
+        btnGPS_stop.setVisibility(View.GONE);
+
         final TextView textViewLocation = (TextView) getView().findViewById(R.id.textview_location);
         final DatabaseHandler db = new DatabaseHandler(getContext());
 
@@ -139,7 +143,6 @@ public class RunFragment extends Fragment {
         };
 
 
-        Button btnGPS_start = (Button) getView().findViewById(R.id.button_gps_start);
         btnGPS_start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -157,10 +160,12 @@ public class RunFragment extends Fragment {
                 }
                 Toast.makeText(getContext(), "Inizio attività", Toast.LENGTH_SHORT).show();
                 active = true;
+                btnGPS_start.setVisibility(View.GONE);
+                btnGPS_stop.setVisibility(View.VISIBLE);
+
             }
         });
 
-        Button btnGPS_stop = (Button) getView().findViewById(R.id.button_gps_stop);
         btnGPS_stop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -169,6 +174,8 @@ public class RunFragment extends Fragment {
                 Toast.makeText( getContext(),"GPS points: "+db.getGpsCount(),Toast.LENGTH_SHORT).show();
                 Toast.makeText( getContext(),"Distanza (m): "+totalDistance,Toast.LENGTH_SHORT).show();
                 locationManager.removeUpdates(locationListener);
+                btnGPS_stop.setVisibility(View.GONE);
+                btnGPS_start.setVisibility(View.VISIBLE);
             }
         });
 

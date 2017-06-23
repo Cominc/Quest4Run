@@ -1,8 +1,4 @@
-package com.comincini_micheli.quest4run.other;
-
-/**
- * Created by Gianmaria on 19/05/2017.
- */
+package com.comincini_micheli.quest4run.adapter;
 
 import android.app.Activity;
 import android.content.Context;
@@ -10,15 +6,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Switch;
 import android.widget.TextView;
-
-import java.util.List;
 
 import com.comincini_micheli.quest4run.R;
 import com.comincini_micheli.quest4run.objects.Task;
 
-public class TaskAdapter extends BaseAdapter
+import java.util.List;
+
+/**
+ * Created by Gianmaria on 29/05/2017.
+ */
+
+public class TaskHistoryAdapter extends BaseAdapter
 {
 
     private Activity activity;
@@ -28,15 +27,13 @@ public class TaskAdapter extends BaseAdapter
     private String [][] task_goal;
     private String [] task_reward;
     private Task task_actual;
-    DatabaseHandler db;
 
-    public TaskAdapter(Activity a, List<Task> d, String [] task_type, String [][] task_goal, String [] task_reward, DatabaseHandler db) {
+    public TaskHistoryAdapter(Activity a, List<Task> d, String [] task_type, String [][] task_goal, String [] task_reward) {
         activity = a;
         data=d;
         this.task_type = task_type;
         this.task_goal = task_goal;
         this.task_reward = task_reward;
-        this.db = db;
         inflater = (LayoutInflater)activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
@@ -55,13 +52,12 @@ public class TaskAdapter extends BaseAdapter
     public View getView(final int position, View convertView, ViewGroup parent) {
         View vi=convertView;
         if(convertView==null)
-            vi = inflater.inflate(R.layout.task_list_row, null);
+            vi = inflater.inflate(R.layout.task_list_completed_row, null);
 
-        TextView name = (TextView)vi.findViewById(R.id.task_name);
-        TextView type = (TextView)vi.findViewById(R.id.task_type);
-        TextView goal = (TextView)vi.findViewById(R.id.task_goal);
-        TextView reward = (TextView)vi.findViewById(R.id.task_reward);
-        final Switch active = (Switch) vi.findViewById(R.id.task_switch_active);
+        TextView name = (TextView)vi.findViewById(R.id.task_name_completed);
+        TextView type = (TextView)vi.findViewById(R.id.task_type_completed);
+        TextView goal = (TextView)vi.findViewById(R.id.task_goal_completed);
+        TextView reward = (TextView)vi.findViewById(R.id.task_reward_completed);
 
         task_actual = data.get(position);
 
@@ -71,17 +67,6 @@ public class TaskAdapter extends BaseAdapter
         type.setText(task_type[task_actual.getIdTaskType()]);
         goal.setText(task_goal[task_actual.getIdTaskType()][Integer.parseInt(task_actual.getGoal())]);
         reward.setText(task_reward[task_actual.getReward()]);
-        active.setChecked(task_actual.isActive());
-        active.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                task_actual = data.get(position);
-                task_actual.setActive(active.isChecked());
-                db.updateTask(task_actual);
-            }
-        });
 
         return vi;
     }

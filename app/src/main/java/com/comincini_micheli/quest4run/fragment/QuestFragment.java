@@ -11,10 +11,8 @@ import android.widget.ListView;
 
 import com.comincini_micheli.quest4run.R;
 import com.comincini_micheli.quest4run.objects.Quest;
-import com.comincini_micheli.quest4run.objects.Task;
 import com.comincini_micheli.quest4run.other.DatabaseHandler;
-import com.comincini_micheli.quest4run.other.QuestAdapter;
-import com.comincini_micheli.quest4run.other.TaskAdapter;
+import com.comincini_micheli.quest4run.adapter.QuestAdapter;
 
 import java.util.List;
 

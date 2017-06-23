@@ -1,4 +1,4 @@
-package com.comincini_micheli.quest4run.other;
+package com.comincini_micheli.quest4run.adapter;
 
 import android.app.Activity;
 import android.content.Context;
@@ -19,6 +19,8 @@ import android.widget.Toast;
 import com.comincini_micheli.quest4run.R;
 import com.comincini_micheli.quest4run.objects.Character;
 import com.comincini_micheli.quest4run.objects.Quest;
+import com.comincini_micheli.quest4run.other.Constants;
+import com.comincini_micheli.quest4run.other.DatabaseHandler;
 
 import java.util.List;
 

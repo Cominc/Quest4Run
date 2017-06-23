@@ -1,18 +1,15 @@
 package com.comincini_micheli.quest4run.activity;
 
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
-import android.widget.ImageButton;
 import android.widget.ListView;
 
 import com.comincini_micheli.quest4run.R;
 import com.comincini_micheli.quest4run.other.Constants;
 import com.comincini_micheli.quest4run.other.DatabaseHandler;
-import com.comincini_micheli.quest4run.other.EquipmentInventoryAdapter;
-import com.comincini_micheli.quest4run.other.EquipmentShopAdapter;
+import com.comincini_micheli.quest4run.adapter.EquipmentInventoryAdapter;
 
 import java.util.List;
 

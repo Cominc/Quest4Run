@@ -1,20 +1,14 @@
 package com.comincini_micheli.quest4run.activity;
 
-import android.content.Intent;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.ListView;
 
 import com.comincini_micheli.quest4run.R;
 import com.comincini_micheli.quest4run.objects.Task;
-import com.comincini_micheli.quest4run.other.Constants;
 import com.comincini_micheli.quest4run.other.DatabaseHandler;
-import com.comincini_micheli.quest4run.other.TaskAdapter;
-import com.comincini_micheli.quest4run.other.TaskHistoryAdapter;
+import com.comincini_micheli.quest4run.adapter.TaskHistoryAdapter;
 
 import java.util.List;
 
