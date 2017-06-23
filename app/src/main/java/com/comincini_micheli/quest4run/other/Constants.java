@@ -23,4 +23,8 @@ public class Constants
    public static final int MIN_NEG_DISTANCE = -250;*/
 
    public static final float PERCENT_SCREEN_SWIPE = 5;
+
+   public static final int DISTANCE_TYPE_TASK = 0;
+   public static final int PACE_TYPE_TASK = 1;
+   public static final int CONSTANCE_TYPE_TASK = 2;
 }

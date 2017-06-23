@@ -18,6 +18,7 @@ import java.util.List;
 
 import com.comincini_micheli.quest4run.R;
 import com.comincini_micheli.quest4run.objects.Task;
+import com.comincini_micheli.quest4run.other.Constants;
 import com.comincini_micheli.quest4run.other.DatabaseHandler;
 
 public class TaskAdapter extends BaseAdapter
@@ -74,13 +75,13 @@ public class TaskAdapter extends BaseAdapter
         type.setText(task_type[task_actual.getIdTaskType()]);
         goal.setText(task_goal[task_actual.getIdTaskType()][Integer.parseInt(task_actual.getGoal())]);
         reward.setText(task_reward[task_actual.getReward()]);
-        if(task_actual.getIdTaskType() == 0)
+        if(task_actual.getIdTaskType() == Constants.DISTANCE_TYPE_TASK)
         {
             String s = task_goal[task_actual.getIdTaskType()][Integer.parseInt(task_actual.getGoal())];
             double goalValue = Double.parseDouble(s.substring(0, s.length() - 3));
             percentage.setText(Math.round(task_actual.getProgress()/goalValue) + "%");
         }
-        else if(task_actual.getIdTaskType() == 2)
+        else if(task_actual.getIdTaskType() == Constants.CONSTANCE_TYPE_TASK)
         {
             String s = task_goal[task_actual.getIdTaskType()][Integer.parseInt(task_actual.getGoal())];
             double goalValue = Double.parseDouble(s.substring(0, s.length() - 7));

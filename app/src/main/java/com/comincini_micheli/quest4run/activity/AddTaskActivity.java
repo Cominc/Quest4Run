@@ -57,13 +57,13 @@ public class AddTaskActivity extends AppCompatActivity
                 List<String> listGoal = null;
                 switch (position)
                 {
-                    case 0:
+                    case Constants.DISTANCE_TYPE_TASK:
                         listGoal = Arrays.asList(getResources().getStringArray(R.array.task_distance_goal));
                         break;
-                    case 1:
+                    case Constants.PACE_TYPE_TASK:
                         listGoal = Arrays.asList(getResources().getStringArray(R.array.task_rithm_goal));
                         break;
-                    case 2:
+                    case Constants.CONSTANCE_TYPE_TASK:
                         listGoal = Arrays.asList(getResources().getStringArray(R.array.task_constance_goal));
                         break;
                     default:

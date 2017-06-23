@@ -50,8 +50,6 @@ public class RunFragment extends Fragment {
     private MapView mMapView;
     private GoogleMap mMapGoogle;
 
-    private List<Task> tasks_distance;
-
     public RunFragment() {
     }
 
@@ -156,8 +154,6 @@ public class RunFragment extends Fragment {
                     if(locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
                         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, Constants.MIN_TIME_BETEWEEN_UPDATE, 0, locationListener);
 
-                        tasks_distance = db.getTasks(false, 0);
-
                         previusLocation = null;
                         Toast.makeText(getContext(), "Inizio attività", Toast.LENGTH_SHORT).show();
                         active = true;
@@ -181,6 +177,18 @@ public class RunFragment extends Fragment {
                 locationManager.removeUpdates(locationListener);
                 btnGPS_stop.setVisibility(View.GONE);
                 btnGPS_start.setVisibility(View.VISIBLE);
+
+                List<Task> tasks_distance;
+                tasks_distance = db.getTasks(false, Constants.DISTANCE_TYPE_TASK);
+                for(int i=0; i<tasks_distance.size(); i++){
+                    String s = getActivity().getResources().getStringArray(R.array.task_distance_goal).toString();
+                    double goalValue = Double.parseDouble(s.substring(0, s.length() - 3));
+                    if((tasks_distance.get(i).getProgress()+totalDistance) > goalValue)
+                        tasks_distance.get(i).setCompleted(true);
+                    else
+                        tasks_distance.get(i).setProgress(tasks_distance.get(i).getProgress()+totalDistance);
+                    db.updateTask(tasks_distance.get(i));
+                }
             }
         });
 
