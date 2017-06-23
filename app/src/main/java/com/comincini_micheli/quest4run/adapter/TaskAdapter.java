@@ -6,6 +6,7 @@ package com.comincini_micheli.quest4run.adapter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -62,6 +63,7 @@ public class TaskAdapter extends BaseAdapter
         TextView type = (TextView)vi.findViewById(R.id.task_type);
         TextView goal = (TextView)vi.findViewById(R.id.task_goal);
         TextView reward = (TextView)vi.findViewById(R.id.task_reward);
+        TextView percentage = (TextView)vi.findViewById(R.id.task_completed_percent);
         final Switch active = (Switch) vi.findViewById(R.id.task_switch_active);
 
         task_actual = data.get(position);
@@ -72,6 +74,19 @@ public class TaskAdapter extends BaseAdapter
         type.setText(task_type[task_actual.getIdTaskType()]);
         goal.setText(task_goal[task_actual.getIdTaskType()][Integer.parseInt(task_actual.getGoal())]);
         reward.setText(task_reward[task_actual.getReward()]);
+        if(task_actual.getIdTaskType() == 0)
+        {
+            String s = task_goal[task_actual.getIdTaskType()][Integer.parseInt(task_actual.getGoal())];
+            double goalValue = Double.parseDouble(s.substring(0, s.length() - 3));
+            percentage.setText(Math.round(task_actual.getProgress()/goalValue) + "%");
+        }
+        else if(task_actual.getIdTaskType() == 2)
+        {
+            String s = task_goal[task_actual.getIdTaskType()][Integer.parseInt(task_actual.getGoal())];
+            double goalValue = Double.parseDouble(s.substring(0, s.length() - 7));
+            percentage.setText(Math.round(task_actual.getProgress()/goalValue) + "%");
+        }
+
         active.setChecked(task_actual.isActive());
         active.setOnClickListener(new View.OnClickListener()
         {

@@ -16,10 +16,10 @@ public class Quest
     private int minMagic;
     private int expReward;
     private int duration;
-    private int dateStart;
-    private int dateFinish;
+    private long dateStart;
+    private long dateFinish;
 
-    public Quest(int id, String title, String description, boolean completed, boolean active, int minAttack, int minDefense, int minMagic, int expReward, int duration, int dateStart, int dateFinish)
+    public Quest(int id, String title, String description, boolean completed, boolean active, int minAttack, int minDefense, int minMagic, int expReward, int duration, long dateStart, long dateFinish)
     {
         this.id = id;
         this.title = title;
@@ -154,22 +154,22 @@ public class Quest
         this.duration = duration;
     }
 
-    public int getDateStart()
+    public long getDateStart()
     {
         return dateStart;
     }
 
-    public void setDateStart(int dateStart)
+    public void setDateStart(long dateStart)
     {
         this.dateStart = dateStart;
     }
 
-    public int getDateFinish()
+    public long getDateFinish()
     {
         return dateFinish;
     }
 
-    public void setDateFinish(int dateFinish)
+    public void setDateFinish(long dateFinish)
     {
         this.dateFinish = dateFinish;
     }

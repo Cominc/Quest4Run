@@ -64,4 +64,12 @@
         android:layout_centerVertical="true"
         android:layout_toEndOf="@+id/icon_coin"
         android:text="TextView" />
+
+    <TextView
+        android:id="@+id/task_completed_percent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="10dp"
+        android:layout_toStartOf="@+id/task_switch_active"/>
 </RelativeLayout>

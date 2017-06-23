@@ -24,6 +24,7 @@ import android.widget.Toast;
 
 import com.comincini_micheli.quest4run.R;
 import com.comincini_micheli.quest4run.objects.Gps;
+import com.comincini_micheli.quest4run.objects.Task;
 import com.comincini_micheli.quest4run.other.Constants;
 import com.comincini_micheli.quest4run.other.DatabaseHandler;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -48,6 +49,8 @@ public class RunFragment extends Fragment {
 
     private MapView mMapView;
     private GoogleMap mMapGoogle;
+
+    private List<Task> tasks_distance;
 
     public RunFragment() {
     }
@@ -112,6 +115,7 @@ public class RunFragment extends Fragment {
                     Gps newPoint = new Gps(location.getLatitude()+"", location.getLongitude()+"", (int) Math.round(location.getAltitude()), (int)location.getTime());
                     db.addGps(newPoint);
                     totalDistance += intermediateDistance;
+
                     //******************
                     LatLng newPoisition = new LatLng(location.getLatitude(),location.getLongitude());
                     mMapGoogle.addMarker(new MarkerOptions().position(newPoisition).anchor(0.5f, 0.5f).icon(BitmapDescriptorFactory.fromResource(R.drawable.point_black)));
@@ -151,12 +155,9 @@ public class RunFragment extends Fragment {
                 } else {
                     if(locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
                         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, Constants.MIN_TIME_BETEWEEN_UPDATE, 0, locationListener);
-                        //locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
-                        /*
-                        previusLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-                        if(previusLocation == null)
-                            previusLocation = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-                        */
+
+                        tasks_distance = db.getTasks(false, 0);
+
                         previusLocation = null;
                         Toast.makeText(getContext(), "Inizio attività", Toast.LENGTH_SHORT).show();
                         active = true;

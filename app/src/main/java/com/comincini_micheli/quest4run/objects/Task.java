@@ -15,8 +15,10 @@ public class Task implements Serializable
     private String goal;
     private boolean completed;
     private boolean active;
+    private double progress;
+    private long execDate;
 
-    public Task(int id, String name, int reward, int idTaskType, String goal, boolean completed, boolean active)
+    public Task(int id, String name, int reward, int idTaskType, String goal, boolean completed, boolean active, double progress, long execDate)
     {
         this.id = id;
         this.name = name;
@@ -25,6 +27,8 @@ public class Task implements Serializable
         this.goal = goal;
         this.completed = completed;
         this.active = active;
+        this.progress = progress;
+        this.execDate = execDate;
     }
 
     public Task(String name, int reward, int idTaskType, String goal, boolean completed, boolean active)
@@ -35,6 +39,7 @@ public class Task implements Serializable
         this.goal = goal;
         this.completed = completed;
         this.active = active;
+        this.progress = 0.0;
     }
 
     public String getGoal()
@@ -63,6 +68,7 @@ public class Task implements Serializable
     {
         this.completed = false;
         this.active = true;
+        this.progress = 0.0;
     }
 
     public String getName()
@@ -125,5 +131,23 @@ public class Task implements Serializable
         this.idTaskType = idTaskType;
     }
 
+    public double getProgress()
+    {
+        return progress;
+    }
 
+    public void setProgress(double progress)
+    {
+        this.progress = progress;
+    }
+
+    public long getExecDate()
+    {
+        return execDate;
+    }
+
+    public void setExecDate(long execDate)
+    {
+        this.execDate = execDate;
+    }
 }

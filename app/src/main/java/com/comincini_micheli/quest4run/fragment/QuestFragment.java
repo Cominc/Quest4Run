@@ -21,6 +21,9 @@ import java.util.List;
  */
 public class QuestFragment extends Fragment
 {
+
+    //TODO CREARE STORICO QUEST
+    //TODO GESTIRE INIZIO E FINE QUEST
     private ListView list;
     private QuestAdapter adapter;
     private List<Quest> questList;

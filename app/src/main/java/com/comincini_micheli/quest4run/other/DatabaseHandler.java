@@ -64,6 +64,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String KEY_ID_TASK_TYPE = "idTaskType";
     private static final String KEY_COMPLETED = "completed";
     private static final String KEY_ACTIVE = "active";
+    private static final String KEY_PROGRESS = "progress";
+    private static final String KEY_EXEC_DATE = "execDate";
 
     private static final String KEY_GENDER = "gender";
     private static final String KEY_AVATAR = "avatar";
@@ -100,7 +102,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + KEY_NAME + " TEXT,"
             + KEY_REWARD + " INTEGER," + KEY_ID_TASK_TYPE + " INTEGER,"
             + KEY_GOAL + " NUMERIC," + KEY_COMPLETED + " INTEGER,"
-            + KEY_ACTIVE + " INTEGER" +
+            + KEY_ACTIVE + " INTEGER, " + KEY_PROGRESS + " REAL, " + KEY_EXEC_DATE + " TEXT" +
              ")";
     private static final String CREATE_CHARACTER_TABLE = "CREATE TABLE " + TABLE_CHARACTER + "("
             + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + KEY_NAME + " TEXT," + KEY_GENDER + " INTEGER," + KEY_AVATAR + " INTEGER,"
@@ -110,7 +112,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String CREATE_QUEST_TABLE = " CREATE TABLE " + TABLE_QUEST + "("
             + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + KEY_TITLE + " TEXT," + KEY_DESCRIPTION + " TEXT," + KEY_COMPLETED + " INTEGER,"
             + KEY_ACTIVE + " INTEGER," + KEY_ATK + " INTEGER," + KEY_DEF + " INTEGER," + KEY_MGC + " INTEGER," + KEY_EXP_REWARD + " INTEGER,"
-            + KEY_DURATION + " INTEGER," + KEY_START_DATE + " INTEGER," + KEY_FINISH_DATE + " INTEGER"
+            + KEY_DURATION + " INTEGER," + KEY_START_DATE + " TEXT," + KEY_FINISH_DATE + " TEXT"
             + ")";
 
     private static final String CREATE_GPS_TABLE = " CREATE TABLE " + TABLE_GPS + "("
@@ -222,6 +224,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         values.put(KEY_GOAL, task.getGoal());
         values.put(KEY_COMPLETED, task.isCompleted());
         values.put(KEY_ACTIVE, task.isActive());
+        values.put(KEY_PROGRESS, task.getProgress());
+        values.put(KEY_EXEC_DATE, task.getExecDate());
 
         // Inserting Row
         int id = (int) db.insert(TABLE_TASK, null, values);
@@ -234,7 +238,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
 
         Cursor cursor = db.query(TABLE_TASK, new String[] { KEY_ID,
-                        KEY_NAME, KEY_REWARD, KEY_ID_TASK_TYPE, KEY_GOAL, KEY_COMPLETED, KEY_ACTIVE }, KEY_ID + "=?",
+                        KEY_NAME, KEY_REWARD, KEY_ID_TASK_TYPE, KEY_GOAL, KEY_COMPLETED, KEY_ACTIVE,
+                        KEY_PROGRESS, KEY_EXEC_DATE}, KEY_ID + "=?",
                 new String[] { String.valueOf(id) }, null, null, null, null);
         if (cursor != null)
             cursor.moveToFirst();
@@ -242,7 +247,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         Task task = new Task(Integer.parseInt(cursor.getString(0)),
                 cursor.getString(1), Integer.parseInt(cursor.getString(2)),
                 Integer.parseInt(cursor.getString(3)),cursor.getString(4),
-                castStringToBoolean(cursor.getString(5)),castStringToBoolean(cursor.getString(6)));
+                castStringToBoolean(cursor.getString(5)),castStringToBoolean(cursor.getString(6)),
+                Double.parseDouble(cursor.getString(7)),Long.parseLong(cursor.getString(8)));
         cursor.close();
         // return Task
         return task;
@@ -268,6 +274,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 task.setGoal(cursor.getString(4));
                 task.setCompleted(castStringToBoolean(cursor.getString(5)));
                 task.setActive(castStringToBoolean(cursor.getString(6)));
+                task.setProgress(Double.parseDouble(cursor.getString(7)));
+                task.setExecDate(Long.parseLong(cursor.getString(8)));
                 // Adding Task to list
                 taskList.add(task);
             } while (cursor.moveToNext());
@@ -286,7 +294,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         else
             _completed = 0;
 
-        String selectQuery = "SELECT  * FROM " + TABLE_TASK + " WHERE " + KEY_COMPLETED + " == " + _completed;
+        String selectQuery = "SELECT  * FROM " + TABLE_TASK + " WHERE " + KEY_COMPLETED + " = " + _completed;
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
@@ -301,6 +309,43 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 task.setGoal(cursor.getString(4));
                 task.setCompleted(castStringToBoolean(cursor.getString(5)));
                 task.setActive(castStringToBoolean(cursor.getString(6)));
+                task.setProgress(Double.parseDouble(cursor.getString(7)));
+                task.setExecDate(Long.parseLong(cursor.getString(8)));
+                // Adding Task to list
+                taskList.add(task);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        // return Task list
+        return taskList;
+    }
+
+    public List<Task> getTasks(boolean show_completed, int taskType) {
+        List<Task> taskList = new ArrayList<Task>();
+        int _completed;
+        if(show_completed)
+            _completed = 1;
+        else
+            _completed = 0;
+
+        String selectQuery = "SELECT  * FROM " + TABLE_TASK + " WHERE " + KEY_COMPLETED + " = " + _completed +
+        " AND " + KEY_ID_TASK_TYPE + " = " + taskType;
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+                Task task = new Task();
+                task.setId(Integer.parseInt(cursor.getString(0)));
+                task.setName(cursor.getString(1));
+                task.setReward(Integer.parseInt(cursor.getString(2)));
+                task.setIdTaskType(Integer.parseInt(cursor.getString(3)));
+                task.setGoal(cursor.getString(4));
+                task.setCompleted(castStringToBoolean(cursor.getString(5)));
+                task.setActive(castStringToBoolean(cursor.getString(6)));
+                task.setProgress(Double.parseDouble(cursor.getString(7)));
+                task.setExecDate(Long.parseLong(cursor.getString(8)));
                 // Adding Task to list
                 taskList.add(task);
             } while (cursor.moveToNext());
@@ -319,6 +364,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         values.put(KEY_REWARD, task.getReward());
         values.put(KEY_ID_TASK_TYPE, task.getIdTaskType());
         values.put(KEY_GOAL, task.getGoal());
+        values.put(KEY_PROGRESS, task.getProgress());
+        values.put(KEY_EXEC_DATE, task.getExecDate());
 
         int completed_t = 0;
         if(task.isCompleted())
@@ -656,8 +703,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 castStringToBoolean(cursor.getString(3)),castStringToBoolean(cursor.getString(4)),
                 Integer.parseInt(cursor.getString(5)),Integer.parseInt(cursor.getString(6)),
                 Integer.parseInt(cursor.getString(7)),Integer.parseInt(cursor.getString(8)),
-                Integer.parseInt(cursor.getString(9)),Integer.parseInt(cursor.getString(10)),
-                Integer.parseInt(cursor.getString(11)));
+                Integer.parseInt(cursor.getString(9)),Long.parseLong(cursor.getString(10)),
+                Long.parseLong(cursor.getString(11)));
         cursor.close();
         return quest;
     }
@@ -685,8 +732,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 quest.setMinMagic(Integer.parseInt(cursor.getString(7)));
                 quest.setExpReward(Integer.parseInt(cursor.getString(8)));
                 quest.setDuration(Integer.parseInt(cursor.getString(9)));
-                quest.setDateStart(Integer.parseInt(cursor.getString(10)));
-                quest.setDateFinish(Integer.parseInt(cursor.getString(11)));
+                quest.setDateStart(Long.parseLong(cursor.getString(10)));
+                quest.setDateFinish(Long.parseLong(cursor.getString(11)));
 
                 questList.add(quest);
             } while (cursor.moveToNext());
@@ -715,8 +762,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             quest.setMinMagic(Integer.parseInt(cursor.getString(7)));
             quest.setExpReward(Integer.parseInt(cursor.getString(8)));
             quest.setDuration(Integer.parseInt(cursor.getString(9)));
-            quest.setDateStart(Integer.parseInt(cursor.getString(10)));
-            quest.setDateFinish(Integer.parseInt(cursor.getString(11)));
+            quest.setDateStart(Long.parseLong(cursor.getString(10)));
+            quest.setDateFinish(Long.parseLong(cursor.getString(11)));
             return quest;
         }
         else return null;
@@ -748,8 +795,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 quest.setMinMagic(Integer.parseInt(cursor.getString(7)));
                 quest.setExpReward(Integer.parseInt(cursor.getString(8)));
                 quest.setDuration(Integer.parseInt(cursor.getString(9)));
-                quest.setDateStart(Integer.parseInt(cursor.getString(10)));
-                quest.setDateFinish(Integer.parseInt(cursor.getString(11)));
+                quest.setDateStart(Long.parseLong(cursor.getString(10)));
+                quest.setDateFinish(Long.parseLong(cursor.getString(11)));
 
                 questList.add(quest);
 

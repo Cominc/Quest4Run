@@ -2,6 +2,7 @@ package com.comincini_micheli.quest4run.adapter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,8 @@ import android.widget.TextView;
 import com.comincini_micheli.quest4run.R;
 import com.comincini_micheli.quest4run.objects.Task;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -58,6 +61,7 @@ public class TaskHistoryAdapter extends BaseAdapter
         TextView type = (TextView)vi.findViewById(R.id.task_type_completed);
         TextView goal = (TextView)vi.findViewById(R.id.task_goal_completed);
         TextView reward = (TextView)vi.findViewById(R.id.task_reward_completed);
+        TextView dateComplete = (TextView)vi.findViewById(R.id.text_view_date_completed);
 
         task_actual = data.get(position);
 
@@ -67,6 +71,9 @@ public class TaskHistoryAdapter extends BaseAdapter
         type.setText(task_type[task_actual.getIdTaskType()]);
         goal.setText(task_goal[task_actual.getIdTaskType()][Integer.parseInt(task_actual.getGoal())]);
         reward.setText(task_reward[task_actual.getReward()]);
+        Date date = new Date(task_actual.getExecDate());
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+        dateComplete.setText(sdf.format(date));
 
         return vi;
     }

@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -128,6 +129,7 @@ public class TaskFragment extends Fragment
                 // edit stuff here
                 //TODO EDIT CONTESTUALE TASK
                 taskList.get(info.position).setCompleted(true);
+                taskList.get(info.position).setExecDate(System.currentTimeMillis());
                 db.updateTask(taskList.get(info.position));
                 taskList.remove(info.position);
                 adapter.notifyDataSetChanged();
