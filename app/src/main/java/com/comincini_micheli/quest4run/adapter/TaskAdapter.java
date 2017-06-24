@@ -79,7 +79,7 @@ public class TaskAdapter extends BaseAdapter
         {
             String s = task_goal[task_actual.getIdTaskType()][Integer.parseInt(task_actual.getGoal())];
             double goalValue = Double.parseDouble(s.substring(0, s.length() - 3));
-            percentage.setText(Math.round(task_actual.getProgress()/goalValue) + "%");
+            percentage.setText(Math.round(task_actual.getProgress()/(goalValue*Constants.FROM_KM_TO_M)*100) + "%");
         }
         else if(task_actual.getIdTaskType() == Constants.CONSTANCE_TYPE_TASK)
         {
