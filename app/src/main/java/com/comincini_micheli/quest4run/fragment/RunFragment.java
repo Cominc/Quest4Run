@@ -257,7 +257,11 @@ public class RunFragment extends Fragment {
                             tasks_constance.get(i).setCompleted(true);
                     }
                     else
-                        tasks_constance.get(i).setProgress(0);
+                    {
+                        tasks_constance.get(i).setProgress(1);
+                        if(goalValue == 1)
+                            tasks_constance.get(i).setCompleted(true);
+                    }
 
                     tasks_constance.get(i).setExecDate(finishTime);
                     db.updateTask(tasks_constance.get(i));

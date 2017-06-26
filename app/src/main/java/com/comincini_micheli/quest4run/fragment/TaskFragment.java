@@ -166,8 +166,13 @@ public class TaskFragment extends Fragment
                                 getResources().getStringArray(R.array.task_constance_goal),
                                 getResources().getStringArray(R.array.task_duration_goal)};
 
+        String [][] taskRewards = {getResources().getStringArray(R.array.task_distance_reward),
+                                   getResources().getStringArray(R.array.task_rithm_reward),
+                                   getResources().getStringArray(R.array.task_constance_reward),
+                                   getResources().getStringArray(R.array.task_duration_reward)};
+
         adapter=new TaskAdapter(getActivity(), taskList, getResources().getStringArray(R.array.task_type),
-                                taskGoals, getResources().getStringArray(R.array.task_reward), db);
+                                taskGoals, taskRewards, db);
         list.setAdapter(adapter);
         list.setEmptyView(getActivity().findViewById(R.id.empty_list));
     }
