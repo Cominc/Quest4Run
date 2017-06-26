@@ -16,6 +16,7 @@ import android.view.MenuItem;
 
 import com.comincini_micheli.quest4run.R;
 import com.comincini_micheli.quest4run.fragment.CharacterFragment;
+import com.comincini_micheli.quest4run.fragment.MapsFragment;
 import com.comincini_micheli.quest4run.fragment.QuestFragment;
 import com.comincini_micheli.quest4run.fragment.RunFragment;
 import com.comincini_micheli.quest4run.fragment.ShopFragment;
@@ -79,6 +80,14 @@ public class MainActivity extends AppCompatActivity
 
         switch(idNavigationItemSelected)
         {
+            case R.id.nav_run:
+                fragment = new RunFragment();
+                title = getResources().getString(R.string.nav_run);
+                break;
+            case R.id.nav_path:
+                fragment = new MapsFragment();
+                title = getResources().getString(R.string.nav_path);
+                break;
             case R.id.nav_task:
                 fragment = new TaskFragment();
                 title = getResources().getString(R.string.task_fragment_title);
@@ -86,10 +95,6 @@ public class MainActivity extends AppCompatActivity
             case R.id.nav_quest:
                 fragment = new QuestFragment();
                 title = getResources().getString(R.string.nav_quest);
-                break;
-            case R.id.nav_run:
-                fragment = new RunFragment();
-                title = getResources().getString(R.string.nav_run);
                 break;
             case R.id.nav_shop:
                 fragment = new ShopFragment();
@@ -102,10 +107,6 @@ public class MainActivity extends AppCompatActivity
             case R.id.nav_share:
                 fragment = new TestFragment();
                 title = getResources().getString(R.string.nav_share);
-                break;
-            case R.id.nav_send:
-                Intent i2 = new Intent(MainActivity.this, MapsActivity.class);
-                startActivity(i2);
                 break;
             case R.id.nav_about_us:
                 Intent i = new Intent(MainActivity.this, AboutUsActivity.class);

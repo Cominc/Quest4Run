@@ -6,6 +6,10 @@
             android:icon="@drawable/ic_directions_run_black_24dp"
             android:title="@string/nav_run" />
         <item
+            android:id="@+id/nav_path"
+            android:icon="@drawable/path"
+            android:title="@string/nav_path" />
+        <item
             android:id="@+id/nav_task"
             android:icon="@drawable/ic_format_list_bulleted_black_24dp"
             android:title="@string/nav_task" />
@@ -31,10 +35,6 @@
                 android:id="@+id/nav_share"
                 android:icon="@drawable/ic_menu_share"
                 android:title="@string/nav_share" />
-            <item
-                android:id="@+id/nav_send"
-                android:icon="@drawable/ic_menu_send"
-                android:title="@string/nav_send" />
             <item
                 android:id="@+id/nav_about_us"
                 android:icon="@drawable/ic_info_outline_black_24dp"

@@ -17,6 +17,7 @@
 
     <!-- Navigation Drawer menu labels -->
     <string name="nav_run">Corsa</string>
+    <string name="nav_path">Percorso</string>
     <string name="nav_task">Task</string>
 
     <string name="nav_character">Personaggio</string>
@@ -25,7 +26,6 @@
 
 
     <string name="nav_share">Condividi</string>
-    <string name="nav_send">Invia</string>
     <string name="nav_about_us">Chi siamo</string>
 
 
