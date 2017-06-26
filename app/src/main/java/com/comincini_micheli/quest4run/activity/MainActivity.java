@@ -16,6 +16,7 @@ import android.view.MenuItem;
 
 import com.comincini_micheli.quest4run.R;
 import com.comincini_micheli.quest4run.fragment.CharacterFragment;
+import com.comincini_micheli.quest4run.fragment.MapsFragment;
 import com.comincini_micheli.quest4run.fragment.QuestFragment;
 import com.comincini_micheli.quest4run.fragment.RunFragment;
 import com.comincini_micheli.quest4run.fragment.ShopFragment;
@@ -104,8 +105,8 @@ public class MainActivity extends AppCompatActivity
                 title = getResources().getString(R.string.nav_share);
                 break;
             case R.id.nav_send:
-                Intent i2 = new Intent(MainActivity.this, MapsActivity.class);
-                startActivity(i2);
+                fragment = new MapsFragment();
+                title = getResources().getString(R.string.nav_send);
                 break;
             case R.id.nav_about_us:
                 Intent i = new Intent(MainActivity.this, AboutUsActivity.class);
