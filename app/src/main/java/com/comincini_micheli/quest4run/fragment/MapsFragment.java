@@ -59,7 +59,6 @@ public class MapsFragment extends Fragment {
                 LatLng point = null;
                 Double meanLat = 0.0, meanLng = 0.0;
 
-                double interLat = 0, interLng = 0;
                 int counter = 0;
                 for(int i=0; i<gpsList.size(); i++){
                     point = new LatLng(
