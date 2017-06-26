@@ -123,8 +123,10 @@ public class RunFragment extends Fragment {
                         line.add(new LatLng(previusLocation.getLatitude(), previusLocation.getLongitude()));
                         mMapGoogle.addMarker(new MarkerOptions().position(newPoisition).anchor(0.5f, 0.5f).icon(BitmapDescriptorFactory.fromResource(R.drawable.point_black)));
                     }
-                    else
+                    else {
+                        mMapGoogle.addMarker(new MarkerOptions().position(newPoisition).icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_start)));
                         mMapGoogle.addMarker(new MarkerOptions().position(newPoisition));
+                    }
                     line.add(newPoisition);
                     mMapGoogle.addPolyline(line);
                     CameraPosition cameraPosition = new CameraPosition.Builder().target(newPoisition).zoom(18).bearing(location.getBearing()).build();
@@ -193,7 +195,7 @@ public class RunFragment extends Fragment {
                         tasks_distance.get(i).setProgress(tasks_distance.get(i).getProgress()+totalDistance);
                     db.updateTask(tasks_distance.get(i));
                 }
-                mMapGoogle.addMarker(new MarkerOptions().position(new LatLng(previusLocation.getLatitude(),previusLocation.getLongitude())).anchor(0.0f, 0.5f).icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_finish)));
+                mMapGoogle.addMarker(new MarkerOptions().position(new LatLng(previusLocation.getLatitude(),previusLocation.getLongitude())).anchor(0.0f, 1.0f).icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_finish)));
             }
         });
 
