@@ -1,8 +1,8 @@
 package com.comincini_micheli.quest4run.fragment;
 
 import android.Manifest;
-import android.content.ContentResolver;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.DatabaseErrorHandler;
 import android.graphics.Color;
@@ -10,11 +10,9 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.comincini_micheli.quest4run.R;
+import com.comincini_micheli.quest4run.objects.Character;
 import com.comincini_micheli.quest4run.objects.Gps;
 import com.comincini_micheli.quest4run.objects.Task;
 import com.comincini_micheli.quest4run.other.Constants;
@@ -31,7 +30,6 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
@@ -125,7 +123,6 @@ public class RunFragment extends Fragment {
                     totalGPSPoints++;
                     totalDistance += intermediateDistance;
 
-                    //******************
                     LatLng newPoisition = new LatLng(location.getLatitude(),location.getLongitude());
                     PolylineOptions line= new PolylineOptions().width(5).color(Color.RED);
                     if(previusLocation!=null) {
@@ -139,7 +136,6 @@ public class RunFragment extends Fragment {
                     mMapGoogle.addPolyline(line);
                     CameraPosition cameraPosition = new CameraPosition.Builder().target(newPoisition).zoom(18).bearing(location.getBearing()).build();
                     mMapGoogle.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
-                    //******************
                 }
 
                 previusLocation = location;
@@ -162,6 +158,8 @@ public class RunFragment extends Fragment {
         btnGPS_start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                db.deleteAllGps();
+                Toast.makeText( getContext(),"Cancellati tutti i GPS points ("+db.getGpsCount()+")",Toast.LENGTH_SHORT).show();
                 if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                     Toast.makeText(getContext(), "Permessi GPS mancanti", Toast.LENGTH_SHORT).show();
                 } else {
@@ -193,7 +191,7 @@ public class RunFragment extends Fragment {
                 finishTime = System.currentTimeMillis();
                 long totalTime = (finishTime - startTime)/ Constants.MILLISECONDS_A_SECOND;
                 long numberMinutes = totalTime / Constants.SECONDS_A_MINUTE;
-
+                int totalRewardEarned = 0;
                 if(numberMinutes > 0)
                 {
                     Toast.makeText( getContext(),"Durata : "+numberMinutes*Constants.SECONDS_A_MINUTE + " minuti e " +
@@ -214,8 +212,10 @@ public class RunFragment extends Fragment {
                 for(int i=0; i<tasks_distance.size(); i++){
                     String s = getActivity().getResources().getStringArray(R.array.task_distance_goal)[Integer.parseInt(tasks_distance.get(i).getGoal())].toString();
                     double goalValue = Double.parseDouble(s.substring(0, s.length() - 3))*Constants.FROM_KM_TO_M;
-                    if((tasks_distance.get(i).getProgress()+totalDistance) > goalValue)
+                    if((tasks_distance.get(i).getProgress()+totalDistance) > goalValue){
                         tasks_distance.get(i).setCompleted(true);
+                        totalRewardEarned += tasks_distance.get(i).getReward();
+                    }
                     else
                         tasks_distance.get(i).setProgress(tasks_distance.get(i).getProgress()+totalDistance);
 
@@ -233,6 +233,7 @@ public class RunFragment extends Fragment {
                     {
                         tasks_rithm.get(i).setCompleted(true);
                         tasks_rithm.get(i).setExecDate(finishTime);
+                        totalRewardEarned += tasks_rithm.get(i).getReward();
                     }
 
                     db.updateTask(tasks_rithm.get(i));
@@ -249,20 +250,20 @@ public class RunFragment extends Fragment {
                     Date yesterdayDate = new Date(finishTime - Constants.MILLISECONDS_A_DAY);
 
                     SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+                    //TODO if ristrutturati controllare se corretto
                     if(sdf.format(yesterdayDate).equals(sdf.format(lastExecDate)))
                     {
                         int progress = (int) tasks_constance.get(i).getProgress() + 1;
                         tasks_constance.get(i).setProgress(progress);
-                        if(progress >= goalValue)
-                            tasks_constance.get(i).setCompleted(true);
                     }
                     else
                     {
                         tasks_constance.get(i).setProgress(1);
-                        if(goalValue == 1)
-                            tasks_constance.get(i).setCompleted(true);
                     }
-
+                    if(tasks_constance.get(i).getProgress() >= goalValue){
+                        tasks_constance.get(i).setCompleted(true);
+                        totalRewardEarned += tasks_constance.get(i).getReward();
+                    }
                     tasks_constance.get(i).setExecDate(finishTime);
                     db.updateTask(tasks_constance.get(i));
                 }
@@ -276,21 +277,20 @@ public class RunFragment extends Fragment {
                     {
                         tasks_duration.get(i).setCompleted(true);
                         tasks_duration.get(i).setExecDate(finishTime);
+                        totalRewardEarned += tasks_duration.get(i).getReward();
                     }
 
                     db.updateTask(tasks_duration.get(i));
                 }
-
-                mMapGoogle.addMarker(new MarkerOptions().position(new LatLng(previusLocation.getLatitude(),previusLocation.getLongitude())).anchor(0.0f, 1.0f).icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_finish)));
-            }
-        });
-
-        Button btnGPS_delete_all = (Button) getView().findViewById(R.id.button_gps_delete_all);
-        btnGPS_delete_all.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText( getContext(),"Cancellati tutti i GPS points ("+db.getGpsCount()+")",Toast.LENGTH_SHORT).show();
-                db.deleteAllGps();
+                if(previusLocation!=null)
+                    mMapGoogle.addMarker(new MarkerOptions().position(new LatLng(previusLocation.getLatitude(),previusLocation.getLongitude())).anchor(0.0f, 1.0f).icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_finish)));
+                //TODO non da errore sia con getActivity sia con getContext ???
+                SharedPreferences firstLaunchSetting = getActivity().getSharedPreferences(Constants.NAME_PREFS, Context.MODE_PRIVATE);
+                int characterId = firstLaunchSetting.getInt(Constants.CHAR_ID_PREFERENCE, -1);
+                Character myCharacter = db.getCharacter(characterId);
+                myCharacter.setWallet(myCharacter.getWallet()+totalRewardEarned);
+                db.updateCharacter(myCharacter);
+                Toast.makeText( getContext(),"Monete guadagnate: "+totalRewardEarned+getResources().getString(R.string.cents_symbol_label),Toast.LENGTH_SHORT).show();
             }
         });
     }
