@@ -38,6 +38,8 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 
@@ -49,6 +51,10 @@ public class RunFragment extends Fragment {
     static Location previusLocation = null;
     boolean active = false;
     float totalDistance = 0, intermediateDistance = 0;
+    float totalSpeed;
+    int totalGPSPoints;
+
+    long startTime, finishTime;
 
     private MapView mMapView;
     private GoogleMap mMapGoogle;
@@ -100,7 +106,9 @@ public class RunFragment extends Fragment {
                 Toast.makeText(getContext(), "Location changed!", Toast.LENGTH_SHORT).show();
                 if(previusLocation!=null) {
                     intermediateDistance = location.distanceTo(previusLocation);
-                    location.setSpeed(intermediateDistance / ((location.getTime() - previusLocation.getTime()) / 1000));
+                    float actual_speed = intermediateDistance / ((location.getTime() - previusLocation.getTime()) / 1000);
+                    totalSpeed += actual_speed;
+                    location.setSpeed(actual_speed);
                 }
                 textViewLocation.setText("Latitudine: " + location.getLatitude() + "\n" +
                         "Longitudine: " + location.getLongitude() + "\n" +
@@ -114,6 +122,7 @@ public class RunFragment extends Fragment {
                 if (active) {
                     Gps newPoint = new Gps(location.getLatitude()+"", location.getLongitude()+"", (int) Math.round(location.getAltitude()), (int)location.getTime());
                     db.addGps(newPoint);
+                    totalGPSPoints++;
                     totalDistance += intermediateDistance;
 
                     //******************
@@ -164,6 +173,7 @@ public class RunFragment extends Fragment {
                         active = true;
                         btnGPS_start.setVisibility(View.GONE);
                         btnGPS_stop.setVisibility(View.VISIBLE);
+                        startTime = System.currentTimeMillis();
                     }
                     else {
                         Toast.makeText(getContext(), "GPS is not working", Toast.LENGTH_SHORT).show();
@@ -179,12 +189,28 @@ public class RunFragment extends Fragment {
                 active = false;
                 Toast.makeText( getContext(),"GPS points: "+db.getGpsCount(),Toast.LENGTH_SHORT).show();
                 Toast.makeText( getContext(),"Distanza (m): "+totalDistance,Toast.LENGTH_SHORT).show();
+
+                finishTime = System.currentTimeMillis();
+                long totalTime = (finishTime - startTime)/ Constants.MILLISECONDS_A_SECOND;
+                long numberMinutes = totalTime / Constants.SECONDS_A_MINUTE;
+
+                if(numberMinutes > 0)
+                {
+                    Toast.makeText( getContext(),"Durata : "+numberMinutes*Constants.SECONDS_A_MINUTE + " minuti e " +
+                                    (totalTime - numberMinutes * Constants.SECONDS_A_MINUTE) + " secondi",Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
+                    Toast.makeText( getContext(),"Durata (s): "+totalTime,Toast.LENGTH_SHORT).show();
+                }
+
                 locationManager.removeUpdates(locationListener);
                 btnGPS_stop.setVisibility(View.GONE);
                 btnGPS_start.setVisibility(View.VISIBLE);
 
+                //DISTANCE
                 List<Task> tasks_distance;
-                tasks_distance = db.getTasks(false, Constants.DISTANCE_TYPE_TASK);
+                tasks_distance = db.getTasks(false,true, Constants.DISTANCE_TYPE_TASK);
                 for(int i=0; i<tasks_distance.size(); i++){
                     String s = getActivity().getResources().getStringArray(R.array.task_distance_goal)[Integer.parseInt(tasks_distance.get(i).getGoal())].toString();
                     double goalValue = Double.parseDouble(s.substring(0, s.length() - 3))*Constants.FROM_KM_TO_M;
@@ -192,8 +218,65 @@ public class RunFragment extends Fragment {
                         tasks_distance.get(i).setCompleted(true);
                     else
                         tasks_distance.get(i).setProgress(tasks_distance.get(i).getProgress()+totalDistance);
+
+                    tasks_distance.get(i).setExecDate(finishTime);
                     db.updateTask(tasks_distance.get(i));
                 }
+
+                //RITHM
+                List<Task> tasks_rithm;
+                tasks_rithm = db.getTasks(false,true, Constants.PACE_TYPE_TASK);
+                for(int i=0; i<tasks_rithm.size(); i++){
+                    String s = getActivity().getResources().getStringArray(R.array.task_rithm_goal)[Integer.parseInt(tasks_rithm.get(i).getGoal())].toString();
+                    double goalValue = Double.parseDouble(s.substring(0, s.length() - 4));
+                    if(goalValue <= totalSpeed/totalGPSPoints)
+                    {
+                        tasks_rithm.get(i).setCompleted(true);
+                        tasks_rithm.get(i).setExecDate(finishTime);
+                    }
+
+                    db.updateTask(tasks_rithm.get(i));
+                }
+
+                //CONSTANCE
+                List<Task> tasks_constance;
+                tasks_constance = db.getTasks(false,true, Constants.CONSTANCE_TYPE_TASK);
+                for(int i=0; i<tasks_constance.size(); i++){
+                    String s = getActivity().getResources().getStringArray(R.array.task_constance_goal)[Integer.parseInt(tasks_constance.get(i).getGoal())].toString();
+                    int goalValue = Integer.parseInt(s.substring(0, s.length() - 7));
+
+                    Date lastExecDate = new Date(tasks_constance.get(i).getExecDate());
+                    Date yesterdayDate = new Date(finishTime - Constants.MILLISECONDS_A_DAY);
+
+                    SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+                    if(sdf.format(yesterdayDate).equals(sdf.format(lastExecDate)))
+                    {
+                        int progress = (int) tasks_constance.get(i).getProgress() + 1;
+                        tasks_constance.get(i).setProgress(progress);
+                        if(progress >= goalValue)
+                            tasks_constance.get(i).setCompleted(true);
+                    }
+                    else
+                        tasks_constance.get(i).setProgress(0);
+
+                    tasks_constance.get(i).setExecDate(finishTime);
+                    db.updateTask(tasks_constance.get(i));
+                }
+
+                List<Task> tasks_duration;
+                tasks_duration = db.getTasks(false,true, Constants.DURATION_TYPE_TASK);
+                for(int i=0; i<tasks_duration.size(); i++){
+                    String s = getActivity().getResources().getStringArray(R.array.task_duration_goal)[Integer.parseInt(tasks_duration.get(i).getGoal())].toString();
+                    int goalValue = Integer.parseInt(s.substring(0, s.length() - 7))*Constants.SECONDS_A_MINUTE;
+                    if(goalValue <= totalTime)
+                    {
+                        tasks_duration.get(i).setCompleted(true);
+                        tasks_duration.get(i).setExecDate(finishTime);
+                    }
+
+                    db.updateTask(tasks_duration.get(i));
+                }
+
                 mMapGoogle.addMarker(new MarkerOptions().position(new LatLng(previusLocation.getLatitude(),previusLocation.getLongitude())).anchor(0.0f, 1.0f).icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_finish)));
             }
         });

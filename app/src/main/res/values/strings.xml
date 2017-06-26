@@ -67,7 +67,7 @@
     <string-array name="task_rithm_goal">
         <item>1 m/s</item>
         <item>2 m/s</item>
-        <item>3 m/s</item>
+        <item>5 m/s</item>
     </string-array>
     <string-array name="task_constance_goal">
         <item>1 giorno</item>

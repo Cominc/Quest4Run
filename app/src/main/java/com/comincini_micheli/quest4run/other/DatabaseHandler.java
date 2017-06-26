@@ -355,6 +355,47 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return taskList;
     }
 
+    public List<Task> getTasks(boolean show_completed,boolean active, int taskType) {
+        List<Task> taskList = new ArrayList<Task>();
+        int _completed;
+        if(show_completed)
+            _completed = 1;
+        else
+            _completed = 0;
+
+        int _active;
+        if(active)
+            _active = 1;
+        else
+            _active = 0;
+
+        String selectQuery = "SELECT  * FROM " + TABLE_TASK + " WHERE " + KEY_COMPLETED + " = " + _completed +
+                 KEY_ACTIVE + " = " + _active + " AND " + KEY_ID_TASK_TYPE + " = " + taskType;
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+                Task task = new Task();
+                task.setId(Integer.parseInt(cursor.getString(0)));
+                task.setName(cursor.getString(1));
+                task.setReward(Integer.parseInt(cursor.getString(2)));
+                task.setIdTaskType(Integer.parseInt(cursor.getString(3)));
+                task.setGoal(cursor.getString(4));
+                task.setCompleted(castStringToBoolean(cursor.getString(5)));
+                task.setActive(castStringToBoolean(cursor.getString(6)));
+                task.setProgress(Double.parseDouble(cursor.getString(7)));
+                task.setExecDate(Long.parseLong(cursor.getString(8)));
+                // Adding Task to list
+                taskList.add(task);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        // return Task list
+        return taskList;
+    }
+
     // Updating single Task
     public int updateTask(Task task) {
         SQLiteDatabase db = this.getWritableDatabase();

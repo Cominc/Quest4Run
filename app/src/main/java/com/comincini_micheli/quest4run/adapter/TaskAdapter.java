@@ -88,6 +88,7 @@ public class TaskAdapter extends BaseAdapter
             percentage.setText(Math.round(task_actual.getProgress()/goalValue) + "%");
         }
 
+
         active.setChecked(task_actual.isActive());
         active.setOnClickListener(new View.OnClickListener()
         {
