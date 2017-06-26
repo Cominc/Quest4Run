@@ -55,7 +55,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         Double d = Double.parseDouble(
                 gpsList.get(0).getLatitude()
         );
-        Log.w("test gps","("+gpsList.get(0).getLatitude()+")"+d);
+        //Log.w("test gps","("+gpsList.get(0).getLatitude()+")"+d);
 
         double interLat = 0, interLng = 0;
         int counter = 0;
@@ -73,7 +73,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     ));
             LatLng interPoint = new LatLng(interLat,interLng);
             if(i>0&&i<(gpsList.size()-1)&&checkPoint(point, interPoint)){
-                mMap.addMarker(new MarkerOptions().position(point).title(i+"").anchor(0.5f, 0.5f).icon(BitmapDescriptorFactory.fromResource(R.drawable.point_black)));
+                if(i==0)
+                    mMap.addMarker(new MarkerOptions().position(point).title(i+"").icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_start)));
+                else if(i==(gpsList.size()-1))
+                    mMap.addMarker(new MarkerOptions().position(point).title(i+"").icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_finish)));
+                else
+                    mMap.addMarker(new MarkerOptions().position(point).title(i+"").anchor(0.5f, 0.5f).icon(BitmapDescriptorFactory.fromResource(R.drawable.point_black)));
                 line.add(point);
                 meanLat += point.latitude;
                 meanLng += point.longitude;
