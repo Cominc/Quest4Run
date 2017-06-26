@@ -369,7 +369,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         else
             _active = 0;
 
-        String selectQuery = "SELECT  * FROM " + TABLE_TASK + " WHERE " + KEY_COMPLETED + " = " + _completed +
+        String selectQuery = "SELECT  * FROM " + TABLE_TASK + " WHERE " + KEY_COMPLETED + " = " + _completed + " AND " +
                  KEY_ACTIVE + " = " + _active + " AND " + KEY_ID_TASK_TYPE + " = " + taskType;
 
         SQLiteDatabase db = this.getWritableDatabase();

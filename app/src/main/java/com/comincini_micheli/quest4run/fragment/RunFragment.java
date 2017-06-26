@@ -46,8 +46,8 @@ import java.util.List;
 public class RunFragment extends Fragment {
 
     //TODO riattivare GPS quando i test sono finiti
-    //final static String provider = LocationManager.GPS_PROVIDER;
-    final static String provider = LocationManager.NETWORK_PROVIDER;
+    final static String provider = LocationManager.GPS_PROVIDER;
+    //final static String provider = LocationManager.NETWORK_PROVIDER;
     static Location previusLocation = null;
     boolean active = false;
     float totalDistance = 0, intermediateDistance = 0;
