@@ -66,6 +66,9 @@ public class AddTaskActivity extends AppCompatActivity
                     case Constants.CONSTANCE_TYPE_TASK:
                         listGoal = Arrays.asList(getResources().getStringArray(R.array.task_constance_goal));
                         break;
+                    case Constants.DURATION_TYPE_TASK:
+                        listGoal = Arrays.asList(getResources().getStringArray(R.array.task_duration_goal));
+                        break;
                     default:
                         break;
                 }

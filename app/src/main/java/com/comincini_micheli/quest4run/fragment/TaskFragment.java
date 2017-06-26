@@ -62,10 +62,6 @@ public class TaskFragment extends Fragment
 
         switch (id)
         {
-            case R.id.action_settings:
-
-                break;
-
             case R.id.action_delete_all:
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                 builder.setMessage(R.string.delete_confirmation)
@@ -167,7 +163,8 @@ public class TaskFragment extends Fragment
         // Getting adapter by passing xml data ArrayList
         String [][] taskGoals = {getResources().getStringArray(R.array.task_distance_goal),
                                 getResources().getStringArray(R.array.task_rithm_goal),
-                                getResources().getStringArray(R.array.task_constance_goal)};
+                                getResources().getStringArray(R.array.task_constance_goal),
+                                getResources().getStringArray(R.array.task_duration_goal)};
 
         adapter=new TaskAdapter(getActivity(), taskList, getResources().getStringArray(R.array.task_type),
                                 taskGoals, getResources().getStringArray(R.array.task_reward), db);

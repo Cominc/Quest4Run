@@ -34,7 +34,8 @@ public class TaskHistoryActivity extends AppCompatActivity
         // Getting adapter by passing xml data ArrayList
         String [][] taskGoals = {getResources().getStringArray(R.array.task_distance_goal),
                 getResources().getStringArray(R.array.task_rithm_goal),
-                getResources().getStringArray(R.array.task_constance_goal)};
+                getResources().getStringArray(R.array.task_constance_goal),
+                getResources().getStringArray(R.array.task_duration_goal)};
 
         adapter=new TaskHistoryAdapter(this, taskList, getResources().getStringArray(R.array.task_type),
                 taskGoals, getResources().getStringArray(R.array.task_reward));
