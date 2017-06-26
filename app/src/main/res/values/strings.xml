@@ -60,9 +60,9 @@
         <item>Durata</item>
     </string-array>
     <string-array name="task_distance_goal">
+        <item>1 Km</item>
         <item>5 Km</item>
         <item>10 Km</item>
-        <item>15 Km</item>
     </string-array>
     <string-array name="task_rithm_goal">
         <item>1 m/s</item>
@@ -79,10 +79,25 @@
         <item>30 minuti</item>
         <item>60 minuti</item>
     </string-array>
-    <string-array name="task_reward">
+    <string-array name="task_distance_reward">
+        <item>5 &#162;</item>
+        <item>10 &#162;</item>
+        <item>30 &#162;</item>
+    </string-array>
+    <string-array name="task_rithm_reward">
         <item>5 &#162;</item>
         <item>10 &#162;</item>
         <item>15 &#162;</item>
+    </string-array>
+    <string-array name="task_constance_reward">
+        <item>5 &#162;</item>
+        <item>20 &#162;</item>
+        <item>50 &#162;</item>
+    </string-array>
+    <string-array name="task_duration_reward">
+        <item>5 &#162;</item>
+        <item>10 &#162;</item>
+        <item>25 &#162;</item>
     </string-array>
     <string name="task_added">Task aggiunto</string>
     <string name="name_empty_task_error">Inserire il nome del Task</string>

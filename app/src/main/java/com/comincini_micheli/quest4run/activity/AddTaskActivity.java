@@ -20,6 +20,7 @@ import com.comincini_micheli.quest4run.other.DatabaseHandler;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.StringTokenizer;
 
 public class AddTaskActivity extends AppCompatActivity
 {
@@ -49,31 +50,44 @@ public class AddTaskActivity extends AppCompatActivity
         ArrayAdapter<String> adapterGoal = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, listGoal);
         spinnerGoal.setAdapter(adapterGoal);
 
+        spinnerReward = (Spinner) findViewById(R.id.task_reward_spinner);
+        //spinner.setOnItemClickListener();
+        List<String> listReward = Arrays.asList(getResources().getStringArray(R.array.task_distance_reward));
+        ArrayAdapter<String> adapterReward = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, listReward);
+        spinnerReward.setAdapter(adapterReward);
+
         final Context context = this;
 
         spinnerType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
                 List<String> listGoal = null;
+                List<String> listReward = null;
                 switch (position)
                 {
                     case Constants.DISTANCE_TYPE_TASK:
                         listGoal = Arrays.asList(getResources().getStringArray(R.array.task_distance_goal));
+                        listReward = Arrays.asList(getResources().getStringArray(R.array.task_distance_reward));
                         break;
                     case Constants.PACE_TYPE_TASK:
                         listGoal = Arrays.asList(getResources().getStringArray(R.array.task_rithm_goal));
+                        listReward = Arrays.asList(getResources().getStringArray(R.array.task_rithm_reward));
                         break;
                     case Constants.CONSTANCE_TYPE_TASK:
                         listGoal = Arrays.asList(getResources().getStringArray(R.array.task_constance_goal));
+                        listReward = Arrays.asList(getResources().getStringArray(R.array.task_constance_reward));
                         break;
                     case Constants.DURATION_TYPE_TASK:
                         listGoal = Arrays.asList(getResources().getStringArray(R.array.task_duration_goal));
+                        listReward = Arrays.asList(getResources().getStringArray(R.array.task_duration_reward));
                         break;
                     default:
                         break;
                 }
                 ArrayAdapter<String> adapterGoal = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, listGoal);
                 spinnerGoal.setAdapter(adapterGoal);
+                ArrayAdapter<String> adapterReward = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, listReward);
+                spinnerReward.setAdapter(adapterReward);
             }
 
             @Override
@@ -81,12 +95,6 @@ public class AddTaskActivity extends AppCompatActivity
             }
 
         });
-
-        spinnerReward = (Spinner) findViewById(R.id.task_reward_spinner);
-        //spinner.setOnItemClickListener();
-        List<String> listReward = Arrays.asList(getResources().getStringArray(R.array.task_reward));
-        ArrayAdapter<String> adapterReward = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, listReward);
-        spinnerReward.setAdapter(adapterReward);
 
         nameTextEdit = (TextView)findViewById(R.id.name_task);
 
