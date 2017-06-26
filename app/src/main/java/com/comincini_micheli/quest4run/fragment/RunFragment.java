@@ -43,6 +43,9 @@ import java.util.List;
 
 public class RunFragment extends Fragment {
 
+    //TODO riattivare GPS quando i test sono finiti
+    //final static String provider = LocationManager.GPS_PROVIDER;
+    final static String provider = LocationManager.NETWORK_PROVIDER;
     static Location previusLocation = null;
     boolean active = false;
     float totalDistance = 0, intermediateDistance = 0;
@@ -81,7 +84,6 @@ public class RunFragment extends Fragment {
                 */
             }
         });
-
         //********************************************************************************
         final Button btnGPS_start = (Button) getView().findViewById(R.id.button_gps_start);
         final Button btnGPS_stop = (Button) getView().findViewById(R.id.button_gps_stop);
@@ -116,10 +118,14 @@ public class RunFragment extends Fragment {
 
                     //******************
                     LatLng newPoisition = new LatLng(location.getLatitude(),location.getLongitude());
-                    mMapGoogle.addMarker(new MarkerOptions().position(newPoisition).anchor(0.5f, 0.5f).icon(BitmapDescriptorFactory.fromResource(R.drawable.point_black)));
                     PolylineOptions line= new PolylineOptions().width(5).color(Color.RED);
                     if(previusLocation!=null) {
                         line.add(new LatLng(previusLocation.getLatitude(), previusLocation.getLongitude()));
+                        mMapGoogle.addMarker(new MarkerOptions().position(newPoisition).anchor(0.5f, 0.5f).icon(BitmapDescriptorFactory.fromResource(R.drawable.point_black)));
+                    }
+                    else {
+                        mMapGoogle.addMarker(new MarkerOptions().position(newPoisition).icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_start)));
+                        mMapGoogle.addMarker(new MarkerOptions().position(newPoisition));
                     }
                     line.add(newPoisition);
                     mMapGoogle.addPolyline(line);
@@ -151,8 +157,8 @@ public class RunFragment extends Fragment {
                 if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                     Toast.makeText(getContext(), "Permessi GPS mancanti", Toast.LENGTH_SHORT).show();
                 } else {
-                    if(locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
-                        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, Constants.MIN_TIME_BETEWEEN_UPDATE, 0, locationListener);
+                    if(locationManager.isProviderEnabled(provider)) {
+                        locationManager.requestLocationUpdates(provider, Constants.MIN_TIME_BETEWEEN_UPDATE, 0, locationListener);
 
                         previusLocation = null;
                         Toast.makeText(getContext(), "Inizio attività", Toast.LENGTH_SHORT).show();
@@ -181,14 +187,15 @@ public class RunFragment extends Fragment {
                 List<Task> tasks_distance;
                 tasks_distance = db.getTasks(false, Constants.DISTANCE_TYPE_TASK);
                 for(int i=0; i<tasks_distance.size(); i++){
-                    String s = getActivity().getResources().getStringArray(R.array.task_distance_goal).toString();
-                    double goalValue = Double.parseDouble(s.substring(0, s.length() - 3))*1000;
+                    String s = getActivity().getResources().getStringArray(R.array.task_distance_goal)[Integer.parseInt(tasks_distance.get(i).getGoal())].toString();
+                    double goalValue = Double.parseDouble(s.substring(0, s.length() - 3))*Constants.FROM_KM_TO_M;
                     if((tasks_distance.get(i).getProgress()+totalDistance) > goalValue)
                         tasks_distance.get(i).setCompleted(true);
                     else
                         tasks_distance.get(i).setProgress(tasks_distance.get(i).getProgress()+totalDistance);
                     db.updateTask(tasks_distance.get(i));
                 }
+                mMapGoogle.addMarker(new MarkerOptions().position(new LatLng(previusLocation.getLatitude(),previusLocation.getLongitude())).anchor(0.0f, 1.0f).icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_finish)));
             }
         });
 
