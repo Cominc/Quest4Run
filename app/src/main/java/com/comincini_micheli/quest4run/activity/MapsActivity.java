@@ -52,18 +52,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         PolylineOptions line= new PolylineOptions().width(5).color(Color.RED);
         LatLng point = null;
         Double meanLat = 0.0, meanLng = 0.0;
-        Double d = Double.parseDouble(
-                gpsList.get(0).getLatitude()
-        );
-        //Log.w("test gps","("+gpsList.get(0).getLatitude()+")"+d);
 
         double interLat = 0, interLng = 0;
         int counter = 0;
         for(int i=0; i<gpsList.size(); i++){
+            /*
             if(i>0&&i<(gpsList.size()-1)) {
                 interLat = (Double.parseDouble(gpsList.get(i - 1).getLatitude()) + Double.parseDouble(gpsList.get(i + 1).getLatitude())) / 2;
                 interLng = (Double.parseDouble(gpsList.get(i - 1).getLongitude()) + Double.parseDouble(gpsList.get(i + 1).getLongitude())) / 2;
             }
+            */
             point = new LatLng(
                     Double.parseDouble(
                             gpsList.get(i).getLatitude()
@@ -71,20 +69,22 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     Double.parseDouble(
                             gpsList.get(i).getLongitude()
                     ));
-            LatLng interPoint = new LatLng(interLat,interLng);
-            if(i>0&&i<(gpsList.size()-1)&&checkPoint(point, interPoint)){
-                if(i==0)
-                    mMap.addMarker(new MarkerOptions().position(point).title(i+"").icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_start)));
-                else if(i==(gpsList.size()-1))
-                    mMap.addMarker(new MarkerOptions().position(point).title(i+"").icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_finish)));
-                else
-                    mMap.addMarker(new MarkerOptions().position(point).title(i+"").anchor(0.5f, 0.5f).icon(BitmapDescriptorFactory.fromResource(R.drawable.point_black)));
-                line.add(point);
+            //LatLng interPoint = new LatLng(interLat,interLng);
+            line.add(point);
+            //if(i>0&&i<(gpsList.size()-1)&&checkPoint(point, interPoint)){
                 meanLat += point.latitude;
                 meanLng += point.longitude;
                 counter++;
-            }
+            //}
+            //TODO vogliamo mettere il puntino vero ovunque?
+            if(i==0)
+                mMap.addMarker(new MarkerOptions().position(point).title(i+"").icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_start)));
+            else if(i==(gpsList.size()-1))
+                mMap.addMarker(new MarkerOptions().position(point).title(i+"").anchor(0.0f, 1.0f).icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_finish)));
+            else
+                mMap.addMarker(new MarkerOptions().position(point).title(i+"").anchor(0.5f, 0.5f).icon(BitmapDescriptorFactory.fromResource(R.drawable.point_black)));
         }
+
 
         meanLat/=counter;
         meanLng/=counter;
