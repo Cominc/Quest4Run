@@ -125,7 +125,6 @@ public class RunFragment extends Fragment {
                     }
                     else {
                         mMapGoogle.addMarker(new MarkerOptions().position(newPoisition).icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_start)));
-                        mMapGoogle.addMarker(new MarkerOptions().position(newPoisition));
                     }
                     line.add(newPoisition);
                     mMapGoogle.addPolyline(line);
