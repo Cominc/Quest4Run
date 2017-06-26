@@ -62,10 +62,6 @@ public class TaskFragment extends Fragment
 
         switch (id)
         {
-            case R.id.action_settings:
-
-                break;
-
             case R.id.action_delete_all:
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                 builder.setMessage(R.string.delete_confirmation)
