@@ -27,6 +27,7 @@ public class Constants
    public static final int DISTANCE_TYPE_TASK = 0;
    public static final int PACE_TYPE_TASK = 1;
    public static final int CONSTANCE_TYPE_TASK = 2;
+   public static final int DURATION_TYPE_TASK = 3;
 
    public static final int FROM_KM_TO_M = 1000;
 }
