@@ -69,7 +69,7 @@ public class TaskHistoryAdapter extends BaseAdapter
         //TODO Va bene mettere le stringe fisse così oppure bisognerebbe usare 2 PlainText separati?
         name.setText(task_actual.getName());
         type.setText(task_type[task_actual.getIdTaskType()]);
-        goal.setText(task_goal[task_actual.getIdTaskType()][Integer.parseInt(task_actual.getGoal())]);
+        goal.setText(task_goal[task_actual.getIdTaskType()][task_actual.getGoal()]);
         reward.setText(task_reward[task_actual.getIdTaskType()][task_actual.getReward()]);
         Date date = new Date(task_actual.getExecDate());
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");

@@ -73,18 +73,18 @@ public class TaskAdapter extends BaseAdapter
         //TODO Va bene mettere le stringe fisse così oppure bisognerebbe usare 2 PlainText separati?
         name.setText(task_actual.getName());
         type.setText(task_type[task_actual.getIdTaskType()]);
-        goal.setText(task_goal[task_actual.getIdTaskType()][Integer.parseInt(task_actual.getGoal())]);
+        goal.setText(task_goal[task_actual.getIdTaskType()][task_actual.getGoal()]);
         reward.setText(task_reward[task_actual.getIdTaskType()][task_actual.getReward()]);
 
         if(task_actual.getIdTaskType() == Constants.DISTANCE_TYPE_TASK)
         {
-            String s = task_goal[task_actual.getIdTaskType()][Integer.parseInt(task_actual.getGoal())];
+            String s = task_goal[task_actual.getIdTaskType()][task_actual.getGoal()];
             double goalValue = Double.parseDouble(s.substring(0, s.length() - 3));
             percentage.setText(Math.round(task_actual.getProgress()/(goalValue*Constants.FROM_KM_TO_M)*100) + "%");
         }
         else if(task_actual.getIdTaskType() == Constants.CONSTANCE_TYPE_TASK)
         {
-            String s = task_goal[task_actual.getIdTaskType()][Integer.parseInt(task_actual.getGoal())];
+            String s = task_goal[task_actual.getIdTaskType()][task_actual.getGoal()];
             double goalValue = Double.parseDouble(s.substring(0, s.length() - 7));
             percentage.setText(Math.round(task_actual.getProgress()/goalValue) + "%");
         }

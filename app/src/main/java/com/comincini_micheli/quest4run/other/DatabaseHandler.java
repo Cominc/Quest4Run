@@ -101,7 +101,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String CREATE_TASK_TABLE = "CREATE TABLE " + TABLE_TASK + "("
             + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + KEY_NAME + " TEXT,"
             + KEY_REWARD + " INTEGER," + KEY_ID_TASK_TYPE + " INTEGER,"
-            + KEY_GOAL + " NUMERIC," + KEY_COMPLETED + " INTEGER,"
+            + KEY_GOAL + " INTEGER," + KEY_COMPLETED + " INTEGER,"
             + KEY_ACTIVE + " INTEGER, " + KEY_PROGRESS + " REAL, " + KEY_EXEC_DATE + " TEXT" +
              ")";
     private static final String CREATE_CHARACTER_TABLE = "CREATE TABLE " + TABLE_CHARACTER + "("
@@ -246,7 +246,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
         Task task = new Task(Integer.parseInt(cursor.getString(0)),
                 cursor.getString(1), Integer.parseInt(cursor.getString(2)),
-                Integer.parseInt(cursor.getString(3)),cursor.getString(4),
+                Integer.parseInt(cursor.getString(3)),Integer.parseInt(cursor.getString(4)),
                 castStringToBoolean(cursor.getString(5)),castStringToBoolean(cursor.getString(6)),
                 Double.parseDouble(cursor.getString(7)),Long.parseLong(cursor.getString(8)));
         cursor.close();
@@ -271,7 +271,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 task.setName(cursor.getString(1));
                 task.setReward(Integer.parseInt(cursor.getString(2)));
                 task.setIdTaskType(Integer.parseInt(cursor.getString(3)));
-                task.setGoal(cursor.getString(4));
+                task.setGoal(Integer.parseInt(cursor.getString(4)));
                 task.setCompleted(castStringToBoolean(cursor.getString(5)));
                 task.setActive(castStringToBoolean(cursor.getString(6)));
                 task.setProgress(Double.parseDouble(cursor.getString(7)));
@@ -306,7 +306,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 task.setName(cursor.getString(1));
                 task.setReward(Integer.parseInt(cursor.getString(2)));
                 task.setIdTaskType(Integer.parseInt(cursor.getString(3)));
-                task.setGoal(cursor.getString(4));
+                task.setGoal(Integer.parseInt(cursor.getString(4)));
                 task.setCompleted(castStringToBoolean(cursor.getString(5)));
                 task.setActive(castStringToBoolean(cursor.getString(6)));
                 task.setProgress(Double.parseDouble(cursor.getString(7)));
@@ -341,7 +341,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 task.setName(cursor.getString(1));
                 task.setReward(Integer.parseInt(cursor.getString(2)));
                 task.setIdTaskType(Integer.parseInt(cursor.getString(3)));
-                task.setGoal(cursor.getString(4));
+                task.setGoal(Integer.parseInt(cursor.getString(4)));
                 task.setCompleted(castStringToBoolean(cursor.getString(5)));
                 task.setActive(castStringToBoolean(cursor.getString(6)));
                 task.setProgress(Double.parseDouble(cursor.getString(7)));
@@ -382,7 +382,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 task.setName(cursor.getString(1));
                 task.setReward(Integer.parseInt(cursor.getString(2)));
                 task.setIdTaskType(Integer.parseInt(cursor.getString(3)));
-                task.setGoal(cursor.getString(4));
+                task.setGoal(Integer.parseInt(cursor.getString(4)));
                 task.setCompleted(castStringToBoolean(cursor.getString(5)));
                 task.setActive(castStringToBoolean(cursor.getString(6)));
                 task.setProgress(Double.parseDouble(cursor.getString(7)));

@@ -110,7 +110,7 @@ public class AddTaskActivity extends AppCompatActivity
                 {
                     t.setName(nameTextEdit.getText().toString().trim());
                     t.setIdTaskType(spinnerType.getSelectedItemPosition());
-                    t.setGoal(Integer.toString(spinnerGoal.getSelectedItemPosition()));
+                    t.setGoal(spinnerGoal.getSelectedItemPosition());
                     t.setReward(spinnerReward.getSelectedItemPosition());
                     int newTaskId = db.addTask(t);
                     db.close();

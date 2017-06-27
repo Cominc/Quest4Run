@@ -215,7 +215,7 @@ public class RunFragment extends Fragment {
                     List<Task> tasks_distance;
                     tasks_distance = db.getTasks(false, true, Constants.DISTANCE_TYPE_TASK);
                     for (int i = 0; i < tasks_distance.size(); i++) {
-                        String s = getActivity().getResources().getStringArray(R.array.task_distance_goal)[Integer.parseInt(tasks_distance.get(i).getGoal())];
+                        String s = getActivity().getResources().getStringArray(R.array.task_distance_goal)[tasks_distance.get(i).getGoal()];
                         double goalValue = Double.parseDouble(s.substring(0, s.length() - 3)) * Constants.FROM_KM_TO_M;
                         if ((tasks_distance.get(i).getProgress() + totalDistance) > goalValue) {
                             tasks_distance.get(i).setCompleted(true);
@@ -234,7 +234,7 @@ public class RunFragment extends Fragment {
                     List<Task> tasks_rithm;
                     tasks_rithm = db.getTasks(false, true, Constants.PACE_TYPE_TASK);
                     for (int i = 0; i < tasks_rithm.size(); i++) {
-                        String s = getActivity().getResources().getStringArray(R.array.task_rithm_goal)[Integer.parseInt(tasks_rithm.get(i).getGoal())];
+                        String s = getActivity().getResources().getStringArray(R.array.task_rithm_goal)[tasks_rithm.get(i).getGoal()];
                         double goalValue = Double.parseDouble(s.substring(0, s.length() - 4));
                         if (goalValue <= totalSpeed / totalGPSPoints) {
                             tasks_rithm.get(i).setCompleted(true);
@@ -252,7 +252,7 @@ public class RunFragment extends Fragment {
                     List<Task> tasks_constance;
                     tasks_constance = db.getTasks(false, true, Constants.CONSTANCE_TYPE_TASK);
                     for (int i = 0; i < tasks_constance.size(); i++) {
-                        String s = getActivity().getResources().getStringArray(R.array.task_constance_goal)[Integer.parseInt(tasks_constance.get(i).getGoal())];
+                        String s = getActivity().getResources().getStringArray(R.array.task_constance_goal)[tasks_constance.get(i).getGoal()];
                         int goalValue = Integer.parseInt(s.substring(0, s.length() - 7));
 
                         Date lastExecDate = new Date(tasks_constance.get(i).getExecDate());
@@ -280,7 +280,7 @@ public class RunFragment extends Fragment {
                     List<Task> tasks_duration;
                     tasks_duration = db.getTasks(false, true, Constants.DURATION_TYPE_TASK);
                     for (int i = 0; i < tasks_duration.size(); i++) {
-                        String s = getActivity().getResources().getStringArray(R.array.task_duration_goal)[Integer.parseInt(tasks_duration.get(i).getGoal())];
+                        String s = getActivity().getResources().getStringArray(R.array.task_duration_goal)[tasks_duration.get(i).getGoal()];
                         int goalValue = Integer.parseInt(s.substring(0, s.length() - 7)) * Constants.SECONDS_A_MINUTE;
                         if (goalValue <= totalTime) {
                             tasks_duration.get(i).setCompleted(true);

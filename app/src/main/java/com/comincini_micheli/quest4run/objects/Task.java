@@ -12,13 +12,13 @@ public class Task implements Serializable
     private String name;
     private int reward;
     private int idTaskType;
-    private String goal;
+    private int goal;
     private boolean completed;
     private boolean active;
     private double progress;
     private long execDate;
 
-    public Task(int id, String name, int reward, int idTaskType, String goal, boolean completed, boolean active, double progress, long execDate)
+    public Task(int id, String name, int reward, int idTaskType, int goal, boolean completed, boolean active, double progress, long execDate)
     {
         this.id = id;
         this.name = name;
@@ -31,7 +31,7 @@ public class Task implements Serializable
         this.execDate = execDate;
     }
 
-    public Task(String name, int reward, int idTaskType, String goal, boolean completed, boolean active)
+    public Task(String name, int reward, int idTaskType, int goal, boolean completed, boolean active)
     {
         this.name = name;
         this.reward = reward;
@@ -42,17 +42,17 @@ public class Task implements Serializable
         this.progress = 0.0;
     }
 
-    public String getGoal()
+    public int getGoal()
     {
         return goal;
     }
 
-    public void setGoal(String goal)
+    public void setGoal(int goal)
     {
         this.goal = goal;
     }
 
-    public Task(int id, String name, int reward, int idTaskType, String goal)
+    public Task(int id, String name, int reward, int idTaskType, int goal)
     {
         this.id = id;
         this.name = name;
