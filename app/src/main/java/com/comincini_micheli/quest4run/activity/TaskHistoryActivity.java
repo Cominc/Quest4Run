@@ -10,6 +10,7 @@ import com.comincini_micheli.quest4run.objects.Task;
 import com.comincini_micheli.quest4run.other.DatabaseHandler;
 import com.comincini_micheli.quest4run.adapter.TaskHistoryAdapter;
 
+import java.util.Collections;
 import java.util.List;
 
 public class TaskHistoryActivity extends AppCompatActivity
@@ -29,6 +30,7 @@ public class TaskHistoryActivity extends AppCompatActivity
         DatabaseHandler db = new DatabaseHandler(this);
 
         taskList = db.getTasks(true);
+        Collections.sort(taskList);
         list=(ListView) findViewById(R.id.list_task_completed);
 
         // Getting adapter by passing xml data ArrayList

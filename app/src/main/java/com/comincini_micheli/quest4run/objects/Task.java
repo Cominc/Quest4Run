@@ -1,12 +1,14 @@
 package com.comincini_micheli.quest4run.objects;
 
+import android.support.annotation.NonNull;
+
 import java.io.Serializable;
 
 /**
  * Created by Gianmaria on 19/05/2017.
  */
 
-public class Task implements Serializable
+public class Task implements Serializable, Comparable
 {
     private int id;
     private String name;
@@ -149,5 +151,16 @@ public class Task implements Serializable
     public void setExecDate(long execDate)
     {
         this.execDate = execDate;
+    }
+
+    @Override
+    public int compareTo(@NonNull Object o) {
+        Task t = (Task)o;
+        if(execDate-t.getExecDate()>0)
+            return -1;
+        else if(execDate-t.getExecDate()<0)
+            return 1;
+        else
+            return 0;
     }
 }

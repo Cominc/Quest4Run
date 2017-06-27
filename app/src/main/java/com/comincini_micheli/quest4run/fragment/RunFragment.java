@@ -257,12 +257,13 @@ public class RunFragment extends Fragment {
                         Date lastExecDate = new Date(tasks_constance.get(i).getExecDate());
                         Date yesterdayDate = new Date(finishTime - Constants.MILLISECONDS_A_DAY);
 
+                        Date today = new Date(finishTime);
                         SimpleDateFormat sdf = new SimpleDateFormat(getResources().getString(R.string.date_format));
 
                         if (sdf.format(yesterdayDate).equals(sdf.format(lastExecDate))) {
                             int progress = (int) tasks_constance.get(i).getProgress() + 1;
                             tasks_constance.get(i).setProgress(progress);
-                        } else {
+                        }else if(!sdf.format(today).equals(sdf.format(lastExecDate))){
                             tasks_constance.get(i).setProgress(1);
                         }
                         if (tasks_constance.get(i).getProgress() >= goalValue) {
