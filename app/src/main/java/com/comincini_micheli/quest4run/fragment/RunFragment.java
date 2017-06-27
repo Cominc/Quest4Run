@@ -294,7 +294,6 @@ public class RunFragment extends Fragment {
                         db.updateTask(tasks_duration.get(i));
                     }
 
-                    //TODO non da errore sia con getActivity sia con getContext ???
                     SharedPreferences firstLaunchSetting = getActivity().getSharedPreferences(Constants.NAME_PREFS, Context.MODE_PRIVATE);
                     int characterId = firstLaunchSetting.getInt(Constants.CHAR_ID_PREFERENCE, -1);
                     Character myCharacter = db.getCharacter(characterId);

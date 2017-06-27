@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -21,9 +20,6 @@ import com.comincini_micheli.quest4run.fragment.QuestFragment;
 import com.comincini_micheli.quest4run.fragment.RunFragment;
 import com.comincini_micheli.quest4run.fragment.ShopFragment;
 import com.comincini_micheli.quest4run.fragment.TaskFragment;
-import com.comincini_micheli.quest4run.fragment.TestFragment;
-
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -105,16 +101,17 @@ public class MainActivity extends AppCompatActivity
                 title = getResources().getString(R.string.nav_character);
                 break;
             case R.id.nav_share:
-                fragment = new TestFragment();
-                title = getResources().getString(R.string.nav_share);
-                break;
-            case R.id.nav_about_us:
                 Intent i = new Intent(MainActivity.this, AboutUsActivity.class);
                 startActivity(i);
+                //TODO: implementare condividi?
+                break;
+            case R.id.nav_about_us:
+                Intent i2 = new Intent(MainActivity.this, AboutUsActivity.class);
+                startActivity(i2);
                 break;
             default:
-                fragment = new TestFragment();
-                title = getResources().getString(R.string.test_fragment_title);
+                fragment = new RunFragment();
+                title = getResources().getString(R.string.nav_run);
                 break;
         }
 

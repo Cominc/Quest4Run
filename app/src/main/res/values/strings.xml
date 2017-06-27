@@ -160,8 +160,6 @@
     <!-- Option Menu QuestList -->
     <string name="show_history_quest">Missioni Completate</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="title_task_history_activity">Task Completati</string>
     <string name="title_create_character">Crea il personaggio</string>

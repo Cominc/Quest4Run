@@ -27,7 +27,6 @@
             android:name=".activity.AboutUsActivity"
             android:label="@string/nav_about_us"
             android:screenOrientation="portrait" />
-        <!-- TODO definire un'altra stringa? -->
         <activity
             android:name=".activity.PrivacyPolicyActivity"
             android:screenOrientation="portrait" />
