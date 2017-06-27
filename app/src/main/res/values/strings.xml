@@ -40,10 +40,10 @@
     <string name="task_delete">Task rimosso</string>
 
     <!-- Option Menu TaskList -->
-    <string name="delete_all">Cancella tutto</string>
-    <string name="delete_confirmation">Sei sicuro di voler cancellare tutti i Task?</string>
+    <string name="delete_all_task">Cancella tutto</string>
+    <string name="delete_all_task_confirmation">Sei sicuro di voler cancellare tutti i Task?</string>
     <string name="number_task_deleted">Rimossi %d Task</string>
-    <string name="show_history">Task Completati</string>
+    <string name="show_history_task">Task Completati</string>
 
     <!-- Task Creation -->
     <string name="name_hint">Nome</string>
@@ -157,11 +157,15 @@
     <string name="request_deactive_quest">Vuoi disattivare questa Missione?</string>
     <string name="impossible_active_quest">Statistiche troppo basse, impossibile attivare la Missione</string>
 
+    <!-- Option Menu QuestList -->
+    <string name="show_history_quest">Missioni Completate</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="title_task_history_activity">Task Completati</string>
     <string name="title_create_character">Crea il personaggio</string>
+    <string name="title_quest_history_activity">Missioni Completate</string>
 
 
     <!-- Task run -->
