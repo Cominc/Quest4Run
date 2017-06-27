@@ -89,8 +89,7 @@ public class EquipmentShopAdapter extends BaseAdapter {
                 {
                     equipment_actual = data.get(position);
                     AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-                    //TODO come usare resources
-                    builder.setMessage(String.format("Vuoi acquistare %s per %d " + activity.getResources().getString(R.string.cents_symbol_label) + " ?",equipment_actual.getName(),equipment_actual.getPrice()))
+                    builder.setMessage(String.format(activity.getResources().getString(R.string.buy_confirmation),equipment_actual.getName(),equipment_actual.getPrice()))
                             .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener()
                             {
                                 public void onClick(DialogInterface dialog, int id)

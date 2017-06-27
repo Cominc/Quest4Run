@@ -70,7 +70,6 @@ public class TaskAdapter extends BaseAdapter
         task_actual = data.get(position);
 
         // Setting all values in listview
-        //TODO Va bene mettere le stringe fisse così oppure bisognerebbe usare 2 PlainText separati?
         name.setText(task_actual.getName());
         type.setText(task_type[task_actual.getIdTaskType()]);
         goal.setText(task_goal[task_actual.getIdTaskType()][task_actual.getGoal()]);
