@@ -62,9 +62,9 @@ public class EquipmentShopAdapter extends BaseAdapter {
             vi = inflater.inflate(R.layout.shop_list_row, null);
 
         TextView name = (TextView)vi.findViewById(R.id.shop_equipment_name);
-        TextView attack = (TextView)vi.findViewById(R.id.shop_equipment_attack);
-        TextView defense = (TextView)vi.findViewById(R.id.shop_equipment_defense);
-        TextView magic = (TextView)vi.findViewById(R.id.shop_equipment_magic);
+        TextView attack = (TextView)vi.findViewById(R.id.shop_equipment_attack_value);
+        TextView defense = (TextView)vi.findViewById(R.id.shop_equipment_defense_value);
+        TextView magic = (TextView)vi.findViewById(R.id.shop_equipment_magic_value);
         TextView price = (TextView)vi.findViewById(R.id.shop_equipment_price);
         Button buy_button = (Button) vi.findViewById(R.id.btn_buy);
 
@@ -72,9 +72,20 @@ public class EquipmentShopAdapter extends BaseAdapter {
 
         // Setting all values in listview
         name.setText(equipment_actual.getName());
-        attack.setText(String.valueOf(equipment_actual.getAtk()));
-        defense.setText(String.valueOf(equipment_actual.getDef()));
-        magic.setText(String.valueOf(equipment_actual.getMgc()));
+        if(equipment_actual.getAtk()>=0)
+            attack.setText("+"+String.valueOf(equipment_actual.getAtk()));
+        else
+            attack.setText(String.valueOf(equipment_actual.getAtk()));
+
+        if(equipment_actual.getDef()>=0)
+            defense.setText("+"+String.valueOf(equipment_actual.getDef()));
+        else
+            defense.setText(String.valueOf(equipment_actual.getDef()));
+
+        if(equipment_actual.getMgc()>=0)
+            magic.setText("+"+String.valueOf(equipment_actual.getMgc()));
+        else
+            magic.setText(String.valueOf(equipment_actual.getMgc()));
         price.setText(String.valueOf(equipment_actual.getPrice()));
         if(wallet < equipment_actual.getPrice())
         {

@@ -25,28 +25,31 @@
         android:layout_toEndOf="@+id/shop_equipment_icon" />
 
     <TextView
-        android:id="@+id/shop_equipment_attack"
+        android:id="@+id/shop_equipment_attack_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/shop_equipment_name"
         android:layout_toEndOf="@+id/shop_equipment_icon"
-        android:text="TextView" />
+        android:text="@string/attack_label"
+        android:width="50dp" />
 
     <TextView
-        android:id="@+id/shop_equipment_defense"
+        android:id="@+id/shop_equipment_defense_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/shop_equipment_attack"
+        android:layout_below="@+id/shop_equipment_attack_label"
         android:layout_toEndOf="@+id/shop_equipment_icon"
-        android:text="TextView" />
+        android:text="@string/defense_label"
+        android:width="50dp" />
 
     <TextView
-        android:id="@+id/shop_equipment_magic"
+        android:id="@+id/shop_equipment_magic_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/shop_equipment_defense"
+        android:layout_below="@+id/shop_equipment_defense_label"
         android:layout_toEndOf="@+id/shop_equipment_icon"
-        android:text="TextView" />
+        android:text="@string/magic_label"
+        android:width="50dp" />
 
 
 
@@ -56,15 +59,16 @@
         android:layout_height="wrap_content"
         app:srcCompat="@drawable/coins"
         android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_toEndOf="@+id/shop_equipment_name"
+        android:layout_marginStart="45dp" />
 
     <TextView
         android:id="@+id/shop_equipment_price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="TextView"
         android:layout_centerVertical="true"
-        android:layout_toEndOf="@+id/icon_coin"
-        android:text="TextView" />
+        android:layout_toEndOf="@+id/icon_coin" />
 
     <Button
         android:id="@+id/btn_buy"
@@ -74,4 +78,32 @@
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:text="@string/buy_button_label" />
+
+    <TextView
+        android:id="@+id/shop_equipment_attack_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:layout_alignBaseline="@+id/shop_equipment_attack_label"
+        android:layout_alignBottom="@+id/shop_equipment_attack_label"
+        android:layout_toEndOf="@+id/shop_equipment_attack_label"
+        android:layout_marginLeft="5dp"/>
+
+    <TextView
+        android:id="@+id/shop_equipment_defense_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:layout_below="@+id/shop_equipment_attack_value"
+        android:layout_toEndOf="@+id/shop_equipment_defense_label"
+        android:layout_marginLeft="5dp"/>
+
+    <TextView
+        android:id="@+id/shop_equipment_magic_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:layout_below="@+id/shop_equipment_defense_value"
+        android:layout_toEndOf="@+id/shop_equipment_magic_label"
+        android:layout_marginLeft="5dp"/>
 </RelativeLayout>
