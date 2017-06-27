@@ -7,7 +7,7 @@
         <defense>1</defense>
         <magic>2</magic>
         <expReward>15</expReward>
-        <duration>4</duration>
+        <duration>172800000</duration>
     </quest>
     <quest>
         <title>quest 2</title>
@@ -16,6 +16,6 @@
         <defense>1</defense>
         <magic>1</magic>
         <expReward>1</expReward>
-        <duration>1</duration>
+        <duration>86400000</duration>
     </quest>
 </quests>

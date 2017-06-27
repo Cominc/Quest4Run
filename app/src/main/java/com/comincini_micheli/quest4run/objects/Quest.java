@@ -15,7 +15,7 @@ public class Quest
     private int minDefense;
     private int minMagic;
     private int expReward;
-    private int duration;
+    private long duration;
     private long dateStart;
     private long dateFinish;
 
@@ -144,7 +144,7 @@ public class Quest
         this.expReward = expReward;
     }
 
-    public int getDuration()
+    public long getDuration()
     {
         return duration;
     }
