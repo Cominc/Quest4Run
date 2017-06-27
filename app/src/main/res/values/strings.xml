@@ -160,10 +160,15 @@
     <!-- Option Menu QuestList -->
     <string name="show_history_quest">Missioni Completate</string>
 
+    <!-- Context Menu QuestList -->
+    <string name="menu_quest_detail">Dettagli</string>
+
     <string name="title_activity_main">MainActivity</string>
     <string name="title_task_history_activity">Task Completati</string>
     <string name="title_create_character">Crea il personaggio</string>
     <string name="title_quest_history_activity">Missioni Completate</string>
+
+    <string name="title_quest_detail_activity">Dettagli missione</string>
 
 
     <!-- Task run -->

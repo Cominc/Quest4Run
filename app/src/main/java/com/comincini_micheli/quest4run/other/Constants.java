@@ -12,6 +12,7 @@ public class Constants
    public static final String ID_EQUIPMENT_TYPE = "id_type";
    public static final String CHAR_ID_PREFERENCE = "characterId";
    public static final String NAME_PREFS = "myPrefs";
+   public static final String ID_QUEST = "id_quest";
 
    public static final long MIN_TIME_BETEWEEN_UPDATE = 1000;
 

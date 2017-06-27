@@ -54,6 +54,10 @@
             android:name=".activity.QuestHistoryActivity"
             android:label="@string/title_quest_history_activity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.QuestDetailActivity"
+            android:label="@string/title_quest_detail_activity"
+            android:screenOrientation="portrait" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -65,6 +69,7 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
+
     </application>
 
 </manifest>

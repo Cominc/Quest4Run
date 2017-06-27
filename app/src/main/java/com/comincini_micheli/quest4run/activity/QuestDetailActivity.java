@@ -1,0 +1,47 @@
+package com.comincini_micheli.quest4run.activity;
+
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.util.Log;
+import android.widget.ListView;
+import android.widget.TextView;
+
+import com.comincini_micheli.quest4run.R;
+import com.comincini_micheli.quest4run.objects.Quest;
+import com.comincini_micheli.quest4run.other.Constants;
+import com.comincini_micheli.quest4run.other.DatabaseHandler;
+
+import java.util.List;
+
+public class QuestDetailActivity extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_quest_detail);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        Bundle b = getIntent().getExtras();
+        int idQuest = -1;
+        if(b != null)
+            idQuest = b.getInt(Constants.ID_QUEST);
+        Log.w("id quest",idQuest+"");
+        DatabaseHandler db = new DatabaseHandler(this);
+        Quest quest = db.getQuest(idQuest);
+
+        TextView title = (TextView) findViewById(R.id.quest_detail_title);
+        TextView description = (TextView) findViewById(R.id.quest_detail_description);
+        TextView attack = (TextView) findViewById(R.id.quest_detail_attack_value);
+        TextView defense = (TextView) findViewById(R.id.quest_detail_defense_value);
+        TextView magic = (TextView) findViewById(R.id.quest_detail_magic_value);
+        TextView duration = (TextView) findViewById(R.id.quest_detail_duration);
+
+        title.setText(quest.getTitle());
+        description.setText(quest.getDescription());
+        attack.setText(quest.getMinAttack()+"");
+        defense.setText(quest.getMinDefense()+"");
+        magic.setText(quest.getMinMagic()+"");
+        duration.setText(quest.getDuration()+"");
+
+    }
+}

@@ -50,7 +50,6 @@ public class EquipmentActivity extends AppCompatActivity {
         EquipmentInventoryAdapter adapter = new EquipmentInventoryAdapter(this, equipmentList, db);
         list.setAdapter(adapter);
         list.setEmptyView(findViewById(R.id.empty_list));
-        Log.w("elementi",""+equipmentList.size());
     }
 
     @Override

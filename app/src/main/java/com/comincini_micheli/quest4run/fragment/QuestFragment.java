@@ -7,19 +7,24 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import com.comincini_micheli.quest4run.R;
+import com.comincini_micheli.quest4run.activity.EquipmentActivity;
+import com.comincini_micheli.quest4run.activity.QuestDetailActivity;
 import com.comincini_micheli.quest4run.activity.QuestHistoryActivity;
 import com.comincini_micheli.quest4run.activity.TaskHistoryActivity;
 import com.comincini_micheli.quest4run.objects.Quest;
+import com.comincini_micheli.quest4run.other.Constants;
 import com.comincini_micheli.quest4run.other.DatabaseHandler;
 import com.comincini_micheli.quest4run.adapter.QuestAdapter;
 
@@ -46,6 +51,34 @@ public class QuestFragment extends Fragment
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
+    }
+
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo)
+    {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        if (v.getId()==R.id.quest_list_view) {
+            MenuInflater inflater = getActivity().getMenuInflater();
+            inflater.inflate(R.menu.menu_quest_list, menu);
+        }
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        super.onContextItemSelected(item);
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+        switch(item.getItemId()) {
+            case R.id.detail:
+                Intent intent = new Intent(getActivity(), QuestDetailActivity.class);
+                Bundle b = new Bundle();
+                b.putInt(Constants.ID_QUEST, questList.get(info.position).getId());
+                intent.putExtras(b);
+                startActivity(intent);
+                return true;
+            default:
+                return super.onContextItemSelected(item);
+        }
     }
 
     @Override
@@ -98,6 +131,7 @@ public class QuestFragment extends Fragment
 
         questList = db.getQuests(false);
         list=(ListView)getView().findViewById(R.id.quest_list_view);
+        registerForContextMenu(list);
         adapter = new QuestAdapter(getActivity(), questList, db);
         list.setAdapter(adapter);
         list.setEmptyView(getActivity().findViewById(R.id.empty_list));

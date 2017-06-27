@@ -727,7 +727,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     }
 
     //Getting single Task
-    Quest getQuest(int id) {
+    public Quest getQuest(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
 
         Cursor cursor = db.query(TABLE_QUEST, new String[] { KEY_ID,
