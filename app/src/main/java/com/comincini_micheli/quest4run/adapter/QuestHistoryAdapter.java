@@ -20,6 +20,8 @@ import com.comincini_micheli.quest4run.objects.Quest;
 import com.comincini_micheli.quest4run.other.Constants;
 import com.comincini_micheli.quest4run.other.DatabaseHandler;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -58,20 +60,18 @@ public class QuestHistoryAdapter extends BaseAdapter
         if(convertView==null)
             vi = inflater.inflate(R.layout.quest_history_list_row, null);
 
-        TextView title = (TextView)vi.findViewById(R.id.quest_history_title);
-        TextView attack = (TextView)vi.findViewById(R.id.quest_history_min_attack);
-        TextView defense = (TextView)vi.findViewById(R.id.quest_history_min_defense);
-        TextView magic = (TextView)vi.findViewById(R.id.quest_history_min_magic);
+        TextView title = (TextView) vi.findViewById(R.id.quest_history_title);
         TextView expReward = (TextView) vi.findViewById(R.id.quest_history_exp_reward);
+        TextView dateFinish = (TextView) vi.findViewById(R.id.quest_history_date_finish);
 
         questActual = data.get(position);
 
         // Setting all values in listview
         title.setText(questActual.getTitle());
-        attack.setText(String.valueOf(questActual.getMinAttack()));
-        defense.setText(String.valueOf(questActual.getMinDefense()));
-        magic.setText(String.valueOf(questActual.getMinMagic()));
         expReward.setText(questActual.getExpReward() + activity.getResources().getString(R.string.exp_label));
+        Date date = new Date(questActual.getDateFinish());
+        SimpleDateFormat sdf = new SimpleDateFormat(activity.getResources().getString(R.string.date_format));
+        dateFinish.setText(sdf.format(date));
 
         return vi;
     }

@@ -87,12 +87,15 @@ public class QuestFragment extends Fragment
         super.onViewCreated(view, savedInstanceState);
         db = new DatabaseHandler(getContext());
 
-        /*Quest quest1 = new Quest("quest 1", "", 1, 2, 3, 4, 5);
+        /*
+        Quest quest1 = new Quest("quest 1", "", 1, 2, 3, 4, 5);
+        quest1.setCompleted(true);
         db.addQuest(quest1);
         Quest quest2 = new Quest("quest 2", "", 1, 2, 3, 4, 5);
         db.addQuest(quest2);
         Quest quest3 = new Quest("quest 3", "", 1, 2, 3, 4, 5);
-        db.addQuest(quest3);*/
+        db.addQuest(quest3);
+        */
 
         questList = db.getQuests(false);
         list=(ListView)getView().findViewById(R.id.quest_list_view);
