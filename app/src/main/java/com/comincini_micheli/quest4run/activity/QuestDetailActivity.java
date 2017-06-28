@@ -3,6 +3,7 @@ package com.comincini_micheli.quest4run.activity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -43,5 +44,16 @@ public class QuestDetailActivity extends AppCompatActivity {
         magic.setText(quest.getMinMagic()+"");
         duration.setText(quest.getDuration()+"");
 
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            // Respond to the action bar's Up/Home button
+            case android.R.id.home:
+                finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

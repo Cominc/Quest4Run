@@ -187,12 +187,13 @@ public class QuestAdapter extends BaseAdapter
                 questActual.setActive(false);
                 db.updateQuest(questActual);
             }
-            active.setEnabled(false);
-            vi.setOnClickListener(new View.OnClickListener()
+
+            active.setOnClickListener(new View.OnClickListener()
             {
                 @Override
                 public void onClick(View v)
                 {
+                    ((RadioButton) v).setChecked(false);
                     Toast.makeText(activity.getApplicationContext(), R.string.impossible_active_quest, Toast.LENGTH_SHORT).show();
                 }
             });

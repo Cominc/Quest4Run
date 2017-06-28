@@ -45,7 +45,6 @@ public class TaskFragment extends Fragment
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //TODO cosa serve setHasOptionsMenu
         setHasOptionsMenu(true);
     }
 
