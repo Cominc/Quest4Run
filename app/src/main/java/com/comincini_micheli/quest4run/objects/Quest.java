@@ -21,7 +21,7 @@ public class Quest
     private long dateStart;
     private long dateFinish;
 
-    public Quest(int id, String title, String description, boolean completed, boolean active, int minAttack, int minDefense, int minMagic, int expReward, int duration, long dateStart, long dateFinish)
+    public Quest(int id, String title, String description, boolean completed, boolean active, int minAttack, int minDefense, int minMagic, int expReward, long duration, long dateStart, long dateFinish)
     {
         this.id = id;
         this.title = title;
@@ -37,7 +37,7 @@ public class Quest
         this.dateFinish = dateFinish;
     }
 
-    public Quest(String title, String description, int minAttack, int minDefense, int minMagic, int expReward, int duration)
+    public Quest(String title, String description, int minAttack, int minDefense, int minMagic, int expReward, long duration)
     {
         this.title = title;
         this.description = description;
@@ -151,7 +151,7 @@ public class Quest
         return duration;
     }
 
-    public void setDuration(int duration)
+    public void setDuration(long duration)
     {
         this.duration = duration;
     }

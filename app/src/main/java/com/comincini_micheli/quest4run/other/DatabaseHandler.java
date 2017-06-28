@@ -112,7 +112,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String CREATE_QUEST_TABLE = " CREATE TABLE " + TABLE_QUEST + "("
             + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + KEY_TITLE + " TEXT," + KEY_DESCRIPTION + " TEXT," + KEY_COMPLETED + " INTEGER,"
             + KEY_ACTIVE + " INTEGER," + KEY_ATK + " INTEGER," + KEY_DEF + " INTEGER," + KEY_MGC + " INTEGER," + KEY_EXP_REWARD + " INTEGER,"
-            + KEY_DURATION + " INTEGER," + KEY_START_DATE + " TEXT," + KEY_FINISH_DATE + " TEXT"
+            + KEY_DURATION + " TEXT," + KEY_START_DATE + " TEXT," + KEY_FINISH_DATE + " TEXT"
             + ")";
 
     private static final String CREATE_GPS_TABLE = " CREATE TABLE " + TABLE_GPS + "("
@@ -742,7 +742,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 castStringToBoolean(cursor.getString(3)),castStringToBoolean(cursor.getString(4)),
                 Integer.parseInt(cursor.getString(5)),Integer.parseInt(cursor.getString(6)),
                 Integer.parseInt(cursor.getString(7)),Integer.parseInt(cursor.getString(8)),
-                Integer.parseInt(cursor.getString(9)),Long.parseLong(cursor.getString(10)),
+                Long.parseLong(cursor.getString(9)),Long.parseLong(cursor.getString(10)),
                 Long.parseLong(cursor.getString(11)));
         cursor.close();
         return quest;
@@ -770,7 +770,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 quest.setMinDefense(Integer.parseInt(cursor.getString(6)));
                 quest.setMinMagic(Integer.parseInt(cursor.getString(7)));
                 quest.setExpReward(Integer.parseInt(cursor.getString(8)));
-                quest.setDuration(Integer.parseInt(cursor.getString(9)));
+                quest.setDuration(Long.parseLong(cursor.getString(9)));
                 quest.setDateStart(Long.parseLong(cursor.getString(10)));
                 quest.setDateFinish(Long.parseLong(cursor.getString(11)));
 
@@ -800,7 +800,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             quest.setMinDefense(Integer.parseInt(cursor.getString(6)));
             quest.setMinMagic(Integer.parseInt(cursor.getString(7)));
             quest.setExpReward(Integer.parseInt(cursor.getString(8)));
-            quest.setDuration(Integer.parseInt(cursor.getString(9)));
+            quest.setDuration(Long.parseLong(cursor.getString(9)));
             quest.setDateStart(Long.parseLong(cursor.getString(10)));
             quest.setDateFinish(Long.parseLong(cursor.getString(11)));
             return quest;
@@ -833,7 +833,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 quest.setMinDefense(Integer.parseInt(cursor.getString(6)));
                 quest.setMinMagic(Integer.parseInt(cursor.getString(7)));
                 quest.setExpReward(Integer.parseInt(cursor.getString(8)));
-                quest.setDuration(Integer.parseInt(cursor.getString(9)));
+                quest.setDuration(Long.parseLong(cursor.getString(9)));
                 quest.setDateStart(Long.parseLong(cursor.getString(10)));
                 quest.setDateFinish(Long.parseLong(cursor.getString(11)));
 
