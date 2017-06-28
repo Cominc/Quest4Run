@@ -76,7 +76,7 @@ public class QuestFragment extends Fragment
                 Bundle b = new Bundle();
                 b.putInt(Constants.ID_QUEST, questList.get(info.position).getId());
                 intent.putExtras(b);
-                startActivity(intent);
+                startActivityForResult(intent,Constants.DETAILS_QUEST);
                 return true;
             default:
                 return super.onContextItemSelected(item);
@@ -131,7 +131,7 @@ public class QuestFragment extends Fragment
         db.addQuest(quest3);
         */
         Quest activeQuest = db.getActiveQuest();
-        if(activeQuest.checkCompleted())
+        if(activeQuest!=null && activeQuest.checkCompleted())
         {
             activeQuest.setCompleted(true);
             activeQuest.setActive(false);
@@ -147,7 +147,7 @@ public class QuestFragment extends Fragment
         list.setEmptyView(getActivity().findViewById(R.id.empty_list));
     }
 
-    /*@Override
+    @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data)
     {
         super.onActivityResult(requestCode, resultCode, data);
@@ -162,25 +162,10 @@ public class QuestFragment extends Fragment
                     activeQuest.setActive(false);
                     activeQuest.setDateFinish(activeQuest.getDateStart() + activeQuest.getDuration());
                     db.updateQuest(activeQuest);
+                    questList.remove(activeQuest);
                 }
                 adapter.notifyDataSetChanged();
             }
         }
-    }*/
-
-    @Override
-    public void onResume()
-    {
-        super.onResume();
-        Quest activeQuest = db.getActiveQuest();
-        if(activeQuest.checkCompleted())
-        {
-            activeQuest.setCompleted(true);
-            activeQuest.setActive(false);
-            activeQuest.setDateFinish(activeQuest.getDateStart() + activeQuest.getDuration());
-            db.updateQuest(activeQuest);
-            questList.remove(activeQuest);
-        }
-        adapter.notifyDataSetChanged();
     }
 }

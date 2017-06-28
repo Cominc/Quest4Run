@@ -181,12 +181,19 @@ public class Quest
         long durationMS = duration;
         long temp;
         temp = TimeUnit.MILLISECONDS.toHours(durationMS);
+        if(temp < 10)
+            durationString += "0";
         durationString += temp+":";
         durationMS -= TimeUnit.HOURS.toMillis(temp);
         temp = TimeUnit.MILLISECONDS.toMinutes(durationMS);
+        if(temp < 10)
+            durationString += "0";
         durationString += temp+":";
         durationMS -= TimeUnit.MINUTES.toMillis(temp);
-        durationString += TimeUnit.MILLISECONDS.toSeconds(durationMS);
+        temp = TimeUnit.MILLISECONDS.toSeconds(durationMS);
+        if(temp < 10)
+            durationString += "0";
+        durationString += temp;
         return durationString;
     }
 

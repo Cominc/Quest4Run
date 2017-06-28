@@ -101,6 +101,9 @@ public class QuestDetailActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             // Respond to the action bar's Up/Home button
             case android.R.id.home:
+                Intent resultIntent = new Intent();
+                //resultIntent.putExtra(Constants.TASK_ADDED, t);
+                setResult(RESULT_OK, resultIntent);
                 finish();
                 return true;
         }
