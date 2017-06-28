@@ -1,5 +1,6 @@
 package com.comincini_micheli.quest4run.activity;
 
+import android.content.Intent;
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -31,7 +32,9 @@ public class QuestDetailActivity extends AppCompatActivity {
         Bundle b = getIntent().getExtras();
         int idQuest = -1;
         if(b != null)
+        {
             idQuest = b.getInt(Constants.ID_QUEST);
+        }
         Log.w("id quest",idQuest+"");
         db = new DatabaseHandler(this);
         quest = db.getQuest(idQuest);
@@ -56,6 +59,9 @@ public class QuestDetailActivity extends AppCompatActivity {
         dateFinish.setText(sdf.format(date));
 
         countTime = quest.getDateStart() + quest.getDuration() - System.currentTimeMillis();
+
+        if(countTime <= 0)
+            countdown.setText("");
 
         new CountDownTimer(countTime, 1000)
         {
@@ -85,8 +91,7 @@ public class QuestDetailActivity extends AppCompatActivity {
             @Override
             public void onFinish()
             {
-                quest.setCompleted(true);
-                db.updateQuest(quest);
+
             }
         }.start();
     }

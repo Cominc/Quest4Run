@@ -189,4 +189,19 @@ public class Quest
         durationString += TimeUnit.MILLISECONDS.toSeconds(durationMS);
         return durationString;
     }
+
+    public boolean checkCompleted()
+    {
+        if(this.completed)
+            return true;
+        else
+        {
+            if(this.dateStart + this.duration <= System.currentTimeMillis())
+            {
+                return true;
+            }
+            else
+                return false;
+        }
+    }
 }

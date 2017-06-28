@@ -30,6 +30,8 @@ import com.comincini_micheli.quest4run.adapter.QuestAdapter;
 
 import java.util.List;
 
+import static android.app.Activity.RESULT_OK;
+
 /**
  * A simple {@link Fragment} subclass.
  */
@@ -128,6 +130,14 @@ public class QuestFragment extends Fragment
         Quest quest3 = new Quest("quest 3", "", 1, 2, 3, 4, 5);
         db.addQuest(quest3);
         */
+        Quest activeQuest = db.getActiveQuest();
+        if(activeQuest.checkCompleted())
+        {
+            activeQuest.setCompleted(true);
+            activeQuest.setActive(false);
+            activeQuest.setDateFinish(activeQuest.getDateStart() + activeQuest.getDuration());
+            db.updateQuest(activeQuest);
+        }
 
         questList = db.getQuests(false);
         list=(ListView)getView().findViewById(R.id.quest_list_view);
@@ -135,5 +145,42 @@ public class QuestFragment extends Fragment
         adapter = new QuestAdapter(getActivity(), questList, db);
         list.setAdapter(adapter);
         list.setEmptyView(getActivity().findViewById(R.id.empty_list));
+    }
+
+    /*@Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == Constants.DETAILS_QUEST)
+        {
+            if(resultCode == RESULT_OK)
+            {
+                Quest activeQuest = db.getActiveQuest();
+                if(activeQuest.checkCompleted())
+                {
+                    activeQuest.setCompleted(true);
+                    activeQuest.setActive(false);
+                    activeQuest.setDateFinish(activeQuest.getDateStart() + activeQuest.getDuration());
+                    db.updateQuest(activeQuest);
+                }
+                adapter.notifyDataSetChanged();
+            }
+        }
+    }*/
+
+    @Override
+    public void onResume()
+    {
+        super.onResume();
+        Quest activeQuest = db.getActiveQuest();
+        if(activeQuest.checkCompleted())
+        {
+            activeQuest.setCompleted(true);
+            activeQuest.setActive(false);
+            activeQuest.setDateFinish(activeQuest.getDateStart() + activeQuest.getDuration());
+            db.updateQuest(activeQuest);
+            questList.remove(activeQuest);
+        }
+        adapter.notifyDataSetChanged();
     }
 }
