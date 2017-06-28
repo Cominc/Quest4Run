@@ -179,11 +179,14 @@ public class Quest
     public String getDurationString(){
         String durationString = "";
         long durationMS = duration;
-        durationString = TimeUnit.MICROSECONDS.toHours(durationMS)+":";
-        durationMS -= TimeUnit.HOURS.toMillis(durationMS);
-        durationString += TimeUnit.MICROSECONDS.toMinutes(durationMS)+":";
-        durationMS -= TimeUnit.MINUTES.toMillis(durationMS);
-        durationString += TimeUnit.MICROSECONDS.toSeconds(durationMS);
+        long temp;
+        temp = TimeUnit.MILLISECONDS.toHours(durationMS);
+        durationString += temp+":";
+        durationMS -= TimeUnit.HOURS.toMillis(temp);
+        temp = TimeUnit.MILLISECONDS.toMinutes(durationMS);
+        durationString += temp+":";
+        durationMS -= TimeUnit.MINUTES.toMillis(temp);
+        durationString += TimeUnit.MILLISECONDS.toSeconds(durationMS);
         return durationString;
     }
 }
