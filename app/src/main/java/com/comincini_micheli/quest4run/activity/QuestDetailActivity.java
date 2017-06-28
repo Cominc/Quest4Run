@@ -11,6 +11,10 @@ import com.comincini_micheli.quest4run.objects.Quest;
 import com.comincini_micheli.quest4run.other.Constants;
 import com.comincini_micheli.quest4run.other.DatabaseHandler;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.concurrent.TimeUnit;
+
 public class QuestDetailActivity extends AppCompatActivity {
 
     @Override
@@ -33,14 +37,17 @@ public class QuestDetailActivity extends AppCompatActivity {
         TextView defense = (TextView) findViewById(R.id.quest_detail_defense_value);
         TextView magic = (TextView) findViewById(R.id.quest_detail_magic_value);
         TextView duration = (TextView) findViewById(R.id.quest_detail_duration_value);
+        TextView dateFinish = (TextView) findViewById(R.id.quest_detail_date_finish_value);
 
         title.setText(quest.getTitle());
         description.setText(quest.getDescription());
         attack.setText(quest.getMinAttack()+"");
         defense.setText(quest.getMinDefense()+"");
         magic.setText(quest.getMinMagic()+"");
-        duration.setText(quest.getDuration()+"");
-
+        duration.setText(quest.getDurationString());
+        Date date = new Date(quest.getDateFinish());
+        SimpleDateFormat sdf = new SimpleDateFormat(getResources().getString(R.string.date_format));
+        dateFinish.setText(sdf.format(date));
     }
 
     @Override

@@ -1,5 +1,7 @@
 package com.comincini_micheli.quest4run.objects;
 
+import java.util.concurrent.TimeUnit;
+
 /**
  * Created by Gianmaria on 08/06/2017.
  */
@@ -172,5 +174,16 @@ public class Quest
     public void setDateFinish(long dateFinish)
     {
         this.dateFinish = dateFinish;
+    }
+
+    public String getDurationString(){
+        String durationString = "";
+        long durationMS = duration;
+        durationString = TimeUnit.MICROSECONDS.toHours(durationMS)+":";
+        durationMS -= TimeUnit.HOURS.toMillis(durationMS);
+        durationString += TimeUnit.MICROSECONDS.toMinutes(durationMS)+":";
+        durationMS -= TimeUnit.MINUTES.toMillis(durationMS);
+        durationString += TimeUnit.MICROSECONDS.toSeconds(durationMS);
+        return durationString;
     }
 }
