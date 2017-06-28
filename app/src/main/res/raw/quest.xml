@@ -18,4 +18,22 @@
         <expReward>1</expReward>
         <duration>5400000</duration>
     </quest>
+    <quest>
+        <title>quest 3</title>
+        <description>description</description>
+        <attack>1</attack>
+        <defense>1</defense>
+        <magic>1</magic>
+        <expReward>1</expReward>
+        <duration>30000</duration>
+    </quest>
+    <quest>
+        <title>quest 4</title>
+        <description>description</description>
+        <attack>1</attack>
+        <defense>1</defense>
+        <magic>1</magic>
+        <expReward>1</expReward>
+        <duration>60000</duration>
+    </quest>
 </quests>

@@ -125,6 +125,7 @@ public class QuestAdapter extends BaseAdapter
 
                                                 questActual = data.get(position);
                                                 questActual.setActive(true);
+                                                questActual.setDateStart(System.currentTimeMillis());
                                                 db.updateQuest(questActual);
                                                 data.set(position, questActual);
                                                 indexActiveQuest = position;
@@ -144,6 +145,7 @@ public class QuestAdapter extends BaseAdapter
                             {
                                 questActual = data.get(position);
                                 questActual.setActive(true);
+                                questActual.setDateStart(System.currentTimeMillis());
                                 db.updateQuest(questActual);
                                 data.set(position, questActual);
                                 indexActiveQuest = position;
