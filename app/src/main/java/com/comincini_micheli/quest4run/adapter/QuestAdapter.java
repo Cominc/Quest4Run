@@ -188,6 +188,7 @@ public class QuestAdapter extends BaseAdapter
                 db.updateQuest(questActual);
             }
 
+            active.setAlpha(0.5f);
             active.setOnClickListener(new View.OnClickListener()
             {
                 @Override
