@@ -4,15 +4,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.comincini_micheli.quest4run.R;
 import com.comincini_micheli.quest4run.objects.Quest;
 import com.comincini_micheli.quest4run.other.Constants;
 import com.comincini_micheli.quest4run.other.DatabaseHandler;
-
-import java.util.List;
 
 public class QuestDetailActivity extends AppCompatActivity {
 
@@ -35,7 +32,7 @@ public class QuestDetailActivity extends AppCompatActivity {
         TextView attack = (TextView) findViewById(R.id.quest_detail_attack_value);
         TextView defense = (TextView) findViewById(R.id.quest_detail_defense_value);
         TextView magic = (TextView) findViewById(R.id.quest_detail_magic_value);
-        TextView duration = (TextView) findViewById(R.id.quest_detail_duration);
+        TextView duration = (TextView) findViewById(R.id.quest_detail_duration_value);
 
         title.setText(quest.getTitle());
         description.setText(quest.getDescription());

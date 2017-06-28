@@ -168,7 +168,9 @@
     <string name="title_create_character">Crea il personaggio</string>
     <string name="title_quest_history_activity">Missioni Completate</string>
 
+    <!-- Quest Detail-->
     <string name="title_quest_detail_activity">Dettagli missione</string>
+    <string name="quest_detail_duration_label">Durata</string>
 
 
     <!-- Task run -->

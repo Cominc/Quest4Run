@@ -79,11 +79,23 @@
         android:text="TextView" />
 
     <TextView
-        android:id="@+id/quest_detail_duration"
+        android:id="@+id/quest_detail_duration_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/quest_detail_duration_label"
+        android:layout_below="@+id/quest_detail_defense_value"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="29dp" />
+
+    <TextView
+        android:id="@+id/quest_detail_duration_value"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
+        android:layout_below="@+id/quest_detail_duration_label"
+        android:layout_marginTop="15dp"
         android:text="TextView" />
+
+
 
 </RelativeLayout>
