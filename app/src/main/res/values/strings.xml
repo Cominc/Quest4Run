@@ -171,6 +171,7 @@
     <!-- Quest Detail-->
     <string name="title_quest_detail_activity">Dettagli missione</string>
     <string name="quest_detail_duration_label">Durata</string>
+    <string name="quest_detail_date_finish_label">Data fine</string>
 
 
     <!-- Task run -->
