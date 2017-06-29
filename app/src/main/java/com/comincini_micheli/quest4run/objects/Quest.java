@@ -8,6 +8,8 @@ import java.util.concurrent.TimeUnit;
 
 public class Quest
 {
+    public static long DEFAUL_EMPTY_DATE_VALUE = -1;
+
     private int id;
     private String title;
     private String description;
@@ -48,12 +50,16 @@ public class Quest
         this.duration = duration;
         this.completed = false;
         this.active = false;
+        this.dateStart = DEFAUL_EMPTY_DATE_VALUE;
+        this.dateFinish = DEFAUL_EMPTY_DATE_VALUE;
     }
 
     public Quest()
     {
         this.completed = false;
         this.active = false;
+        this.dateStart = DEFAUL_EMPTY_DATE_VALUE;
+        this.dateFinish = DEFAUL_EMPTY_DATE_VALUE;
     }
 
     public int getId()

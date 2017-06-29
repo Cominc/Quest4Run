@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
 import com.comincini_micheli.quest4run.R;
@@ -54,10 +55,15 @@ public class QuestDetailActivity extends AppCompatActivity {
         defense.setText(quest.getMinDefense()+"");
         magic.setText(quest.getMinMagic()+"");
         duration.setText(quest.getDurationString());
-        Date date = new Date(quest.getDateFinish());
-        SimpleDateFormat sdf = new SimpleDateFormat(getResources().getString(R.string.date_format));
-        dateFinish.setText(sdf.format(date));
-
+        if(quest.getDateFinish()!=Quest.DEFAUL_EMPTY_DATE_VALUE) {
+            Date date = new Date(quest.getDateFinish());
+            SimpleDateFormat sdf = new SimpleDateFormat(getResources().getString(R.string.date_format));
+            dateFinish.setText(sdf.format(date));
+        }
+        else{
+            findViewById(R.id.quest_detail_date_finish_value).setVisibility(View.INVISIBLE);
+            dateFinish.setText("");
+        }
         countTime = quest.getDateStart() + quest.getDuration() - System.currentTimeMillis();
 
         if(countTime <= 0)
