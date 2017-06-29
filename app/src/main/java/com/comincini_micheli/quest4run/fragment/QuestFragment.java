@@ -1,8 +1,10 @@
 package com.comincini_micheli.quest4run.fragment;
 
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -24,6 +26,7 @@ import com.comincini_micheli.quest4run.activity.QuestDetailActivity;
 import com.comincini_micheli.quest4run.activity.QuestHistoryActivity;
 import com.comincini_micheli.quest4run.activity.TaskHistoryActivity;
 import com.comincini_micheli.quest4run.objects.Quest;
+import com.comincini_micheli.quest4run.objects.Character;
 import com.comincini_micheli.quest4run.other.Constants;
 import com.comincini_micheli.quest4run.other.DatabaseHandler;
 import com.comincini_micheli.quest4run.adapter.QuestAdapter;
@@ -121,15 +124,6 @@ public class QuestFragment extends Fragment
         super.onViewCreated(view, savedInstanceState);
         db = new DatabaseHandler(getContext());
 
-        /*
-        Quest quest1 = new Quest("quest 1", "", 1, 2, 3, 4, 5);
-        quest1.setCompleted(true);
-        db.addQuest(quest1);
-        Quest quest2 = new Quest("quest 2", "", 1, 2, 3, 4, 5);
-        db.addQuest(quest2);
-        Quest quest3 = new Quest("quest 3", "", 1, 2, 3, 4, 5);
-        db.addQuest(quest3);
-        */
         Quest activeQuest = db.getActiveQuest();
         if(activeQuest!=null && activeQuest.checkCompleted())
         {
@@ -137,6 +131,11 @@ public class QuestFragment extends Fragment
             activeQuest.setActive(false);
             activeQuest.setDateFinish(activeQuest.getDateStart() + activeQuest.getDuration());
             db.updateQuest(activeQuest);
+
+            SharedPreferences settings = getContext().getSharedPreferences(Constants.NAME_PREFS, Context.MODE_PRIVATE);
+            Character myCharacter = db.getCharacter(settings.getInt(Constants.CHAR_ID_PREFERENCE,-1));
+            myCharacter.setExp(myCharacter.getExp()+activeQuest.getExpReward());
+            db.updateCharacter(myCharacter);
         }
 
         questList = db.getQuests(false);
@@ -154,6 +153,7 @@ public class QuestFragment extends Fragment
         if(requestCode == Constants.DETAILS_QUEST)
         {
             Quest activeQuest = db.getActiveQuest();
+
             if(activeQuest!=null && activeQuest.checkCompleted())
             {
                 activeQuest.setCompleted(true);
@@ -161,6 +161,11 @@ public class QuestFragment extends Fragment
                 activeQuest.setDateFinish(activeQuest.getDateStart() + activeQuest.getDuration());
                 db.updateQuest(activeQuest);
                 questList = db.getQuests(false);
+
+                SharedPreferences settings = getContext().getSharedPreferences(Constants.NAME_PREFS, Context.MODE_PRIVATE);
+                Character myCharacter = db.getCharacter(settings.getInt(Constants.CHAR_ID_PREFERENCE,-1));
+                myCharacter.setExp(myCharacter.getExp()+activeQuest.getExpReward());
+                db.updateCharacter(myCharacter);
             }
             list=(ListView)getView().findViewById(R.id.quest_list_view);
             registerForContextMenu(list);

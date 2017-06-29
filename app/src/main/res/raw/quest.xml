@@ -24,7 +24,7 @@
         <attack>1</attack>
         <defense>1</defense>
         <magic>1</magic>
-        <expReward>1</expReward>
+        <expReward>50</expReward>
         <duration>30000</duration>
     </quest>
     <quest>
@@ -33,7 +33,7 @@
         <attack>1</attack>
         <defense>1</defense>
         <magic>1</magic>
-        <expReward>1</expReward>
+        <expReward>100</expReward>
         <duration>30000</duration>
     </quest>
     <quest>

@@ -46,7 +46,7 @@ import java.util.List;
 
 
 public class RunFragment extends Fragment {
-
+    //TODO rimuovere molti toast
     //TODO riattivare GPS quando i test sono finiti
     final static String provider = LocationManager.GPS_PROVIDER;
     //final static String provider = LocationManager.NETWORK_PROVIDER;
@@ -305,6 +305,8 @@ public class RunFragment extends Fragment {
                         NotificationManager nm = (NotificationManager) getContext().getSystemService(Context.NOTIFICATION_SERVICE);
                         Intent notifyIntent = new Intent(getActivity(), TaskHistoryActivity.class);
                         PendingIntent intent = PendingIntent.getActivity(getActivity(), 0, notifyIntent, 0);
+                        //TODO ticker-> testo in anteprima
+                        //TODO creare stringhe in strings
                         final Notification notifyDetails = new Notification.Builder(getContext())
                                 .setTicker("Ticker")
                                 //.setSmallIcon(R.mipmap.ic_test)
