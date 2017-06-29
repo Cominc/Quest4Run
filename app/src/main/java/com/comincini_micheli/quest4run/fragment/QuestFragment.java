@@ -154,7 +154,7 @@ public class QuestFragment extends Fragment
         if(requestCode == Constants.DETAILS_QUEST)
         {
             Quest activeQuest = db.getActiveQuest();
-            if(activeQuest.checkCompleted())
+            if(activeQuest!=null && activeQuest.checkCompleted())
             {
                 activeQuest.setCompleted(true);
                 activeQuest.setActive(false);

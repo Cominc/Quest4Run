@@ -59,47 +59,46 @@ public class QuestDetailActivity extends AppCompatActivity {
             Date date = new Date(quest.getDateFinish());
             SimpleDateFormat sdf = new SimpleDateFormat(getResources().getString(R.string.date_format));
             dateFinish.setText(sdf.format(date));
+            countdown.setText("");
         }
         else{
             findViewById(R.id.quest_detail_date_finish_value).setVisibility(View.INVISIBLE);
             dateFinish.setText("");
         }
-        countTime = quest.getDateStart() + quest.getDuration() - System.currentTimeMillis();
 
-        if(countTime <= 0)
-            countdown.setText("");
+        if(!quest.isActive())
+            countdown.setText(quest.getDurationString());
+        else {
+            countTime = quest.getDateStart() + quest.getDuration() - System.currentTimeMillis();
+            new CountDownTimer(countTime, 1000) {
 
-        new CountDownTimer(countTime, 1000)
-        {
+                @Override
+                public void onTick(long millisUntilFinished) {
+                    countTime -= 1000;
+                    long durationMS = countTime;
+                    long temp;
+                    String durationString = "";
+                    temp = TimeUnit.MILLISECONDS.toHours(durationMS);
+                    durationString += temp + ":";
+                    durationMS -= TimeUnit.HOURS.toMillis(temp);
+                    temp = TimeUnit.MILLISECONDS.toMinutes(durationMS);
+                    if (temp < 10)
+                        durationString += "0";
+                    durationString += temp + ":";
+                    durationMS -= TimeUnit.MINUTES.toMillis(temp);
+                    temp = TimeUnit.MILLISECONDS.toSeconds(durationMS);
+                    if (temp < 10)
+                        durationString += "0";
+                    durationString += temp;
+                    countdown.setText(durationString);
+                }
 
-            @Override
-            public void onTick(long millisUntilFinished)
-            {
-                countTime -= 1000;
-                long durationMS = countTime;
-                long temp;
-                String durationString = "";
-                temp = TimeUnit.MILLISECONDS.toHours(durationMS);
-                durationString += temp+":";
-                durationMS -= TimeUnit.HOURS.toMillis(temp);
-                temp = TimeUnit.MILLISECONDS.toMinutes(durationMS);
-                if(temp < 10)
-                    durationString += "0";
-                durationString += temp+":";
-                durationMS -= TimeUnit.MINUTES.toMillis(temp);
-                temp = TimeUnit.MILLISECONDS.toSeconds(durationMS);
-                if(temp < 10)
-                    durationString += "0";
-                durationString += temp;
-                countdown.setText(durationString);
-            }
-
-            @Override
-            public void onFinish()
-            {
-                countdown.setText("0:00:00");
-            }
-        }.start();
+                @Override
+                public void onFinish() {
+                    countdown.setText("00:00:00");
+                }
+            }.start();
+        }
     }
 
     @Override
