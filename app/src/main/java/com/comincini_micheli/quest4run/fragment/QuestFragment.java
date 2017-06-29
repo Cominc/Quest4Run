@@ -160,9 +160,13 @@ public class QuestFragment extends Fragment
                 activeQuest.setActive(false);
                 activeQuest.setDateFinish(activeQuest.getDateStart() + activeQuest.getDuration());
                 db.updateQuest(activeQuest);
-                questList.remove(activeQuest);
+                questList = db.getQuests(false);
             }
-            adapter.notifyDataSetChanged();
+            list=(ListView)getView().findViewById(R.id.quest_list_view);
+            registerForContextMenu(list);
+            adapter = new QuestAdapter(getActivity(), questList, db);
+            list.setAdapter(adapter);
+            list.setEmptyView(getActivity().findViewById(R.id.empty_list));
         }
     }
 }
