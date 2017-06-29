@@ -171,6 +171,7 @@
     <!-- Quest Detail-->
     <string name="title_quest_detail_activity">Dettagli missione</string>
     <string name="quest_detail_duration_label">Durata</string>
+    <string name="quest_detail_date_start_label">Data inizio</string>
     <string name="quest_detail_date_finish_label">Data fine</string>
 
 
@@ -180,4 +181,5 @@
 
 
     <string name="date_format">dd-MM-yyyy</string>
+    <string name="datetime_format">hh:mm dd-MM-yyyy</string>
 </resources>

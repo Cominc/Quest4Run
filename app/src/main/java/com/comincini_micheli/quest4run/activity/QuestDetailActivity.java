@@ -45,7 +45,8 @@ public class QuestDetailActivity extends AppCompatActivity {
         TextView attack = (TextView) findViewById(R.id.quest_detail_attack_value);
         TextView defense = (TextView) findViewById(R.id.quest_detail_defense_value);
         TextView magic = (TextView) findViewById(R.id.quest_detail_magic_value);
-        final TextView duration = (TextView) findViewById(R.id.quest_detail_duration_value);
+        TextView duration = (TextView) findViewById(R.id.quest_detail_duration_value);
+        TextView dateStart = (TextView) findViewById(R.id.quest_detail_date_start_value);
         TextView dateFinish = (TextView) findViewById(R.id.quest_detail_date_finish_value);
         final TextView countdown = (TextView) findViewById(R.id.quest_detail_countdown);
 
@@ -55,19 +56,32 @@ public class QuestDetailActivity extends AppCompatActivity {
         defense.setText(quest.getMinDefense()+"");
         magic.setText(quest.getMinMagic()+"");
         duration.setText(quest.getDurationString());
-        if(quest.getDateFinish()!=Quest.DEFAUL_EMPTY_DATE_VALUE) {
-            Date date = new Date(quest.getDateFinish());
-            SimpleDateFormat sdf = new SimpleDateFormat(getResources().getString(R.string.date_format));
-            dateFinish.setText(sdf.format(date));
-            countdown.setText("");
+        countdown.setText("");
+        if(quest.getDateStart()!=Quest.DEFAUL_EMPTY_DATE_VALUE) {
+            Date date = new Date(quest.getDateStart());
+            SimpleDateFormat sdf = new SimpleDateFormat(getResources().getString(R.string.datetime_format));
+            dateStart.setText(sdf.format(date));
         }
         else{
-            findViewById(R.id.quest_detail_date_finish_value).setVisibility(View.INVISIBLE);
+            findViewById(R.id.quest_detail_date_start_label).setVisibility(View.INVISIBLE);
+            dateStart.setText("");
+        }
+        if(quest.getDateFinish()!=Quest.DEFAUL_EMPTY_DATE_VALUE) {
+            Date date = new Date(quest.getDateFinish());
+            SimpleDateFormat sdf = new SimpleDateFormat(getResources().getString(R.string.datetime_format));
+            dateFinish.setText(sdf.format(date));
+        }
+        else{
+            findViewById(R.id.quest_detail_date_finish_label).setVisibility(View.INVISIBLE);
             dateFinish.setText("");
         }
 
-        if(!quest.isActive())
-            countdown.setText(quest.getDurationString());
+        if(!quest.isActive()){
+            if (quest.isCompleted())
+                countdown.setText("");
+            else
+                countdown.setText(quest.getDurationString());
+        }
         else {
             countTime = quest.getDateStart() + quest.getDuration() - System.currentTimeMillis();
             new CountDownTimer(countTime, 1000) {

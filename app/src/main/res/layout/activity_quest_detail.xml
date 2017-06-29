@@ -92,35 +92,51 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="TextView"
-        android:layout_above="@+id/quest_detail_date_finish_label"
-        android:layout_toStartOf="@+id/quest_detail_defense_label" />
+        android:layout_marginLeft="50dp"
+        android:layout_alignBaseline="@+id/quest_detail_duration_label"
+        android:layout_alignBottom="@+id/quest_detail_duration_label"
+        android:layout_toEndOf="@+id/quest_detail_attack_label" />
 
+    <TextView
+        android:id="@+id/quest_detail_date_start_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/quest_detail_duration_label"
+        android:layout_marginTop="15dp"
+        android:text="@string/quest_detail_date_start_label" />
+
+    <TextView
+        android:id="@+id/quest_detail_date_start_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/quest_detail_duration_value"
+        android:layout_alignTop="@+id/quest_detail_date_start_label"
+        android:text="TextView" />
 
     <TextView
         android:id="@+id/quest_detail_date_finish_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/quest_detail_date_finish_label"
-        android:layout_below="@+id/quest_detail_duration_label"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="21dp" />
-
+        android:layout_marginTop="15dp"
+        android:layout_below="@+id/quest_detail_date_start_label"
+        android:layout_alignParentStart="true" />
 
     <TextView
         android:id="@+id/quest_detail_date_finish_value"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="TextView"
-        android:layout_alignBaseline="@+id/quest_detail_date_finish_label"
-        android:layout_alignBottom="@+id/quest_detail_date_finish_label"
+        android:layout_alignTop="@+id/quest_detail_date_finish_label"
         android:layout_alignStart="@+id/quest_detail_duration_value" />
 
     <TextView
         android:id="@+id/quest_detail_countdown"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
-        android:textSize="31dp"
+        android:layout_marginTop="50dp"
+        android:textSize="30dp"
         android:text="TextView"
         android:layout_below="@+id/quest_detail_date_finish_value"
         android:layout_centerHorizontal="true" />

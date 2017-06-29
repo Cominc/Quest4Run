@@ -120,6 +120,7 @@ public class QuestAdapter extends BaseAdapter
                                             public void onClick(DialogInterface dialog, int id)
                                             {
                                                 previusActiveQuest.setActive(false);
+                                                previusActiveQuest.setDateStart(Quest.DEFAUL_EMPTY_DATE_VALUE);
                                                 db.updateQuest(previusActiveQuest);
                                                 data.set(indexActiveQuest,previusActiveQuest);
 
@@ -161,6 +162,7 @@ public class QuestAdapter extends BaseAdapter
                                         public void onClick(DialogInterface dialog, int id)
                                         {
                                             previusActiveQuest.setActive(false);
+                                            previusActiveQuest.setDateStart(Quest.DEFAUL_EMPTY_DATE_VALUE);
                                             db.updateQuest(previusActiveQuest);
                                             data.set(indexActiveQuest,previusActiveQuest);
                                             indexActiveQuest = -1;
@@ -187,6 +189,7 @@ public class QuestAdapter extends BaseAdapter
             if(questActual.isActive())
             {
                 questActual.setActive(false);
+                questActual.setDateStart(Quest.DEFAUL_EMPTY_DATE_VALUE);
                 db.updateQuest(questActual);
             }
 
