@@ -34,6 +34,60 @@
         <defense>1</defense>
         <magic>1</magic>
         <expReward>1</expReward>
-        <duration>60000</duration>
+        <duration>30000</duration>
+    </quest>
+    <quest>
+        <title>quest 5</title>
+        <description>description</description>
+        <attack>1</attack>
+        <defense>1</defense>
+        <magic>1</magic>
+        <expReward>1</expReward>
+        <duration>30000</duration>
+    </quest>
+    <quest>
+        <title>quest 6</title>
+        <description>description</description>
+        <attack>1</attack>
+        <defense>1</defense>
+        <magic>1</magic>
+        <expReward>1</expReward>
+        <duration>30000</duration>
+    </quest>
+    <quest>
+        <title>quest 7</title>
+        <description>description</description>
+        <attack>1</attack>
+        <defense>1</defense>
+        <magic>1</magic>
+        <expReward>1</expReward>
+        <duration>30000</duration>
+    </quest>
+    <quest>
+        <title>quest 8</title>
+        <description>description</description>
+        <attack>1</attack>
+        <defense>1</defense>
+        <magic>1</magic>
+        <expReward>1</expReward>
+        <duration>30000</duration>
+    </quest>
+    <quest>
+        <title>quest 9</title>
+        <description>description</description>
+        <attack>1</attack>
+        <defense>1</defense>
+        <magic>1</magic>
+        <expReward>1</expReward>
+        <duration>30000</duration>
+    </quest>
+    <quest>
+        <title>quest 10</title>
+        <description>description</description>
+        <attack>1</attack>
+        <defense>1</defense>
+        <magic>1</magic>
+        <expReward>1</expReward>
+        <duration>30000</duration>
     </quest>
 </quests>

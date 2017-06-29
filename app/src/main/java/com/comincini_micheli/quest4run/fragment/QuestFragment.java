@@ -153,19 +153,16 @@ public class QuestFragment extends Fragment
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == Constants.DETAILS_QUEST)
         {
-            if(resultCode == RESULT_OK)
+            Quest activeQuest = db.getActiveQuest();
+            if(activeQuest.checkCompleted())
             {
-                Quest activeQuest = db.getActiveQuest();
-                if(activeQuest.checkCompleted())
-                {
-                    activeQuest.setCompleted(true);
-                    activeQuest.setActive(false);
-                    activeQuest.setDateFinish(activeQuest.getDateStart() + activeQuest.getDuration());
-                    db.updateQuest(activeQuest);
-                    questList.remove(activeQuest);
-                }
-                adapter.notifyDataSetChanged();
+                activeQuest.setCompleted(true);
+                activeQuest.setActive(false);
+                activeQuest.setDateFinish(activeQuest.getDateStart() + activeQuest.getDuration());
+                db.updateQuest(activeQuest);
+                questList.remove(activeQuest);
             }
+            adapter.notifyDataSetChanged();
         }
     }
 }

@@ -97,7 +97,7 @@ public class QuestDetailActivity extends AppCompatActivity {
             @Override
             public void onFinish()
             {
-
+                countdown.setText("0:00:00");
             }
         }.start();
     }
@@ -114,5 +114,14 @@ public class QuestDetailActivity extends AppCompatActivity {
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+
+    @Override
+    protected void onPause()
+    {
+        Intent resultIntent = new Intent();
+        setResult(RESULT_OK, resultIntent);
+        super.onPause();
     }
 }

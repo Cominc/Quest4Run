@@ -1,5 +1,8 @@
 package com.comincini_micheli.quest4run.objects;
 
+import android.provider.Settings;
+import android.util.Log;
+
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -209,12 +212,11 @@ public class Quest
             return true;
         else
         {
-            if(this.dateStart + this.duration <= System.currentTimeMillis())
-            {
-                return true;
-            }
-            else
-                return false;
+            long timestamp = System.currentTimeMillis();
+            long somma = this.dateStart + this.duration;
+            long diff = somma - timestamp;
+            boolean result = diff <=0;
+            return result;
         }
     }
 }
