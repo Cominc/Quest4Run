@@ -58,5 +58,8 @@ public class AlarmNotificationReceiver extends BroadcastReceiver {
         Character myCharacter = db.getCharacter(settings.getInt(Constants.CHAR_ID_PREFERENCE,-1));
         myCharacter.setExp(myCharacter.getExp()+activeQuest.getExpReward());
         db.updateCharacter(myCharacter);
+
+        //TODO gestire refresh QuestFragment list
+        //TODO gestire back quando non esiste activity main
     }
 }
