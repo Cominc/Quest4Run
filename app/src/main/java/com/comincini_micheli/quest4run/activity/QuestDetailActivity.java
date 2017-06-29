@@ -129,7 +129,6 @@ public class QuestDetailActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-
     @Override
     protected void onPause()
     {

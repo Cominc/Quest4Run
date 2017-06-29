@@ -37,10 +37,14 @@ public class AlarmNotificationReceiver extends BroadcastReceiver {
                 .setWhen(System.currentTimeMillis())
                 .setSmallIcon(R.mipmap.ic_launcher)
                 .setContentTitle(context.getResources().getString(R.string.quest_complete_notification_title))
-                .setContentText(String.format(context.getResources().getString(R.string.quest_complete_notification_text),activeQuest.getTitle(),activeQuest.getExpReward()))
+                .setStyle(new NotificationCompat.BigTextStyle().bigText(
+                        String.format(context.getResources().getString(R.string.quest_complete_notification_text),
+                                activeQuest.getTitle(),
+                                activeQuest.getExpReward())))
                 .setDefaults(Notification.DEFAULT_LIGHTS | Notification.DEFAULT_SOUND)
                 .setContentInfo("Info")
                 .setContentIntent(myIntent);
+
 
         NotificationManager notificationManager = (NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
 
