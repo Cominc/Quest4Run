@@ -1,9 +1,13 @@
 package com.comincini_micheli.quest4run.adapter;
 
 import android.app.Activity;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.SystemClock;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -19,6 +23,7 @@ import android.widget.Toast;
 import com.comincini_micheli.quest4run.R;
 import com.comincini_micheli.quest4run.objects.Character;
 import com.comincini_micheli.quest4run.objects.Quest;
+import com.comincini_micheli.quest4run.other.AlarmNotificationReceiver;
 import com.comincini_micheli.quest4run.other.Constants;
 import com.comincini_micheli.quest4run.other.DatabaseHandler;
 
@@ -131,6 +136,7 @@ public class QuestAdapter extends BaseAdapter
                                                 data.set(position, questActual);
                                                 indexActiveQuest = position;
                                                 notifyDataSetChanged();
+                                                startAlarm(questActual.getDuration());
                                             }
                                         })
                                         .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
@@ -151,6 +157,7 @@ public class QuestAdapter extends BaseAdapter
                                 data.set(position, questActual);
                                 indexActiveQuest = position;
                                 notifyDataSetChanged();
+                                startAlarm(questActual.getDuration());
                             }
                         }
                         else
@@ -205,5 +212,16 @@ public class QuestAdapter extends BaseAdapter
             });
         }
         return vi;
+    }
+
+    private void startAlarm(long duration) {
+
+        AlarmManager manager = (AlarmManager)activity.getSystemService(Context.ALARM_SERVICE);
+        Intent myIntent;
+        PendingIntent pendingIntent;
+
+        myIntent = new Intent(activity,AlarmNotificationReceiver.class);
+        pendingIntent = PendingIntent.getBroadcast(activity,0,myIntent,0);
+        manager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime()+duration,pendingIntent);
     }
 }
