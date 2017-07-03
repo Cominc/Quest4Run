@@ -93,6 +93,8 @@ public class QuestDetailActivity extends AppCompatActivity {
                     long temp;
                     String durationString = "";
                     temp = TimeUnit.MILLISECONDS.toHours(durationMS);
+                    if (temp < 10)
+                        durationString += "0";
                     durationString += temp + ":";
                     durationMS -= TimeUnit.HOURS.toMillis(temp);
                     temp = TimeUnit.MILLISECONDS.toMinutes(durationMS);

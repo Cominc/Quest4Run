@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.CountDownTimer;
 import android.os.SystemClock;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
@@ -28,6 +29,7 @@ import com.comincini_micheli.quest4run.other.Constants;
 import com.comincini_micheli.quest4run.other.DatabaseHandler;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by Gianmaria on 08/06/2017.
@@ -46,6 +48,8 @@ public class QuestAdapter extends BaseAdapter
     private int myAttack;
     private int myDefense;
     private int myMagic;
+
+    private long countTime;
 
     DatabaseHandler db;
     Quest previusActiveQuest;
@@ -90,6 +94,8 @@ public class QuestAdapter extends BaseAdapter
         TextView expReward = (TextView) vi.findViewById(R.id.quest_exp_reward);
         RadioButton active = (RadioButton)vi.findViewById(R.id.quest_active_radiobutton);
 
+        final TextView countdown = (TextView)vi.findViewById(R.id.quest_timer);
+
         questActual = data.get(position);
 
         // Setting all values in listview
@@ -98,6 +104,43 @@ public class QuestAdapter extends BaseAdapter
         defense.setText(String.valueOf(questActual.getMinDefense()));
         magic.setText(String.valueOf(questActual.getMinMagic()));
         expReward.setText(questActual.getExpReward() + activity.getResources().getString(R.string.exp_label));
+
+        if(!questActual.isActive()){
+                countdown.setText("");
+        }
+        else {
+            countTime = questActual.getDateStart() + questActual.getDuration() - System.currentTimeMillis();
+            new CountDownTimer(countTime, 1000) {
+
+                @Override
+                public void onTick(long millisUntilFinished) {
+                    countTime -= 1000;
+                    long durationMS = countTime;
+                    long temp;
+                    String durationString = "";
+                    temp = TimeUnit.MILLISECONDS.toHours(durationMS);
+                    if (temp < 10)
+                        durationString += "0";
+                    durationString += temp + ":";
+                    durationMS -= TimeUnit.HOURS.toMillis(temp);
+                    temp = TimeUnit.MILLISECONDS.toMinutes(durationMS);
+                    if (temp < 10)
+                        durationString += "0";
+                    durationString += temp + ":";
+                    durationMS -= TimeUnit.MINUTES.toMillis(temp);
+                    temp = TimeUnit.MILLISECONDS.toSeconds(durationMS);
+                    if (temp < 10)
+                        durationString += "0";
+                    durationString += temp;
+                    countdown.setText(durationString);
+                }
+
+                @Override
+                public void onFinish() {
+                    countdown.setText("00:00:00");
+                }
+            }.start();
+        }
 
         if((questActual.getMinAttack()<= myAttack) && (questActual.getMinDefense() <= myDefense) && (questActual.getMinMagic() <= myMagic))
         {
@@ -215,7 +258,6 @@ public class QuestAdapter extends BaseAdapter
     }
 
     private void startAlarm(long duration) {
-
         AlarmManager manager = (AlarmManager)activity.getSystemService(Context.ALARM_SERVICE);
         Intent myIntent;
         PendingIntent pendingIntent;
