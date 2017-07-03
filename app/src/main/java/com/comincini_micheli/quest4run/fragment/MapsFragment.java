@@ -17,7 +17,6 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.comincini_micheli.quest4run.R;
 import com.comincini_micheli.quest4run.objects.Gps;
@@ -100,16 +99,16 @@ public class MapsFragment extends Fragment {
                             getActivity()).create();
 
                     // Setting Dialog Title
-                    alertDialog.setTitle(getResources().getString(R.string.no_path_title));
+                    alertDialog.setTitle(getResources().getString(R.string.alert_no_path_title));
 
                     // Setting Dialog Message
-                    alertDialog.setMessage(getResources().getString(R.string.no_path_text));
+                    alertDialog.setMessage(getResources().getString(R.string.alert_no_path_text));
 
                     // Setting Icon to Dialog
                     //alertDialog.setIcon(R.drawable.tick);
 
                     // Setting OK Button
-                    alertDialog.setButton(DialogInterface.BUTTON_POSITIVE,"OK", new DialogInterface.OnClickListener() {
+                    alertDialog.setButton(DialogInterface.BUTTON_POSITIVE,getResources().getString(R.string.alert_btn_positive_label), new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
                             FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
                             fragmentTransaction.replace(R.id.fragment_container, new RunFragment());

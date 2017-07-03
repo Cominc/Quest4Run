@@ -1,10 +1,12 @@
 package com.comincini_micheli.quest4run.fragment;
 
 import android.Manifest;
+import android.app.AlertDialog;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -13,6 +15,7 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
@@ -74,6 +77,41 @@ public class RunFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        final AlertDialog alertDialog = new AlertDialog.Builder(getActivity()).create();
+
+        // Setting Dialog Title
+        alertDialog.setTitle(getResources().getString(R.string.alert_no_gps_title));
+
+        // Setting Dialog Message
+        alertDialog.setMessage(getResources().getString(R.string.alert_no_gps_text));
+
+        // Setting Icon to Dialog
+        //alertDialog.setIcon(R.drawable.tick);
+        //TODO scegliere se usare negative o neutral
+        // Setting OK Button
+        alertDialog.setButton(DialogInterface.BUTTON_POSITIVE,getResources().getString(R.string.alert_btn_positive_label), new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                startActivity(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS));
+            }
+        });
+
+        /*
+        alertDialog.setButton(DialogInterface.BUTTON_NEGATIVE,getResources().getString(R.string.alert_btn_negative_label), new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        */
+
+        alertDialog.setButton(DialogInterface.BUTTON_NEUTRAL,getResources().getString(R.string.alert_btn_neutral_label), new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+
+        // Showing Alert Message
+
         //MAPPA***************************************************************************
         mMapView = (MapView) getActivity().findViewById(R.id.map2);
         mMapView.onCreate(savedInstanceState);
@@ -155,6 +193,7 @@ public class RunFragment extends Fragment {
 
             public void onProviderDisabled(String provider) {
                 Toast.makeText(getContext(), "GPS is not working", Toast.LENGTH_SHORT).show();
+                alertDialog.show();
             }
         };
 
@@ -162,12 +201,13 @@ public class RunFragment extends Fragment {
         btnGPS_start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                db.deleteAllGps();
-                Toast.makeText( getContext(),"Cancellati tutti i GPS points ("+db.getGpsCount()+")",Toast.LENGTH_SHORT).show();
                 if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                     Toast.makeText(getContext(), "Permessi GPS mancanti", Toast.LENGTH_SHORT).show();
                 } else {
                     if(locationManager.isProviderEnabled(provider)) {
+                        db.deleteAllGps();
+                        Toast.makeText( getContext(),"Cancellati tutti i GPS points ("+db.getGpsCount()+")",Toast.LENGTH_SHORT).show();
+
                         locationManager.requestLocationUpdates(provider, Constants.MIN_TIME_BETEWEEN_UPDATE, 0, locationListener);
 
                         previusLocation = null;
@@ -179,6 +219,7 @@ public class RunFragment extends Fragment {
                     }
                     else {
                         Toast.makeText(getContext(), "GPS is not working", Toast.LENGTH_SHORT).show();
+                        alertDialog.show();
                     }
                 }
             }
