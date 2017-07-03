@@ -2,6 +2,7 @@ package com.comincini_micheli.quest4run.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.RelativeLayout;
@@ -40,4 +41,12 @@ public class AboutUsActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+
+    //TODO serve fare Info in questa activity?
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        getMenuInflater().inflate(R.menu.info_menu, menu);
+        return true;
+    }
 }

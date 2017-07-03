@@ -13,7 +13,6 @@ public class Equipment {
     private boolean bought, equipped;
     private int minLevel;
 
-    //TODO minLevel
 
     public Equipment() {
         this.bought = false;

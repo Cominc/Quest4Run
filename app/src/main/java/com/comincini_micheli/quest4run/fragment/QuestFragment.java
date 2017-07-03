@@ -40,8 +40,6 @@ import static android.app.Activity.RESULT_OK;
  */
 public class QuestFragment extends Fragment
 {
-
-    //TODO GESTIRE INIZIO E FINE QUEST
     private ListView list;
     private QuestAdapter adapter;
     private List<Quest> questList;
