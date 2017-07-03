@@ -75,6 +75,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String KEY_ID_EQUIPMENT_TYPE = "idEquipmentType";
     private static final String KEY_BOUGHT = "bought";
     private static final String KEY_EQUIPPED = "equipped";
+    private static final String KEY_MIN_LEVEL = "minLevel";
 
     private static final String KEY_TITLE = "title";
     private static final String KEY_DURATION = "duration";
@@ -96,7 +97,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + KEY_NAME + " TEXT,"
             + KEY_ID_EQUIPMENT_TYPE + " INTEGER," + KEY_ATK + " INTEGER," + KEY_DEF + " INTEGER,"
             + KEY_MGC + " INTEGER," + KEY_PRICE + " INTEGER," + KEY_ICON + " TEXT,"
-            + KEY_BOUGHT + " INTEGER," + KEY_EQUIPPED + " INTEGER"
+            + KEY_BOUGHT + " INTEGER," + KEY_EQUIPPED + " INTEGER, " + KEY_MIN_LEVEL + " INTEGER"
             + ")";
     private static final String CREATE_TASK_TABLE = "CREATE TABLE " + TABLE_TASK + "("
             + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + KEY_NAME + " TEXT,"
@@ -162,6 +163,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             equipment.setMgc(Integer.parseInt(parser.getValue(e, KEY_MGC)));
             equipment.setPrice(Integer.parseInt(parser.getValue(e, KEY_PRICE)));
             equipment.setIdType(Integer.parseInt(parser.getValue(e, KEY_ID_EQUIPMENT_TYPE)));
+            equipment.setMinLevel(Integer.parseInt(parser.getValue(e, KEY_MIN_LEVEL)));
             addEquipment(equipment);
         }
     }
@@ -567,6 +569,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         values.put(KEY_ICON, equipment.getIcon());
         values.put(KEY_BOUGHT, equipment.isBought());
         values.put(KEY_EQUIPPED, equipment.isEquipped());
+        values.put(KEY_MIN_LEVEL, equipment.getMinLevel());
 
         // Inserting Row
         db.insert(TABLE_EQUIPMENT, null, values);
@@ -578,7 +581,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
 
         Cursor cursor = db.query(TABLE_EQUIPMENT, new String[] { KEY_ID,
-                        KEY_NAME, KEY_ID_EQUIPMENT_TYPE, KEY_ATK, KEY_DEF, KEY_MGC, KEY_PRICE, KEY_ICON, KEY_BOUGHT, KEY_EQUIPPED }, KEY_ID + "=?",
+                        KEY_NAME, KEY_ID_EQUIPMENT_TYPE, KEY_ATK, KEY_DEF, KEY_MGC, KEY_PRICE, KEY_ICON, KEY_BOUGHT, KEY_EQUIPPED , KEY_MIN_LEVEL}, KEY_ID + "=?",
                 new String[] { String.valueOf(id) }, null, null, null, null);
         if (cursor != null)
             cursor.moveToFirst();
@@ -587,7 +590,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 cursor.getString(1), Integer.parseInt(cursor.getString(2)),
                 Integer.parseInt(cursor.getString(3)),Integer.parseInt(cursor.getString(4)),
                 Integer.parseInt(cursor.getString(5)),Integer.parseInt(cursor.getString(6)),cursor.getString(7),
-                castStringToBoolean(cursor.getString(8)),castStringToBoolean(cursor.getString(9)));
+                castStringToBoolean(cursor.getString(8)),castStringToBoolean(cursor.getString(9)),Integer.parseInt(cursor.getString(10)));
         cursor.close();
         // return Equipment
         return equipment;
@@ -616,6 +619,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 equipment.setIcon(cursor.getString(7));
                 equipment.setBought(castStringToBoolean(cursor.getString(8)));
                 equipment.setEquipped(castStringToBoolean(cursor.getString(9)));
+                equipment.setMinLevel(Integer.parseInt(cursor.getString(10)));
                 // Adding Equipment to list
                 equipmentList.add(equipment);
             } while (cursor.moveToNext());
@@ -655,6 +659,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 equipment.setIcon(cursor.getString(7));
                 equipment.setBought(castStringToBoolean(cursor.getString(8)));
                 equipment.setEquipped(castStringToBoolean(cursor.getString(9)));
+                equipment.setMinLevel(Integer.parseInt(cursor.getString(10)));
                 // Adding Equipment to list
                 equipmentList.add(equipment);
             } while (cursor.moveToNext());
@@ -678,6 +683,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         values.put(KEY_ICON, equipment.getIcon());
         values.put(KEY_BOUGHT, equipment.isBought());
         values.put(KEY_EQUIPPED, equipment.isEquipped());
+        values.put(KEY_MIN_LEVEL, equipment.getMinLevel());
         // updating row
         return db.update(TABLE_EQUIPMENT, values, KEY_ID + " = ?",
                 new String[] { String.valueOf(equipment.getId()) });

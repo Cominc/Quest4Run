@@ -7,6 +7,7 @@
         <magic>-2</magic>
         <price>15</price>
         <idEquipmentType>0</idEquipmentType>
+        <minLevel>1</minLevel>
     </equipment>
     <equipment>
         <name>Spada fuffa</name>
@@ -15,6 +16,7 @@
         <magic>-1</magic>
         <price>1</price>
         <idEquipmentType>0</idEquipmentType>
+        <minLevel>3</minLevel>
     </equipment>
     <equipment>
         <name>Scudo</name>
@@ -23,6 +25,7 @@
         <magic>1</magic>
         <price>10</price>
         <idEquipmentType>1</idEquipmentType>
+        <minLevel>3</minLevel>
     </equipment>
     <equipment>
         <name>Scudo fuffa</name>
@@ -31,6 +34,7 @@
         <magic>-1</magic>
         <price>1</price>
         <idEquipmentType>1</idEquipmentType>
+        <minLevel>3</minLevel>
     </equipment>
     <equipment>
         <name>Scettro</name>
@@ -39,6 +43,7 @@
         <magic>6</magic>
         <price>25</price>
         <idEquipmentType>2</idEquipmentType>
+        <minLevel>1</minLevel>
     </equipment>
     <equipment>
         <name>Scettro fuffa</name>
@@ -47,5 +52,6 @@
         <magic>-1</magic>
         <price>1</price>
         <idEquipmentType>2</idEquipmentType>
+        <minLevel>1</minLevel>
     </equipment>
 </equipments>

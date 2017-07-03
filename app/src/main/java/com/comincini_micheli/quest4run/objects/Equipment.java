@@ -11,6 +11,7 @@ public class Equipment {
     private int price;
     private String icon;
     private boolean bought, equipped;
+    private int minLevel;
 
     //TODO minLevel
 
@@ -19,7 +20,7 @@ public class Equipment {
         this.equipped = false;
     }
 
-    public Equipment(String name, int idType, int atk, int def, int mgc, int price, String icon) {
+    public Equipment(String name, int idType, int atk, int def, int mgc, int price, String icon, int minLevel) {
         this.name = name;
         this.idType = idType;
         this.atk = atk;
@@ -29,9 +30,10 @@ public class Equipment {
         this.icon = icon;
         this.bought = false;
         this.equipped = false;
+        this.minLevel = minLevel;
     }
 
-    public Equipment(int id, String name, int idType, int atk, int def, int mgc, int price, String icon, boolean bought, boolean equipped) {
+    public Equipment(int id, String name, int idType, int atk, int def, int mgc, int price, String icon, boolean bought, boolean equipped, int minLevel) {
         this.id = id;
         this.name = name;
         this.idType = idType;
@@ -42,6 +44,7 @@ public class Equipment {
         this.icon = icon;
         this.bought = bought;
         this.equipped = equipped;
+        this.minLevel = minLevel;
     }
 
     public int getId() {
@@ -122,6 +125,16 @@ public class Equipment {
 
     public void setEquipped(boolean equipped) {
         this.equipped = equipped;
+    }
+
+    public int getMinLevel()
+    {
+        return minLevel;
+    }
+
+    public void setMinLevel(int minLevel)
+    {
+        this.minLevel = minLevel;
     }
 }
 

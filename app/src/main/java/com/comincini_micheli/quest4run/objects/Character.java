@@ -112,6 +112,6 @@ public class Character {
         this.wallet = wallet;
     }
 
-    public int getLevel(){ return (int)Math.round(exp/EXP_FOR_NEXT_LEVEL);}
+    public int getLevel(){ return (int)Math.round(exp/EXP_FOR_NEXT_LEVEL) + 1;}
 
 }

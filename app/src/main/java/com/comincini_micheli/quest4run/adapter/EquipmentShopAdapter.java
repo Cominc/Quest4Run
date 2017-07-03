@@ -30,6 +30,7 @@ public class EquipmentShopAdapter extends BaseAdapter {
     private List<Equipment> data;
     private static LayoutInflater inflater=null;
     private int wallet;
+    private int level;
 
     private Equipment equipment_actual;
     DatabaseHandler db;
@@ -41,6 +42,7 @@ public class EquipmentShopAdapter extends BaseAdapter {
         inflater = (LayoutInflater)activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         SharedPreferences settings = activity.getSharedPreferences(Constants.NAME_PREFS, Context.MODE_PRIVATE);
         wallet = db.getCharacter(settings.getInt(Constants.CHAR_ID_PREFERENCE,-1)).getWallet();
+        level = db.getCharacter(settings.getInt(Constants.CHAR_ID_PREFERENCE,-1)).getLevel();
     }
 
     public int getCount() {
@@ -87,7 +89,7 @@ public class EquipmentShopAdapter extends BaseAdapter {
         else
             magic.setText(String.valueOf(equipment_actual.getMgc()));
         price.setText(String.valueOf(equipment_actual.getPrice()));
-        if(wallet < equipment_actual.getPrice())
+        if(wallet < equipment_actual.getPrice() || level < equipment_actual.getMinLevel())
         {
             buy_button.setEnabled(false);
         }
