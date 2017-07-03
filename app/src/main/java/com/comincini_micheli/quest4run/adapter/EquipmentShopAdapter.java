@@ -64,6 +64,7 @@ public class EquipmentShopAdapter extends BaseAdapter {
             vi = inflater.inflate(R.layout.shop_list_row, null);
 
         TextView name = (TextView)vi.findViewById(R.id.shop_equipment_name);
+        TextView minLevel = (TextView)vi.findViewById(R.id.shop_equipment_min_level);
         TextView attack = (TextView)vi.findViewById(R.id.shop_equipment_attack_value);
         TextView defense = (TextView)vi.findViewById(R.id.shop_equipment_defense_value);
         TextView magic = (TextView)vi.findViewById(R.id.shop_equipment_magic_value);
@@ -74,6 +75,7 @@ public class EquipmentShopAdapter extends BaseAdapter {
 
         // Setting all values in listview
         name.setText(equipment_actual.getName());
+        minLevel.setText(String.format(activity.getResources().getString(R.string.shop_min_level),equipment_actual.getMinLevel()));
         if(equipment_actual.getAtk()>=0)
             attack.setText("+"+String.valueOf(equipment_actual.getAtk()));
         else

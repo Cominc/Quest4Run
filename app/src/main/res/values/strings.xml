@@ -149,6 +149,7 @@
     <string name="buy_button_label">Compra</string>
     <string name="bought_label">Comprato</string>
     <string name="buy_confirmation">Vuoi acquistare %1$s per %2$d &#162; ?</string>
+    <string name="shop_min_level">Lv. %d</string>
 
 
     <!-- Quest -->

@@ -15,20 +15,34 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true" />
 
-    <TextView
-        android:id="@+id/shop_equipment_name"
+    <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="21dp"
-        android:text="TextView"
         android:layout_alignTop="@+id/shop_equipment_icon"
-        android:layout_toEndOf="@+id/shop_equipment_icon" />
+        android:layout_toEndOf="@+id/shop_equipment_icon"
+        android:id="@+id/shop_equipment_layout_name_level">
+        <TextView
+            android:id="@+id/shop_equipment_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="21dp"
+            android:text="TextView" />
+
+        <TextView
+            android:id="@+id/shop_equipment_min_level"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@+id/shop_equipment_name"
+            android:layout_marginLeft="5dp"
+            android:text="TextView" />
+    </RelativeLayout>
 
     <TextView
         android:id="@+id/shop_equipment_attack_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/shop_equipment_name"
+        android:layout_below="@+id/shop_equipment_layout_name_level"
         android:layout_toEndOf="@+id/shop_equipment_icon"
         android:text="@string/attack_label"
         android:width="50dp" />
@@ -59,8 +73,8 @@
         android:layout_height="wrap_content"
         app:srcCompat="@drawable/coins"
         android:layout_centerVertical="true"
-        android:layout_toEndOf="@+id/shop_equipment_name"
-        android:layout_marginStart="45dp" />
+        android:layout_toStartOf="@+id/btn_buy"
+        android:layout_marginRight="5dp"/>
 
     <TextView
         android:id="@+id/shop_equipment_price"
@@ -68,7 +82,8 @@
         android:layout_height="wrap_content"
         android:text="TextView"
         android:layout_centerVertical="true"
-        android:layout_toEndOf="@+id/icon_coin" />
+        android:layout_toStartOf="@+id/icon_coin"
+        />
 
     <Button
         android:id="@+id/btn_buy"
@@ -106,4 +121,8 @@
         android:layout_below="@+id/shop_equipment_defense_value"
         android:layout_toEndOf="@+id/shop_equipment_magic_label"
         android:layout_marginLeft="5dp"/>
+
+
+
+
 </RelativeLayout>
