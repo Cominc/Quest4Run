@@ -1,15 +1,23 @@
 package com.comincini_micheli.quest4run.fragment;
 
 
+
+import android.content.DialogInterface;
 import android.graphics.Color;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
+//TODO quale import usare?
+import android.app.AlertDialog;
+//import android.support.v7.app.AlertDialog;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.comincini_micheli.quest4run.R;
 import com.comincini_micheli.quest4run.objects.Gps;
@@ -59,6 +67,7 @@ public class MapsFragment extends Fragment {
                 LatLng point = null;
                 Double meanLat = 0.0, meanLng = 0.0;
 
+                //TODO serve counter o basta gpsList.size() ?
                 int counter = 0;
                 for(int i=0; i<gpsList.size(); i++){
                     point = new LatLng(
@@ -85,6 +94,35 @@ public class MapsFragment extends Fragment {
 
                 mMapGoogle.addPolyline(line);
                 mMapGoogle.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(meanLat,meanLng),18));
+
+                if(gpsList.isEmpty()){
+                    AlertDialog alertDialog = new AlertDialog.Builder(
+                            getActivity()).create();
+
+                    // Setting Dialog Title
+                    alertDialog.setTitle(getResources().getString(R.string.no_path_title));
+
+                    // Setting Dialog Message
+                    alertDialog.setMessage(getResources().getString(R.string.no_path_text));
+
+                    // Setting Icon to Dialog
+                    //alertDialog.setIcon(R.drawable.tick);
+
+                    // Setting OK Button
+                    alertDialog.setButton(DialogInterface.BUTTON_POSITIVE,"OK", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+                            fragmentTransaction.replace(R.id.fragment_container, new RunFragment());
+                            fragmentTransaction.commit();
+                            getActivity().setTitle(getResources().getString(R.string.nav_run));
+                            NavigationView navigationView = (NavigationView) getActivity().findViewById(R.id.nav_view);
+                            navigationView.setCheckedItem(R.id.nav_run);
+                        }
+                    });
+
+                    // Showing Alert Message
+                    alertDialog.show();
+                }
             }
         });
 
