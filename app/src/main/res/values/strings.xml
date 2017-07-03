@@ -182,8 +182,16 @@
     <!-- Task run -->
     <string name="btn_label_start_run">START</string>
     <string name="btn_label_stop_run">STOP</string>
+    <string name="alert_no_gps_title">GPS non attivo</string>
+    <string name="alert_no_gps_text">Vuoi attivarlo adesso?</string>
 
+
+    <string name="alert_no_path_title">Nessun percorso trovato</string>
+    <string name="alert_no_path_text">Inizia ad allenarti adesso!</string>
 
     <string name="date_format">dd-MM-yyyy</string>
     <string name="datetime_format">HH:mm dd-MM-yyyy</string>
+    <string name="alert_btn_positive_label">OK</string>
+    <string name="alert_btn_negative_label">KO</string>
+    <string name="alert_btn_neutral_label">Annulla</string>
 </resources>

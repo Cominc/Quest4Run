@@ -45,6 +45,7 @@ public class MainActivity extends AppCompatActivity
         fragmentTransaction.replace(R.id.fragment_container, new RunFragment());
         fragmentTransaction.commit();
         this.setTitle(getResources().getString(R.string.nav_run));
+        navigationView.setCheckedItem(R.id.nav_run);
     }
 
     @Override
