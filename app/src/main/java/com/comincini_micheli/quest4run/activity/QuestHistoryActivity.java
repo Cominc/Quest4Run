@@ -16,6 +16,7 @@ import com.comincini_micheli.quest4run.objects.Quest;
 import com.comincini_micheli.quest4run.other.Constants;
 import com.comincini_micheli.quest4run.other.DatabaseHandler;
 
+import java.util.Collections;
 import java.util.List;
 
 public class QuestHistoryActivity extends AppCompatActivity {
@@ -33,6 +34,7 @@ public class QuestHistoryActivity extends AppCompatActivity {
 
         db = new DatabaseHandler(this);
         questList = db.getQuests(true);
+        Collections.sort(questList);
         list=(ListView)findViewById(R.id.quest_history_list_view);
         registerForContextMenu(list);
         adapter = new QuestHistoryAdapter(this, questList);

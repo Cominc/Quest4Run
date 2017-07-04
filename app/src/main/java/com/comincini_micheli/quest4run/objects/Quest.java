@@ -1,6 +1,7 @@
 package com.comincini_micheli.quest4run.objects;
 
 import android.provider.Settings;
+import android.support.annotation.NonNull;
 import android.util.Log;
 
 import java.util.concurrent.TimeUnit;
@@ -9,7 +10,7 @@ import java.util.concurrent.TimeUnit;
  * Created by Gianmaria on 08/06/2017.
  */
 
-public class Quest
+public class Quest implements Comparable
 {
     public static long DEFAUL_EMPTY_DATE_VALUE = -1;
 
@@ -218,5 +219,16 @@ public class Quest
             boolean result = diff <=0;
             return result;
         }
+    }
+
+    @Override
+    public int compareTo(@NonNull Object o) {
+        Quest q = (Quest)o;
+        if(dateFinish-q.getDateFinish()>0)
+            return -1;
+        else if(dateFinish-q.getDateFinish()<0)
+            return 1;
+        else
+            return 0;
     }
 }
