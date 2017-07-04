@@ -20,6 +20,7 @@ import com.comincini_micheli.quest4run.fragment.QuestFragment;
 import com.comincini_micheli.quest4run.fragment.RunFragment;
 import com.comincini_micheli.quest4run.fragment.ShopFragment;
 import com.comincini_micheli.quest4run.fragment.TaskFragment;
+import com.comincini_micheli.quest4run.other.Constants;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -40,12 +41,26 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        //Apro il fragment run
-        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.fragment_container, new RunFragment());
-        fragmentTransaction.commit();
-        this.setTitle(getResources().getString(R.string.nav_run));
-        navigationView.setCheckedItem(R.id.nav_run);
+        Bundle b = getIntent().getExtras();
+        if(b != null && b.getBoolean(Constants.FROM_NOTIFICATION_QUEST_COMPLETED))
+        {
+            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.fragment_container, new QuestFragment());
+            fragmentTransaction.commit();
+            this.setTitle(getResources().getString(R.string.nav_quest));
+            navigationView.setCheckedItem(R.id.nav_quest);
+            Intent i = new Intent(this, QuestHistoryActivity.class);
+            startActivity(i);
+        }
+        else
+        {
+            //Apro il fragment run
+            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.fragment_container, new RunFragment());
+            fragmentTransaction.commit();
+            this.setTitle(getResources().getString(R.string.nav_run));
+            navigationView.setCheckedItem(R.id.nav_run);
+        }
     }
 
     @Override

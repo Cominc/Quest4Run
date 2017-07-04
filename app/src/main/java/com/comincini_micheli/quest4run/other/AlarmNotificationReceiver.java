@@ -8,12 +8,12 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Bundle;
 import android.provider.Settings;
 import android.support.v7.app.NotificationCompat;
 
 import com.comincini_micheli.quest4run.R;
-import com.comincini_micheli.quest4run.activity.QuestHistoryActivity;
-import com.comincini_micheli.quest4run.activity.TaskHistoryActivity;
+import com.comincini_micheli.quest4run.activity.SplashActivity;
 import com.comincini_micheli.quest4run.objects.Character;
 import com.comincini_micheli.quest4run.objects.Quest;
 
@@ -26,9 +26,12 @@ public class AlarmNotificationReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         DatabaseHandler db = new DatabaseHandler(context);
         Quest activeQuest = db.getActiveQuest();
-        //TODO guarda file error.txt, if aggiunto per evitare crash
         if(activeQuest!=null) {
-            Intent notifyIntent = new Intent(context, QuestHistoryActivity.class);
+            Intent notifyIntent = new Intent(context, SplashActivity.class);
+            Bundle b = new Bundle();
+            b.putBoolean(Constants.FROM_NOTIFICATION_QUEST_COMPLETED, true);
+            notifyIntent.putExtras(b);
+
             PendingIntent myIntent = PendingIntent.getActivity(context, 0, notifyIntent, 0);
 
             NotificationCompat.Builder builder = new NotificationCompat.Builder(context);
@@ -61,6 +64,5 @@ public class AlarmNotificationReceiver extends BroadcastReceiver {
             db.updateCharacter(myCharacter);
         }
         //TODO gestire refresh QuestFragment list
-        //TODO gestire back quando non esiste activity main
     }
 }

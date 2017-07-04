@@ -14,7 +14,7 @@ public class Constants
    public static final String CHAR_ID_PREFERENCE = "characterId";
    public static final String NAME_PREFS = "myPrefs";
    public static final String ID_QUEST = "id_quest";
-   public static final String QUEST_POSITION = "quest_position";
+   public static final String FROM_NOTIFICATION_QUEST_COMPLETED = "from_notification_quest_completed";
 
    public static final long MIN_TIME_BETEWEEN_UPDATE = 1000;
 

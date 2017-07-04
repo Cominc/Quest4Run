@@ -37,6 +37,11 @@ public class SplashActivity extends AppCompatActivity {
                 else
                 {
                     Intent i = new Intent(SplashActivity.this, MainActivity.class);
+
+                    Bundle b = getIntent().getExtras();
+                    if(b != null)
+                        i.putExtras(b);
+
                     startActivity(i);
                 }
                 finish();
