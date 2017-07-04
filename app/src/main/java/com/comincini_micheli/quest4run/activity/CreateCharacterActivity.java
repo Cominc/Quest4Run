@@ -1,7 +1,11 @@
 package com.comincini_micheli.quest4run.activity;
 
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.provider.Settings;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.ButtonBarLayout;
@@ -21,9 +25,6 @@ import com.comincini_micheli.quest4run.other.DatabaseHandler;
 
 public class CreateCharacterActivity extends AppCompatActivity
 {
-
-    //TODO rotella di caricamento finchè non ha creato il db
-
     private int[] femaleAvatar = {
             R.drawable.f_0,
             R.drawable.f_1,
@@ -44,6 +45,11 @@ public class CreateCharacterActivity extends AppCompatActivity
     private int avatarIndex;
 
     TextView nameTextEdit;
+
+
+    //ProgressDialog nDialog;
+    AlertDialog dialog;
+    Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -140,11 +146,22 @@ public class CreateCharacterActivity extends AppCompatActivity
         nameTextEdit = (TextView)findViewById(R.id.create_character_insert_name);
 
         Button createBtn = (Button) findViewById(R.id.btn_create_character);
+        context = this;
         createBtn.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
             {
+                dialog = new AlertDialog.Builder(context).create();
+                dialog.setMessage(getResources().getString(R.string.loading));
+                dialog.show();
+                /*nDialog = new ProgressDialog(context);
+                nDialog.setMessage(getResources().getString(R.string.loading));
+                nDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+                nDialog.setIndeterminate(true);
+                nDialog.setCancelable(false);
+                nDialog.show();*/
+
                 String newCharacterName = nameTextEdit.getText().toString().trim();
                 if(newCharacterName.length() != 0)
                 {
@@ -169,6 +186,7 @@ public class CreateCharacterActivity extends AppCompatActivity
                         Intent i = new Intent(CreateCharacterActivity.this, MainActivity.class);
                         startActivity(i);
                         finish();
+                        //nDialog.dismiss();
                     }
                     else
                     {
