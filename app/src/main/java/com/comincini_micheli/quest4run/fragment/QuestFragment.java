@@ -152,7 +152,7 @@ public class QuestFragment extends Fragment
         {
             Quest activeQuest = db.getActiveQuest();
 
-            if(activeQuest!=null && activeQuest.checkCompleted())
+            /*if(activeQuest!=null && activeQuest.checkCompleted())
             {
                 activeQuest.setCompleted(true);
                 activeQuest.setActive(false);
@@ -164,12 +164,15 @@ public class QuestFragment extends Fragment
                 Character myCharacter = db.getCharacter(settings.getInt(Constants.CHAR_ID_PREFERENCE,-1));
                 myCharacter.setExp(myCharacter.getExp()+activeQuest.getExpReward());
                 db.updateCharacter(myCharacter);
-            }
+            }*/
+            //questList.clear();
+            //questList = db.getQuests(false);
             list=(ListView)getView().findViewById(R.id.quest_list_view);
             registerForContextMenu(list);
             adapter = new QuestAdapter(getActivity(), questList, db);
             list.setAdapter(adapter);
             list.setEmptyView(getActivity().findViewById(R.id.empty_list));
+            adapter.notifyDataSetChanged();
         }
     }
 }

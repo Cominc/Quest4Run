@@ -21,6 +21,9 @@ import com.comincini_micheli.quest4run.other.DatabaseHandler;
 
 public class CreateCharacterActivity extends AppCompatActivity
 {
+
+    //TODO rotella di caricamento finchè non ha creato il db
+
     private int[] femaleAvatar = {
             R.drawable.f_0,
             R.drawable.f_1,

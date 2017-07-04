@@ -36,7 +36,6 @@ public class QuestDetailActivity extends AppCompatActivity {
         {
             idQuest = b.getInt(Constants.ID_QUEST);
         }
-        Log.w("id quest",idQuest+"");
         db = new DatabaseHandler(this);
         quest = db.getQuest(idQuest);
 

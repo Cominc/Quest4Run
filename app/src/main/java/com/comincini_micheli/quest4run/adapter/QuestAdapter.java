@@ -51,6 +51,8 @@ public class QuestAdapter extends BaseAdapter
 
     private long countTime;
 
+    private CountDownTimer myTimer = null;
+
     DatabaseHandler db;
     Quest previusActiveQuest;
 
@@ -110,7 +112,9 @@ public class QuestAdapter extends BaseAdapter
         }
         else {
             countTime = questActual.getDateStart() + questActual.getDuration() - System.currentTimeMillis();
-            new CountDownTimer(countTime, 1000) {
+            if(myTimer != null)
+                myTimer.cancel();
+            myTimer = new CountDownTimer(countTime, 1000) {
 
                 @Override
                 public void onTick(long millisUntilFinished) {
@@ -138,6 +142,9 @@ public class QuestAdapter extends BaseAdapter
                 @Override
                 public void onFinish() {
                     countdown.setText("00:00:00");
+                    data.remove(indexActiveQuest);
+                    indexActiveQuest = -1;
+                    notifyDataSetChanged();
                 }
             }.start();
         }
@@ -184,7 +191,7 @@ public class QuestAdapter extends BaseAdapter
                                         })
                                         .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
                                             public void onClick(DialogInterface dialog, int id) {
-                                                notifyDataSetChanged();
+
                                             }
                                         });
                                 // Create the AlertDialog object and return it
@@ -216,12 +223,12 @@ public class QuestAdapter extends BaseAdapter
                                             db.updateQuest(previusActiveQuest);
                                             data.set(indexActiveQuest,previusActiveQuest);
                                             indexActiveQuest = -1;
+                                            myTimer.cancel();
                                             notifyDataSetChanged();
                                         }
                                     })
                                     .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
                                         public void onClick(DialogInterface dialog, int id) {
-                                            notifyDataSetChanged();
                                         }
                                     });
                             // Create the AlertDialog object and return it
