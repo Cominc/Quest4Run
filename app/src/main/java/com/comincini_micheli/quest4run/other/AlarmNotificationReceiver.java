@@ -27,6 +27,8 @@ import java.util.Date;
  */
 
 public class AlarmNotificationReceiver extends BroadcastReceiver {
+
+    //TODO Se la main è già aperta la ricrea...
     @Override
     public void onReceive(Context context, Intent intent) {
         DatabaseHandler db = new DatabaseHandler(context);
