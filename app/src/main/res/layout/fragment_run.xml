@@ -31,13 +31,6 @@
             android:layout_alignParentBottom="true"
             android:layout_alignParentStart="true" />
 
-        <TextView
-            android:id="@+id/textview_location"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentStart="true" />
-
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -53,7 +46,6 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
-                android:format="@string/defaul_time_value"
                 android:textAlignment="center"
                 android:textColor="@color/black"
                 android:textSize="28dp" />
@@ -71,7 +63,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_toStartOf="@+id/display_time"
-                android:layout_marginEnd="40dp">
+                android:layout_marginEnd="30dp">
 
                 <TextView
                     android:id="@+id/display_distance"
@@ -99,7 +91,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_toEndOf="@+id/display_time"
-                android:layout_marginStart="40dp">
+                android:layout_marginStart="30dp">
 
                 <TextView
                     android:id="@+id/display_speed"

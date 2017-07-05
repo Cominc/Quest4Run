@@ -23,6 +23,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Chronometer;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -58,6 +59,8 @@ public class RunFragment extends Fragment {
     float totalDistance = 0, intermediateDistance = 0;
     float totalSpeed;
     int totalGPSPoints;
+
+    Chronometer chronometer;
 
     long startTime, finishTime;
 
@@ -135,7 +138,10 @@ public class RunFragment extends Fragment {
         final Button btnGPS_stop = (Button) getView().findViewById(R.id.button_gps_stop);
         btnGPS_stop.setVisibility(View.GONE);
 
-        final TextView textViewLocation = (TextView) getView().findViewById(R.id.textview_location);
+        final TextView textViewDistance = (TextView) getView().findViewById(R.id.display_distance);
+        final TextView textViewSpeed = (TextView) getView().findViewById(R.id.display_speed);
+        chronometer = (Chronometer) getView().findViewById(R.id.display_time);
+
         final DatabaseHandler db = new DatabaseHandler(getContext());
 
         final LocationManager locationManager = (LocationManager) getContext().getSystemService(Context.LOCATION_SERVICE);
@@ -150,14 +156,9 @@ public class RunFragment extends Fragment {
                     totalSpeed += actual_speed;
                     location.setSpeed(actual_speed);
                 }
-                textViewLocation.setText("Latitudine: " + location.getLatitude() + "\n" +
-                        "Longitudine: " + location.getLongitude() + "\n" +
-                        "Altitudine: " + location.getAltitude() + "\n" +
-                        "Velocità: " + location.getSpeed() + " (" + location.hasSpeed() + ")\n" +
-                        "Direzione: " + location.getBearing() + " (" + location.hasBearing() + ")\n" +
-                        "Provider: " + location.getProvider() + "\n\n" +
-                        "Distanza percorsa: " + totalDistance + " m"
-                );
+                textViewDistance.setText(totalDistance+"");
+                textViewSpeed.setText(location.getSpeed()+"");
+                //TODO serve controllare location.hasSpeed() ?
 
                 if (active) {
                     Gps newPoint = new Gps(location.getLatitude()+"", location.getLongitude()+"", (int) Math.round(location.getAltitude()), (int)location.getTime());
@@ -216,6 +217,7 @@ public class RunFragment extends Fragment {
                         btnGPS_start.setVisibility(View.GONE);
                         btnGPS_stop.setVisibility(View.VISIBLE);
                         startTime = System.currentTimeMillis();
+                        chronometer.start();
                     }
                     else {
                         Toast.makeText(getContext(), "GPS is not working", Toast.LENGTH_SHORT).show();
@@ -239,6 +241,7 @@ public class RunFragment extends Fragment {
                 Toast.makeText( getContext(),"Distanza (m): "+totalDistance,Toast.LENGTH_SHORT).show();
 
                 finishTime = System.currentTimeMillis();
+                chronometer.stop();
                 long totalTime = (finishTime - startTime)/ Constants.MILLISECONDS_A_SECOND;
                 long numberMinutes = totalTime / Constants.SECONDS_A_MINUTE;
                 int totalRewardEarned = 0;
