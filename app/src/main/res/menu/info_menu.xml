@@ -1,7 +1,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
       xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item android:id="@+id/action_settings"
+    <item android:id="@+id/info_button"
           android:icon="@drawable/info_100"
           android:title="info"
           app:showAsAction="always"/>

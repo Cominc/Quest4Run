@@ -12,6 +12,7 @@ public class Constants
    public static final int EXP_FOR_NEXT_LEVEL = 100;
    public static final String ID_EQUIPMENT_TYPE = "id_type";
    public static final String CHAR_ID_PREFERENCE = "characterId";
+   public static final String INFO_ABOUT_US = "infoAboutUs";
    public static final String NAME_PREFS = "myPrefs";
    public static final String ID_QUEST = "id_quest";
    public static final String FROM_NOTIFICATION_QUEST_COMPLETED = "from_notification_quest_completed";
