@@ -334,10 +334,12 @@ public class RunFragment extends Fragment {
                         PendingIntent intent = PendingIntent.getActivity(getActivity(), 0, notifyIntent, 0);
 
                         final Notification notifyDetails = new Notification.Builder(getContext())
+                                .setAutoCancel(true)
                                 .setSmallIcon(R.drawable.notification)
                                 .setWhen(System.currentTimeMillis())
                                 .setContentText(String.format(getResources().getString(R.string.notification_message_run_reward),totalRewardEarned))
                                 .setContentTitle(String.format(getResources().getString(R.string.notification_title_run_reward),totalNewTaskCompleted))
+                                .setDefaults(Notification.DEFAULT_ALL)
                                 .setContentIntent(intent)
                                 .build();
                         notifyDetails.flags = notifyDetails.flags | Notification.FLAG_AUTO_CANCEL;

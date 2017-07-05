@@ -40,19 +40,15 @@ public class AlarmNotificationReceiver extends BroadcastReceiver {
             PendingIntent myIntent = PendingIntent.getActivity(context, 0, notifyIntent, 0);
 
             NotificationCompat.Builder builder = new NotificationCompat.Builder(context);
-            Bitmap largeIcon = BitmapFactory.decodeResource(context.getResources(),R.drawable.splash);
             builder.setAutoCancel(true)
                     .setDefaults(Notification.DEFAULT_ALL)
                     .setWhen(System.currentTimeMillis())
                     .setSmallIcon(R.drawable.notification)
-                    //.setLargeIcon(largeIcon)
                     .setContentTitle(context.getResources().getString(R.string.quest_complete_notification_title))
                     .setStyle(new NotificationCompat.BigTextStyle().bigText(
                             String.format(context.getResources().getString(R.string.quest_complete_notification_text),
                                     activeQuest.getTitle(),
                                     activeQuest.getExpReward())))
-                    .setDefaults(Notification.DEFAULT_LIGHTS | Notification.DEFAULT_SOUND)
-                    .setContentInfo("Info")
                     .setContentIntent(myIntent);
 
 
