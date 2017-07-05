@@ -186,8 +186,14 @@
     <string name="btn_label_stop_run">STOP</string>
     <string name="alert_no_gps_title">GPS non attivo</string>
     <string name="alert_no_gps_text">Vuoi attivarlo adesso?</string>
+    <string name="run_distance_label">Distanza (Km)</string>
+    <string name="run_time_label">Durata</string>
+    <string name="run_speed_label">Velocità (m/s)</string>
+    <string name="defaul_distance_value">0.00</string>
+    <string name="defaul_time_value">00:00:00</string>
+    <string name="defaul_speed_value">0.0</string>
 
-
+    <!-- Task map -->
     <string name="alert_no_path_title">Nessun percorso trovato</string>
     <string name="alert_no_path_text">Inizia ad allenarti adesso!</string>
 
