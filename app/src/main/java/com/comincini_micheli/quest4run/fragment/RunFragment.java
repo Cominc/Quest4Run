@@ -332,20 +332,16 @@ public class RunFragment extends Fragment {
                         NotificationManager nm = (NotificationManager) getContext().getSystemService(Context.NOTIFICATION_SERVICE);
                         Intent notifyIntent = new Intent(getActivity(), TaskHistoryActivity.class);
                         PendingIntent intent = PendingIntent.getActivity(getActivity(), 0, notifyIntent, 0);
-                        //TODO ticker-> testo in anteprima
-                        //TODO creare stringhe in strings
+
                         final Notification notifyDetails = new Notification.Builder(getContext())
-                                .setTicker("Ticker")
-                                //.setSmallIcon(R.mipmap.ic_test)
-                                .setSmallIcon(R.drawable.splash)
+                                .setSmallIcon(R.drawable.notification)
                                 .setWhen(System.currentTimeMillis())
                                 .setContentText(String.format(getResources().getString(R.string.notification_message_run_reward),totalRewardEarned))
                                 .setContentTitle(String.format(getResources().getString(R.string.notification_title_run_reward),totalNewTaskCompleted))
                                 .setContentIntent(intent)
                                 .build();
                         notifyDetails.flags = notifyDetails.flags | Notification.FLAG_AUTO_CANCEL;
-                        //TODO 1 = SIMPLE_NOTIFICATION_ID
-                        nm.notify(1, notifyDetails);
+                        nm.notify((int)((new Date().getTime()/1000L)%Integer.MAX_VALUE), notifyDetails);
                     }
                 }
             }
