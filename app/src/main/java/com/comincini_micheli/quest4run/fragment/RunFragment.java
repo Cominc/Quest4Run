@@ -52,6 +52,7 @@ import java.util.List;
 public class RunFragment extends Fragment {
     //TODO rimuovere molti toast
     //TODO riattivare GPS quando i test sono finiti
+    //TODO gestire perdita/disattivazione segnale gps
     //final static String provider = LocationManager.GPS_PROVIDER;
     private final static String provider = LocationManager.NETWORK_PROVIDER;
     private static Location previusLocation = null;
