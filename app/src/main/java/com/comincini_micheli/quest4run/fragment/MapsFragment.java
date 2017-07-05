@@ -36,6 +36,8 @@ import java.util.List;
 
 public class MapsFragment extends Fragment {
 
+
+    //TODO gestione automatica zoom al caricamento
     private MapView mMapView;
     private GoogleMap mMapGoogle;
 
