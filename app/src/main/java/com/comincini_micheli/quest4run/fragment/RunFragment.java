@@ -166,7 +166,7 @@ public class RunFragment extends Fragment {
                     totalDistance += intermediateDistance;
 
                     LatLng newPoisition = new LatLng(location.getLatitude(),location.getLongitude());
-                    PolylineOptions line= new PolylineOptions().width(5).color(R.color.colorPrimary);
+                    PolylineOptions line= new PolylineOptions().width(5).color(getResources().getColor(R.color.colorPrimary));
                     if(previusLocation!=null) {
                         line.add(new LatLng(previusLocation.getLatitude(), previusLocation.getLongitude()));
                         mMapGoogle.addMarker(new MarkerOptions().position(newPoisition).anchor(0.5f, 0.5f).icon(BitmapDescriptorFactory.fromResource(R.drawable.point_dark_blu)));

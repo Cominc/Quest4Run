@@ -62,7 +62,7 @@ public class MapsFragment extends Fragment {
                 mMapGoogle = googleMap;
                 DatabaseHandler db = new DatabaseHandler(getContext());
                 List<Gps> gpsList = db.getAllGps();
-                PolylineOptions line= new PolylineOptions().width(5).color(Color.RED);
+                PolylineOptions line= new PolylineOptions().width(5).color(getResources().getColor(R.color.colorPrimary));
                 LatLng point = null;
                 Double meanLat = 0.0, meanLng = 0.0;
 
