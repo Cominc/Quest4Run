@@ -32,6 +32,8 @@ public class Constants
    public static final int CONSTANCE_TYPE_TASK = 2;
    public static final int DURATION_TYPE_TASK = 3;
 
+   public static final int ZOOM_LEVEL = 18;
+
    public static final int M_IN_KM = 1000;
 
    public static final int MILLISECONDS_A_DAY = 24*60*60*1000;

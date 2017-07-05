@@ -53,16 +53,15 @@ public class RunFragment extends Fragment {
     //TODO rimuovere molti toast
     //TODO riattivare GPS quando i test sono finiti
     //final static String provider = LocationManager.GPS_PROVIDER;
-    final static String provider = LocationManager.NETWORK_PROVIDER;
-    static Location previusLocation = null;
-    boolean active = false;
-    float totalDistance = 0, intermediateDistance = 0;
-    float totalSpeed;
-    int totalGPSPoints;
+    private final static String provider = LocationManager.NETWORK_PROVIDER;
+    private static Location previusLocation = null;
+    private boolean active = false;
+    private float totalDistance = 0, intermediateDistance = 0;
+    private float totalSpeed;
+    private long startTime, finishTime;
+    private int totalGPSPoints;
 
-    Chronometer chronometer;
-
-    long startTime, finishTime;
+    private Chronometer chronometer;
 
     private MapView mMapView;
     private GoogleMap mMapGoogle;
@@ -82,11 +81,7 @@ public class RunFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         final AlertDialog alertDialogGpsOff = new AlertDialog.Builder(getActivity()).create();
-
-        // Setting Dialog Title
         alertDialogGpsOff.setTitle(getResources().getString(R.string.alert_no_gps_title));
-
-        // Setting Dialog Message
         alertDialogGpsOff.setMessage(getResources().getString(R.string.alert_no_gps_text));
 
         // Setting Icon to Dialog
@@ -99,41 +94,25 @@ public class RunFragment extends Fragment {
             }
         });
 
-        /*
-        alertDialogGpsOff.setButton(DialogInterface.BUTTON_NEGATIVE,getResources().getString(R.string.alert_btn_negative_label), new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {
-
-            }
-        });
-        */
-
         alertDialogGpsOff.setButton(DialogInterface.BUTTON_NEUTRAL,getResources().getString(R.string.alert_btn_neutral_label), new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
-
+                if(active){
+                    Toast.makeText(getContext(),getResources().getString(R.string.toast_run_gps_deactivated),Toast.LENGTH_SHORT).show();
+                    //TODO disattivare tutto: timer....
+                }
             }
         });
 
-        // Showing Alert Message
-
-        //MAPPA***************************************************************************
         mMapView = (MapView) getActivity().findViewById(R.id.map2);
         mMapView.onCreate(savedInstanceState);
         mMapView.onResume();
-
-
         mMapView.getMapAsync(new OnMapReadyCallback() {
             @Override
             public void onMapReady(GoogleMap googleMap) {
                 mMapGoogle = googleMap;
-                /*
-                LatLng sydeney = new LatLng(-34,151);
-                mMapGoogle.addMarker(new MarkerOptions().position(sydeney));
-                CameraPosition cameraPosition = new CameraPosition.Builder().target(sydeney).zoom(12).build();
-                mMapGoogle.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
-                */
             }
         });
-        //********************************************************************************
+
         final Button btnGPS_start = (Button) getView().findViewById(R.id.button_gps_start);
         final Button btnGPS_stop = (Button) getView().findViewById(R.id.button_gps_stop);
         btnGPS_stop.setVisibility(View.GONE);
@@ -149,15 +128,12 @@ public class RunFragment extends Fragment {
         final LocationListener locationListener = new LocationListener() {
             public void onLocationChanged(Location location) {
                 // Called when a new location is found by the network location provider.
-                Toast.makeText(getContext(), "Location changed!", Toast.LENGTH_SHORT).show();
                 if(previusLocation!=null) {
                     intermediateDistance = location.distanceTo(previusLocation);
-                    float actual_speed = intermediateDistance / ((location.getTime() - previusLocation.getTime()) / 1000);
+                    float actual_speed = intermediateDistance / ((location.getTime() - previusLocation.getTime()) / Constants.MILLISECONDS_A_SECOND);
                     totalSpeed += actual_speed;
                     location.setSpeed(actual_speed);
                 }
-
-                //TODO serve controllare location.hasSpeed() ?
 
                 if (active) {
                     Gps newPoint = new Gps(location.getLatitude()+"", location.getLongitude()+"", (int) Math.round(location.getAltitude()), (int)location.getTime());
@@ -179,7 +155,7 @@ public class RunFragment extends Fragment {
                     }
                     line.add(newPosition);
                     mMapGoogle.addPolyline(line);
-                    CameraPosition cameraPosition = new CameraPosition.Builder().target(newPosition).zoom(18).bearing(location.getBearing()).build();
+                    CameraPosition cameraPosition = new CameraPosition.Builder().target(newPosition).zoom(Constants.ZOOM_LEVEL).bearing(location.getBearing()).build();
                     mMapGoogle.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
                 }
 
@@ -195,7 +171,6 @@ public class RunFragment extends Fragment {
             }
 
             public void onProviderDisabled(String provider) {
-                Toast.makeText(getContext(), "GPS is not working", Toast.LENGTH_SHORT).show();
                 alertDialogGpsOff.show();
             }
         };
@@ -205,16 +180,16 @@ public class RunFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                    Toast.makeText(getContext(), "Permessi GPS mancanti", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), getResources().getString(R.string.toast_gps_missing_permission), Toast.LENGTH_SHORT).show();
                 } else {
                     if(locationManager.isProviderEnabled(provider)) {
                         db.deleteAllGps();
-                        Toast.makeText( getContext(),"Cancellati tutti i GPS points ("+db.getGpsCount()+")",Toast.LENGTH_SHORT).show();
+                        //Toast.makeText( getContext(),"Cancellati tutti i GPS points ("+db.getGpsCount()+")",Toast.LENGTH_SHORT).show();
 
                         locationManager.requestLocationUpdates(provider, Constants.MIN_TIME_BETEWEEN_UPDATE, 0, locationListener);
 
+                        Toast.makeText(getContext(), getResources().getString(R.string.toast_run_start), Toast.LENGTH_SHORT).show();
                         previusLocation = null;
-                        Toast.makeText(getContext(), "Inizio attività", Toast.LENGTH_SHORT).show();
                         active = true;
                         mMapGoogle.clear();
                         totalDistance = 0;
@@ -227,7 +202,6 @@ public class RunFragment extends Fragment {
                         chronometer.start();
                     }
                     else {
-                        Toast.makeText(getContext(), "GPS is not working", Toast.LENGTH_SHORT).show();
                         alertDialogGpsOff.show();
                     }
                 }
@@ -237,15 +211,16 @@ public class RunFragment extends Fragment {
         btnGPS_stop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText( getContext(),"Fine attività",Toast.LENGTH_SHORT).show();
+                Toast.makeText( getContext(), getResources().getString(R.string.toast_run_stop), Toast.LENGTH_SHORT).show();
                 active = false;
                 locationManager.removeUpdates(locationListener);
                 btnGPS_stop.setVisibility(View.GONE);
                 btnGPS_start.setVisibility(View.VISIBLE);
                 if (previusLocation != null)
                     mMapGoogle.addMarker(new MarkerOptions().position(new LatLng(previusLocation.getLatitude(), previusLocation.getLongitude())).anchor(0.0f, 1.0f).icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_finish)));
-                Toast.makeText( getContext(),"GPS points: "+db.getGpsCount(),Toast.LENGTH_SHORT).show();
-                Toast.makeText( getContext(),"Distanza (m): "+totalDistance,Toast.LENGTH_SHORT).show();
+
+                //Toast.makeText( getContext(),"GPS points: "+db.getGpsCount(),Toast.LENGTH_SHORT).show();
+                //Toast.makeText( getContext(),"Distanza (m): "+totalDistance,Toast.LENGTH_SHORT).show();
 
                 finishTime = System.currentTimeMillis();
                 chronometer.stop();
@@ -328,6 +303,7 @@ public class RunFragment extends Fragment {
                         db.updateTask(tasks_constance.get(i));
                     }
 
+                    //DURATION
                     List<Task> tasks_duration;
                     tasks_duration = db.getTasks(false, true, Constants.DURATION_TYPE_TASK);
                     for (int i = 0; i < tasks_duration.size(); i++) {
@@ -350,7 +326,7 @@ public class RunFragment extends Fragment {
                     Character myCharacter = db.getCharacter(characterId);
                     myCharacter.setWallet(myCharacter.getWallet() + totalRewardEarned);
                     db.updateCharacter(myCharacter);
-                    Toast.makeText(getContext(), "Monete guadagnate: " + totalRewardEarned + getResources().getString(R.string.cents_symbol_label), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), String.format(getResources().getString(R.string.toast_money_earned), totalRewardEarned), Toast.LENGTH_SHORT).show();
 
                     if (totalNewTaskCompleted > 0) {
                         NotificationManager nm = (NotificationManager) getContext().getSystemService(Context.NOTIFICATION_SERVICE);
@@ -363,8 +339,8 @@ public class RunFragment extends Fragment {
                                 //.setSmallIcon(R.mipmap.ic_test)
                                 .setSmallIcon(R.drawable.splash)
                                 .setWhen(System.currentTimeMillis())
-                                .setContentText("Hai guadagnato " + totalRewardEarned + getResources().getString(R.string.cents_symbol_label))
-                                .setContentTitle("Hai completato " + totalNewTaskCompleted + " task!")
+                                .setContentText(String.format(getResources().getString(R.string.notification_message_run_reward),totalRewardEarned))
+                                .setContentTitle(String.format(getResources().getString(R.string.notification_title_run_reward),totalNewTaskCompleted))
                                 .setContentIntent(intent)
                                 .build();
                         notifyDetails.flags = notifyDetails.flags | Notification.FLAG_AUTO_CANCEL;

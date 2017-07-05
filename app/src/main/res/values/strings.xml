@@ -186,12 +186,19 @@
     <string name="btn_label_stop_run">STOP</string>
     <string name="alert_no_gps_title">GPS non attivo</string>
     <string name="alert_no_gps_text">Vuoi attivarlo adesso?</string>
+    <string name="toast_run_gps_deactivated">Allenamento interrotto</string>
     <string name="run_distance_label">Distanza (Km)</string>
     <string name="run_time_label">Durata</string>
     <string name="run_speed_label">Velocità (m/s)</string>
     <string name="defaul_distance_value">0.00</string>
     <string name="defaul_time_value">00:00:00</string>
     <string name="defaul_speed_value">0.0</string>
+    <string name="toast_gps_missing_permission">Permessi GPS mancanti</string>
+    <string name="toast_run_start">Inizio attività</string>
+    <string name="toast_run_stop">Fine attività</string>
+    <string name="toast_money_earned">Monete guadagnate: %d &#162;</string>
+    <string name="notification_message_run_reward">Monete guadagnate: %d &#162;</string>
+    <string name="notification_title_run_reward">Hai completato %d task!</string>
 
     <!-- Task map -->
     <string name="alert_no_path_title">Nessun percorso trovato</string>
