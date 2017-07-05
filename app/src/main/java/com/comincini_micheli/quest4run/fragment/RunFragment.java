@@ -10,7 +10,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.graphics.Color;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -53,8 +52,8 @@ import java.util.List;
 public class RunFragment extends Fragment {
     //TODO rimuovere molti toast
     //TODO riattivare GPS quando i test sono finiti
-    final static String provider = LocationManager.GPS_PROVIDER;
-    //final static String provider = LocationManager.NETWORK_PROVIDER;
+    //final static String provider = LocationManager.GPS_PROVIDER;
+    final static String provider = LocationManager.NETWORK_PROVIDER;
     static Location previusLocation = null;
     boolean active = false;
     float totalDistance = 0, intermediateDistance = 0;
@@ -157,8 +156,8 @@ public class RunFragment extends Fragment {
                     totalSpeed += actual_speed;
                     location.setSpeed(actual_speed);
                 }
-                textViewDistance.setText(totalDistance+"");
-                textViewSpeed.setText(location.getSpeed()+"");
+                textViewDistance.setText(String.format("%.2f",totalDistance/Constants.M_IN_KM));
+                textViewSpeed.setText(String.format("%.1f",location.getSpeed()));
                 //TODO serve controllare location.hasSpeed() ?
 
                 if (active) {
@@ -167,18 +166,18 @@ public class RunFragment extends Fragment {
                     totalGPSPoints++;
                     totalDistance += intermediateDistance;
 
-                    LatLng newPoisition = new LatLng(location.getLatitude(),location.getLongitude());
+                    LatLng newPosition = new LatLng(location.getLatitude(),location.getLongitude());
                     PolylineOptions line= new PolylineOptions().width(5).color(getResources().getColor(R.color.colorPrimary));
                     if(previusLocation!=null) {
                         line.add(new LatLng(previusLocation.getLatitude(), previusLocation.getLongitude()));
-                        mMapGoogle.addMarker(new MarkerOptions().position(newPoisition).anchor(0.5f, 0.5f).icon(BitmapDescriptorFactory.fromResource(R.drawable.point_dark_blu)));
+                        mMapGoogle.addMarker(new MarkerOptions().position(newPosition).anchor(0.5f, 0.5f).icon(BitmapDescriptorFactory.fromResource(R.drawable.point_dark_blu)));
                     }
                     else {
-                        mMapGoogle.addMarker(new MarkerOptions().position(newPoisition).icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_start)));
+                        mMapGoogle.addMarker(new MarkerOptions().position(newPosition).icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_start)));
                     }
-                    line.add(newPoisition);
+                    line.add(newPosition);
                     mMapGoogle.addPolyline(line);
-                    CameraPosition cameraPosition = new CameraPosition.Builder().target(newPoisition).zoom(18).bearing(location.getBearing()).build();
+                    CameraPosition cameraPosition = new CameraPosition.Builder().target(newPosition).zoom(18).bearing(location.getBearing()).build();
                     mMapGoogle.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
                 }
 
@@ -215,6 +214,10 @@ public class RunFragment extends Fragment {
                         previusLocation = null;
                         Toast.makeText(getContext(), "Inizio attività", Toast.LENGTH_SHORT).show();
                         active = true;
+                        mMapGoogle.clear();
+                        totalDistance = 0;
+                        totalSpeed = 0;
+                        totalGPSPoints = 0;
                         btnGPS_start.setVisibility(View.GONE);
                         btnGPS_stop.setVisibility(View.VISIBLE);
                         startTime = System.currentTimeMillis();
@@ -261,7 +264,7 @@ public class RunFragment extends Fragment {
                     tasks_distance = db.getTasks(false, true, Constants.DISTANCE_TYPE_TASK);
                     for (int i = 0; i < tasks_distance.size(); i++) {
                         String goalString = getActivity().getResources().getStringArray(R.array.task_distance_goal)[tasks_distance.get(i).getGoal()];
-                        double goalValue = Double.parseDouble(goalString.substring(0, goalString.length() - 3)) * Constants.FROM_KM_TO_M;
+                        double goalValue = Double.parseDouble(goalString.substring(0, goalString.length() - 3)) * Constants.M_IN_KM;
                         if ((tasks_distance.get(i).getProgress() + totalDistance) > goalValue) {
                             tasks_distance.get(i).setCompleted(true);
                             String rewardString = getActivity().getResources().getStringArray(R.array.task_distance_reward)[tasks_distance.get(i).getReward()];

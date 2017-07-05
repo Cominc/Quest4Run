@@ -6,7 +6,6 @@ package com.comincini_micheli.quest4run.adapter;
 
 import android.app.Activity;
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -79,7 +78,7 @@ public class TaskAdapter extends BaseAdapter
         {
             String goalString = task_goal[task_actual.getIdTaskType()][task_actual.getGoal()];
             double goalValue = Double.parseDouble(goalString.substring(0, goalString.length() - 3));
-            percentage.setText(Math.round(task_actual.getProgress()/(goalValue*Constants.FROM_KM_TO_M)*100) + "%");
+            percentage.setText(Math.round(task_actual.getProgress()/(goalValue*Constants.M_IN_KM)*100) + "%");
         }
         else if(task_actual.getIdTaskType() == Constants.CONSTANCE_TYPE_TASK)
         {
