@@ -15,6 +15,7 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.provider.Settings;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
@@ -217,6 +218,7 @@ public class RunFragment extends Fragment {
                         btnGPS_start.setVisibility(View.GONE);
                         btnGPS_stop.setVisibility(View.VISIBLE);
                         startTime = System.currentTimeMillis();
+                        chronometer.setBase(SystemClock.elapsedRealtime());
                         chronometer.start();
                     }
                     else {
