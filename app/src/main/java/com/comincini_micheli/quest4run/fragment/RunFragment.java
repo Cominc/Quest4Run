@@ -156,8 +156,7 @@ public class RunFragment extends Fragment {
                     totalSpeed += actual_speed;
                     location.setSpeed(actual_speed);
                 }
-                textViewDistance.setText(String.format("%.2f",totalDistance/Constants.M_IN_KM));
-                textViewSpeed.setText(String.format("%.1f",location.getSpeed()));
+
                 //TODO serve controllare location.hasSpeed() ?
 
                 if (active) {
@@ -165,6 +164,9 @@ public class RunFragment extends Fragment {
                     db.addGps(newPoint);
                     totalGPSPoints++;
                     totalDistance += intermediateDistance;
+
+                    textViewDistance.setText(String.format("%.2f",totalDistance/Constants.M_IN_KM));
+                    textViewSpeed.setText(String.format("%.1f",location.getSpeed()));
 
                     LatLng newPosition = new LatLng(location.getLatitude(),location.getLongitude());
                     PolylineOptions line= new PolylineOptions().width(5).color(getResources().getColor(R.color.colorPrimary));
@@ -253,7 +255,7 @@ public class RunFragment extends Fragment {
                 int totalNewTaskCompleted = 0;
                 if(totalDistance > 0) {
                     if (numberMinutes > 0) {
-                        Toast.makeText(getContext(), "Durata : " + numberMinutes * Constants.SECONDS_A_MINUTE + " minuti e " +
+                        Toast.makeText(getContext(), "Durata : " + numberMinutes + " minuti e " +
                                 (totalTime - numberMinutes * Constants.SECONDS_A_MINUTE) + " secondi", Toast.LENGTH_SHORT).show();
                     } else {
                         Toast.makeText(getContext(), "Durata (s): " + totalTime, Toast.LENGTH_SHORT).show();
