@@ -78,33 +78,33 @@ public class RunFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        final AlertDialog alertDialog = new AlertDialog.Builder(getActivity()).create();
+        final AlertDialog alertDialogGpsOff = new AlertDialog.Builder(getActivity()).create();
 
         // Setting Dialog Title
-        alertDialog.setTitle(getResources().getString(R.string.alert_no_gps_title));
+        alertDialogGpsOff.setTitle(getResources().getString(R.string.alert_no_gps_title));
 
         // Setting Dialog Message
-        alertDialog.setMessage(getResources().getString(R.string.alert_no_gps_text));
+        alertDialogGpsOff.setMessage(getResources().getString(R.string.alert_no_gps_text));
 
         // Setting Icon to Dialog
-        //alertDialog.setIcon(R.drawable.tick);
+        //alertDialogGpsOff.setIcon(R.drawable.tick);
         //TODO scegliere se usare negative o neutral
         // Setting OK Button
-        alertDialog.setButton(DialogInterface.BUTTON_POSITIVE,getResources().getString(R.string.alert_btn_positive_label), new DialogInterface.OnClickListener() {
+        alertDialogGpsOff.setButton(DialogInterface.BUTTON_POSITIVE,getResources().getString(R.string.alert_btn_positive_label), new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 startActivity(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS));
             }
         });
 
         /*
-        alertDialog.setButton(DialogInterface.BUTTON_NEGATIVE,getResources().getString(R.string.alert_btn_negative_label), new DialogInterface.OnClickListener() {
+        alertDialogGpsOff.setButton(DialogInterface.BUTTON_NEGATIVE,getResources().getString(R.string.alert_btn_negative_label), new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
 
             }
         });
         */
 
-        alertDialog.setButton(DialogInterface.BUTTON_NEUTRAL,getResources().getString(R.string.alert_btn_neutral_label), new DialogInterface.OnClickListener() {
+        alertDialogGpsOff.setButton(DialogInterface.BUTTON_NEUTRAL,getResources().getString(R.string.alert_btn_neutral_label), new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
 
             }
@@ -166,10 +166,10 @@ public class RunFragment extends Fragment {
                     totalDistance += intermediateDistance;
 
                     LatLng newPoisition = new LatLng(location.getLatitude(),location.getLongitude());
-                    PolylineOptions line= new PolylineOptions().width(5).color(Color.RED);
+                    PolylineOptions line= new PolylineOptions().width(5).color(R.color.colorPrimary);
                     if(previusLocation!=null) {
                         line.add(new LatLng(previusLocation.getLatitude(), previusLocation.getLongitude()));
-                        mMapGoogle.addMarker(new MarkerOptions().position(newPoisition).anchor(0.5f, 0.5f).icon(BitmapDescriptorFactory.fromResource(R.drawable.point_black)));
+                        mMapGoogle.addMarker(new MarkerOptions().position(newPoisition).anchor(0.5f, 0.5f).icon(BitmapDescriptorFactory.fromResource(R.drawable.point_dark_blu)));
                     }
                     else {
                         mMapGoogle.addMarker(new MarkerOptions().position(newPoisition).icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_start)));
@@ -193,7 +193,7 @@ public class RunFragment extends Fragment {
 
             public void onProviderDisabled(String provider) {
                 Toast.makeText(getContext(), "GPS is not working", Toast.LENGTH_SHORT).show();
-                alertDialog.show();
+                alertDialogGpsOff.show();
             }
         };
 
@@ -219,7 +219,7 @@ public class RunFragment extends Fragment {
                     }
                     else {
                         Toast.makeText(getContext(), "GPS is not working", Toast.LENGTH_SHORT).show();
-                        alertDialog.show();
+                        alertDialogGpsOff.show();
                     }
                 }
             }

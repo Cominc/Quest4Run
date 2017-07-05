@@ -85,7 +85,7 @@ public class MapsFragment extends Fragment {
                     else if(i==(gpsList.size()-1))
                         mMapGoogle.addMarker(new MarkerOptions().position(point).title(i+"").anchor(0.0f, 1.0f).icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_finish)));
                     else
-                        mMapGoogle.addMarker(new MarkerOptions().position(point).title(i+"").anchor(0.5f, 0.5f).icon(BitmapDescriptorFactory.fromResource(R.drawable.point_black)));
+                        mMapGoogle.addMarker(new MarkerOptions().position(point).title(i+"").anchor(0.5f, 0.5f).icon(BitmapDescriptorFactory.fromResource(R.drawable.point_dark_blu)));
                 }
 
                 meanLat/=counter;
