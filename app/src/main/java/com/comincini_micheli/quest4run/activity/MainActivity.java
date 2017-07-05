@@ -116,11 +116,6 @@ public class MainActivity extends AppCompatActivity
                 fragment = new CharacterFragment();
                 title = getResources().getString(R.string.nav_character);
                 break;
-            case R.id.nav_share:
-                Intent i = new Intent(MainActivity.this, AboutUsActivity.class);
-                startActivity(i);
-                //TODO: implementare condividi?
-                break;
             case R.id.nav_about_us:
                 Intent i2 = new Intent(MainActivity.this, AboutUsActivity.class);
                 startActivity(i2);

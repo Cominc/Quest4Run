@@ -81,29 +81,6 @@ public class RunFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        final AlertDialog alertDialogGpsOff = new AlertDialog.Builder(getActivity()).create();
-        alertDialogGpsOff.setTitle(getResources().getString(R.string.alert_no_gps_title));
-        alertDialogGpsOff.setMessage(getResources().getString(R.string.alert_no_gps_text));
-
-        // Setting Icon to Dialog
-        //alertDialogGpsOff.setIcon(R.drawable.tick);
-        //TODO scegliere se usare negative o neutral
-        // Setting OK Button
-        alertDialogGpsOff.setButton(DialogInterface.BUTTON_POSITIVE,getResources().getString(R.string.alert_btn_positive_label), new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {
-                startActivity(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS));
-            }
-        });
-
-        alertDialogGpsOff.setButton(DialogInterface.BUTTON_NEUTRAL,getResources().getString(R.string.alert_btn_neutral_label), new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {
-                if(active){
-                    Toast.makeText(getContext(),getResources().getString(R.string.toast_run_gps_deactivated),Toast.LENGTH_SHORT).show();
-                    //TODO disattivare tutto: timer....
-                }
-            }
-        });
-
         mMapView = (MapView) getActivity().findViewById(R.id.map2);
         mMapView.onCreate(savedInstanceState);
         mMapView.onResume();
@@ -121,6 +98,8 @@ public class RunFragment extends Fragment {
         final TextView textViewDistance = (TextView) getView().findViewById(R.id.display_distance);
         final TextView textViewSpeed = (TextView) getView().findViewById(R.id.display_speed);
         chronometer = (Chronometer) getView().findViewById(R.id.display_time);
+
+        final AlertDialog alertDialogGpsOff = new AlertDialog.Builder(getActivity()).create();
 
         final DatabaseHandler db = new DatabaseHandler(getContext());
 
@@ -177,6 +156,36 @@ public class RunFragment extends Fragment {
         };
 
 
+        alertDialogGpsOff.setTitle(getResources().getString(R.string.alert_no_gps_title));
+        alertDialogGpsOff.setMessage(getResources().getString(R.string.alert_no_gps_text));
+
+        // Setting Icon to Dialog
+        //alertDialogGpsOff.setIcon(R.drawable.tick);
+        //TODO vogliamo mettere icona?
+        // Setting OK Button
+        alertDialogGpsOff.setButton(DialogInterface.BUTTON_POSITIVE,getResources().getString(R.string.alert_btn_positive_label), new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                startActivity(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS));
+            }
+        });
+
+        alertDialogGpsOff.setButton(DialogInterface.BUTTON_NEUTRAL,getResources().getString(R.string.alert_btn_neutral_label), new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                if(active){
+                    Toast.makeText(getContext(),getResources().getString(R.string.toast_run_gps_deactivated),Toast.LENGTH_SHORT).show();
+                    //TODO duplicato
+                    active = false;
+                    locationManager.removeUpdates(locationListener);
+                    btnGPS_stop.setVisibility(View.GONE);
+                    btnGPS_start.setVisibility(View.VISIBLE);
+                    if (previusLocation != null)
+                        mMapGoogle.addMarker(new MarkerOptions().position(new LatLng(previusLocation.getLatitude(), previusLocation.getLongitude())).anchor(0.0f, 1.0f).icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_finish)));
+                    chronometer.stop();
+                }
+            }
+        });
+
+
         btnGPS_start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -213,18 +222,18 @@ public class RunFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Toast.makeText( getContext(), getResources().getString(R.string.toast_run_stop), Toast.LENGTH_SHORT).show();
+                //TODO duplicato
                 active = false;
                 locationManager.removeUpdates(locationListener);
                 btnGPS_stop.setVisibility(View.GONE);
                 btnGPS_start.setVisibility(View.VISIBLE);
                 if (previusLocation != null)
                     mMapGoogle.addMarker(new MarkerOptions().position(new LatLng(previusLocation.getLatitude(), previusLocation.getLongitude())).anchor(0.0f, 1.0f).icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_finish)));
+                chronometer.stop();
 
                 //Toast.makeText( getContext(),"GPS points: "+db.getGpsCount(),Toast.LENGTH_SHORT).show();
                 //Toast.makeText( getContext(),"Distanza (m): "+totalDistance,Toast.LENGTH_SHORT).show();
-
                 finishTime = System.currentTimeMillis();
-                chronometer.stop();
                 long totalTime = (finishTime - startTime)/ Constants.MILLISECONDS_A_SECOND;
                 long numberMinutes = totalTime / Constants.SECONDS_A_MINUTE;
                 int totalRewardEarned = 0;
@@ -349,6 +358,8 @@ public class RunFragment extends Fragment {
                 }
             }
         });
+
+
     }
 }
 
