@@ -44,6 +44,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
 
@@ -145,7 +146,8 @@ public class RunFragment extends Fragment {
                     PolylineOptions line= new PolylineOptions().width(5).color(getResources().getColor(R.color.colorPrimary));
                     if(previusLocation!=null) {
                         line.add(new LatLng(previusLocation.getLatitude(), previusLocation.getLongitude()));
-                        mMapGoogle.addMarker(new MarkerOptions().position(newPosition).anchor(0.5f, 0.5f).icon(BitmapDescriptorFactory.fromResource(R.drawable.point_dark_blu)));
+                        //TODO aggiungere marker freccia
+                        //mMapGoogle.addMarker(new MarkerOptions().position(newPosition).anchor(0.5f, 0.5f).icon(BitmapDescriptorFactory.fromResource(R.drawable.point_dark_blu)));
                     }
                     else {
                         mMapGoogle.addMarker(new MarkerOptions().position(newPosition).icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_start)));
