@@ -1,6 +1,7 @@
 package com.comincini_micheli.quest4run.fragment;
 
 import android.Manifest;
+import android.app.ProgressDialog;
 import android.support.v7.app.AlertDialog;
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -100,6 +101,13 @@ public class RunFragment extends Fragment {
         chronometer = (Chronometer) getView().findViewById(R.id.display_time);
 
         final AlertDialog alertDialogGpsOff = new AlertDialog.Builder(getActivity()).create();
+        alertDialogGpsOff.setTitle(getResources().getString(R.string.alert_no_gps_title));
+        alertDialogGpsOff.setMessage(getResources().getString(R.string.alert_no_gps_text));
+
+        final ProgressDialog progressDialog= new ProgressDialog(getContext());
+        progressDialog.setMessage(getResources().getString(R.string.searching_gps));
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDialog.setIndeterminate(true);
 
         final DatabaseHandler db = new DatabaseHandler(getContext());
 
@@ -113,6 +121,13 @@ public class RunFragment extends Fragment {
                     float actual_speed = intermediateDistance / ((location.getTime() - previusLocation.getTime()) / Constants.MILLISECONDS_A_SECOND);
                     totalSpeed += actual_speed;
                     location.setSpeed(actual_speed);
+                }
+                else
+                {
+                    progressDialog.dismiss();
+                    startTime = System.currentTimeMillis();
+                    chronometer.setBase(SystemClock.elapsedRealtime());
+                    chronometer.start();
                 }
 
                 if (active) {
@@ -156,9 +171,6 @@ public class RunFragment extends Fragment {
         };
 
 
-        alertDialogGpsOff.setTitle(getResources().getString(R.string.alert_no_gps_title));
-        alertDialogGpsOff.setMessage(getResources().getString(R.string.alert_no_gps_text));
-
         // Setting Icon to Dialog
         //alertDialogGpsOff.setIcon(R.drawable.tick);
         //TODO vogliamo mettere icona?
@@ -197,6 +209,7 @@ public class RunFragment extends Fragment {
                         //Toast.makeText( getContext(),"Cancellati tutti i GPS points ("+db.getGpsCount()+")",Toast.LENGTH_SHORT).show();
 
                         locationManager.requestLocationUpdates(provider, Constants.MIN_TIME_BETEWEEN_UPDATE, 0, locationListener);
+                        progressDialog.show();
 
                         Toast.makeText(getContext(), getResources().getString(R.string.toast_run_start), Toast.LENGTH_SHORT).show();
                         previusLocation = null;
@@ -207,9 +220,6 @@ public class RunFragment extends Fragment {
                         totalGPSPoints = 0;
                         btnGPS_start.setVisibility(View.GONE);
                         btnGPS_stop.setVisibility(View.VISIBLE);
-                        startTime = System.currentTimeMillis();
-                        chronometer.setBase(SystemClock.elapsedRealtime());
-                        chronometer.start();
                     }
                     else {
                         alertDialogGpsOff.show();
@@ -225,6 +235,7 @@ public class RunFragment extends Fragment {
                 //TODO duplicato
                 active = false;
                 locationManager.removeUpdates(locationListener);
+                progressDialog.dismiss();
                 btnGPS_stop.setVisibility(View.GONE);
                 btnGPS_start.setVisibility(View.VISIBLE);
                 if (previusLocation != null)

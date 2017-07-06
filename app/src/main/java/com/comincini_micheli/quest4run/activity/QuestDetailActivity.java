@@ -24,6 +24,7 @@ public class QuestDetailActivity extends AppCompatActivity {
     Quest quest;
     DatabaseHandler db;
 
+    //TODO rendere più guardabile
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
