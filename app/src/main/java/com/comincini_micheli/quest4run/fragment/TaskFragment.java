@@ -119,15 +119,6 @@ public class TaskFragment extends Fragment
         DatabaseHandler db = new DatabaseHandler(getContext());
 
         switch(item.getItemId()) {
-            case R.id.edit:
-                // edit stuff here
-                //TODO EDIT CONTESTUALE TASK
-                taskList.get(info.position).setCompleted(true);
-                taskList.get(info.position).setExecDate(System.currentTimeMillis());
-                db.updateTask(taskList.get(info.position));
-                taskList.remove(info.position);
-                adapter.notifyDataSetChanged();
-                return true;
             case R.id.delete:
                 // remove stuff here
                 db.deleteTask(taskList.get(info.position));

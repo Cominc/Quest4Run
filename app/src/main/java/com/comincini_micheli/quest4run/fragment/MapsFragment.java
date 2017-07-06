@@ -13,6 +13,7 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v4.app.FragmentTransaction;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,12 +25,15 @@ import com.comincini_micheli.quest4run.objects.Gps;
 
 import com.comincini_micheli.quest4run.other.Constants;
 import com.comincini_micheli.quest4run.other.DatabaseHandler;
+import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
 
@@ -40,7 +44,6 @@ import java.util.concurrent.TimeUnit;
 public class MapsFragment extends Fragment {
 
     //TODO da sistemare e riordinare
-    //TODO gestione automatica zoom al caricamento
     private MapView mMapView;
     private GoogleMap mMapGoogle;
 
@@ -120,7 +123,26 @@ public class MapsFragment extends Fragment {
                 meanLng/=gpsList.size();
 
                 mMapGoogle.addPolyline(line);
-                mMapGoogle.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(meanLat,meanLng),18));
+                //mMapGoogle.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(meanLat,meanLng),18));
+
+
+                DisplayMetrics metrics = new DisplayMetrics();
+                getActivity().getWindowManager().getDefaultDisplay().getMetrics(metrics);
+                int width = metrics.widthPixels;
+                LatLngBounds.Builder builder = new LatLngBounds.Builder();
+                for (Gps p : gpsList)
+                {
+                    LatLng pos = new LatLng(Double.parseDouble(p.getLatitude()), Double.parseDouble(p.getLongitude()));
+                    builder.include(pos);
+                }
+                LatLngBounds bounds = builder.build();
+                int padding = ((width * 10) / 100); // offset from edges of the map
+                // in pixels
+                CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds,
+                        padding);
+                mMapGoogle.moveCamera(cu);
+
+
 
                 if(gpsList.isEmpty()){
                     AlertDialog alertDialog = new AlertDialog.Builder(
