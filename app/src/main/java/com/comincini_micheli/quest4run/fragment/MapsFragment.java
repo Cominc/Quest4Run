@@ -95,7 +95,6 @@ public class MapsFragment extends Fragment {
 
                 PolylineOptions line= new PolylineOptions().width(5).color(getResources().getColor(R.color.colorPrimary));
                 LatLng point = null;
-                Double meanLat = 0.0, meanLng = 0.0;
 
                 for(int i=0; i<gpsList.size(); i++){
                     point = new LatLng(
@@ -106,25 +105,16 @@ public class MapsFragment extends Fragment {
                                     gpsList.get(i).getLongitude()
                             ));
                     line.add(point);
-                    meanLat += point.latitude;
-                    meanLng += point.longitude;
 
                     if(i==0) {
-                        mMapGoogle.addMarker(new MarkerOptions().position(point).title(i + "").icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_start)));
+                        mMapGoogle.addMarker(new MarkerOptions().position(point).icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_start)));
                     }
                     else if(i==(gpsList.size()-1)) {
-                        mMapGoogle.addMarker(new MarkerOptions().position(point).title(i + "").anchor(0.0f, 1.0f).icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_finish)));
+                        mMapGoogle.addMarker(new MarkerOptions().position(point).anchor(0.0f, 1.0f).icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_finish)));
                     }
-                    else
-                        mMapGoogle.addMarker(new MarkerOptions().position(point).title(i+"").anchor(0.5f, 0.5f).icon(BitmapDescriptorFactory.fromResource(R.drawable.point_dark_blu)));
                 }
 
-                meanLat/=gpsList.size();
-                meanLng/=gpsList.size();
-
                 mMapGoogle.addPolyline(line);
-                //mMapGoogle.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(meanLat,meanLng),18));
-
 
                 DisplayMetrics metrics = new DisplayMetrics();
                 getActivity().getWindowManager().getDefaultDisplay().getMetrics(metrics);
