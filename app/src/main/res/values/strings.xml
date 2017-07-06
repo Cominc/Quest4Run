@@ -19,7 +19,7 @@
     <!-- Navigation Drawer menu labels -->
     <string name="nav_run">Corsa</string>
     <string name="nav_path">Ultima attività</string>
-    <string name="nav_task">Task</string>
+    <string name="nav_task">Obiettivi</string>
 
     <string name="nav_character">Personaggio</string>
     <string name="nav_quest">Missioni</string>
@@ -29,29 +29,27 @@
 
 
     <!-- Fragments titles -->
-    <string name="task_fragment_title">I tuoi tasks</string>
-    <string name="test_fragment_title">I tuo test</string>
-
+    <string name="task_fragment_title">I tuoi obiettivi</string>
 
     <!-- Context Menu TaskList -->
     <string name="menu_complete">Completa</string>
     <string name="menu_delete">Cancella</string>
-    <string name="task_delete">Task rimosso</string>
+    <string name="task_delete">Obiettivo rimosso</string>
 
     <!-- Option Menu TaskList -->
     <string name="delete_all_task">Cancella tutto</string>
-    <string name="delete_all_task_confirmation">Sei sicuro di voler cancellare tutti i Task?</string>
-    <string name="number_task_deleted">Rimossi %d Task</string>
-    <string name="show_history_task">Task Completati</string>
+    <string name="delete_all_task_confirmation">Sei sicuro di voler cancellare tutti gli obiettivi?</string>
+    <string name="number_task_deleted">Rimossi %d obiettivi</string>
+    <string name="show_history_task">Obiettivi Completati</string>
 
     <!-- Task Creation -->
     <string name="name_hint">Nome</string>
 
-    <string name="spinner_task_type_label">Seleziona il tipo di Task</string>
-    <string name="spinner_task_goal_label">Seleziona l\'obbiettivo</string>
+    <string name="spinner_task_type_label">Seleziona il tipo di obiettivo</string>
+    <string name="spinner_task_goal_label">Seleziona il traguardo</string>
     <string name="spinner_task_reward_label">Seleziona la ricompensa</string>
     <string name="btn_add_label">Crea</string>
-    <string name="add_task_activity_title">Crea Task</string>
+    <string name="add_task_activity_title">Crea obiettivo</string>
     <string-array name="task_type">
         <item>Distanza</item>
         <item>Ritmo</item>
@@ -99,7 +97,7 @@
         <item>25 &#162;</item>
     </string-array>
     <string name="task_added">Task aggiunto</string>
-    <string name="name_empty_task_error">Inserire il nome del Task</string>
+    <string name="name_empty_task_error">Inserire il nome dell\'obiettivo</string>
 
     <!-- Character Creation -->
     <string name="name_empty_character_error">Inserire il nome del personaggio</string>
@@ -164,7 +162,7 @@
     <string name="menu_quest_detail">Dettagli</string>
 
     <string name="title_activity_main">MainActivity</string>
-    <string name="title_task_history_activity">Task Completati</string>
+    <string name="title_task_history_activity">Obiettivi Completati</string>
     <string name="title_create_character">Crea il personaggio</string>
     <string name="title_quest_history_activity">Missioni Completate</string>
 
@@ -196,7 +194,7 @@
     <string name="toast_run_stop">Fine attività</string>
     <string name="toast_money_earned">Monete guadagnate: %d &#162;</string>
     <string name="notification_message_run_reward">Monete guadagnate: %d &#162;</string>
-    <string name="notification_title_run_reward">Hai completato %d task!</string>
+    <string name="notification_title_run_reward">Hai completato %d obiettivi!</string>
 
     <!-- Task map -->
     <string name="alert_no_path_title">Nessuna attività trovata</string>
