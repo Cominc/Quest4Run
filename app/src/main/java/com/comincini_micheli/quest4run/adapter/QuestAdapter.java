@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.SystemClock;
 import android.support.v7.app.AlertDialog;
@@ -22,6 +23,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.comincini_micheli.quest4run.R;
+import com.comincini_micheli.quest4run.activity.QuestDetailActivity;
 import com.comincini_micheli.quest4run.objects.Character;
 import com.comincini_micheli.quest4run.objects.Quest;
 import com.comincini_micheli.quest4run.other.AlarmNotificationReceiver;
@@ -89,6 +91,7 @@ public class QuestAdapter extends BaseAdapter
         if(convertView==null)
             vi = inflater.inflate(R.layout.quest_list_row, null);
 
+
         TextView title = (TextView)vi.findViewById(R.id.quest_title);
         TextView attack = (TextView)vi.findViewById(R.id.quest_min_attack);
         TextView defense = (TextView)vi.findViewById(R.id.quest_min_defense);
@@ -99,6 +102,15 @@ public class QuestAdapter extends BaseAdapter
         final TextView countdown = (TextView)vi.findViewById(R.id.quest_timer);
 
         questActual = data.get(position);
+
+        vi.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                activity.openContextMenu(v);
+            }
+        });
 
         // Setting all values in listview
         title.setText(questActual.getTitle());
