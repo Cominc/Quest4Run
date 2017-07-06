@@ -188,9 +188,9 @@
     <string name="run_distance_label">Distanza (Km)</string>
     <string name="run_time_label">Durata</string>
     <string name="run_speed_label">Velocità (m/s)</string>
-    <string name="defaul_distance_value">0.00</string>
+    <string name="defaul_distance_value">0,00</string>
     <string name="defaul_time_value">00:00:00</string>
-    <string name="defaul_speed_value">0.0</string>
+    <string name="defaul_speed_value">0,0</string>
     <string name="toast_gps_missing_permission">Permessi GPS mancanti</string>
     <string name="toast_run_start">Inizio attività</string>
     <string name="toast_run_stop">Fine attività</string>

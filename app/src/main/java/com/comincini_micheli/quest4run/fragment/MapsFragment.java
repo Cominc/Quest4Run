@@ -65,8 +65,11 @@ public class MapsFragment extends Fragment {
 
         SharedPreferences lastRunInfo = getContext().getSharedPreferences(Constants.NAME_PREFS, getContext().MODE_PRIVATE);
         distance = lastRunInfo.getFloat(Constants.LAST_DISTANCE, 0);
-        duration = lastRunInfo.getLong(Constants.LAST_DURATION, 1);
-        speed = distance/(duration/Constants.MILLISECONDS_A_SECOND);
+        duration = lastRunInfo.getLong(Constants.LAST_DURATION, 0);
+        if(duration==0)
+            speed = (float) 0.0;
+        else
+            speed = distance/(duration/Constants.MILLISECONDS_A_SECOND);
 
         TextView textViewDistance = (TextView) view.findViewById(R.id.display_distance);
         TextView textViewSpeed = (TextView) view.findViewById(R.id.display_speed);
@@ -174,9 +177,12 @@ public class MapsFragment extends Fragment {
         long temp;
         String durationString="";
         temp = TimeUnit.MILLISECONDS.toHours(myDuration);
-        if(temp < 10)
-            durationString += "0";
-        durationString += temp+":";
+        if(temp>0)
+        {
+            if(temp < 10)
+                durationString += "0";
+            durationString += temp+":";
+        }
         myDuration -= TimeUnit.HOURS.toMillis(temp);
         temp = TimeUnit.MILLISECONDS.toMinutes(myDuration);
         if(temp < 10)
