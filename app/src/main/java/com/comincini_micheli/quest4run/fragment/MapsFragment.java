@@ -76,7 +76,6 @@ public class MapsFragment extends Fragment {
         textViewDistance.setText(String.format("%.2f",distance/ Constants.M_IN_KM));
         textViewSpeed.setText(String.format("%.1f",speed));
         String durationString = myFormatTime(duration);
-
         chronometer.setText(durationString);
 
         mMapView = (MapView) getActivity().findViewById(R.id.map3);
@@ -95,9 +94,6 @@ public class MapsFragment extends Fragment {
                 LatLng point = null;
                 Double meanLat = 0.0, meanLng = 0.0;
 
-                //TODO serve counter o basta gpsList.size() ?
-                int counter = 0;
-
                 for(int i=0; i<gpsList.size(); i++){
                     point = new LatLng(
                             Double.parseDouble(
@@ -109,11 +105,7 @@ public class MapsFragment extends Fragment {
                     line.add(point);
                     meanLat += point.latitude;
                     meanLng += point.longitude;
-                    counter++;
 
-                    //TODO da vedere
-                    //TODO aggiungere sempre bandierina in fondo (caso con un solo punto)
-                    /*
                     if(i==0) {
                         mMapGoogle.addMarker(new MarkerOptions().position(point).title(i + "").icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_start)));
                     }
@@ -122,19 +114,10 @@ public class MapsFragment extends Fragment {
                     }
                     else
                         mMapGoogle.addMarker(new MarkerOptions().position(point).title(i+"").anchor(0.5f, 0.5f).icon(BitmapDescriptorFactory.fromResource(R.drawable.point_dark_blu)));
-                    */
-                    if(i==0) {
-                        mMapGoogle.addMarker(new MarkerOptions().position(point).title(i + "").icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_start)));
-                    }
-                    if(i==(gpsList.size()-1)) {
-                        mMapGoogle.addMarker(new MarkerOptions().position(point).title(i + "").anchor(0.0f, 1.0f).icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_finish)));
-                    }
-                    if(i>0&&i<(gpsList.size()-1))
-                        mMapGoogle.addMarker(new MarkerOptions().position(point).title(i+"").anchor(0.5f, 0.5f).icon(BitmapDescriptorFactory.fromResource(R.drawable.point_dark_blu)));
                 }
 
-                meanLat/=counter;
-                meanLng/=counter;
+                meanLat/=gpsList.size();
+                meanLng/=gpsList.size();
 
                 mMapGoogle.addPolyline(line);
                 mMapGoogle.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(meanLat,meanLng),18));

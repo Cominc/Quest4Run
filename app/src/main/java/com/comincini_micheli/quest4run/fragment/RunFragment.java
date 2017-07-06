@@ -143,11 +143,11 @@ public class RunFragment extends Fragment {
             }
 
             public void onStatusChanged(String provider, int status, Bundle extras) {
-                Toast.makeText(getContext(), "Status change", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getContext(), "Status change", Toast.LENGTH_SHORT).show();
             }
 
             public void onProviderEnabled(String provider) {
-                Toast.makeText(getContext(), "GPS is working", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getContext(), "GPS is working", Toast.LENGTH_SHORT).show();
             }
 
             public void onProviderDisabled(String provider) {
@@ -245,12 +245,12 @@ public class RunFragment extends Fragment {
                     lastRunInfo.putLong(Constants.LAST_DURATION, (finishTime - startTime));
                     lastRunInfo.commit();
 
-                    if (numberMinutes > 0) {
+                    /*if (numberMinutes > 0) {
                         Toast.makeText(getContext(), "Durata : " + numberMinutes + " minuti e " +
                                 (totalTime - numberMinutes * Constants.SECONDS_A_MINUTE) + " secondi", Toast.LENGTH_SHORT).show();
                     } else {
                         Toast.makeText(getContext(), "Durata (s): " + totalTime, Toast.LENGTH_SHORT).show();
-                    }
+                    }*/
 
                     //DISTANCE
                     List<Task> tasks_distance;
@@ -361,6 +361,15 @@ public class RunFragment extends Fragment {
                         notifyDetails.flags = notifyDetails.flags | Notification.FLAG_AUTO_CANCEL;
                         nm.notify((int)((new Date().getTime()/1000L)%Integer.MAX_VALUE), notifyDetails);
                     }
+                }
+                else
+                {
+                    db.deleteAllGps();
+                    SharedPreferences.Editor lastRunInfo = getContext().getSharedPreferences(Constants.NAME_PREFS, getContext().MODE_PRIVATE).edit();
+                    lastRunInfo.remove(Constants.LAST_DISTANCE);
+                    lastRunInfo.remove(Constants.LAST_DURATION);
+                    lastRunInfo.commit();
+                    Toast.makeText(getContext(),R.string.warning_zero_distance, Toast.LENGTH_SHORT).show();
                 }
             }
         });

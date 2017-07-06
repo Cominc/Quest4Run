@@ -196,6 +196,7 @@
     <string name="toast_money_earned">Monete guadagnate: %d &#162;</string>
     <string name="notification_message_run_reward">Monete guadagnate: %d &#162;</string>
     <string name="notification_title_run_reward">Hai completato %d obiettivi!</string>
+    <string name="warning_zero_distance">Attenzione! Allenamento non riuscito</string>
 
     <!-- Task map -->
     <string name="alert_no_path_title">Nessuna attività trovata</string>
