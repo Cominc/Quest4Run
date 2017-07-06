@@ -42,6 +42,7 @@ public class QuestDetailActivity extends AppCompatActivity {
 
         TextView title = (TextView) findViewById(R.id.quest_detail_title);
         TextView description = (TextView) findViewById(R.id.quest_detail_description);
+        TextView reward = (TextView) findViewById(R.id.quest_detail_exp_reward);
         TextView attack = (TextView) findViewById(R.id.quest_detail_attack_value);
         TextView defense = (TextView) findViewById(R.id.quest_detail_defense_value);
         TextView magic = (TextView) findViewById(R.id.quest_detail_magic_value);
@@ -52,6 +53,7 @@ public class QuestDetailActivity extends AppCompatActivity {
 
         title.setText(quest.getTitle());
         description.setText(quest.getDescription());
+        reward.setText(String.format(getResources().getString(R.string.quest_detail_reward),quest.getExpReward()));
         attack.setText(quest.getMinAttack()+"");
         defense.setText(quest.getMinDefense()+"");
         magic.setText(quest.getMinMagic()+"");

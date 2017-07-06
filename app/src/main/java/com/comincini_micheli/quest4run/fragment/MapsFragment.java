@@ -96,44 +96,6 @@ public class MapsFragment extends Fragment {
                 PolylineOptions line= new PolylineOptions().width(5).color(getResources().getColor(R.color.colorPrimary));
                 LatLng point = null;
 
-                for(int i=0; i<gpsList.size(); i++){
-                    point = new LatLng(
-                            Double.parseDouble(
-                                    gpsList.get(i).getLatitude()
-                            ),
-                            Double.parseDouble(
-                                    gpsList.get(i).getLongitude()
-                            ));
-                    line.add(point);
-
-                    if(i==0) {
-                        mMapGoogle.addMarker(new MarkerOptions().position(point).icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_start)));
-                    }
-                    else if(i==(gpsList.size()-1)) {
-                        mMapGoogle.addMarker(new MarkerOptions().position(point).anchor(0.0f, 1.0f).icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_finish)));
-                    }
-                }
-
-                mMapGoogle.addPolyline(line);
-
-                DisplayMetrics metrics = new DisplayMetrics();
-                getActivity().getWindowManager().getDefaultDisplay().getMetrics(metrics);
-                int width = metrics.widthPixels;
-                LatLngBounds.Builder builder = new LatLngBounds.Builder();
-                for (Gps p : gpsList)
-                {
-                    LatLng pos = new LatLng(Double.parseDouble(p.getLatitude()), Double.parseDouble(p.getLongitude()));
-                    builder.include(pos);
-                }
-                LatLngBounds bounds = builder.build();
-                int padding = ((width * 10) / 100); // offset from edges of the map
-                // in pixels
-                CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds,
-                        padding);
-                mMapGoogle.moveCamera(cu);
-
-
-
                 if(gpsList.isEmpty()){
                     AlertDialog alertDialog = new AlertDialog.Builder(
                             getActivity()).create();
@@ -161,6 +123,42 @@ public class MapsFragment extends Fragment {
 
                     // Showing Alert Message
                     alertDialog.show();
+                }
+                else {
+                    for (int i = 0; i < gpsList.size(); i++) {
+                        point = new LatLng(
+                                Double.parseDouble(
+                                        gpsList.get(i).getLatitude()
+                                ),
+                                Double.parseDouble(
+                                        gpsList.get(i).getLongitude()
+                                ));
+                        line.add(point);
+
+                        if (i == 0) {
+                            mMapGoogle.addMarker(new MarkerOptions().position(point).icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_start)));
+                        } else if (i == (gpsList.size() - 1)) {
+                            mMapGoogle.addMarker(new MarkerOptions().position(point).anchor(0.0f, 1.0f).icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_finish)));
+                        }
+                    }
+
+                    mMapGoogle.addPolyline(line);
+
+                    DisplayMetrics metrics = new DisplayMetrics();
+                    getActivity().getWindowManager().getDefaultDisplay().getMetrics(metrics);
+                    int width = metrics.widthPixels;
+                    LatLngBounds.Builder builder = new LatLngBounds.Builder();
+                    for (Gps p : gpsList) {
+                        LatLng pos = new LatLng(Double.parseDouble(p.getLatitude()), Double.parseDouble(p.getLongitude()));
+                        builder.include(pos);
+                    }
+
+                    LatLngBounds bounds = builder.build();
+                    int padding = ((width * 10) / 100); // offset from edges of the map
+                    // in pixels
+                    CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds,
+                            padding);
+                    mMapGoogle.moveCamera(cu);
                 }
             }
         });

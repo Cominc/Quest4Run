@@ -100,8 +100,7 @@
         android:gravity="center"
         android:id="@+id/linearLayout"
         android:layout_below="@+id/RelativeLayoutExp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="18dp">
+        android:layout_centerHorizontal="true">
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -191,18 +190,28 @@
 
     <RelativeLayout
         android:id="@+id/RelativeLayoutExp"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/quest_detail_description">
+        android:layout_below="@+id/quest_detail_description"
+        android:layout_marginTop="5dp"
+        android:layout_centerHorizontal="true">
 
-        <TextView
-            android:id="@+id/textView"
+        <ImageView
+            android:id="@+id/imageView5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:text="TextView" />
+            app:srcCompat="@drawable/ic_chart_line_variant_grey600_24dp" />
+
+        <TextView
+            android:id="@+id/quest_detail_exp_reward"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@+id/imageView5" />
     </RelativeLayout>
+
+
 
 
 </RelativeLayout>
