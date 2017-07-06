@@ -4,18 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="5dp"
+    android:layout_margin="10dp"
     tools:context="com.comincini_micheli.quest4run.activity.QuestDetailActivity">
 
     <TextView
         android:id="@+id/quest_detail_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
         android:text="TextView"
-        android:textSize="21dp"/>
+        android:textSize="21dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
 
     <TextView
         android:id="@+id/quest_detail_description"
@@ -26,65 +25,19 @@
         android:layout_marginTop="17dp"
         android:text="TextView" />
 
-    <TextView
-        android:id="@+id/quest_detail_attack_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/quest_detail_description"
-        android:layout_marginTop="37dp"
-        android:text="@string/attack_label" />
 
-    <TextView
-        android:id="@+id/quest_detail_defense_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/quest_detail_attack_label"
-        android:layout_centerHorizontal="true"
-        android:text="@string/defense_label" />
 
-    <TextView
-        android:id="@+id/quest_detail_magic_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignTop="@+id/quest_detail_defense_label"
-        android:text="@string/magic_label" />
 
-    <TextView
-        android:id="@+id/quest_detail_attack_value"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/quest_detail_attack_label"
-        android:layout_marginTop="15dp"
-        android:text="TextView" />
 
-    <TextView
-        android:id="@+id/quest_detail_defense_value"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/quest_detail_defense_label"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="15dp"
-        android:text="TextView" />
 
-    <TextView
-        android:id="@+id/quest_detail_magic_value"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_below="@+id/quest_detail_magic_label"
-        android:layout_marginTop="15dp"
-        android:text="TextView" />
 
     <TextView
         android:id="@+id/quest_detail_duration_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/quest_detail_duration_label"
-        android:layout_marginTop="23dp"
-        android:layout_below="@+id/quest_detail_attack_value"
+        android:layout_marginTop="13dp"
+        android:layout_below="@+id/quest_detail_countdown"
         android:layout_alignParentStart="true" />
 
     <TextView
@@ -93,9 +46,8 @@
         android:layout_height="wrap_content"
         android:text="TextView"
         android:layout_marginLeft="50dp"
-        android:layout_alignBaseline="@+id/quest_detail_duration_label"
-        android:layout_alignBottom="@+id/quest_detail_duration_label"
-        android:layout_toEndOf="@+id/quest_detail_attack_label" />
+        android:layout_above="@+id/quest_detail_date_start_label"
+        android:layout_toStartOf="@+id/quest_detail_title" />
 
     <TextView
         android:id="@+id/quest_detail_date_start_label"
@@ -135,11 +87,103 @@
         android:id="@+id/quest_detail_countdown"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
         android:textSize="30dp"
         android:text="TextView"
-        android:layout_below="@+id/quest_detail_date_finish_value"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/linearLayout"
         android:layout_centerHorizontal="true" />
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:id="@+id/linearLayout"
+        android:layout_below="@+id/quest_detail_description"
+        android:layout_centerHorizontal="true">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/ic_sword_grey600_48dp" />
+
+            <TextView
+                android:id="@+id/quest_detail_attack_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/attack_label"
+                android:layout_marginTop="5dp"/>
+
+            <TextView
+                android:id="@+id/quest_detail_attack_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="TextView" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:padding="40dp">
+
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/ic_shield_half_full_grey600_48dp" />
+
+            <TextView
+                android:id="@+id/quest_detail_defense_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/quest_detail_attack_label"
+                android:layout_centerHorizontal="true"
+                android:text="@string/defense_label"
+                android:layout_marginTop="5dp"/>
+
+            <TextView
+                android:id="@+id/quest_detail_defense_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/quest_detail_defense_label"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="15dp"
+                android:text="TextView" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/imageView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/ic_auto_fix_grey600_48dp" />
+
+            <TextView
+                android:id="@+id/quest_detail_magic_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/magic_label"
+                android:layout_marginTop="5dp"/>
+
+            <TextView
+                android:id="@+id/quest_detail_magic_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="TextView" />
+        </LinearLayout>
+    </LinearLayout>
 
 
 </RelativeLayout>
