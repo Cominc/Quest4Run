@@ -128,6 +128,7 @@ public class RunFragment extends Fragment {
                 else
                 {
                     progressDialog.dismiss();
+                    Toast.makeText(getContext(), getResources().getString(R.string.toast_run_start), Toast.LENGTH_SHORT).show();
                     startTime = System.currentTimeMillis();
                     chronometer.setBase(SystemClock.elapsedRealtime());
                     chronometer.start();
@@ -218,7 +219,6 @@ public class RunFragment extends Fragment {
                         locationManager.requestLocationUpdates(provider, Constants.MIN_TIME_BETEWEEN_UPDATE, 0, locationListener);
                         progressDialog.show();
 
-                        Toast.makeText(getContext(), getResources().getString(R.string.toast_run_start), Toast.LENGTH_SHORT).show();
                         previusLocation = null;
                         active = true;
                         mMapGoogle.clear();
