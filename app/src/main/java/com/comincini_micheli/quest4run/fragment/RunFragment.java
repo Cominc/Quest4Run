@@ -57,8 +57,8 @@ public class RunFragment extends Fragment {
     //TODO rimuovere molti toast
     //TODO riattivare GPS quando i test sono finiti
     //TODO gestire perdita/disattivazione segnale gps
-    private final static String provider = LocationManager.GPS_PROVIDER;
-    //private final static String provider = LocationManager.NETWORK_PROVIDER;
+    //private final static String provider = LocationManager.GPS_PROVIDER;
+    private final static String provider = LocationManager.NETWORK_PROVIDER;
     private static Location previusLocation = null;
     private boolean active = false;
     private float totalDistance = 0, intermediateDistance = 0;
@@ -70,6 +70,7 @@ public class RunFragment extends Fragment {
 
     private MapView mMapView;
     private GoogleMap mMapGoogle;
+    private Marker arrowMarker = null;
 
     public RunFragment() {
     }
@@ -147,8 +148,11 @@ public class RunFragment extends Fragment {
                     PolylineOptions line= new PolylineOptions().width(5).color(getResources().getColor(R.color.colorPrimary));
                     if(previusLocation!=null) {
                         line.add(new LatLng(previusLocation.getLatitude(), previusLocation.getLongitude()));
-                        //TODO aggiungere marker freccia
+                        //TODO aggiunta marker freccia DA TESTARE (correggere rotazione freccia)
                         //mMapGoogle.addMarker(new MarkerOptions().position(newPosition).anchor(0.5f, 0.5f).icon(BitmapDescriptorFactory.fromResource(R.drawable.point_dark_blu)));
+                        if(arrowMarker!=null)
+                            arrowMarker.remove();
+                        arrowMarker = mMapGoogle.addMarker(new MarkerOptions().position(newPosition).anchor(0.5f, 0.5f).rotation(location.getBearing()).icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_navigation_grey600_24dp)));
                     }
                     else {
                         mMapGoogle.addMarker(new MarkerOptions().position(newPosition).icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_start)));
@@ -195,6 +199,8 @@ public class RunFragment extends Fragment {
                     locationManager.removeUpdates(locationListener);
                     btnGPS_stop.setVisibility(View.GONE);
                     btnGPS_start.setVisibility(View.VISIBLE);
+                    if(arrowMarker!=null)
+                        arrowMarker.remove();
                     if (previusLocation != null)
                         mMapGoogle.addMarker(new MarkerOptions().position(new LatLng(previusLocation.getLatitude(), previusLocation.getLongitude())).anchor(0.0f, 1.0f).icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_finish)));
                     chronometer.stop();
@@ -245,6 +251,8 @@ public class RunFragment extends Fragment {
                 progressDialog.dismiss();
                 btnGPS_stop.setVisibility(View.GONE);
                 btnGPS_start.setVisibility(View.VISIBLE);
+                if(arrowMarker!=null)
+                    arrowMarker.remove();
                 if (previusLocation != null)
                     mMapGoogle.addMarker(new MarkerOptions().position(new LatLng(previusLocation.getLatitude(), previusLocation.getLongitude())).anchor(0.0f, 1.0f).icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_finish)));
                 chronometer.stop();
