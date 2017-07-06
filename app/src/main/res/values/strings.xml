@@ -203,6 +203,4 @@
     <string name="date_format">dd-MM-yyyy</string>
     <string name="datetime_format">HH:mm dd-MM-yyyy</string>
     <string name="alert_btn_positive_label">OK</string>
-    <string name="alert_btn_negative_label">KO</string>
-    <string name="alert_btn_neutral_label">Annulla</string>
 </resources>
