@@ -7,7 +7,6 @@ import java.io.Serializable;
 /**
  * Created by Gianmaria on 19/05/2017.
  */
-//TODO perchè serializable
 public class Task implements Serializable, Comparable
 {
     private int id;
