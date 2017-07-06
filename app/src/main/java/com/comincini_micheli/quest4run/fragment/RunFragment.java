@@ -2,6 +2,7 @@ package com.comincini_micheli.quest4run.fragment;
 
 import android.Manifest;
 import android.app.ProgressDialog;
+import android.os.Build;
 import android.support.v7.app.AlertDialog;
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -20,6 +21,7 @@ import android.provider.Settings;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.text.AndroidCharacter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,6 +47,8 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
 
+import java.security.Permission;
+import java.security.PermissionCollection;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -202,7 +206,10 @@ public class RunFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                    Toast.makeText(getContext(), getResources().getString(R.string.toast_gps_missing_permission), Toast.LENGTH_SHORT).show();
+                    if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
+                        ActivityCompat.requestPermissions(getActivity(),new String[]{Manifest.permission.ACCESS_FINE_LOCATION},Constants.MY_PERMISSION_REQUEST_LOCATION);
+                    else
+                        Toast.makeText(getContext(), getResources().getString(R.string.toast_gps_missing_permission), Toast.LENGTH_SHORT).show();
                 } else {
                     if(locationManager.isProviderEnabled(provider)) {
                         db.deleteAllGps();

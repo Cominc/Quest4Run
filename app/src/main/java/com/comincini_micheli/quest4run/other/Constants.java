@@ -19,6 +19,8 @@ public class Constants
    public static final String ID_QUEST = "id_quest";
    public static final String FROM_NOTIFICATION_QUEST_COMPLETED = "from_notification_quest_completed";
 
+   public static final int MY_PERMISSION_REQUEST_LOCATION = 99;
+
    public static final long MIN_TIME_BETEWEEN_UPDATE = 1000;
 
    public static final int ID_TYPE_ATTACK = 0;
