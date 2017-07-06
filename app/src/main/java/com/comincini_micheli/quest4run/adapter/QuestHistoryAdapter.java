@@ -66,6 +66,15 @@ public class QuestHistoryAdapter extends BaseAdapter
 
         questActual = data.get(position);
 
+        vi.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                activity.openContextMenu(v);
+            }
+        });
+
         // Setting all values in listview
         title.setText(questActual.getTitle());
         expReward.setText(questActual.getExpReward() + activity.getResources().getString(R.string.exp_label));

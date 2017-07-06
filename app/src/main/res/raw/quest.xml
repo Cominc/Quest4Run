@@ -2,7 +2,9 @@
 <quests>
     <quest>
         <title>quest 1</title>
-        <description>description</description>
+        <description>Esisteva Eru, l’Uno, che in Arda è chiamato Ilùvatar; ed egli creò per primi gli Ainur, i Santi,
+            rampolli del suo pensiero, ed essi erano con lui prima che ogni altro fosse creato.
+            Ed egli parlò loro, proponendo temi musicali; ed essi cantarono al suo cospetto, ed egli ne fu lieto.</description>
         <attack>4</attack>
         <defense>1</defense>
         <magic>2</magic>
@@ -11,7 +13,10 @@
     </quest>
     <quest>
         <title>quest 2</title>
-        <description>description</description>
+        <description>A lungo cantarono soltanto uno alla volta, o solo pochi insieme mentre gli altri stavano ad ascoltare;
+            ché ciascuno di essi penetrava soltanto quella parte della mente di Ilùvatar da cui proveniva,
+            e crescevano lentamente nella comprensione dei loro fratelli.
+            Ma già solo ascoltando pervenivano a una comprensione più profonda, e s’accrescevano l’unisono e l’armonia.</description>
         <attack>1</attack>
         <defense>1</defense>
         <magic>1</magic>
@@ -20,7 +25,9 @@
     </quest>
     <quest>
         <title>quest 3</title>
-        <description>description</description>
+        <description>E accadde che Ilùvatar convocò tutti gli Ainur ed espose loro un possente tema, svelando cose più grandi
+            e più magnifiche di quante ne avesse fino a quel momento rivelate; e la gloria dell’inizio
+            e lo splendore della conclusione lasciarono stupiti gli Ainur. sì che si inchinarono davanti a Ilùvatar e stettero in silenzio.</description>
         <attack>1</attack>
         <defense>1</defense>
         <magic>1</magic>
@@ -29,7 +36,10 @@
     </quest>
     <quest>
         <title>quest 4</title>
-        <description>description</description>
+        <description>Allora Ilùvatar disse: "Del tema che vi ho esposto, io voglio che voi adesso facciate, in congiunta armonia,
+            una Grande Musica, E poiché vi ho accesi della Fiamma Imperitura, voi esibirete i vostri poteri nell’adornare il tema stesso,
+            ciascuno con i propri pensieri e artifici, dove lo desideri.
+            Io invece siederò in ascolto, contento del fatto che tramite vostro una grande bellezza sia ridesta in canto".</description>
         <attack>1</attack>
         <defense>1</defense>
         <magic>1</magic>
@@ -38,7 +48,11 @@
     </quest>
     <quest>
         <title>quest 5</title>
-        <description>description</description>
+        <description>Allora la voce degli Ainur, quasi con arpe e liuti e flauti e trombe, e viole e organi,
+            quasi con innumerevoli cori che cantassero con parole, prese a plasmare il tema di Ilùvatar in una grande musica;
+            e si levò un suono di melodie infinitamente avvicendantisi, conteste in armonia, che trascendevano l'udibile in prrofondità
+            e altezza, e i luoghi della dimora di Ilùvatar ne erano riempiti a traboccarne,
+            e la musica e l’eco della musica si spandevano nel Vuoto, ed esso non era vacuo.</description>
         <attack>1</attack>
         <defense>1</defense>
         <magic>1</magic>
@@ -47,7 +61,9 @@
     </quest>
     <quest>
         <title>quest 6</title>
-        <description>description</description>
+        <description>Mai prima gli Ainur avevano prodotto una musica simile, benché sia stato detto
+            che una ancora più grande sarà fatta al cospetto di Ilùvatar dai cori degli Ainur e dei
+            Figli di Ilùvatar dopo la fine dei giorni.</description>
         <attack>1</attack>
         <defense>1</defense>
         <magic>1</magic>
@@ -56,7 +72,10 @@
     </quest>
     <quest>
         <title>quest 7</title>
-        <description>description</description>
+        <description>Allora i temi di Ilùvatar saranno eseguiti alla perfezione, assumendo
+            Essere nel momento stesso in cui saranno emessi, ché tutti allora avranno compreso appieno
+            quale sia il suo intento nella singola parte, e ciascuno conoscerà la comprensione di ognuno,
+            e Ilùvatar conferirà ai loro pensieri il fuoco segreto, poiché sarà assai compiaciuto.</description>
         <attack>1</attack>
         <defense>1</defense>
         <magic>1</magic>
@@ -65,7 +84,11 @@
     </quest>
     <quest>
         <title>quest 8</title>
-        <description>description</description>
+        <description>Ora però Ilùvatar sedeva ad ascoltare, e a lungo gli parve che andasse bene,
+            perché nella musica non erano pecche. Ma, col progredire del tema, nel cuore di Melkor
+            sorse l’idea di inserire trovate frutto della propria immaginazione, che non erano in
+            accordo con il tema di Ilùvatar, ed egli con ciò intendeva accrescere la potenza e la
+            gloria della parte assegnatagli. </description>
         <attack>1</attack>
         <defense>1</defense>
         <magic>1</magic>
@@ -74,7 +97,8 @@
     </quest>
     <quest>
         <title>quest 9</title>
-        <description>description</description>
+        <description>A Melkor tra gli Ainur erano state concesse le massime doti di potenza e conoscenza,
+            ed egli partecipava di tutti i doni dei suoi fratelli.</description>
         <attack>1</attack>
         <defense>1</defense>
         <magic>1</magic>
@@ -83,7 +107,11 @@
     </quest>
     <quest>
         <title>quest 10</title>
-        <description>description</description>
+        <description>Spesso se n’era andato da solo nei luoghi vuoti alla ricerca della Fiamma Imperitura,
+            poiché grande era in lui il desiderio di porre in Essere cose sue proprie, e gli sembrava
+            che Ilùvatar non tenesse da conto il Vuoto, e la vacuità di questo gli riusciva intollerabile.
+            Ma il Fuoco non l’aveva trovato, poiché esso è con Ilùvatar. Standosene solo, aveva però preso
+            a concepire pensieri suoi propri, diversi da quelli dei suoi fratelli.</description>
         <attack>1</attack>
         <defense>1</defense>
         <magic>1</magic>
