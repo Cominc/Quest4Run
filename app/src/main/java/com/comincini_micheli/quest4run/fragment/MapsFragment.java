@@ -11,9 +11,7 @@ import android.support.annotation.Nullable;
 
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
-//TODO quale import usare?
-import android.app.AlertDialog;
-//import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AlertDialog;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
