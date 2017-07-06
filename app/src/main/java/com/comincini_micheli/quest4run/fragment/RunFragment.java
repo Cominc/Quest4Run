@@ -169,7 +169,7 @@ public class RunFragment extends Fragment {
             }
         });
 
-        alertDialogGpsOff.setButton(DialogInterface.BUTTON_NEUTRAL,getResources().getString(R.string.alert_btn_neutral_label), new DialogInterface.OnClickListener() {
+        alertDialogGpsOff.setButton(DialogInterface.BUTTON_NEUTRAL,getResources().getString(R.string.cancel), new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 if(active){
                     Toast.makeText(getContext(),getResources().getString(R.string.toast_run_gps_deactivated),Toast.LENGTH_SHORT).show();
