@@ -200,7 +200,7 @@
             android:id="@+id/imageView5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:srcCompat="@drawable/ic_chart_line_variant_grey600_24dp" />
+            app:srcCompat="@drawable/ic_trending_up_grey600_24dp" />
 
         <TextView
             android:id="@+id/quest_detail_exp_reward"
@@ -210,8 +210,5 @@
             android:layout_centerVertical="true"
             android:layout_toEndOf="@+id/imageView5" />
     </RelativeLayout>
-
-
-
 
 </RelativeLayout>
