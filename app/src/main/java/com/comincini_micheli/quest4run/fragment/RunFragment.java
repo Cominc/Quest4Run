@@ -239,6 +239,12 @@ public class RunFragment extends Fragment {
                 int totalRewardEarned = 0;
                 int totalNewTaskCompleted = 0;
                 if(totalDistance > 0) {
+
+                    SharedPreferences.Editor lastRunInfo = getContext().getSharedPreferences(Constants.NAME_PREFS, getContext().MODE_PRIVATE).edit();
+                    lastRunInfo.putFloat(Constants.LAST_DISTANCE, totalDistance);
+                    lastRunInfo.putLong(Constants.LAST_DURATION, (finishTime - startTime));
+                    lastRunInfo.commit();
+
                     if (numberMinutes > 0) {
                         Toast.makeText(getContext(), "Durata : " + numberMinutes + " minuti e " +
                                 (totalTime - numberMinutes * Constants.SECONDS_A_MINUTE) + " secondi", Toast.LENGTH_SHORT).show();

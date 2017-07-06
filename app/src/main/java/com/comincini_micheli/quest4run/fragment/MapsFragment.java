@@ -4,6 +4,7 @@ package com.comincini_micheli.quest4run.fragment;
 
 import android.content.DialogInterface;
 
+import android.content.SharedPreferences;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -49,8 +50,6 @@ public class MapsFragment extends Fragment {
     private float speed;
     private long duration;
 
-    private List<Gps> gpsList;
-
     public MapsFragment() {
     }
 
@@ -63,19 +62,12 @@ public class MapsFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        DatabaseHandler db = new DatabaseHandler(getContext());
-        gpsList = db.getAllGps();
-        int startTime = 0, finishTime = 0;
-        for(int i=0; i<gpsList.size(); i++){
-            if(i==0) {
-                startTime = gpsList.get(i).getTime();
-            }
-            if(i==(gpsList.size()-1)) {
-                finishTime = gpsList.get(i).getTime();
-            }
-            if(i>0&&i<(gpsList.size()-1)){}
-        }
-        duration = finishTime - startTime;
+
+        SharedPreferences lastRunInfo = getContext().getSharedPreferences(Constants.NAME_PREFS, getContext().MODE_PRIVATE);
+        distance = lastRunInfo.getFloat(Constants.LAST_DISTANCE, 0);
+        duration = lastRunInfo.getLong(Constants.LAST_DURATION, 1);
+        speed = distance/(duration/Constants.MILLISECONDS_A_SECOND);
+
         TextView textViewDistance = (TextView) view.findViewById(R.id.display_distance);
         TextView textViewSpeed = (TextView) view.findViewById(R.id.display_speed);
         Chronometer chronometer = (Chronometer) view.findViewById(R.id.display_time);
@@ -94,10 +86,10 @@ public class MapsFragment extends Fragment {
             @Override
             public void onMapReady(GoogleMap googleMap) {
                 mMapGoogle = googleMap;
-                /*
+
                 DatabaseHandler db = new DatabaseHandler(getContext());
                 List<Gps> gpsList = db.getAllGps();
-                */
+
                 PolylineOptions line= new PolylineOptions().width(5).color(getResources().getColor(R.color.colorPrimary));
                 LatLng point = null;
                 Double meanLat = 0.0, meanLng = 0.0;
@@ -123,22 +115,18 @@ public class MapsFragment extends Fragment {
                     /*
                     if(i==0) {
                         mMapGoogle.addMarker(new MarkerOptions().position(point).title(i + "").icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_start)));
-                        startTime = gpsList.get(i).getTime();
                     }
                     else if(i==(gpsList.size()-1)) {
                         mMapGoogle.addMarker(new MarkerOptions().position(point).title(i + "").anchor(0.0f, 1.0f).icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_finish)));
-                        finishTime = gpsList.get(i).getTime();
                     }
                     else
                         mMapGoogle.addMarker(new MarkerOptions().position(point).title(i+"").anchor(0.5f, 0.5f).icon(BitmapDescriptorFactory.fromResource(R.drawable.point_dark_blu)));
                     */
                     if(i==0) {
                         mMapGoogle.addMarker(new MarkerOptions().position(point).title(i + "").icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_start)));
-                        //startTime = gpsList.get(i).getTime();
                     }
                     if(i==(gpsList.size()-1)) {
                         mMapGoogle.addMarker(new MarkerOptions().position(point).title(i + "").anchor(0.0f, 1.0f).icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_finish)));
-                        //finishTime = gpsList.get(i).getTime();
                     }
                     if(i>0&&i<(gpsList.size()-1))
                         mMapGoogle.addMarker(new MarkerOptions().position(point).title(i+"").anchor(0.5f, 0.5f).icon(BitmapDescriptorFactory.fromResource(R.drawable.point_dark_blu)));
