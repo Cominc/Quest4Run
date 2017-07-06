@@ -18,7 +18,7 @@
 
     <!-- Navigation Drawer menu labels -->
     <string name="nav_run">Corsa</string>
-    <string name="nav_path">Percorso</string>
+    <string name="nav_path">Ultima attività</string>
     <string name="nav_task">Task</string>
 
     <string name="nav_character">Personaggio</string>
@@ -199,7 +199,7 @@
     <string name="notification_title_run_reward">Hai completato %d task!</string>
 
     <!-- Task map -->
-    <string name="alert_no_path_title">Nessun percorso trovato</string>
+    <string name="alert_no_path_title">Nessuna attività trovata</string>
     <string name="alert_no_path_text">Inizia ad allenarti adesso!</string>
 
     <string name="date_format">dd-MM-yyyy</string>
