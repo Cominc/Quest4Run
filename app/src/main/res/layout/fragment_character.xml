@@ -80,6 +80,7 @@
             android:layout_alignStart="@+id/character_wallet_label"
             android:layout_below="@+id/character_wallet_label"
             android:layout_marginTop="18dp"
+            android:textColor="@color/black"
             android:text="@string/character_stats_label"
             android:textSize="18sp" />
 

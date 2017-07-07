@@ -29,6 +29,11 @@
     <string name="nav_about_us">Chi siamo</string>
     <string name="nav_faq">Faq</string>
 
+    <!--About Us -->
+    <string name="comincini_name_value">Daniele Comincini</string>
+    <string name="micheli_name_value">Gianmaria Micheli</string>
+    <string name="release_year">2017</string>
+
     <!--Faq-->
     <string name="faq_title">Cos\'è Quest4Run?</string>
     <string name="faq_text">A lungo cantarono soltanto uno alla volta, o solo pochi insieme mentre gli altri stavano ad ascoltare;

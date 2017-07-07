@@ -11,51 +11,66 @@
     android:id="@+id/about_us_layout"
     tools:context="com.comincini_micheli.quest4run.activity.AboutUsActivity">
 
-    <ImageView
-        android:id="@+id/comincini_avatar"
+    <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:srcCompat="@drawable/m_1"
-        android:layout_marginTop="65dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true" />
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true">
 
-    <TextView
-        android:id="@+id/comincini_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/comincini_avatar"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="42dp"
-        android:layout_marginStart="133dp"
-        android:text="Daniele Comincini"
-        android:textSize="22sp"/>
+        <RelativeLayout
+            android:id="@+id/RelativeLayoutComincini"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true">
+            <ImageView
+                android:id="@+id/comincini_avatar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/m_1" />
 
-    <ImageView
-        android:id="@+id/micheli_avatar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@drawable/m_0"
-        android:layout_below="@+id/comincini_name"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="51dp" />
+            <TextView
+                android:id="@+id/comincini_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:width="200dp"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:text="@string/comincini_name_value"
+                android:textSize="22sp"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@+id/comincini_avatar" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/RelativeLayoutMicheli"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/RelativeLayoutComincini"
+            android:layout_marginTop="50dp">
+            <ImageView
+                android:id="@+id/micheli_avatar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/m_0" />
 
-    <TextView
-        android:id="@+id/micheli_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/micheli_avatar"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="42dp"
-        android:layout_marginStart="133dp"
-        android:text="Gianmaria Micheli"
-        android:textSize="22sp"/>
-
+            <TextView
+                android:id="@+id/micheli_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:width="200dp"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:text="@string/micheli_name_value"
+                android:textSize="22sp"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@+id/micheli_avatar" />
+        </RelativeLayout>
+    </RelativeLayout>
     <TextView
         android:id="@+id/year_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:text="2017"/>
+        android:text="@string/release_year"/>
 </RelativeLayout>
