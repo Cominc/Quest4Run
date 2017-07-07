@@ -54,9 +54,7 @@ import java.util.List;
 
 
 public class RunFragment extends Fragment {
-    //TODO rimuovere molti toast
     //TODO riattivare GPS quando i test sono finiti
-    //TODO gestire perdita/disattivazione segnale gps
     private final static String provider = LocationManager.GPS_PROVIDER;
     //private final static String provider = LocationManager.NETWORK_PROVIDER;
     private static Location previusLocation = null;
@@ -182,7 +180,6 @@ public class RunFragment extends Fragment {
 
         // Setting Icon to Dialog
         //alertDialogGpsOff.setIcon(R.drawable.tick);
-        //TODO vogliamo mettere icona?
         // Setting OK Button
         alertDialogGpsOff.setButton(DialogInterface.BUTTON_POSITIVE,getResources().getString(R.string.alert_btn_positive_label), new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
@@ -194,7 +191,6 @@ public class RunFragment extends Fragment {
             public void onClick(DialogInterface dialog, int which) {
                 if(active){
                     Toast.makeText(getContext(),getResources().getString(R.string.toast_run_gps_deactivated),Toast.LENGTH_SHORT).show();
-                    //TODO duplicato
                     active = false;
                     locationManager.removeUpdates(locationListener);
                     btnGPS_stop.setVisibility(View.GONE);
@@ -245,7 +241,6 @@ public class RunFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Toast.makeText( getContext(), getResources().getString(R.string.toast_run_stop), Toast.LENGTH_SHORT).show();
-                //TODO duplicato
                 active = false;
                 locationManager.removeUpdates(locationListener);
                 progressDialog.dismiss();

@@ -43,7 +43,6 @@ import java.util.concurrent.TimeUnit;
 
 public class MapsFragment extends Fragment {
 
-    //TODO da sistemare e riordinare
     private MapView mMapView;
     private GoogleMap mMapGoogle;
 
