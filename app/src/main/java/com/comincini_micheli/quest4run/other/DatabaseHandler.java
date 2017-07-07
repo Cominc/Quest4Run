@@ -113,7 +113,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String CREATE_QUEST_TABLE = " CREATE TABLE " + TABLE_QUEST + "("
             + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + KEY_TITLE + " TEXT," + KEY_DESCRIPTION + " TEXT," + KEY_COMPLETED + " INTEGER,"
             + KEY_ACTIVE + " INTEGER," + KEY_ATK + " INTEGER," + KEY_DEF + " INTEGER," + KEY_MGC + " INTEGER," + KEY_EXP_REWARD + " INTEGER,"
-            + KEY_DURATION + " TEXT," + KEY_START_DATE + " TEXT," + KEY_FINISH_DATE + " TEXT"
+            + KEY_DURATION + " TEXT," + KEY_START_DATE + " TEXT," + KEY_FINISH_DATE + " TEXT," + KEY_ICON + " TEXT"
             + ")";
 
     private static final String CREATE_GPS_TABLE = " CREATE TABLE " + TABLE_GPS + "("
@@ -190,6 +190,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             quest.setMinMagic(Integer.parseInt(parser.getValue(e, KEY_MGC)));
             quest.setExpReward(Integer.parseInt(parser.getValue(e, KEY_EXP_REWARD)));
             quest.setDuration(Integer.parseInt(parser.getValue(e, KEY_DURATION)));
+            quest.setIcon(parser.getValue(e, KEY_ICON));
             addQuest(quest);
         }
 
@@ -726,6 +727,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         values.put(KEY_DURATION, quest.getDuration());
         values.put(KEY_START_DATE, quest.getDateStart());
         values.put(KEY_FINISH_DATE, quest.getDateFinish());
+        values.put(KEY_ICON, quest.getIcon());
 
         // Inserting Row
         int id = (int) db.insert(TABLE_QUEST, null, values);
@@ -739,7 +741,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
         Cursor cursor = db.query(TABLE_QUEST, new String[] { KEY_ID,
                         KEY_TITLE, KEY_DESCRIPTION, KEY_COMPLETED, KEY_ACTIVE, KEY_ATK, KEY_DEF, KEY_MGC, KEY_EXP_REWARD,
-                        KEY_DURATION, KEY_START_DATE, KEY_FINISH_DATE}, KEY_ID + "=?",
+                        KEY_DURATION, KEY_START_DATE, KEY_FINISH_DATE, KEY_ICON}, KEY_ID + "=?",
                 new String[] { String.valueOf(id) }, null, null, null, null);
         if (cursor != null)
             cursor.moveToFirst();
@@ -750,7 +752,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 Integer.parseInt(cursor.getString(5)),Integer.parseInt(cursor.getString(6)),
                 Integer.parseInt(cursor.getString(7)),Integer.parseInt(cursor.getString(8)),
                 Long.parseLong(cursor.getString(9)),Long.parseLong(cursor.getString(10)),
-                Long.parseLong(cursor.getString(11)));
+                Long.parseLong(cursor.getString(11)),cursor.getString(12));
         cursor.close();
         return quest;
     }
@@ -780,6 +782,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 quest.setDuration(Long.parseLong(cursor.getString(9)));
                 quest.setDateStart(Long.parseLong(cursor.getString(10)));
                 quest.setDateFinish(Long.parseLong(cursor.getString(11)));
+                quest.setIcon(cursor.getString(12));
 
                 questList.add(quest);
             } while (cursor.moveToNext());
@@ -810,6 +813,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             quest.setDuration(Long.parseLong(cursor.getString(9)));
             quest.setDateStart(Long.parseLong(cursor.getString(10)));
             quest.setDateFinish(Long.parseLong(cursor.getString(11)));
+            quest.setIcon(cursor.getString(12));
             return quest;
         }
         else return null;
@@ -843,6 +847,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 quest.setDuration(Long.parseLong(cursor.getString(9)));
                 quest.setDateStart(Long.parseLong(cursor.getString(10)));
                 quest.setDateFinish(Long.parseLong(cursor.getString(11)));
+                quest.setIcon(cursor.getString(12));
 
                 questList.add(quest);
 
@@ -870,6 +875,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         values.put(KEY_DURATION, quest.getDuration());
         values.put(KEY_START_DATE, quest.getDateStart());
         values.put(KEY_FINISH_DATE, quest.getDateFinish());
+        values.put(KEY_ICON, quest.getIcon());
 
         // updating row
         return db.update(TABLE_QUEST, values, KEY_ID + " = ?",

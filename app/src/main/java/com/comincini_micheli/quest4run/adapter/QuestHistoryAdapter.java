@@ -10,6 +10,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -60,11 +61,15 @@ public class QuestHistoryAdapter extends BaseAdapter
         if(convertView==null)
             vi = inflater.inflate(R.layout.quest_history_list_row, null);
 
+        ImageView icon = (ImageView)vi.findViewById(R.id.quest_history_icon);
         TextView title = (TextView) vi.findViewById(R.id.quest_history_title);
         TextView expReward = (TextView) vi.findViewById(R.id.quest_history_exp_reward);
         TextView dateFinish = (TextView) vi.findViewById(R.id.quest_history_date_finish);
 
         questActual = data.get(position);
+
+        int id = activity.getResources().getIdentifier(questActual.getIcon(),"drawable", activity.getPackageName());
+        icon.setImageResource(id);
 
         vi.setOnClickListener(new View.OnClickListener()
         {

@@ -10,6 +10,7 @@
         <magic>2</magic>
         <expReward>15</expReward>
         <duration>14415000</duration>
+        <icon>ic_numeric_1_box_grey600_48dp</icon>
     </quest>
     <quest>
         <title>quest 2</title>
@@ -22,6 +23,7 @@
         <magic>1</magic>
         <expReward>1</expReward>
         <duration>5400000</duration>
+        <icon>ic_numeric_2_box_grey600_48dp</icon>
     </quest>
     <quest>
         <title>quest 3</title>
@@ -33,6 +35,7 @@
         <magic>1</magic>
         <expReward>50</expReward>
         <duration>30000</duration>
+        <icon>ic_numeric_3_box_grey600_48dp</icon>
     </quest>
     <quest>
         <title>quest 4</title>
@@ -45,6 +48,7 @@
         <magic>1</magic>
         <expReward>100</expReward>
         <duration>30000</duration>
+        <icon>ic_numeric_4_box_grey600_48dp</icon>
     </quest>
     <quest>
         <title>quest 5</title>
@@ -58,6 +62,7 @@
         <magic>1</magic>
         <expReward>1</expReward>
         <duration>30000</duration>
+        <icon>ic_numeric_5_box_grey600_48dp</icon>
     </quest>
     <quest>
         <title>quest 6</title>
@@ -69,6 +74,7 @@
         <magic>1</magic>
         <expReward>1</expReward>
         <duration>30000</duration>
+        <icon>ic_numeric_6_box_grey600_48dp</icon>
     </quest>
     <quest>
         <title>quest 7</title>
@@ -81,6 +87,7 @@
         <magic>1</magic>
         <expReward>1</expReward>
         <duration>30000</duration>
+        <icon>ic_numeric_7_box_grey600_48dp</icon>
     </quest>
     <quest>
         <title>quest 8</title>
@@ -94,6 +101,7 @@
         <magic>1</magic>
         <expReward>1</expReward>
         <duration>30000</duration>
+        <icon>ic_numeric_8_box_grey600_48dp</icon>
     </quest>
     <quest>
         <title>quest 9</title>
@@ -104,18 +112,6 @@
         <magic>1</magic>
         <expReward>1</expReward>
         <duration>30000</duration>
-    </quest>
-    <quest>
-        <title>quest 10</title>
-        <description>Spesso se n’era andato da solo nei luoghi vuoti alla ricerca della Fiamma Imperitura,
-            poiché grande era in lui il desiderio di porre in Essere cose sue proprie, e gli sembrava
-            che Ilùvatar non tenesse da conto il Vuoto, e la vacuità di questo gli riusciva intollerabile.
-            Ma il Fuoco non l’aveva trovato, poiché esso è con Ilùvatar. Standosene solo, aveva però preso
-            a concepire pensieri suoi propri, diversi da quelli dei suoi fratelli.</description>
-        <attack>1</attack>
-        <defense>1</defense>
-        <magic>1</magic>
-        <expReward>1</expReward>
-        <duration>30000</duration>
+        <icon>ic_numeric_9_box_grey600_48dp</icon>
     </quest>
 </quests>

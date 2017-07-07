@@ -18,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -92,6 +93,7 @@ public class QuestAdapter extends BaseAdapter
             vi = inflater.inflate(R.layout.quest_list_row, null);
 
 
+        ImageView icon = (ImageView)vi.findViewById(R.id.quest_icon);
         TextView title = (TextView)vi.findViewById(R.id.quest_title);
         TextView attack = (TextView)vi.findViewById(R.id.quest_min_attack);
         TextView defense = (TextView)vi.findViewById(R.id.quest_min_defense);
@@ -102,6 +104,9 @@ public class QuestAdapter extends BaseAdapter
         final TextView countdown = (TextView)vi.findViewById(R.id.quest_timer);
 
         questActual = data.get(position);
+
+        int id = activity.getResources().getIdentifier(questActual.getIcon(),"drawable", activity.getPackageName());
+        icon.setImageResource(id);
 
         vi.setOnClickListener(new View.OnClickListener()
         {

@@ -26,8 +26,10 @@ public class Quest implements Comparable
     private long duration;
     private long dateStart;
     private long dateFinish;
+    private String icon;
 
-    public Quest(int id, String title, String description, boolean completed, boolean active, int minAttack, int minDefense, int minMagic, int expReward, long duration, long dateStart, long dateFinish)
+    public Quest(int id, String title, String description, boolean completed, boolean active, int minAttack,
+                 int minDefense, int minMagic, int expReward, long duration, long dateStart, long dateFinish, String icon)
     {
         this.id = id;
         this.title = title;
@@ -41,6 +43,7 @@ public class Quest implements Comparable
         this.duration = duration;
         this.dateStart = dateStart;
         this.dateFinish = dateFinish;
+        this.icon = icon;
     }
 
     public Quest(String title, String description, int minAttack, int minDefense, int minMagic, int expReward, long duration)
@@ -230,5 +233,15 @@ public class Quest implements Comparable
             return 1;
         else
             return 0;
+    }
+
+    public String getIcon()
+    {
+        return icon;
+    }
+
+    public void setIcon(String icon)
+    {
+        this.icon = icon;
     }
 }
