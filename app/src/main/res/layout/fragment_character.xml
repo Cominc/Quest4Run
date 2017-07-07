@@ -10,23 +10,40 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/character_name"
+        <RelativeLayout
+            android:id="@+id/RelativeLayoutName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:text="@string/name_hint"
-            android:textSize="21sp" />
+            android:layout_centerHorizontal="true">
+
+            <TextView
+                android:id="@+id/character_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:text="@string/name_hint"
+                android:textSize="27sp" />
+
+            <ImageView
+                android:id="@+id/character_gender_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/ic_gender_male_black_24dp"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@+id/character_name"
+                android:layout_marginStart="20dp" />
+        </RelativeLayout>
 
         <ImageView
             android:id="@+id/character_avatar"
             android:layout_width="120dp"
             android:layout_height="120dp"
-            android:layout_below="@+id/character_name"
+            android:layout_below="@+id/RelativeLayoutName"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="18dp"
             app:srcCompat="@drawable/m_0" />
+
 
         <TextView
             android:id="@+id/character_level_label"
@@ -151,15 +168,6 @@
             android:layout_alignTop="@+id/character_level_label"
             android:layout_toEndOf="@+id/character_attack_label"
             android:text="15" />
-
-        <ImageView
-            android:id="@+id/character_gender_icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_above="@+id/character_avatar"
-            android:layout_marginStart="18dp"
-            android:layout_toEndOf="@+id/character_name"
-            app:srcCompat="@drawable/ic_gender_male_grey600_24dp" />
 
         <TextView
             android:id="@+id/character_wallet_value"
