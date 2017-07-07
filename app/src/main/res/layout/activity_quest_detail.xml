@@ -4,211 +4,228 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="@dimen/fab_margin"
     tools:context="com.comincini_micheli.quest4run.activity.QuestDetailActivity">
-
-    <TextView
-        android:id="@+id/quest_detail_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        android:textSize="21dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
-
-    <TextView
-        android:id="@+id/quest_detail_description"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/quest_detail_title"
-        android:layout_marginTop="17dp"
-        android:text="TextView" />
+        android:layout_height="match_parent">
 
-
-
-
-
-
-
-    <TextView
-        android:id="@+id/quest_detail_duration_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/quest_detail_duration_label"
-        android:layout_marginTop="13dp"
-        android:layout_below="@+id/quest_detail_countdown"
-        android:layout_alignParentStart="true" />
-
-    <TextView
-        android:id="@+id/quest_detail_duration_value"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        android:layout_marginLeft="50dp"
-        android:layout_above="@+id/quest_detail_date_start_label"
-        android:layout_toEndOf="@+id/quest_detail_date_start_label"
-        android:layout_marginStart="38dp" />
-
-    <TextView
-        android:id="@+id/quest_detail_date_start_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/quest_detail_duration_label"
-        android:layout_marginTop="15dp"
-        android:text="@string/quest_detail_date_start_label" />
-
-    <TextView
-        android:id="@+id/quest_detail_date_start_value"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/quest_detail_duration_value"
-        android:layout_alignTop="@+id/quest_detail_date_start_label"
-        android:text="TextView" />
-
-    <TextView
-        android:id="@+id/quest_detail_date_finish_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/quest_detail_date_finish_label"
-        android:layout_marginTop="15dp"
-        android:layout_below="@+id/quest_detail_date_start_label"
-        android:layout_alignParentStart="true" />
-
-    <TextView
-        android:id="@+id/quest_detail_date_finish_value"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        android:layout_alignTop="@+id/quest_detail_date_finish_label"
-        android:layout_alignStart="@+id/quest_detail_duration_value" />
-
-    <TextView
-        android:id="@+id/quest_detail_countdown"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="30dp"
-        android:text="TextView"
-        android:layout_marginTop="15dp"
-        android:layout_below="@+id/linearLayout"
-        android:layout_centerHorizontal="true" />
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center"
-        android:id="@+id/linearLayout"
-        android:layout_below="@+id/RelativeLayoutExp"
-        android:layout_centerHorizontal="true">
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="center">
-
-            <ImageView
-                android:id="@+id/imageView2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:srcCompat="@drawable/ic_sword_grey600_48dp" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="@dimen/fab_margin">
 
             <TextView
-                android:id="@+id/quest_detail_attack_label"
+                android:id="@+id/quest_detail_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/attack_label"
-                android:layout_marginTop="5dp"/>
+                android:text="TextView"
+                android:textSize="21dp"
+                android:textColor="@color/black"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true" />
 
             <TextView
-                android:id="@+id/quest_detail_attack_value"
-                android:layout_width="wrap_content"
+                android:id="@+id/quest_detail_description"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/quest_detail_title"
+                android:layout_marginTop="17dp"
                 android:text="TextView" />
-        </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:padding="40dp">
-
-            <ImageView
-                android:id="@+id/imageView3"
+            <RelativeLayout
+                android:id="@+id/RelativeLayoutExp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:srcCompat="@drawable/ic_shield_half_full_grey600_48dp" />
+                android:layout_below="@+id/quest_detail_description"
+                android:layout_marginTop="40dp"
+                android:layout_centerHorizontal="true">
 
-            <TextView
-                android:id="@+id/quest_detail_defense_label"
+                <ImageView
+                    android:id="@+id/imageView5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@drawable/ic_trending_up_grey600_24dp" />
+
+                <TextView
+                    android:id="@+id/quest_detail_exp_reward"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="TextView"
+                    android:layout_centerVertical="true"
+                    android:layout_toEndOf="@+id/imageView5" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/linearLayoutStats"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/quest_detail_attack_label"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="5dp"
-                android:text="@string/defense_label" />
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_below="@+id/RelativeLayoutExp"
+                android:layout_centerHorizontal="true">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center">
 
-            <TextView
-                android:id="@+id/quest_detail_defense_value"
+                    <ImageView
+                        android:id="@+id/imageView2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:srcCompat="@drawable/ic_sword_grey600_48dp" />
+
+                    <TextView
+                        android:id="@+id/quest_detail_attack_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/attack_label"
+                        android:layout_marginTop="5dp"/>
+
+                    <TextView
+                        android:id="@+id/quest_detail_attack_value"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:text="TextView" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="40dp">
+
+                    <ImageView
+                        android:id="@+id/imageView3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:srcCompat="@drawable/ic_shield_half_full_grey600_48dp" />
+
+                    <TextView
+                        android:id="@+id/quest_detail_defense_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@+id/quest_detail_attack_label"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="5dp"
+                        android:text="@string/defense_label" />
+
+                    <TextView
+                        android:id="@+id/quest_detail_defense_value"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/quest_detail_defense_label"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="15dp"
+                        android:text="TextView" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:id="@+id/imageView4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:srcCompat="@drawable/ic_auto_fix_grey600_48dp" />
+
+                    <TextView
+                        android:id="@+id/quest_detail_magic_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/magic_label"
+                        android:layout_marginTop="5dp"/>
+
+                    <TextView
+                        android:id="@+id/quest_detail_magic_value"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:text="TextView" />
+                </LinearLayout>
+            </LinearLayout>
+
+
+            <RelativeLayout
+                android:id="@+id/RelativeLayoutDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/quest_detail_defense_label"
-                android:layout_centerHorizontal="true"
+                android:layout_below="@id/linearLayoutStats"
                 android:layout_marginTop="15dp"
-                android:text="TextView" />
-        </LinearLayout>
+                android:paddingBottom="16dp"
+                android:layout_centerHorizontal="true">
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="center">
+                <TextView
+                    android:id="@+id/quest_detail_duration_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:textColor="@color/black"
+                    android:text="@string/quest_detail_duration_label" />
 
-            <ImageView
-                android:id="@+id/imageView4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:srcCompat="@drawable/ic_auto_fix_grey600_48dp" />
+                <TextView
+                    android:id="@+id/quest_detail_duration_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@+id/quest_detail_date_start_label"
+                    android:layout_marginLeft="50dp"
+                    android:layout_marginStart="38dp"
+                    android:layout_toEndOf="@+id/quest_detail_duration_label"
+                    android:text="TextView" />
 
-            <TextView
-                android:id="@+id/quest_detail_magic_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/magic_label"
-                android:layout_marginTop="5dp"/>
+                <TextView
+                    android:id="@+id/quest_detail_date_start_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_below="@+id/quest_detail_duration_label"
+                    android:layout_marginTop="15dp"
+                    android:textColor="@color/black"
+                    android:text="@string/quest_detail_date_start_label" />
 
-            <TextView
-                android:id="@+id/quest_detail_magic_value"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:text="TextView" />
-        </LinearLayout>
-    </LinearLayout>
+                <TextView
+                    android:id="@+id/quest_detail_date_start_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignStart="@+id/quest_detail_duration_value"
+                    android:layout_alignTop="@+id/quest_detail_date_start_label"
+                    android:text="TextView" />
 
-    <RelativeLayout
-        android:id="@+id/RelativeLayoutExp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/quest_detail_description"
-        android:layout_marginTop="5dp"
-        android:layout_centerHorizontal="true">
+                <TextView
+                    android:id="@+id/quest_detail_date_finish_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_below="@+id/quest_detail_date_start_label"
+                    android:layout_marginTop="15dp"
+                    android:textColor="@color/black"
+                    android:text="@string/quest_detail_date_finish_label" />
 
-        <ImageView
-            android:id="@+id/imageView5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/ic_trending_up_grey600_24dp" />
+                <TextView
+                    android:id="@+id/quest_detail_date_finish_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignStart="@+id/quest_detail_duration_value"
+                    android:layout_alignTop="@+id/quest_detail_date_finish_label"
+                    android:text="TextView" />
 
-        <TextView
-            android:id="@+id/quest_detail_exp_reward"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="TextView"
-            android:layout_centerVertical="true"
-            android:layout_toEndOf="@+id/imageView5" />
-    </RelativeLayout>
+                <TextView
+                    android:id="@+id/quest_detail_countdown"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="30dp"
+                    android:text="TextView"
+                    android:layout_marginTop="15dp"
+                    android:layout_below="@id/quest_detail_date_finish_label"
+                    android:layout_centerHorizontal="true" />
+            </RelativeLayout>
 
+        </RelativeLayout>
+    </ScrollView>
 </RelativeLayout>

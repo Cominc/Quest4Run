@@ -58,14 +58,14 @@ public class QuestDetailActivity extends AppCompatActivity {
         defense.setText(quest.getMinDefense()+"");
         magic.setText(quest.getMinMagic()+"");
         duration.setText(quest.getDurationString());
-        countdown.setText("");
+        countdown.setVisibility(View.GONE);
         if(quest.getDateStart()!=Quest.DEFAUL_EMPTY_DATE_VALUE) {
             Date date = new Date(quest.getDateStart());
             SimpleDateFormat sdf = new SimpleDateFormat(getResources().getString(R.string.datetime_format));
             dateStart.setText(sdf.format(date));
         }
         else{
-            findViewById(R.id.quest_detail_date_start_label).setVisibility(View.INVISIBLE);
+            findViewById(R.id.quest_detail_date_start_label).setVisibility(View.GONE);
             dateStart.setText("");
         }
         if(quest.getDateFinish()!=Quest.DEFAUL_EMPTY_DATE_VALUE) {
@@ -74,17 +74,13 @@ public class QuestDetailActivity extends AppCompatActivity {
             dateFinish.setText(sdf.format(date));
         }
         else{
-            findViewById(R.id.quest_detail_date_finish_label).setVisibility(View.INVISIBLE);
+            findViewById(R.id.quest_detail_date_finish_label).setVisibility(View.GONE);
             dateFinish.setText("");
         }
 
-        if(!quest.isActive()){
-            if (quest.isCompleted())
-                countdown.setText("");
-            else
-                countdown.setText(quest.getDurationString());
-        }
-        else {
+
+        if(quest.isActive()) {
+            countdown.setVisibility(View.VISIBLE);
             countTime = quest.getDateStart() + quest.getDuration() - System.currentTimeMillis();
             new CountDownTimer(countTime, 1000) {
 
