@@ -1,10 +1,14 @@
 package com.comincini_micheli.quest4run.activity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.CountDownTimer;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -23,6 +27,8 @@ public class QuestDetailActivity extends AppCompatActivity {
     long countTime;
     Quest quest;
     DatabaseHandler db;
+
+    private boolean firstOpen;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -120,7 +126,6 @@ public class QuestDetailActivity extends AppCompatActivity {
             // Respond to the action bar's Up/Home button
             case android.R.id.home:
                 Intent resultIntent = new Intent();
-                //resultIntent.putExtra(Constants.TASK_ADDED, t);
                 setResult(RESULT_OK, resultIntent);
                 finish();
                 return true;
@@ -135,4 +140,5 @@ public class QuestDetailActivity extends AppCompatActivity {
         setResult(RESULT_OK, resultIntent);
         super.onPause();
     }
+
 }
