@@ -28,9 +28,6 @@
             android:label="@string/nav_about_us"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.PrivacyPolicyActivity"
-            android:screenOrientation="portrait" />
-        <activity
             android:name=".activity.MainActivity"
             android:label="@string/title_activity_main"
             android:screenOrientation="portrait"

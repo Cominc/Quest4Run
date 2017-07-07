@@ -1,9 +1,13 @@
 package com.comincini_micheli.quest4run.activity;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -30,6 +34,8 @@ public class AddTaskActivity extends AppCompatActivity
     Button createButton;
     TextView nameTextEdit;
 
+    private boolean firstOpen;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -37,6 +43,13 @@ public class AddTaskActivity extends AppCompatActivity
         setContentView(R.layout.activity_add_task);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        SharedPreferences firstLaunchSetting = getSharedPreferences(Constants.NAME_PREFS, MODE_PRIVATE);
+        firstOpen = firstLaunchSetting.getBoolean(Constants.INFO_ADD_TASK, true);
+        if(firstOpen)
+        {
+            showInfo();
+        }
 
         spinnerType = (Spinner) findViewById(R.id.task_type_spinner);
         //spinner.setOnItemClickListener();
@@ -137,7 +150,39 @@ public class AddTaskActivity extends AppCompatActivity
             case android.R.id.home:
                 finish();
                 return true;
+            case R.id.info_button:
+                showInfo();
+                break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    //TODO serve fare Info in questa activity?
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        getMenuInflater().inflate(R.menu.info_menu, menu);
+        return true;
+    }
+
+    private void showInfo()
+    {
+        AlertDialog.Builder alert = new AlertDialog.Builder(this);
+        alert.setTitle("Titolo");
+        alert.setMessage("Prova");
+        alert.setPositiveButton("Ok", new DialogInterface.OnClickListener()
+        {
+            @Override
+            public void onClick(DialogInterface dialog, int which)
+            {
+                if(firstOpen)
+                {
+                    SharedPreferences.Editor firstLaunchSetting = getSharedPreferences(Constants.NAME_PREFS, MODE_PRIVATE).edit();
+                    firstLaunchSetting.putBoolean(Constants.INFO_ADD_TASK, false);
+                    firstLaunchSetting.commit();
+                }
+            }
+        });
+        alert.show();
     }
 }
