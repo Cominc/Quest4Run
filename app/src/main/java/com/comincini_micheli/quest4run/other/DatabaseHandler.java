@@ -164,6 +164,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             equipment.setPrice(Integer.parseInt(parser.getValue(e, KEY_PRICE)));
             equipment.setIdType(Integer.parseInt(parser.getValue(e, KEY_ID_EQUIPMENT_TYPE)));
             equipment.setMinLevel(Integer.parseInt(parser.getValue(e, KEY_MIN_LEVEL)));
+            equipment.setIcon(parser.getValue(e, KEY_ICON));
             addEquipment(equipment);
         }
     }

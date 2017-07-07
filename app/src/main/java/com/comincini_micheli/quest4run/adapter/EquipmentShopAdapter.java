@@ -4,12 +4,14 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -63,6 +65,7 @@ public class EquipmentShopAdapter extends BaseAdapter {
         if(convertView==null)
             vi = inflater.inflate(R.layout.shop_list_row, null);
 
+        ImageView icon = (ImageView)vi.findViewById(R.id.shop_equipment_icon);
         TextView name = (TextView)vi.findViewById(R.id.shop_equipment_name);
         TextView minLevel = (TextView)vi.findViewById(R.id.shop_equipment_min_level);
         TextView attack = (TextView)vi.findViewById(R.id.shop_equipment_attack_value);
@@ -72,6 +75,11 @@ public class EquipmentShopAdapter extends BaseAdapter {
         Button buy_button = (Button) vi.findViewById(R.id.btn_buy);
 
         equipment_actual = data.get(position);
+
+        String [] icons = activity.getResources().getStringArray(R.array.equipment_icons);
+        int id = activity.getResources().getIdentifier(icons[equipment_actual.getIdType()],"drawable", activity.getPackageName());
+        icon.setImageResource(id);
+        icon.setColorFilter(Color.parseColor(equipment_actual.getIcon()));
 
         // Setting all values in listview
         name.setText(equipment_actual.getName());
