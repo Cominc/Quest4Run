@@ -53,7 +53,7 @@
     <string name="add_task_activity_title">Crea obiettivo</string>
     <string-array name="task_type">
         <item>Distanza</item>
-        <item>Ritmo</item>
+        <item>Velocità Media</item>
         <item>Costanza</item>
         <item>Durata</item>
     </string-array>
@@ -96,6 +96,12 @@
         <item>5 &#162;</item>
         <item>10 &#162;</item>
         <item>25 &#162;</item>
+    </string-array>
+    <string-array name="task_icons">
+        <item>ic_road_variant_grey600_36dp</item>
+        <item>ic_speedometer_grey600_36dp</item>
+        <item>ic_calendar_range_grey600_36dp</item>
+        <item>ic_timer_grey600_36dp</item>
     </string-array>
     <string name="task_added">Obiettivo aggiunto</string>
     <string name="name_empty_task_error">Inserire il nome dell\'obiettivo</string>

@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
 
@@ -59,6 +60,7 @@ public class TaskAdapter extends BaseAdapter
         if(convertView==null)
             vi = inflater.inflate(R.layout.task_list_row, null);
 
+        ImageView icon = (ImageView)vi.findViewById(R.id.task_icon);
         TextView name = (TextView)vi.findViewById(R.id.task_name);
         TextView type = (TextView)vi.findViewById(R.id.task_type);
         TextView goal = (TextView)vi.findViewById(R.id.task_goal);
@@ -73,6 +75,10 @@ public class TaskAdapter extends BaseAdapter
         type.setText(task_type[task_actual.getIdTaskType()]);
         goal.setText(task_goal[task_actual.getIdTaskType()][task_actual.getGoal()]);
         reward.setText(task_reward[task_actual.getIdTaskType()][task_actual.getReward()]);
+
+        String [] icons = activity.getResources().getStringArray(R.array.task_icons);
+        int id = activity.getResources().getIdentifier(icons[task_actual.getIdTaskType()],"drawable", activity.getPackageName());
+        icon.setImageResource(id);
 
         if(task_actual.getIdTaskType() == Constants.DISTANCE_TYPE_TASK)
         {
