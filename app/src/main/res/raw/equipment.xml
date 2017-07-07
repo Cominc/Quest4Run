@@ -8,6 +8,7 @@
         <price>15</price>
         <idEquipmentType>0</idEquipmentType>
         <minLevel>1</minLevel>
+        <icon>red</icon>
     </equipment>
     <equipment>
         <name>Spada fuffa</name>
@@ -17,6 +18,7 @@
         <price>1</price>
         <idEquipmentType>0</idEquipmentType>
         <minLevel>3</minLevel>
+        <icon>blue</icon>
     </equipment>
     <equipment>
         <name>Scudo</name>
@@ -26,6 +28,7 @@
         <price>10</price>
         <idEquipmentType>1</idEquipmentType>
         <minLevel>3</minLevel>
+        <icon>green</icon>
     </equipment>
     <equipment>
         <name>Scudo fuffa</name>
@@ -35,6 +38,7 @@
         <price>1</price>
         <idEquipmentType>1</idEquipmentType>
         <minLevel>3</minLevel>
+        <icon>blue</icon>
     </equipment>
     <equipment>
         <name>Scettro</name>
@@ -44,6 +48,7 @@
         <price>25</price>
         <idEquipmentType>2</idEquipmentType>
         <minLevel>1</minLevel>
+        <icon>red</icon>
     </equipment>
     <equipment>
         <name>Scettro fuffa</name>
@@ -53,5 +58,6 @@
         <price>1</price>
         <idEquipmentType>2</idEquipmentType>
         <minLevel>1</minLevel>
+        <icon>blue</icon>
     </equipment>
 </equipments>

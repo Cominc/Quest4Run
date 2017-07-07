@@ -145,6 +145,11 @@
     <string name="request_change_quest_unequipping">Cambiare l\'equipaggiamento disattiverà la missione %s, vuoi continuare?</string>
     <string name="request_equip_quest_unequipping">Equipaggiare l\'equipaggiamento disattiverà la missione %s, vuoi continuare?</string>
 
+    <string-array name="equipment_icons">
+        <item>ic_sword_grey600_36dp</item>
+        <item>ic_shield_half_full_grey600_36dp</item>
+        <item>ic_auto_fix_grey600_36dp</item>
+    </string-array>
 
     <!-- Shop -->
     <string name="attack_label">Attacco</string>

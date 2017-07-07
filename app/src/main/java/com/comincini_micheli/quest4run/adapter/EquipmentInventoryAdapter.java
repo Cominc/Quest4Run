@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,6 +12,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
@@ -66,6 +68,7 @@ public class EquipmentInventoryAdapter extends BaseAdapter {
         if(convertView==null)
             vi = inflater.inflate(R.layout.inventory_list_row, null);
 
+        ImageView icon = (ImageView)vi.findViewById(R.id.inventory_equipment_icon);
         TextView name = (TextView)vi.findViewById(R.id.inventory_equipment_name);
         TextView attack = (TextView)vi.findViewById(R.id.inventory_equipment_attack);
         TextView defense = (TextView)vi.findViewById(R.id.inventory_equipment_defense);
@@ -73,6 +76,11 @@ public class EquipmentInventoryAdapter extends BaseAdapter {
         RadioButton equipped = (RadioButton)vi.findViewById(R.id.radiobutton_equipped);
 
         equipment_actual = data.get(position);
+
+        String [] icons = activity.getResources().getStringArray(R.array.equipment_icons);
+        int id = activity.getResources().getIdentifier(icons[equipment_actual.getIdType()],"drawable", activity.getPackageName());
+        icon.setImageResource(id);
+        icon.setColorFilter(Color.parseColor(equipment_actual.getIcon()));
 
         // Setting all values in listview
         name.setText(equipment_actual.getName());
