@@ -56,8 +56,8 @@ public class RunFragment extends Fragment {
     //TODO riattivare GPS quando i test sono finiti
     //TODO ridurre pallino a 10
     //TODO notifica task ricrea activity
-    private final static String provider = LocationManager.GPS_PROVIDER;
-    //private final static String provider = LocationManager.NETWORK_PROVIDER;
+    //private final static String provider = LocationManager.GPS_PROVIDER;
+    private final static String provider = LocationManager.NETWORK_PROVIDER;
     private static Location previusLocation = null;
     private boolean active = false;
     private float totalDistance = 0, intermediateDistance = 0;

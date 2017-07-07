@@ -19,7 +19,6 @@
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -38,8 +37,8 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".activity.TaskHistoryActivity"
-            android:launchMode="singleTop"
             android:label="@string/title_task_history_activity"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait" />
         <activity
             android:name=".activity.CreateCharacterActivity"
@@ -56,6 +55,10 @@
             android:name=".activity.QuestDetailActivity"
             android:label="@string/title_quest_detail_activity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.FaqActivity"
+            android:label="@string/nav_faq"
+            android:screenOrientation="portrait" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -67,7 +70,8 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
-        <receiver android:name=".other.AlarmNotificationReceiver"/>
-    </application>
 
+        <receiver android:name=".other.AlarmNotificationReceiver" />
+
+    </application>
 </manifest>

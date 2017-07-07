@@ -117,8 +117,10 @@ public class MainActivity extends AppCompatActivity
                 title = getResources().getString(R.string.nav_character);
                 break;
             case R.id.nav_about_us:
-                Intent i2 = new Intent(MainActivity.this, AboutUsActivity.class);
-                startActivity(i2);
+                startActivity(new Intent(MainActivity.this, AboutUsActivity.class));
+                break;
+            case R.id.nav_faq:
+                startActivity(new Intent(MainActivity.this, FaqActivity.class));
                 break;
             default:
                 fragment = new RunFragment();
