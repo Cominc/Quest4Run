@@ -57,8 +57,8 @@ public class RunFragment extends Fragment {
     //TODO rimuovere molti toast
     //TODO riattivare GPS quando i test sono finiti
     //TODO gestire perdita/disattivazione segnale gps
-    //private final static String provider = LocationManager.GPS_PROVIDER;
-    private final static String provider = LocationManager.NETWORK_PROVIDER;
+    private final static String provider = LocationManager.GPS_PROVIDER;
+    //private final static String provider = LocationManager.NETWORK_PROVIDER;
     private static Location previusLocation = null;
     private boolean active = false;
     private float totalDistance = 0, intermediateDistance = 0;
@@ -152,7 +152,7 @@ public class RunFragment extends Fragment {
                         //mMapGoogle.addMarker(new MarkerOptions().position(newPosition).anchor(0.5f, 0.5f).icon(BitmapDescriptorFactory.fromResource(R.drawable.point_dark_blu)));
                         if(arrowMarker!=null)
                             arrowMarker.remove();
-                        arrowMarker = mMapGoogle.addMarker(new MarkerOptions().position(newPosition).anchor(0.5f, 0.5f).rotation(location.getBearing()).icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_navigation_grey600_24dp)));
+                        arrowMarker = mMapGoogle.addMarker(new MarkerOptions().position(newPosition).anchor(0.5f, 0.5f).rotation(previusLocation.bearingTo(location)).icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_navigation_grey600_24dp)));
                     }
                     else {
                         mMapGoogle.addMarker(new MarkerOptions().position(newPosition).icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_start)));
