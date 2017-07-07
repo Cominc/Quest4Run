@@ -225,9 +225,9 @@ public class CreateCharacterActivity extends AppCompatActivity
     private void showInfo()
     {
         AlertDialog.Builder alert = new AlertDialog.Builder(this);
-        alert.setTitle("Titolo");
-        alert.setMessage("Prova");
-        alert.setPositiveButton("Ok", new DialogInterface.OnClickListener()
+        alert.setTitle(getResources().getString(R.string.title_new_game));
+        alert.setMessage(getResources().getString(R.string.text_new_game));
+        alert.setPositiveButton(getResources().getString(R.string.alert_btn_positive_label), new DialogInterface.OnClickListener()
         {
             @Override
             public void onClick(DialogInterface dialog, int which)

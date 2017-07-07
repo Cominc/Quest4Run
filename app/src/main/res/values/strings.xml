@@ -135,6 +135,8 @@
     <string name="name_empty_task_error">Inserire il nome dell\'obiettivo</string>
 
     <!-- Character Creation -->
+    <string name="title_new_game">Benventuto/a!</string>
+    <string name="text_new_game">Crea il tuo personaggio per iniziare subito ad allenarti e giocare con Quest4Run!</string>
     <string name="name_empty_character_error">Inserire il nome del personaggio</string>
 
     <string name="gender_selection_question">Scegli il genere:</string>
