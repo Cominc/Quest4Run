@@ -56,8 +56,8 @@ public class RunFragment extends Fragment {
     //TODO riattivare GPS quando i test sono finiti
     //TODO ridurre pallino a 10
     //TODO notifica task ricrea activity
-    //private final static String provider = LocationManager.GPS_PROVIDER;
-    private final static String provider = LocationManager.NETWORK_PROVIDER;
+    private final static String provider = LocationManager.GPS_PROVIDER;
+    //private final static String provider = LocationManager.NETWORK_PROVIDER;
     private static Location previusLocation = null;
     private boolean active = false;
     private float totalDistance = 0, intermediateDistance = 0;
@@ -368,7 +368,6 @@ public class RunFragment extends Fragment {
                         NotificationManager nm = (NotificationManager) getContext().getSystemService(Context.NOTIFICATION_SERVICE);
                         Intent notifyIntent = new Intent(getActivity(), TaskHistoryActivity.class);
                         PendingIntent intent = PendingIntent.getActivity(getActivity(), 0, notifyIntent, 0);
-                        notifyIntent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
 
                         final Notification notifyDetails = new Notification.Builder(getContext())
                                 .setAutoCancel(true)
