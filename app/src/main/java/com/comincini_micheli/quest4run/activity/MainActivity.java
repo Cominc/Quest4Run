@@ -1,6 +1,8 @@
 package com.comincini_micheli.quest4run.activity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -8,6 +10,7 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -24,6 +27,8 @@ import com.comincini_micheli.quest4run.other.Constants;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    private boolean firstOpen;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +65,29 @@ public class MainActivity extends AppCompatActivity
             fragmentTransaction.commit();
             this.setTitle(getResources().getString(R.string.nav_run));
             navigationView.setCheckedItem(R.id.nav_run);
+
+            SharedPreferences firstLaunchSetting = getSharedPreferences(Constants.NAME_PREFS, MODE_PRIVATE);
+            firstOpen = firstLaunchSetting.getBoolean(Constants.INFO_START_MAIN, true);
+            if(firstOpen)
+            {
+                AlertDialog.Builder alert = new AlertDialog.Builder(this);
+                alert.setTitle(R.string.title_alert_start);
+                alert.setMessage(R.string.content_alert_start);
+                alert.setPositiveButton(R.string.alert_btn_positive_label, new DialogInterface.OnClickListener()
+                {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which)
+                    {
+                        if(firstOpen)
+                        {
+                            SharedPreferences.Editor firstLaunchSetting = getSharedPreferences(Constants.NAME_PREFS, MODE_PRIVATE).edit();
+                            firstLaunchSetting.putBoolean(Constants.INFO_START_MAIN, false);
+                            firstLaunchSetting.commit();
+                        }
+                    }
+                });
+                alert.show();
+            }
         }
     }
 

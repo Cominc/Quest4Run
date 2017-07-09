@@ -34,29 +34,44 @@
     <string name="micheli_name_value">Gianmaria Micheli</string>
     <string name="release_year">2017</string>
 
+    <!--Main Activity Alert -->
+    <string name="title_alert_start">Benvenuto!</string>
+    <string name="content_alert_start">Benvenuto in Quest4Run! Per cominciare inizia subito a creare i tuoi obbiettivi e parti per la corsa! Per informazioni più dettagliate sulle varie sezioni, consulta le Faq. Buon divertimento!</string>
+
     <!--Faq-->
-    <string name="faq_title">Cos\'è Quest4Run?</string>
-    <string name="faq_text">A lungo cantarono soltanto uno alla volta, o solo pochi insieme mentre gli altri stavano ad ascoltare;
-            ché ciascuno di essi penetrava soltanto quella parte della mente di Ilùvatar da cui proveniva,
-            e crescevano lentamente nella comprensione dei loro fratelli.
-            Ma già solo ascoltando pervenivano a una comprensione più profonda, e s’accrescevano l’unisono e l’armonia.A lungo cantarono soltanto uno alla volta, o solo pochi insieme mentre gli altri stavano ad ascoltare;
-            ché ciascuno di essi penetrava soltanto quella parte della mente di Ilùvatar da cui proveniva,
-            e crescevano lentamente nella comprensione dei loro fratelli.
-            Ma già solo ascoltando pervenivano a una comprensione più profonda, e s’accrescevano l’unisono e l’armonia.A lungo cantarono soltanto uno alla volta, o solo pochi insieme mentre gli altri stavano ad ascoltare;
-            ché ciascuno di essi penetrava soltanto quella parte della mente di Ilùvatar da cui proveniva,
-            e crescevano lentamente nella comprensione dei loro fratelli.
-            Ma già solo ascoltando pervenivano a una comprensione più profonda, e s’accrescevano l’unisono e l’armonia.A lungo cantarono soltanto uno alla volta, o solo pochi insieme mentre gli altri stavano ad ascoltare;
-            ché ciascuno di essi penetrava soltanto quella parte della mente di Ilùvatar da cui proveniva,
-            e crescevano lentamente nella comprensione dei loro fratelli.
-            Ma già solo ascoltando pervenivano a una comprensione più profonda, e s’accrescevano l’unisono e l’armonia.A lungo cantarono soltanto uno alla volta, o solo pochi insieme mentre gli altri stavano ad ascoltare;
-            ché ciascuno di essi penetrava soltanto quella parte della mente di Ilùvatar da cui proveniva,
-            e crescevano lentamente nella comprensione dei loro fratelli.
-            Ma già solo ascoltando pervenivano a una comprensione più profonda, e s’accrescevano l’unisono e l’armonia.A lungo cantarono soltanto uno alla volta, o solo pochi insieme mentre gli altri stavano ad ascoltare;
-            ché ciascuno di essi penetrava soltanto quella parte della mente di Ilùvatar da cui proveniva,
-            e crescevano lentamente nella comprensione dei loro fratelli.
-            Ma già solo ascoltando pervenivano a una comprensione più profonda, e s’accrescevano l’unisono e l’armonia.</string>
-
-
+    <string name="faq_title">Domande Frequenti</string>
+    <string name="faq1_question">1 - Cos\'è Quest4Run?</string>
+    <string name="faq1_answer">Quest4Run è un\'applicazione che ti consente di correre divertendoti! Stabilisci i tuoi obbiettivi e sviluppa il tuo personaggio, migliorandone le statistiche e affrontando via via le varie missioni disponibili.
+    </string>
+    <string name="faq2_question">2 - Come si usa?</string>
+    <string name="faq2_answer">È molto semplice! Dal menù laterale naviga tra le varie sezioni dell\'applicazione per scoprire le fantastiche funzioni fornite. Se vuoi subito iniziare ad allenarti, vai su Corsa e inizia subito la tua sessione!
+    </string>
+    <string name="faq3_question">3 - Corsa</string>
+    <string name="faq3_answer">In questa schermata potrai effettuare l\'allenamento vero e proprio. Ti basterà premere il bottone \"START\" per iniziare subito il tuo allenamento e visualizzare delle statistiche in merito! Alla fine della corsa basterà premere il tasto \"STOP\" per ottenere le ricompense degli obbiettivi completati.
+    </string>
+    <string name="faq4_question">4 - Ultima Attività</string>
+    <string name="faq4_answer">Puoi comodamente visualizzare l\'ultimo percorso seguito durante l\'allenamento, insieme a delle statistiche sulla performance.
+    </string>
+    <string name="faq5_question">5 - Obbiettivi</string>
+    <string name="faq5_answer">Prima di allenarti devi stabilire degli obbiettivi di allenamento! Puoi comodamente crearli premendo il bottone \"+\".
+    Puoi scegliere tra 4 diversi tipi di obbiettivi:
+    \n- Distanza: quanto si vuole percorrere allenandosi. I progressi si accumulano durante le varie sessioni di corsa;
+    \n- Velocità media: la velocità media da mantenere durante la sessione di corsa corrente;
+    \n- Costanza: numero di giorni di fila in cui si effettua una corsa;
+    \n- Durata: quanto si vuole correre in termini di tempo.
+    \n \n Gli obbiettivi possono essere attivati o disattivati, a seconda di quali si voglia completare.
+    Nel caso in cui sia completato un obbiettivo, questo sarà visibile nella scheda \"Obbiettivi Completati\", accessibile dal menù in alto a destra.</string>
+    <string name="faq6_question">6 - Personaggio</string>
+    <string name="faq6_answer">Puoi visualizzare le statistiche del tuo personaggio man mano che queste migliorano!
+    Cliccando sulle icone di Spada, Scudo e Scettro potrai visualizzare gli equipaggiamenti disponibili per il tuo personaggio e scegliere quelli che preferisci.</string>
+    <string name="faq7_question">7 - Missioni</string>
+    <string name="faq7_answer">Man mano che le statistiche del tuo personaggio aumentano, potrai accedere a diverse Missioni. Attiva una missione per far partire il timer del suo completamento. Alla fine otterrai la ricompensa in punti esperienza.
+    Puoi attivare solo una missione alla volta. Le missioni completate sono visibili nella scheda \"Missioni Completate\", accessibile dal menù in alto a destra.
+    Cliccando sulla singola missione sarà possibile vedere la scheda di dettaglio della missione selezionata.</string>
+    <string name="faq8_question">8 - Shop</string>
+    <string name="faq8_answer">Completando gli obbiettivi otterrai delle monete da poter spendere in equipaggiamenti sempre più potenti! A seconda del livello del tuo personaggio avrai accesso o meno all\'acquisto di determinati oggetti.</string>
+    <string name="faq9_question">9- Notifiche</string>
+    <string name="faq9_answer">Temi di dimenticarti di una Missione in corso? Niente paura! Alla scadere del tempo ti arriverà una comoda notifica per non perdere neanche un istante e continuare a giocare!</string>
     <!-- Fragments titles -->
     <string name="task_fragment_title">I tuoi obiettivi</string>
 
@@ -72,6 +87,10 @@
     <string name="show_history_task">Obiettivi Completati</string>
 
     <!-- Task Creation -->
+    <string name="task_creation_alert_title">Crea i tuoi Obbiettivi!</string>
+    <string name="task_creation_alert_text">Crea i tuoi obbiettivi per rendere efficace il tuo allenamento!
+    Puoi scegliere 4 tipi di obbiettivi: Distanza, Velocità Media, Costanza e Durata; seleziona quindi il traguardo
+    e la ricompensa da ottenere. Per maggiori dettagli, consulta la sezione Faq.</string>
     <string name="name_hint">Nome</string>
 
     <string name="spinner_task_type_label">Seleziona il tipo di obiettivo</string>
@@ -135,8 +154,9 @@
     <string name="name_empty_task_error">Inserire il nome dell\'obiettivo</string>
 
     <!-- Character Creation -->
-    <string name="title_new_game">Benventuto/a!</string>
-    <string name="text_new_game">Crea il tuo personaggio per iniziare subito ad allenarti e giocare con Quest4Run!</string>
+    <string name="title_new_game">Benvenuto/a!</string>
+    <string name="text_new_game">Crea il tuo personaggio per iniziare subito ad allenarti e giocare con Quest4Run!
+            Scegli nome, genere e avatar e sei pronto per cominciare!</string>
     <string name="name_empty_character_error">Inserire il nome del personaggio</string>
 
     <string name="gender_selection_question">Scegli il genere:</string>
@@ -247,5 +267,5 @@
 
     <string name="date_format">dd-MM-yyyy</string>
     <string name="datetime_format">HH:mm dd-MM-yyyy</string>
-    <string name="alert_btn_positive_label">OK</string>
+    <string name="alert_btn_positive_label">Ok</string>
 </resources>

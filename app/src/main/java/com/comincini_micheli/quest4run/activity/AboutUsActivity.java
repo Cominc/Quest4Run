@@ -16,7 +16,7 @@ import com.comincini_micheli.quest4run.other.Constants;
 
 public class AboutUsActivity extends AppCompatActivity {
 
-    private boolean firstOpen;
+    //private boolean firstOpen;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,12 +26,12 @@ public class AboutUsActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         RelativeLayout layout = (RelativeLayout) findViewById(R.id.about_us_layout);
-        SharedPreferences firstLaunchSetting = getSharedPreferences(Constants.NAME_PREFS, MODE_PRIVATE);
+        /*SharedPreferences firstLaunchSetting = getSharedPreferences(Constants.NAME_PREFS, MODE_PRIVATE);
         firstOpen = firstLaunchSetting.getBoolean(Constants.INFO_ABOUT_US, true);
         if(firstOpen)
         {
             showInfo();
-        }
+        }*/
         layout.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -49,23 +49,23 @@ public class AboutUsActivity extends AppCompatActivity {
             case android.R.id.home:
                 finish();
                 return true;
-            case R.id.info_button:
+            /*case R.id.info_button:
                 showInfo();
-                break;
+                break;*/
         }
         return super.onOptionsItemSelected(item);
     }
 
 
-    //TODO serve fare Info in questa activity?
-    @Override
+
+    /*@Override
     public boolean onCreateOptionsMenu(Menu menu)
     {
         getMenuInflater().inflate(R.menu.info_menu, menu);
         return true;
-    }
+    }*/
 
-    private void showInfo()
+    /*private void showInfo()
     {
         AlertDialog.Builder alert = new AlertDialog.Builder(this);
         alert.setTitle("Titolo");
@@ -84,5 +84,5 @@ public class AboutUsActivity extends AppCompatActivity {
             }
         });
         alert.show();
-    }
+    }*/
 }

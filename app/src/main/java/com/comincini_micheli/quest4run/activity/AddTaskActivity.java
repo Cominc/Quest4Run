@@ -168,9 +168,9 @@ public class AddTaskActivity extends AppCompatActivity
     private void showInfo()
     {
         AlertDialog.Builder alert = new AlertDialog.Builder(this);
-        alert.setTitle("Titolo");
-        alert.setMessage("Prova");
-        alert.setPositiveButton("Ok", new DialogInterface.OnClickListener()
+        alert.setTitle(R.string.task_creation_alert_title);
+        alert.setMessage(R.string.task_creation_alert_text);
+        alert.setPositiveButton(R.string.alert_btn_positive_label, new DialogInterface.OnClickListener()
         {
             @Override
             public void onClick(DialogInterface dialog, int which)

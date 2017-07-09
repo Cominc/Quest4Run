@@ -14,6 +14,7 @@ public class Constants
    public static final String CHAR_ID_PREFERENCE = "characterId";
    public static final String INFO_ABOUT_US = "infoAboutUs";
    public static final String INFO_ADD_TASK = "infoAddTask";
+   public static final String INFO_START_MAIN = "infoStartMain";
    public static final String LAST_DISTANCE = "lastDistance";
    public static final String LAST_DURATION = "lastDuration";
    public static final String NAME_PREFS = "myPrefs";
