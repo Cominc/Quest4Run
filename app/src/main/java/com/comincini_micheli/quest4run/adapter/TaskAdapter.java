@@ -62,7 +62,7 @@ public class TaskAdapter extends BaseAdapter
             vi = inflater.inflate(R.layout.task_list_row, null);
 
         ImageView icon = (ImageView)vi.findViewById(R.id.task_icon);
-        ImageView icon_coin = (ImageView)vi.findViewById(R.id.shop_equipment_icon_coin);
+        ImageView icon_coin = (ImageView)vi.findViewById(R.id.icon_coin);
         TextView name = (TextView)vi.findViewById(R.id.task_name);
         TextView type = (TextView)vi.findViewById(R.id.task_type);
         TextView goal = (TextView)vi.findViewById(R.id.task_goal);
