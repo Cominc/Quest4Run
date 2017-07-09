@@ -62,7 +62,7 @@ public class TaskAdapter extends BaseAdapter
             vi = inflater.inflate(R.layout.task_list_row, null);
 
         ImageView icon = (ImageView)vi.findViewById(R.id.task_icon);
-        ImageView icon_coin = (ImageView)vi.findViewById(R.id.icon_coin);
+        ImageView icon_coin = (ImageView)vi.findViewById(R.id.shop_equipment_icon_coin);
         TextView name = (TextView)vi.findViewById(R.id.task_name);
         TextView type = (TextView)vi.findViewById(R.id.task_type);
         TextView goal = (TextView)vi.findViewById(R.id.task_goal);
@@ -77,8 +77,7 @@ public class TaskAdapter extends BaseAdapter
         type.setText(task_type[task_actual.getIdTaskType()]);
         goal.setText(task_goal[task_actual.getIdTaskType()][task_actual.getGoal()]);
         reward.setText(task_reward[task_actual.getIdTaskType()][task_actual.getReward()]);
-        //TODO collegare a color.xml
-        icon_coin.setColorFilter(Color.parseColor("#D4AF37"));
+        icon_coin.setColorFilter(activity.getResources().getColor(R.color.gold));
 
         String [] icons = activity.getResources().getStringArray(R.array.task_icons);
         int id = activity.getResources().getIdentifier(icons[task_actual.getIdTaskType()],"drawable", activity.getPackageName());

@@ -78,8 +78,7 @@ public class TaskHistoryAdapter extends BaseAdapter
         String [] icons = activity.getResources().getStringArray(R.array.task_icons);
         int id = activity.getResources().getIdentifier(icons[task_actual.getIdTaskType()],"drawable", activity.getPackageName());
         icon.setImageResource(id);
-        //TODO collegare a color.xml
-        icon_coin.setColorFilter(Color.parseColor("#D4AF37"));
+        icon_coin.setColorFilter(activity.getResources().getColor(R.color.gold));
 
         Date date = new Date(task_actual.getExecDate());
         SimpleDateFormat sdf = new SimpleDateFormat(activity.getResources().getString(R.string.date_format));

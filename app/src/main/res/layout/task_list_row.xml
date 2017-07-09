@@ -55,7 +55,7 @@
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/task_name">
         <ImageView
-            android:id="@+id/icon_coin"
+            android:id="@+id/shop_equipment_icon_coin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:srcCompat="@drawable/ic_database_grey600_36dp" />
@@ -66,7 +66,7 @@
             android:layout_height="wrap_content"
             android:text="TextView"
             android:layout_centerVertical="true"
-            android:layout_toEndOf="@+id/icon_coin" />
+            android:layout_toEndOf="@+id/shop_equipment_icon_coin" />
     </RelativeLayout>
 
     <TextView
