@@ -126,7 +126,7 @@ public class CharacterFragment extends Fragment
         exp_bar.setProgress(myCharacter.getExp()%EXP_FOR_NEXT_LEVEL);
 
         TextView wallet = (TextView) getActivity().findViewById(R.id.character_wallet_value);
-        wallet.setText(String.valueOf(myCharacter.getWallet())+ getResources().getString(R.string.cents_symbol_label));
+        wallet.setText(String.format(getResources().getString(R.string.money_label),myCharacter.getWallet()));
 
         TextView level = (TextView) getActivity().findViewById(R.id.character_level_value);
         level.setText(String.valueOf(myCharacter.getLevel()));

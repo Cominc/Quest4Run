@@ -2,6 +2,7 @@ package com.comincini_micheli.quest4run.adapter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -59,6 +60,7 @@ public class TaskHistoryAdapter extends BaseAdapter
             vi = inflater.inflate(R.layout.task_list_completed_row, null);
 
         ImageView icon = (ImageView)vi.findViewById(R.id.task_icon_completed);
+        ImageView icon_coin = (ImageView)vi.findViewById(R.id.icon_coin_completed);
         TextView name = (TextView)vi.findViewById(R.id.task_name_completed);
         TextView type = (TextView)vi.findViewById(R.id.task_type_completed);
         TextView goal = (TextView)vi.findViewById(R.id.task_goal_completed);
@@ -76,6 +78,8 @@ public class TaskHistoryAdapter extends BaseAdapter
         String [] icons = activity.getResources().getStringArray(R.array.task_icons);
         int id = activity.getResources().getIdentifier(icons[task_actual.getIdTaskType()],"drawable", activity.getPackageName());
         icon.setImageResource(id);
+        //TODO collegare a color.xml
+        icon_coin.setColorFilter(Color.parseColor("#D4AF37"));
 
         Date date = new Date(task_actual.getExecDate());
         SimpleDateFormat sdf = new SimpleDateFormat(activity.getResources().getString(R.string.date_format));

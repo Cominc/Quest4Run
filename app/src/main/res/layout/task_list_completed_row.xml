@@ -39,22 +39,25 @@
         android:layout_toEndOf="@+id/task_icon_completed"
         android:text="TextView" />
 
-    <ImageView
-        android:id="@+id/icon_coin_completed"
+    <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:srcCompat="@drawable/coins"
-        android:layout_below="@+id/task_name_completed"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/task_name_completed">
+        <ImageView
+            android:id="@+id/icon_coin_completed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_database_grey600_36dp" />
 
-    <TextView
-        android:id="@+id/task_reward_completed"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        android:layout_alignBottom="@+id/task_icon_completed"
-        android:layout_toEndOf="@+id/icon_coin_completed" />
-
+        <TextView
+            android:id="@+id/task_reward_completed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@+id/icon_coin_completed" />
+    </RelativeLayout>
     <TextView
         android:id="@+id/text_view_date_completed"
         android:layout_width="wrap_content"

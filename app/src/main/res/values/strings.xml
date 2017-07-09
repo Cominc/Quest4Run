@@ -8,7 +8,7 @@
     <string name="openDrawer">open_drawer</string>
     <string name="closeDrawer">close_drawer</string>
 
-    <string name="cents_symbol_label"> &#162;</string>
+    <string name="money_label">%d &#162;</string>
     <string name="empty_list">Nessun elemento da mostrare</string>
     <string name="loading">Caricamento...</string>
 

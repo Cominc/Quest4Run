@@ -66,6 +66,7 @@ public class EquipmentShopAdapter extends BaseAdapter {
             vi = inflater.inflate(R.layout.shop_list_row, null);
 
         ImageView icon = (ImageView)vi.findViewById(R.id.shop_equipment_icon);
+        ImageView icon_coin = (ImageView)vi.findViewById(R.id.icon_coin);
         TextView name = (TextView)vi.findViewById(R.id.shop_equipment_name);
         TextView minLevel = (TextView)vi.findViewById(R.id.shop_equipment_min_level);
         TextView attack = (TextView)vi.findViewById(R.id.shop_equipment_attack_value);
@@ -80,7 +81,8 @@ public class EquipmentShopAdapter extends BaseAdapter {
         int id = activity.getResources().getIdentifier(icons[equipment_actual.getIdType()],"drawable", activity.getPackageName());
         icon.setImageResource(id);
         icon.setColorFilter(Color.parseColor(equipment_actual.getIcon()));
-
+        //TODO collegare a color.xml
+        icon_coin.setColorFilter(Color.parseColor("#D4AF37"));
         // Setting all values in listview
         name.setText(equipment_actual.getName());
         minLevel.setText(String.format(activity.getResources().getString(R.string.shop_min_level),equipment_actual.getMinLevel()));
@@ -98,7 +100,7 @@ public class EquipmentShopAdapter extends BaseAdapter {
             magic.setText("+"+String.valueOf(equipment_actual.getMgc()));
         else
             magic.setText(String.valueOf(equipment_actual.getMgc()));
-        price.setText(String.valueOf(equipment_actual.getPrice()));
+        price.setText(String.format(activity.getResources().getString(R.string.money_label),equipment_actual.getPrice()));
         if(wallet < equipment_actual.getPrice() || level < equipment_actual.getMinLevel())
         {
             buy_button.setEnabled(false);

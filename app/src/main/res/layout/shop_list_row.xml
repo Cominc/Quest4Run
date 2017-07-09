@@ -72,7 +72,7 @@
         android:id="@+id/icon_coin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:srcCompat="@drawable/coins"
+        app:srcCompat="@drawable/ic_database_grey600_36dp"
         android:layout_centerVertical="true"
         android:layout_toStartOf="@+id/btn_buy"
         android:layout_marginRight="5dp"/>
