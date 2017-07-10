@@ -1,15 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- TODO remove warning-->
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.comincini_micheli.quest4run.activity.QuestDetailActivity">
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -19,7 +14,7 @@
                 android:id="@+id/quest_detail_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="TextView"
+                android:text="@string/default_layout_placeholder"
                 android:textSize="21sp"
                 android:textColor="@color/black"
                 android:layout_alignParentTop="true"
@@ -32,7 +27,7 @@
                 android:layout_alignParentStart="true"
                 android:layout_below="@+id/quest_detail_title"
                 android:layout_marginTop="17dp"
-                android:text="TextView" />
+                android:text="@string/default_layout_placeholder" />
 
             <RelativeLayout
                 android:id="@+id/RelativeLayoutExp"
@@ -46,13 +41,14 @@
                     android:id="@+id/imageView5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:contentDescription="@string/content_description_icon"
                     app:srcCompat="@drawable/ic_trending_up_grey600_24dp" />
 
                 <TextView
                     android:id="@+id/quest_detail_exp_reward"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="TextView"
+                    android:text="@string/default_layout_placeholder"
                     android:layout_centerVertical="true"
                     android:layout_toEndOf="@+id/imageView5" />
             </RelativeLayout>
@@ -75,6 +71,7 @@
                         android:id="@+id/imageView2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:contentDescription="@string/content_description_sword"
                         app:srcCompat="@drawable/ic_sword_grey600_48dp" />
 
                     <TextView
@@ -89,7 +86,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="15dp"
-                        android:text="TextView" />
+                        android:text="@string/default_layout_placeholder" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -103,14 +100,13 @@
                         android:id="@+id/imageView3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:contentDescription="@string/content_description_shield"
                         app:srcCompat="@drawable/ic_shield_half_full_grey600_48dp" />
 
                     <TextView
                         android:id="@+id/quest_detail_defense_label"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignBottom="@+id/quest_detail_attack_label"
-                        android:layout_centerHorizontal="true"
                         android:layout_marginTop="5dp"
                         android:text="@string/defense_label" />
 
@@ -118,10 +114,8 @@
                         android:id="@+id/quest_detail_defense_value"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/quest_detail_defense_label"
-                        android:layout_centerHorizontal="true"
                         android:layout_marginTop="15dp"
-                        android:text="TextView" />
+                        android:text="@string/default_layout_placeholder" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -134,6 +128,7 @@
                         android:id="@+id/imageView4"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:contentDescription="@string/content_description_wand"
                         app:srcCompat="@drawable/ic_auto_fix_grey600_48dp" />
 
                     <TextView
@@ -148,7 +143,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="15dp"
-                        android:text="TextView" />
+                        android:text="@string/default_layout_placeholder" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -177,7 +172,7 @@
                     android:layout_above="@+id/quest_detail_date_start_label"
                     android:layout_marginStart="50dp"
                     android:layout_toEndOf="@+id/quest_detail_duration_label"
-                    android:text="TextView" />
+                    android:text="@string/default_layout_placeholder" />
 
                 <TextView
                     android:id="@+id/quest_detail_date_start_label"
@@ -195,7 +190,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignStart="@+id/quest_detail_duration_value"
                     android:layout_alignTop="@+id/quest_detail_date_start_label"
-                    android:text="TextView" />
+                    android:text="@string/default_layout_placeholder" />
 
                 <TextView
                     android:id="@+id/quest_detail_date_finish_label"
@@ -213,19 +208,18 @@
                     android:layout_height="wrap_content"
                     android:layout_alignStart="@+id/quest_detail_duration_value"
                     android:layout_alignTop="@+id/quest_detail_date_finish_label"
-                    android:text="TextView" />
+                    android:text="@string/default_layout_placeholder" />
 
                 <TextView
                     android:id="@+id/quest_detail_countdown"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="30sp"
-                    android:text="TextView"
+                    android:text="@string/default_layout_placeholder"
                     android:layout_marginTop="15dp"
                     android:layout_below="@id/quest_detail_date_finish_label"
                     android:layout_centerHorizontal="true" />
             </RelativeLayout>
 
         </RelativeLayout>
-    </ScrollView>
-</RelativeLayout>
+</ScrollView>

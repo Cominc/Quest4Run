@@ -1,15 +1,10 @@
-<!--TODO warnings-->
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
              android:layout_width="match_parent"
              android:layout_height="match_parent"
              tools:context="com.comincini_micheli.quest4run.fragment.CharacterFragment"
              android:padding="5dp">
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
 
         <RelativeLayout
             android:id="@+id/RelativeLayoutName"
@@ -30,6 +25,7 @@
                 android:id="@+id/character_gender_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:contentDescription="@string/content_description_icon"
                 app:srcCompat="@drawable/ic_gender_male_black_24dp"
                 android:layout_centerVertical="true"
                 android:layout_toEndOf="@+id/character_name"
@@ -43,6 +39,7 @@
             android:layout_below="@+id/RelativeLayoutName"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="18dp"
+            android:contentDescription="@string/content_description_icon"
             app:srcCompat="@drawable/m_0" />
 
 
@@ -119,7 +116,7 @@
             android:layout_alignBaseline="@+id/character_attack_label"
             android:layout_alignBottom="@+id/character_attack_label"
             android:layout_toEndOf="@+id/character_level_value"
-            android:text="TextView" />
+            android:text="@string/default_layout_placeholder" />
 
         <TextView
             android:id="@+id/character_defense_value"
@@ -127,7 +124,7 @@
             android:layout_height="wrap_content"
             android:layout_alignStart="@+id/character_attack_value"
             android:layout_alignTop="@+id/character_defence_label"
-            android:text="TextView" />
+            android:text="@string/default_layout_placeholder" />
 
         <TextView
             android:id="@+id/character_magic_value"
@@ -135,7 +132,7 @@
             android:layout_height="wrap_content"
             android:layout_alignStart="@+id/character_defense_value"
             android:layout_alignTop="@+id/character_magic_label"
-            android:text="TextView" />
+            android:text="@string/default_layout_placeholder" />
 
         <ImageButton
             android:id="@+id/image_btn_attack"
@@ -143,12 +140,14 @@
             android:layout_height="wrap_content"
             android:layout_alignStart="@+id/character_level_label"
             android:layout_alignTop="@+id/image_btn_defense"
+            android:contentDescription="@string/content_description_sword"
             app:srcCompat="@drawable/ic_sword_grey600_48dp" />
 
         <ImageButton
             android:id="@+id/image_btn_defense"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:contentDescription="@string/content_description_shield"
             app:srcCompat="@drawable/ic_shield_half_full_grey600_48dp"
             android:layout_below="@+id/character_avatar"
             android:layout_centerHorizontal="true"
@@ -161,6 +160,7 @@
             android:layout_alignParentEnd="true"
             android:layout_alignTop="@+id/image_btn_defense"
             android:layout_marginEnd="11dp"
+            android:contentDescription="@string/content_description_wand"
             app:srcCompat="@drawable/ic_auto_fix_grey600_48dp" />
 
         <TextView
@@ -169,7 +169,7 @@
             android:layout_height="wrap_content"
             android:layout_alignTop="@+id/character_level_label"
             android:layout_toEndOf="@+id/character_attack_label"
-            android:text="15" />
+            android:text="@string/default_layout_placeholder_single_digit" />
 
         <TextView
             android:id="@+id/character_wallet_value"
@@ -178,8 +178,6 @@
             android:layout_alignBaseline="@+id/character_wallet_label"
             android:layout_alignBottom="@+id/character_wallet_label"
             android:layout_toEndOf="@+id/character_level_value"
-            android:text="TextView" />
+            android:text="@string/default_layout_placeholder" />
 
-    </RelativeLayout>
-
-</FrameLayout>
+</RelativeLayout>

@@ -9,8 +9,10 @@
         android:id="@+id/task_icon_completed"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:contentDescription="@string/content_description_icon"
         app:srcCompat="@mipmap/ic_launcher"
         android:paddingEnd="5dp"
+        android:paddingStart="0dp"
         android:layout_centerVertical="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true" />
@@ -21,7 +23,7 @@
         android:layout_height="wrap_content"
         android:textSize="21sp"
         android:textColor="@color/black"
-        android:text="TextView"
+        android:text="@string/default_layout_placeholder"
         android:layout_alignTop="@+id/task_icon_completed"
         android:layout_toEndOf="@+id/task_icon_completed" />
 
@@ -31,7 +33,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/task_name_completed"
         android:layout_toEndOf="@+id/task_icon_completed"
-        android:text="TextView" />
+        android:text="@string/default_layout_placeholder" />
 
     <TextView
         android:id="@+id/task_goal_completed"
@@ -39,7 +41,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/task_type_completed"
         android:layout_toEndOf="@+id/task_icon_completed"
-        android:text="TextView" />
+        android:text="@string/default_layout_placeholder" />
 
     <RelativeLayout
         android:layout_width="wrap_content"
@@ -50,13 +52,14 @@
             android:id="@+id/icon_coin_completed"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:contentDescription="@string/content_description_icon"
             app:srcCompat="@drawable/ic_database_grey600_36dp" />
 
         <TextView
             android:id="@+id/task_reward_completed"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="TextView"
+            android:text="@string/default_layout_placeholder"
             android:layout_centerVertical="true"
             android:layout_toEndOf="@+id/icon_coin_completed" />
     </RelativeLayout>
@@ -67,6 +70,6 @@
         android:layout_alignParentEnd="true"
         android:layout_centerVertical="true"
         android:layout_marginEnd="20dp"
-        android:text="TextView"/>
+        android:text="@string/default_layout_placeholder"/>
 
 </RelativeLayout>

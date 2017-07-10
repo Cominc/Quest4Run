@@ -14,11 +14,18 @@
     <string name="yes">Sì</string>
     <string name="cancel">Annulla</string>
 
+    <string name="default_layout_placeholder">TextView</string>
+    <string name="default_layout_placeholder_single_digit">0</string>
+    default_layout_placeholder_single_digit
+
     <!-- Content Description -->
     <string name="content_description_app_icon">Icona App</string>
     <string name="content_description_icon">Icona</string>
     <string name="content_description_arrow_left">Freccia sx</string>
     <string name="content_description_arrow_right">Freccia dx</string>
+    <string name="content_description_sword">Spada</string>
+    <string name="content_description_shield">Scudo</string>
+    <string name="content_description_wand">Bacchetta</string>
 
     <!-- Navigation Drawer menu labels -->
     <string name="nav_run">Corsa</string>

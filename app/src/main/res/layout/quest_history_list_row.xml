@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:srcCompat="@mipmap/ic_launcher"
-
+        android:contentDescription="@string/content_description_icon"
         android:layout_centerVertical="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true" />
@@ -20,7 +20,7 @@
         android:id="@+id/quest_history_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
+        android:text="@string/default_layout_placeholder"
         android:textColor="@color/black"
         android:textSize="21sp"
         android:layout_centerVertical="true"
@@ -30,7 +30,7 @@
         android:id="@+id/quest_history_exp_reward"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
+        android:text="@string/default_layout_placeholder"
         android:layout_marginStart="49dp"
         android:layout_centerVertical="true"
         android:layout_toEndOf="@+id/quest_history_title" />
@@ -42,6 +42,6 @@
         android:layout_alignParentEnd="true"
         android:layout_centerVertical="true"
         android:layout_marginEnd="24dp"
-        android:text="TextView" />
+        android:text="@string/default_layout_placeholder" />
 
 </RelativeLayout>

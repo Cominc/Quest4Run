@@ -157,7 +157,6 @@ public class AddTaskActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
-    //TODO serve fare Info in questa activity?
     @Override
     public boolean onCreateOptionsMenu(Menu menu)
     {

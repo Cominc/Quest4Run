@@ -10,6 +10,7 @@
         android:id="@+id/shop_equipment_icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:contentDescription="@string/content_description_icon"
         app:srcCompat="@mipmap/ic_launcher"
         android:paddingStart="5dp"
         android:paddingEnd="10dp"
@@ -29,7 +30,7 @@
             android:layout_height="wrap_content"
             android:textSize="21sp"
             android:textColor="@color/black"
-            android:text="TextView" />
+            android:text="@string/default_layout_placeholder" />
 
         <TextView
             android:id="@+id/shop_equipment_min_level"
@@ -38,7 +39,7 @@
             android:layout_centerVertical="true"
             android:layout_toEndOf="@+id/shop_equipment_name"
             android:layout_marginStart="5dp"
-            android:text="TextView" />
+            android:text="@string/default_layout_placeholder" />
     </RelativeLayout>
 
     <TextView
@@ -74,6 +75,7 @@
         android:id="@+id/shop_equipment_icon_coin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:contentDescription="@string/content_description_icon"
         app:srcCompat="@drawable/ic_database_grey600_36dp"
         android:layout_centerVertical="true"
         android:layout_toStartOf="@+id/btn_buy"
@@ -83,7 +85,7 @@
         android:id="@+id/shop_equipment_price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
+        android:text="@string/default_layout_placeholder"
         android:layout_centerVertical="true"
         android:layout_toStartOf="@+id/shop_equipment_icon_coin"
         />
@@ -100,7 +102,7 @@
         android:id="@+id/shop_equipment_attack_value"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
+        android:text="@string/default_layout_placeholder"
         android:layout_alignBaseline="@+id/shop_equipment_attack_label"
         android:layout_alignBottom="@+id/shop_equipment_attack_label"
         android:layout_toEndOf="@+id/shop_equipment_attack_label"
@@ -110,7 +112,7 @@
         android:id="@+id/shop_equipment_defense_value"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
+        android:text="@string/default_layout_placeholder"
         android:layout_below="@+id/shop_equipment_attack_value"
         android:layout_toEndOf="@+id/shop_equipment_defense_label"
         android:layout_marginStart="5dp"/>
@@ -119,7 +121,7 @@
         android:id="@+id/shop_equipment_magic_value"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
+        android:text="@string/default_layout_placeholder"
         android:layout_below="@+id/shop_equipment_defense_value"
         android:layout_toEndOf="@+id/shop_equipment_magic_label"
         android:layout_marginStart="5dp"/>
