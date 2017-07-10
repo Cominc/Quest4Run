@@ -115,8 +115,8 @@
         <item>5 m/s</item>
     </string-array>
     <string-array name="task_constance_goal">
-        <item>1 giorno</item>
         <item>2 giorni</item>
+        <item>3 giorni</item>
         <item>5 giorni</item>
     </string-array>
     <string-array name="task_duration_goal">

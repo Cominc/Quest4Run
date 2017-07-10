@@ -52,6 +52,7 @@
         android:ems="10"
         android:inputType="textPersonName"
         android:hint="@string/name_hint"
+        android:maxLength="20"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"/>
 

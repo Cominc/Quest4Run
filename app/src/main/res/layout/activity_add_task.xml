@@ -8,9 +8,9 @@
         android:id="@+id/name_task"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
         android:ems="10"
         android:hint="@string/name_hint"
+        android:maxLength="15"
         android:inputType="textPersonName"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
@@ -24,7 +24,7 @@
         android:layout_below="@+id/name_task"
         android:layout_marginTop="27dp"
         android:text="@string/spinner_task_type_label"
-        android:textSize="18dp"/>
+        android:textSize="18sp"/>
 
     <Spinner
         android:id="@+id/task_type_spinner"
@@ -41,7 +41,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="27dp"
         android:text="@string/spinner_task_goal_label"
-        android:textSize="18dp"
+        android:textSize="18sp"
         android:layout_below="@+id/task_type_spinner"
         android:layout_alignParentStart="true"/>
 
@@ -60,7 +60,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="27dp"
         android:text="@string/spinner_task_reward_label"
-        android:textSize="18dp"
+        android:textSize="18sp"
         android:layout_below="@+id/task_goal_spinner"
         android:layout_alignParentStart="true"/>
 
