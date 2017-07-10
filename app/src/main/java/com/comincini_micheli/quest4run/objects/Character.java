@@ -3,7 +3,7 @@ package com.comincini_micheli.quest4run.objects;
 import static com.comincini_micheli.quest4run.other.Constants.EXP_FOR_NEXT_LEVEL;
 
 /**
- * Created by Daniele on 30/05/2017.
+ *  Created by Daniele on 30/05/2017.
  */
 
 public class Character {
@@ -112,6 +112,6 @@ public class Character {
         this.wallet = wallet;
     }
 
-    public int getLevel(){ return (int)Math.round(exp/EXP_FOR_NEXT_LEVEL) + 1;}
+    public int getLevel(){ return Math.round(exp/EXP_FOR_NEXT_LEVEL) + 1;}
 
 }

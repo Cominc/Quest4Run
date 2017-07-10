@@ -5,7 +5,7 @@ import android.support.annotation.NonNull;
 import java.io.Serializable;
 
 /**
- * Created by Gianmaria on 19/05/2017.
+ *  Created by Gianmaria on 19/05/2017.
  */
 public class Task implements Serializable, Comparable
 {

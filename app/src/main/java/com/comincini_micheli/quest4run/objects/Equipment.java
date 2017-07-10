@@ -1,7 +1,7 @@
 package com.comincini_micheli.quest4run.objects;
 
 /**
- * Created by Daniele on 17/05/2017.
+ *  Created by Daniele on 17/05/2017.
  */
 public class Equipment {
     private int id;
@@ -17,19 +17,6 @@ public class Equipment {
     public Equipment() {
         this.bought = false;
         this.equipped = false;
-    }
-
-    public Equipment(String name, int idType, int atk, int def, int mgc, int price, String icon, int minLevel) {
-        this.name = name;
-        this.idType = idType;
-        this.atk = atk;
-        this.def = def;
-        this.mgc = mgc;
-        this.price = price;
-        this.icon = icon;
-        this.bought = false;
-        this.equipped = false;
-        this.minLevel = minLevel;
     }
 
     public Equipment(int id, String name, int idType, int atk, int def, int mgc, int price, String icon, boolean bought, boolean equipped, int minLevel) {

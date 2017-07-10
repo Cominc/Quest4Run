@@ -1,7 +1,7 @@
 package com.comincini_micheli.quest4run.objects;
 
 /**
- * Created by Daniele on 19/06/2017.
+ *  Created by Daniele on 19/06/2017.
  */
 
 public class Gps {
