@@ -21,6 +21,7 @@ import android.widget.Chronometer;
 import android.widget.TextView;
 
 import com.comincini_micheli.quest4run.R;
+import com.comincini_micheli.quest4run.activity.MainActivity;
 import com.comincini_micheli.quest4run.objects.Gps;
 
 import com.comincini_micheli.quest4run.other.Constants;

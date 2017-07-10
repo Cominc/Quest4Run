@@ -122,7 +122,19 @@ public class MainActivity extends AppCompatActivity
         String title = "";
 
         if(idNavigationItemSelected != R.id.nav_about_us && idNavigationItemSelected != R.id.nav_faq)
-            lastFragmentListId = idNavigationItemSelected;
+        {
+            if(idNavigationItemSelected == R.id.nav_path)
+            {
+                SharedPreferences firstLaunchSetting = getSharedPreferences(Constants.NAME_PREFS, MODE_PRIVATE);
+                float distance = firstLaunchSetting.getFloat(Constants.LAST_DISTANCE, 0);
+                if(distance > 0)
+                    lastFragmentListId = idNavigationItemSelected;
+                else
+                    lastFragmentListId = R.id.nav_run;
+            }
+            else
+                lastFragmentListId = idNavigationItemSelected;
+        }
 
         switch(idNavigationItemSelected)
         {
