@@ -55,7 +55,7 @@ import java.util.List;
 public class RunFragment extends Fragment {
     private final static String provider = LocationManager.GPS_PROVIDER;
     //private final static String provider = LocationManager.NETWORK_PROVIDER;
-    private static Location previusLocation = null;
+    private static Location previousLocation = null;
     private boolean active = false;
     private float totalDistance = 0, intermediateDistance = 0;
     private float totalSpeed;
@@ -64,7 +64,6 @@ public class RunFragment extends Fragment {
 
     private Chronometer chronometer;
 
-    private MapView mMapView;
     private GoogleMap mMapGoogle;
     private Marker positionMarker = null;
 
@@ -82,7 +81,7 @@ public class RunFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        mMapView = (MapView) getActivity().findViewById(R.id.map2);
+        MapView mMapView = (MapView) getActivity().findViewById(R.id.map2);
         mMapView.onCreate(savedInstanceState);
         mMapView.onResume();
         mMapView.getMapAsync(new OnMapReadyCallback() {
@@ -116,9 +115,9 @@ public class RunFragment extends Fragment {
         final LocationListener locationListener = new LocationListener() {
             public void onLocationChanged(Location location) {
                 // Called when a new location is found by the network location provider.
-                if(previusLocation!=null) {
-                    intermediateDistance = location.distanceTo(previusLocation);
-                    float actual_speed = intermediateDistance / ((location.getTime() - previusLocation.getTime()) / Constants.MILLISECONDS_A_SECOND);
+                if(previousLocation !=null) {
+                    intermediateDistance = location.distanceTo(previousLocation);
+                    float actual_speed = intermediateDistance / ((location.getTime() - previousLocation.getTime()) / Constants.MILLISECONDS_A_SECOND);
                     totalSpeed += actual_speed;
                     location.setSpeed(actual_speed);
                 }
@@ -137,13 +136,13 @@ public class RunFragment extends Fragment {
                     totalGPSPoints++;
                     totalDistance += intermediateDistance;
 
-                    textViewDistance.setText(String.format("%.2f",totalDistance/Constants.M_IN_KM));
-                    textViewSpeed.setText(String.format("%.1f",location.getSpeed()));
+                    textViewDistance.setText(String.format(getResources().getString(R.string.distance_value_format),totalDistance/Constants.M_IN_KM));
+                    textViewSpeed.setText(String.format(getResources().getString(R.string.speed_value_format),location.getSpeed()));
 
                     LatLng newPosition = new LatLng(location.getLatitude(),location.getLongitude());
                     PolylineOptions line= new PolylineOptions().width(5).color(getResources().getColor(R.color.colorPrimary));
-                    if(previusLocation!=null) {
-                        line.add(new LatLng(previusLocation.getLatitude(), previusLocation.getLongitude()));
+                    if(previousLocation !=null) {
+                        line.add(new LatLng(previousLocation.getLatitude(), previousLocation.getLongitude()));
                         if(positionMarker !=null)
                             positionMarker.remove();
                         positionMarker = mMapGoogle.addMarker(new MarkerOptions().position(newPosition).anchor(0.5f, 0.5f).icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_dot)));
@@ -157,7 +156,7 @@ public class RunFragment extends Fragment {
                     mMapGoogle.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
                 }
 
-                previusLocation = location;
+                previousLocation = location;
             }
 
             public void onStatusChanged(String provider, int status, Bundle extras) {
@@ -193,8 +192,8 @@ public class RunFragment extends Fragment {
                     btnGPS_start.setVisibility(View.VISIBLE);
                     if(positionMarker !=null)
                         positionMarker.remove();
-                    if (previusLocation != null)
-                        mMapGoogle.addMarker(new MarkerOptions().position(new LatLng(previusLocation.getLatitude(), previusLocation.getLongitude())).anchor(0.0f, 1.0f).icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_finish)));
+                    if (previousLocation != null)
+                        mMapGoogle.addMarker(new MarkerOptions().position(new LatLng(previousLocation.getLatitude(), previousLocation.getLongitude())).anchor(0.0f, 1.0f).icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_finish)));
                     chronometer.stop();
                 }
             }
@@ -217,7 +216,7 @@ public class RunFragment extends Fragment {
                         locationManager.requestLocationUpdates(provider, Constants.MIN_TIME_BETEWEEN_UPDATE, 0, locationListener);
                         progressDialog.show();
 
-                        previusLocation = null;
+                        previousLocation = null;
                         active = true;
                         mMapGoogle.clear();
                         totalDistance = 0;
@@ -244,20 +243,19 @@ public class RunFragment extends Fragment {
                 btnGPS_start.setVisibility(View.VISIBLE);
                 if(positionMarker !=null)
                     positionMarker.remove();
-                if (previusLocation != null)
-                    mMapGoogle.addMarker(new MarkerOptions().position(new LatLng(previusLocation.getLatitude(), previusLocation.getLongitude())).anchor(0.0f, 1.0f).icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_finish)));
+                if (previousLocation != null)
+                    mMapGoogle.addMarker(new MarkerOptions().position(new LatLng(previousLocation.getLatitude(), previousLocation.getLongitude())).anchor(0.0f, 1.0f).icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_finish)));
                 chronometer.stop();
 
                 //Toast.makeText( getContext(),"GPS points: "+db.getGpsCount(),Toast.LENGTH_SHORT).show();
                 //Toast.makeText( getContext(),"Distanza (m): "+totalDistance,Toast.LENGTH_SHORT).show();
                 finishTime = System.currentTimeMillis();
                 long totalTime = (finishTime - startTime)/ Constants.MILLISECONDS_A_SECOND;
-                long numberMinutes = totalTime / Constants.SECONDS_A_MINUTE;
                 int totalRewardEarned = 0;
                 int totalNewTaskCompleted = 0;
                 if(totalDistance > 0) {
 
-                    SharedPreferences.Editor lastRunInfo = getContext().getSharedPreferences(Constants.NAME_PREFS, getContext().MODE_PRIVATE).edit();
+                    SharedPreferences.Editor lastRunInfo = getContext().getSharedPreferences(Constants.NAME_PREFS, Context.MODE_PRIVATE).edit();
                     lastRunInfo.putFloat(Constants.LAST_DISTANCE, totalDistance);
                     lastRunInfo.putLong(Constants.LAST_DURATION, (finishTime - startTime));
                     lastRunInfo.commit();
@@ -382,7 +380,7 @@ public class RunFragment extends Fragment {
                 else
                 {
                     db.deleteAllGps();
-                    SharedPreferences.Editor lastRunInfo = getContext().getSharedPreferences(Constants.NAME_PREFS, getContext().MODE_PRIVATE).edit();
+                    SharedPreferences.Editor lastRunInfo = getContext().getSharedPreferences(Constants.NAME_PREFS, Context.MODE_PRIVATE).edit();
                     lastRunInfo.remove(Constants.LAST_DISTANCE);
                     lastRunInfo.remove(Constants.LAST_DURATION);
                     lastRunInfo.commit();

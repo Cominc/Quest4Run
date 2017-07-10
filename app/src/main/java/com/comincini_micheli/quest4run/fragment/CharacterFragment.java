@@ -3,13 +3,10 @@ package com.comincini_micheli.quest4run.fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
-import android.graphics.ColorFilter;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
@@ -23,7 +20,6 @@ import com.comincini_micheli.quest4run.other.Constants;
 import com.comincini_micheli.quest4run.other.DatabaseHandler;
 import com.comincini_micheli.quest4run.objects.Character;
 
-import static android.app.Activity.RESULT_OK;
 import static com.comincini_micheli.quest4run.other.Constants.EXP_FOR_NEXT_LEVEL;
 
 

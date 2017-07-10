@@ -21,9 +21,6 @@ import com.comincini_micheli.quest4run.adapter.EquipmentShopAdapter;
 
 import java.util.List;
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class ShopListFragment extends Fragment {
     private int equipmentTypeId;
     ListView list;
@@ -36,10 +33,6 @@ public class ShopListFragment extends Fragment {
 
     public ShopListFragment() {
         // Required empty public constructor
-    }
-
-    public int getEquipmentTypeId() {
-        return equipmentTypeId;
     }
 
     public void setEquipmentTypeId(int equipmentTypeId) {

@@ -277,6 +277,9 @@
     <string name="alert_no_path_title">Nessuna attività trovata</string>
     <string name="alert_no_path_text">Inizia ad allenarti adesso!</string>
 
+    <string name="distance_value_format">%.2f</string>
+    <string name="speed_value_format">%.1f</string>
+
     <string name="date_format">dd-MM-yyyy</string>
     <string name="datetime_format">HH:mm dd-MM-yyyy</string>
     <string name="countdown_finish_label">00:00:00</string>

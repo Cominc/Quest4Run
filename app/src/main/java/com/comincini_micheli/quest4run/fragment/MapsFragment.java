@@ -2,10 +2,10 @@ package com.comincini_micheli.quest4run.fragment;
 
 
 
+import android.content.Context;
 import android.content.DialogInterface;
 
 import android.content.SharedPreferences;
-import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
@@ -21,7 +21,6 @@ import android.widget.Chronometer;
 import android.widget.TextView;
 
 import com.comincini_micheli.quest4run.R;
-import com.comincini_micheli.quest4run.activity.MainActivity;
 import com.comincini_micheli.quest4run.objects.Gps;
 
 import com.comincini_micheli.quest4run.other.Constants;
@@ -34,7 +33,6 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
-import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
 
@@ -44,12 +42,7 @@ import java.util.concurrent.TimeUnit;
 
 public class MapsFragment extends Fragment {
 
-    private MapView mMapView;
     private GoogleMap mMapGoogle;
-
-    private float distance;
-    private float speed;
-    private long duration;
 
     public MapsFragment() {
     }
@@ -64,24 +57,25 @@ public class MapsFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        SharedPreferences lastRunInfo = getContext().getSharedPreferences(Constants.NAME_PREFS, getContext().MODE_PRIVATE);
-        distance = lastRunInfo.getFloat(Constants.LAST_DISTANCE, 0);
-        duration = lastRunInfo.getLong(Constants.LAST_DURATION, 0);
-        if(duration==0)
+        SharedPreferences lastRunInfo = getContext().getSharedPreferences(Constants.NAME_PREFS, Context.MODE_PRIVATE);
+        float distance = lastRunInfo.getFloat(Constants.LAST_DISTANCE, 0);
+        long duration = lastRunInfo.getLong(Constants.LAST_DURATION, 0);
+        float speed;
+        if(duration ==0)
             speed = (float) 0.0;
         else
-            speed = distance/(duration/Constants.MILLISECONDS_A_SECOND);
+            speed = distance /(duration /Constants.MILLISECONDS_A_SECOND);
 
         TextView textViewDistance = (TextView) view.findViewById(R.id.display_distance);
         TextView textViewSpeed = (TextView) view.findViewById(R.id.display_speed);
         Chronometer chronometer = (Chronometer) view.findViewById(R.id.display_time);
 
-        textViewDistance.setText(String.format("%.2f",distance/ Constants.M_IN_KM));
-        textViewSpeed.setText(String.format("%.1f",speed));
+        textViewDistance.setText(String.format(getResources().getString(R.string.distance_value_format), distance / Constants.M_IN_KM));
+        textViewSpeed.setText(String.format(getResources().getString(R.string.speed_value_format), speed));
         String durationString = myFormatTime(duration);
         chronometer.setText(durationString);
 
-        mMapView = (MapView) getActivity().findViewById(R.id.map3);
+        MapView mMapView = (MapView) getActivity().findViewById(R.id.map3);
         mMapView.onCreate(savedInstanceState);
         mMapView.onResume();
 

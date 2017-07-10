@@ -2,13 +2,11 @@ package com.comincini_micheli.quest4run.fragment;
 
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AlertDialog;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -18,13 +16,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.comincini_micheli.quest4run.R;
-import com.comincini_micheli.quest4run.activity.EquipmentActivity;
 import com.comincini_micheli.quest4run.activity.QuestDetailActivity;
 import com.comincini_micheli.quest4run.activity.QuestHistoryActivity;
-import com.comincini_micheli.quest4run.activity.TaskHistoryActivity;
 import com.comincini_micheli.quest4run.objects.Quest;
 import com.comincini_micheli.quest4run.objects.Character;
 import com.comincini_micheli.quest4run.other.Constants;
@@ -33,11 +28,6 @@ import com.comincini_micheli.quest4run.adapter.QuestAdapter;
 
 import java.util.List;
 
-import static android.app.Activity.RESULT_OK;
-
-/**
- * A simple {@link Fragment} subclass.
- */
 public class QuestFragment extends Fragment
 {
     private ListView list;
@@ -150,9 +140,10 @@ public class QuestFragment extends Fragment
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == Constants.DETAILS_QUEST)
         {
+            /*
             Quest activeQuest = db.getActiveQuest();
 
-            /*if(activeQuest!=null && activeQuest.checkCompleted())
+            if(activeQuest!=null && activeQuest.checkCompleted())
             {
                 activeQuest.setCompleted(true);
                 activeQuest.setActive(false);
@@ -164,7 +155,8 @@ public class QuestFragment extends Fragment
                 Character myCharacter = db.getCharacter(settings.getInt(Constants.CHAR_ID_PREFERENCE,-1));
                 myCharacter.setExp(myCharacter.getExp()+activeQuest.getExpReward());
                 db.updateCharacter(myCharacter);
-            }*/
+            }
+            */
             //questList.clear();
             //questList = db.getQuests(false);
             list=(ListView)getView().findViewById(R.id.quest_list_view);

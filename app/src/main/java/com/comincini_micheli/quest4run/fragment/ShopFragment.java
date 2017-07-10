@@ -1,28 +1,20 @@
 package com.comincini_micheli.quest4run.fragment;
 
 
-import android.graphics.Point;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.comincini_micheli.quest4run.R;
-import com.comincini_micheli.quest4run.objects.Equipment;
 import com.comincini_micheli.quest4run.other.Constants;
-import com.comincini_micheli.quest4run.other.DatabaseHandler;
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class ShopFragment extends Fragment
 {
     float x1 = 0;
