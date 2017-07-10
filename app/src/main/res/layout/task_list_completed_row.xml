@@ -18,7 +18,8 @@
         android:id="@+id/task_name_completed"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="21dp"
+        android:textSize="21sp"
+        android:textColor="@color/black"
         android:text="TextView"
         android:layout_alignTop="@+id/task_icon_completed"
         android:layout_toEndOf="@+id/task_icon_completed" />

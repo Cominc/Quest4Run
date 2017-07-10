@@ -20,7 +20,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="TextView"
-        android:textSize="21dp"
+        android:textColor="@color/black"
+        android:textSize="21sp"
         android:layout_centerVertical="true"
         android:layout_toEndOf="@+id/quest_history_icon" />
 

@@ -19,7 +19,8 @@
         android:id="@+id/inventory_equipment_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="21dp"
+        android:textSize="21sp"
+        android:textColor="@color/black"
         android:text="TextView"
         android:layout_alignTop="@+id/inventory_equipment_icon"
         android:layout_toEndOf="@+id/inventory_equipment_icon" />
