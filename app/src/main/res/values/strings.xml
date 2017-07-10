@@ -60,7 +60,8 @@
     \n- Costanza: numero di giorni di fila in cui si effettua una corsa;
     \n- Durata: quanto si vuole correre in termini di tempo.
     \n \n Gli obbiettivi possono essere attivati o disattivati, a seconda di quali si voglia completare.
-    Nel caso in cui sia completato un obbiettivo, questo sarà visibile nella scheda \"Obbiettivi Completati\", accessibile dal menù in alto a destra.</string>
+    Nel caso in cui sia completato un obbiettivo, questo sarà visibile nella scheda \"Obbiettivi Completati\", accessibile dal menù in alto a destra.
+    Completando gli Obbiettivi si potranno ottenere le monete necessarie a comprare nuovi equipaggiamenti.</string>
     <string name="faq6_question">6 - Personaggio</string>
     <string name="faq6_answer">Puoi visualizzare le statistiche del tuo personaggio man mano che queste migliorano!
     Cliccando sulle icone di Spada, Scudo e Scettro potrai visualizzare gli equipaggiamenti disponibili per il tuo personaggio e scegliere quelli che preferisci.</string>

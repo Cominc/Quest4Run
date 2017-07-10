@@ -10,9 +10,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/btn_add_label"
+        android:layout_marginBottom="62dp"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="18dp"/>
+        android:layout_centerHorizontal="true"/>
 
     <ImageView
         android:id="@+id/create_character_avatar_img"
@@ -53,8 +53,10 @@
         android:inputType="textPersonName"
         android:hint="@string/name_hint"
         android:maxLength="20"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"/>
+        android:gravity="center"
+        android:layout_below="@+id/create_character_avatar_img"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"/>
 
     <TextView
         android:id="@+id/create_character_gender_textview"
