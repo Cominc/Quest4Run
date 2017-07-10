@@ -111,7 +111,7 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-
+    //TODO cos'è?
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -163,12 +163,10 @@ public class MainActivity extends AppCompatActivity
                 title = getResources().getString(R.string.nav_character);
                 break;
             case R.id.nav_about_us:
-                //startActivity(new Intent(MainActivity.this, AboutUsActivity.class));
                 Intent intent = new Intent(this, AboutUsActivity.class);
                 startActivityForResult(intent, Constants.OPEN_ABOUT_US_ACTIVITY);
                 break;
             case R.id.nav_faq:
-                //startActivity(new Intent(MainActivity.this, FaqActivity.class));
                 Intent intent2 = new Intent(this, FaqActivity.class);
                 startActivityForResult(intent2, Constants.OPEN_FAQ_ACTIVITY);
                 break;

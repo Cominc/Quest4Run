@@ -1,14 +1,9 @@
 package com.comincini_micheli.quest4run.activity;
 
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.CountDownTimer;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -27,8 +22,6 @@ public class QuestDetailActivity extends AppCompatActivity {
     long countTime;
     Quest quest;
     DatabaseHandler db;
-
-    private boolean firstOpen;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -114,7 +107,7 @@ public class QuestDetailActivity extends AppCompatActivity {
 
                 @Override
                 public void onFinish() {
-                    countdown.setText("00:00:00");
+                    countdown.setText(getResources().getString(R.string.quest_detail_countdown_finish_label));
                 }
             }.start();
         }

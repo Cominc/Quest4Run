@@ -5,11 +5,9 @@ import android.content.SharedPreferences;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 
 import com.comincini_micheli.quest4run.R;
 import com.comincini_micheli.quest4run.other.Constants;
-import com.comincini_micheli.quest4run.other.DatabaseHandler;
 
 public class SplashActivity extends AppCompatActivity {
 

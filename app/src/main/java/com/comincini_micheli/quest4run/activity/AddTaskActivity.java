@@ -24,7 +24,6 @@ import com.comincini_micheli.quest4run.other.DatabaseHandler;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.StringTokenizer;
 
 public class AddTaskActivity extends AppCompatActivity
 {
@@ -54,19 +53,19 @@ public class AddTaskActivity extends AppCompatActivity
         spinnerType = (Spinner) findViewById(R.id.task_type_spinner);
         //spinner.setOnItemClickListener();
         List<String> listType = Arrays.asList(getResources().getStringArray(R.array.task_type));
-        ArrayAdapter<String> adapterType = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, listType);
+        ArrayAdapter<String> adapterType = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, listType);
         spinnerType.setAdapter(adapterType);
 
         spinnerGoal = (Spinner) findViewById(R.id.task_goal_spinner);
         //spinner.setOnItemClickListener();
         List<String> listGoal = Arrays.asList(getResources().getStringArray(R.array.task_distance_goal));
-        ArrayAdapter<String> adapterGoal = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, listGoal);
+        ArrayAdapter<String> adapterGoal = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, listGoal);
         spinnerGoal.setAdapter(adapterGoal);
 
         spinnerReward = (Spinner) findViewById(R.id.task_reward_spinner);
         //spinner.setOnItemClickListener();
         List<String> listReward = Arrays.asList(getResources().getStringArray(R.array.task_distance_reward));
-        ArrayAdapter<String> adapterReward = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, listReward);
+        ArrayAdapter<String> adapterReward = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, listReward);
         spinnerReward.setAdapter(adapterReward);
 
         final Context context = this;
@@ -97,9 +96,9 @@ public class AddTaskActivity extends AppCompatActivity
                     default:
                         break;
                 }
-                ArrayAdapter<String> adapterGoal = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, listGoal);
+                ArrayAdapter<String> adapterGoal = new ArrayAdapter<>(context, android.R.layout.simple_spinner_dropdown_item, listGoal);
                 spinnerGoal.setAdapter(adapterGoal);
-                ArrayAdapter<String> adapterReward = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, listReward);
+                ArrayAdapter<String> adapterReward = new ArrayAdapter<>(context, android.R.layout.simple_spinner_dropdown_item, listReward);
                 spinnerReward.setAdapter(adapterReward);
             }
 

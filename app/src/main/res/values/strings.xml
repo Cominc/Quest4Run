@@ -245,6 +245,7 @@
     <string name="quest_detail_duration_label">Durata</string>
     <string name="quest_detail_date_start_label">Data inizio</string>
     <string name="quest_detail_date_finish_label">Data fine</string>
+    <string name="quest_detail_countdown_finish_label">00:00:00</string>
 
     <!-- Quest Complete Notification-->
     <string name="quest_complete_notification_title">Missione completata!</string>
