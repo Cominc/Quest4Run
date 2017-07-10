@@ -21,6 +21,66 @@
         <icon>blue</icon>
     </equipment>
     <equipment>
+        <name>Spada</name>
+        <attack>4</attack>
+        <defense>1</defense>
+        <magic>-2</magic>
+        <price>15</price>
+        <idEquipmentType>0</idEquipmentType>
+        <minLevel>1</minLevel>
+        <icon>red</icon>
+    </equipment>
+    <equipment>
+        <name>Spada fuffa</name>
+        <attack>-1</attack>
+        <defense>-1</defense>
+        <magic>-1</magic>
+        <price>1</price>
+        <idEquipmentType>0</idEquipmentType>
+        <minLevel>3</minLevel>
+        <icon>blue</icon>
+    </equipment>
+    <equipment>
+        <name>Spada</name>
+        <attack>4</attack>
+        <defense>1</defense>
+        <magic>-2</magic>
+        <price>15</price>
+        <idEquipmentType>0</idEquipmentType>
+        <minLevel>1</minLevel>
+        <icon>red</icon>
+    </equipment>
+    <equipment>
+        <name>Spada fuffa</name>
+        <attack>-1</attack>
+        <defense>-1</defense>
+        <magic>-1</magic>
+        <price>1</price>
+        <idEquipmentType>0</idEquipmentType>
+        <minLevel>3</minLevel>
+        <icon>blue</icon>
+    </equipment>
+    <equipment>
+        <name>Spada</name>
+        <attack>4</attack>
+        <defense>1</defense>
+        <magic>-2</magic>
+        <price>15</price>
+        <idEquipmentType>0</idEquipmentType>
+        <minLevel>1</minLevel>
+        <icon>red</icon>
+    </equipment>
+    <equipment>
+        <name>Spada fuffa</name>
+        <attack>-1</attack>
+        <defense>-1</defense>
+        <magic>-1</magic>
+        <price>1</price>
+        <idEquipmentType>0</idEquipmentType>
+        <minLevel>3</minLevel>
+        <icon>blue</icon>
+    </equipment>
+    <equipment>
         <name>Scudo</name>
         <attack>0</attack>
         <defense>5</defense>
@@ -38,6 +98,126 @@
         <price>1</price>
         <idEquipmentType>1</idEquipmentType>
         <minLevel>3</minLevel>
+        <icon>blue</icon>
+    </equipment>
+    <equipment>
+        <name>Scudo</name>
+        <attack>0</attack>
+        <defense>5</defense>
+        <magic>1</magic>
+        <price>10</price>
+        <idEquipmentType>1</idEquipmentType>
+        <minLevel>3</minLevel>
+        <icon>green</icon>
+    </equipment>
+    <equipment>
+        <name>Scudo fuffa</name>
+        <attack>-1</attack>
+        <defense>-1</defense>
+        <magic>-1</magic>
+        <price>1</price>
+        <idEquipmentType>1</idEquipmentType>
+        <minLevel>3</minLevel>
+        <icon>blue</icon>
+    </equipment>
+    <equipment>
+        <name>Scudo</name>
+        <attack>0</attack>
+        <defense>5</defense>
+        <magic>1</magic>
+        <price>10</price>
+        <idEquipmentType>1</idEquipmentType>
+        <minLevel>3</minLevel>
+        <icon>green</icon>
+    </equipment>
+    <equipment>
+        <name>Scudo fuffa</name>
+        <attack>-1</attack>
+        <defense>-1</defense>
+        <magic>-1</magic>
+        <price>1</price>
+        <idEquipmentType>1</idEquipmentType>
+        <minLevel>3</minLevel>
+        <icon>blue</icon>
+    </equipment>
+    <equipment>
+        <name>Scudo</name>
+        <attack>0</attack>
+        <defense>5</defense>
+        <magic>1</magic>
+        <price>10</price>
+        <idEquipmentType>1</idEquipmentType>
+        <minLevel>3</minLevel>
+        <icon>green</icon>
+    </equipment>
+    <equipment>
+        <name>Scudo fuffa</name>
+        <attack>-1</attack>
+        <defense>-1</defense>
+        <magic>-1</magic>
+        <price>1</price>
+        <idEquipmentType>1</idEquipmentType>
+        <minLevel>3</minLevel>
+        <icon>blue</icon>
+    </equipment>
+    <equipment>
+        <name>Scettro</name>
+        <attack>-1</attack>
+        <defense>0</defense>
+        <magic>6</magic>
+        <price>25</price>
+        <idEquipmentType>2</idEquipmentType>
+        <minLevel>1</minLevel>
+        <icon>red</icon>
+    </equipment>
+    <equipment>
+        <name>Scettro fuffa</name>
+        <attack>-1</attack>
+        <defense>-1</defense>
+        <magic>-1</magic>
+        <price>1</price>
+        <idEquipmentType>2</idEquipmentType>
+        <minLevel>1</minLevel>
+        <icon>blue</icon>
+    </equipment>
+    <equipment>
+        <name>Scettro</name>
+        <attack>-1</attack>
+        <defense>0</defense>
+        <magic>6</magic>
+        <price>25</price>
+        <idEquipmentType>2</idEquipmentType>
+        <minLevel>1</minLevel>
+        <icon>red</icon>
+    </equipment>
+    <equipment>
+        <name>Scettro fuffa</name>
+        <attack>-1</attack>
+        <defense>-1</defense>
+        <magic>-1</magic>
+        <price>1</price>
+        <idEquipmentType>2</idEquipmentType>
+        <minLevel>1</minLevel>
+        <icon>blue</icon>
+    </equipment>
+    <equipment>
+        <name>Scettro</name>
+        <attack>-1</attack>
+        <defense>0</defense>
+        <magic>6</magic>
+        <price>25</price>
+        <idEquipmentType>2</idEquipmentType>
+        <minLevel>1</minLevel>
+        <icon>red</icon>
+    </equipment>
+    <equipment>
+        <name>Scettro fuffa</name>
+        <attack>-1</attack>
+        <defense>-1</defense>
+        <magic>-1</magic>
+        <price>1</price>
+        <idEquipmentType>2</idEquipmentType>
+        <minLevel>1</minLevel>
         <icon>blue</icon>
     </equipment>
     <equipment>

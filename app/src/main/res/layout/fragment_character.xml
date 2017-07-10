@@ -79,7 +79,7 @@
             android:layout_height="wrap_content"
             android:layout_alignStart="@+id/character_wallet_label"
             android:layout_below="@+id/character_wallet_label"
-            android:layout_marginTop="18dp"
+            android:layout_marginTop="20dp"
             android:textColor="@color/black"
             android:text="@string/character_stats_label"
             android:textSize="18sp" />
@@ -88,7 +88,7 @@
             android:id="@+id/character_attack_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="14dp"
+            android:layout_marginTop="15dp"
             android:text="@string/attack_label"
             android:layout_below="@+id/character_stats_label"
             android:layout_alignStart="@+id/character_stats_label" />
@@ -99,7 +99,7 @@
             android:layout_height="wrap_content"
             android:layout_alignStart="@+id/character_attack_label"
             android:layout_below="@+id/character_attack_label"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="15dp"
             android:text="@string/defense_label" />
 
         <TextView
@@ -108,7 +108,7 @@
             android:layout_height="wrap_content"
             android:layout_alignStart="@+id/character_defence_label"
             android:layout_below="@+id/character_defence_label"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="15dp"
             android:text="@string/magic_label" />
 
         <TextView
