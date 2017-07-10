@@ -23,13 +23,13 @@
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
                 android:layout_marginBottom="20dp"
+                android:layout_marginTop="4dp"
                 android:gravity="center"
                 />
             <TextView
                 android:id="@+id/faq1_q"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
                 android:text="@string/faq1_question"
                 android:textColor="@color/white"
                 android:background="@color/colorPrimary"
