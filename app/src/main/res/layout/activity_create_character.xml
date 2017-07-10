@@ -22,6 +22,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="52dp"
         android:tag="@string/default_male_avatar_tag"
+        android:contentDescription="@string/content_description_icon"
         app:srcCompat="@drawable/m_0"/>
 
     <ImageButton
@@ -31,6 +32,7 @@
         android:layout_marginBottom="39dp"
         android:layout_marginStart="23dp"
         android:background="@android:color/transparent"
+        android:contentDescription="@string/content_description_arrow_right"
         app:srcCompat="@drawable/ic_arrow_right"
         android:layout_alignBottom="@+id/create_character_avatar_img"
         android:layout_toEndOf="@+id/create_character_avatar_img"/>
@@ -43,6 +45,7 @@
         android:layout_marginEnd="23dp"
         android:layout_toStartOf="@+id/create_character_avatar_img"
         android:background="@android:color/transparent"
+        android:contentDescription="@string/content_description_arrow_left"
         app:srcCompat="@drawable/ic_arrow_left"/>
 
     <EditText

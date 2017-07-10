@@ -26,6 +26,7 @@
                 android:id="@+id/comincini_avatar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:contentDescription="@string/content_description_icon"
                 app:srcCompat="@drawable/m_1" />
 
             <TextView
@@ -51,6 +52,7 @@
                 android:id="@+id/micheli_avatar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:contentDescription="@string/content_description_icon"
                 app:srcCompat="@drawable/m_0" />
 
             <TextView

@@ -10,7 +10,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:srcCompat="@mipmap/ic_launcher"
-        android:layout_marginRight="10dp"
+        android:layout_marginEnd="10dp"
         android:layout_centerVertical="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true" />
@@ -46,7 +46,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:focusable="false"/>
 
@@ -75,6 +74,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        android:layout_marginRight="10dp"
+        android:layout_marginEnd="10dp"
         android:layout_toStartOf="@+id/task_switch_active"/>
 </RelativeLayout>

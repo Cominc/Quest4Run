@@ -15,6 +15,7 @@
             android:id="@+id/imageView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:contentDescription="@string/content_description_icon"
             android:src="@drawable/empty_box_60"
             android:layout_below="@+id/empty_label"
             android:layout_centerHorizontal="true"
