@@ -8,11 +8,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.Icon;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.support.v7.app.NotificationCompat;
 
 import com.comincini_micheli.quest4run.R;
@@ -23,7 +19,7 @@ import com.comincini_micheli.quest4run.objects.Quest;
 import java.util.Date;
 
 /**
- * Created by Daniele on 29/06/2017.
+ *  Created by Daniele on 29/06/2017.
  */
 
 public class AlarmNotificationReceiver extends BroadcastReceiver {

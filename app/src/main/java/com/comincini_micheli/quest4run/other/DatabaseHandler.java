@@ -17,18 +17,12 @@ package com.comincini_micheli.quest4run.other;
     import org.w3c.dom.Document;
     import org.w3c.dom.Element;
     import org.w3c.dom.NodeList;
-    import org.xmlpull.v1.XmlPullParser;
-    import org.xmlpull.v1.XmlPullParserException;
 
-    import java.io.ByteArrayOutputStream;
-    import java.io.IOException;
-    import java.io.InputStream;
-    import java.io.UnsupportedEncodingException;
     import java.util.ArrayList;
     import java.util.List;
 
 /**
- * Created by Daniele on 17/05/2017.
+ *  Created by Daniele on 17/05/2017.
  */
 public class DatabaseHandler extends SQLiteOpenHelper {
 
@@ -260,7 +254,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     // Getting All tasks
     public List<Task> getAllTasks() {
-        List<Task> taskList = new ArrayList<Task>();
+        List<Task> taskList = new ArrayList<>();
         // Select All Query
         String selectQuery = "SELECT  * FROM " + TABLE_TASK;
 
@@ -291,7 +285,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     }
 
     public List<Task> getTasks(boolean show_completed) {
-        List<Task> taskList = new ArrayList<Task>();
+        List<Task> taskList = new ArrayList<>();
         int _completed;
         if(show_completed)
             _completed = 1;
@@ -325,7 +319,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     }
 
     public List<Task> getTasks(boolean show_completed, int taskType) {
-        List<Task> taskList = new ArrayList<Task>();
+        List<Task> taskList = new ArrayList<>();
         int _completed;
         if(show_completed)
             _completed = 1;
@@ -360,7 +354,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     }
 
     public List<Task> getTasks(boolean show_completed,boolean active, int taskType) {
-        List<Task> taskList = new ArrayList<Task>();
+        List<Task> taskList = new ArrayList<>();
         int _completed;
         if(show_completed)
             _completed = 1;

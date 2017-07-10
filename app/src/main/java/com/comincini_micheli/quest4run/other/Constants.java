@@ -1,7 +1,7 @@
 package com.comincini_micheli.quest4run.other;
 
 /**
- * Created by Gianmaria on 26/05/2017.
+ *  Created by Gianmaria on 26/05/2017.
  */
 
 public class Constants
@@ -14,7 +14,6 @@ public class Constants
    public static final int EXP_FOR_NEXT_LEVEL = 100;
    public static final String ID_EQUIPMENT_TYPE = "id_type";
    public static final String CHAR_ID_PREFERENCE = "characterId";
-   public static final String INFO_ABOUT_US = "infoAboutUs";
    public static final String INFO_ADD_TASK = "infoAddTask";
    public static final String INFO_START_MAIN = "infoStartMain";
    public static final String LAST_DISTANCE = "lastDistance";
