@@ -43,7 +43,7 @@
             una Grande Musica, E poiché vi ho accesi della Fiamma Imperitura, voi esibirete i vostri poteri nell’adornare il tema stesso,
             ciascuno con i propri pensieri e artifici, dove lo desideri.
             Io invece siederò in ascolto, contento del fatto che tramite vostro una grande bellezza sia ridesta in canto".</description>
-        <attack>1</attack>
+        <attack>6</attack>
         <defense>1</defense>
         <magic>1</magic>
         <expReward>100</expReward>
@@ -58,7 +58,7 @@
             e altezza, e i luoghi della dimora di Ilùvatar ne erano riempiti a traboccarne,
             e la musica e l’eco della musica si spandevano nel Vuoto, ed esso non era vacuo.</description>
         <attack>1</attack>
-        <defense>1</defense>
+        <defense>5</defense>
         <magic>1</magic>
         <expReward>1</expReward>
         <duration>30000</duration>
@@ -69,9 +69,9 @@
         <description>Mai prima gli Ainur avevano prodotto una musica simile, benché sia stato detto
             che una ancora più grande sarà fatta al cospetto di Ilùvatar dai cori degli Ainur e dei
             Figli di Ilùvatar dopo la fine dei giorni.</description>
-        <attack>1</attack>
-        <defense>1</defense>
-        <magic>1</magic>
+        <attack>0</attack>
+        <defense>0</defense>
+        <magic>10</magic>
         <expReward>1</expReward>
         <duration>30000</duration>
         <icon>ic_numeric_6_box_grey600_48dp</icon>
@@ -109,7 +109,7 @@
             ed egli partecipava di tutti i doni dei suoi fratelli.</description>
         <attack>1</attack>
         <defense>1</defense>
-        <magic>1</magic>
+        <magic>6</magic>
         <expReward>1</expReward>
         <duration>30000</duration>
         <icon>ic_numeric_9_box_grey600_48dp</icon>
