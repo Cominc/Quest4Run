@@ -108,6 +108,8 @@ public class MapsFragment extends Fragment {
                     // Setting Icon to Dialog
                     //alertDialog.setIcon(R.drawable.tick);
 
+                    alertDialog.setCancelable(false);
+
                     // Setting OK Button
                     alertDialog.setButton(DialogInterface.BUTTON_POSITIVE,getResources().getString(R.string.alert_btn_positive_label), new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
