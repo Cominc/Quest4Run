@@ -6,6 +6,7 @@
     <string name="openDrawer">open_drawer</string>
     <string name="closeDrawer">close_drawer</string>
 
+    <string name="value_with_plus_label">+%d</string>
     <string name="money_label">%d &#162;</string>
     <string name="empty_list">Nessun elemento da mostrare</string>
     <string name="loading">Caricamento&#8230;</string>
@@ -90,6 +91,7 @@
     <string name="menu_complete">Completa</string>
     <string name="menu_delete">Cancella</string>
     <string name="task_delete">Obiettivo rimosso</string>
+    <string name="percentage_label">%d\%</string>
 
     <!-- Option Menu TaskList -->
     <string name="delete_all_task">Cancella tutto</string>
@@ -221,9 +223,8 @@
     <string name="buy_confirmation">Vuoi acquistare %1$s per %2$d &#162; ?</string>
     <string name="shop_min_level">Lv. %d</string>
 
-
     <!-- Quest -->
-    <string name="exp_label"> EXP</string>
+    <string name="exp_label">%d EXP</string>
     <string name="request_change_active_quest">Missione %s attiva, vuoi cambiarla?</string>
     <string name="request_deactive_quest">Vuoi disattivare questa Missione?</string>
     <string name="impossible_active_quest">Statistiche troppo basse, impossibile attivare la Missione</string>
@@ -245,7 +246,6 @@
     <string name="quest_detail_duration_label">Durata</string>
     <string name="quest_detail_date_start_label">Data inizio</string>
     <string name="quest_detail_date_finish_label">Data fine</string>
-    <string name="quest_detail_countdown_finish_label">00:00:00</string>
 
     <!-- Quest Complete Notification-->
     <string name="quest_complete_notification_title">Missione completata!</string>
@@ -279,5 +279,6 @@
 
     <string name="date_format">dd-MM-yyyy</string>
     <string name="datetime_format">HH:mm dd-MM-yyyy</string>
+    <string name="countdown_finish_label">00:00:00</string>
     <string name="alert_btn_positive_label">OK</string>
 </resources>

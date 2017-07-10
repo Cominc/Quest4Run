@@ -107,7 +107,7 @@ public class QuestDetailActivity extends AppCompatActivity {
 
                 @Override
                 public void onFinish() {
-                    countdown.setText(getResources().getString(R.string.quest_detail_countdown_finish_label));
+                    countdown.setText(getResources().getString(R.string.countdown_finish_label));
                 }
             }.start();
         }

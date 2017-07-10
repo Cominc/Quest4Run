@@ -24,7 +24,7 @@ import com.comincini_micheli.quest4run.other.DatabaseHandler;
 import java.util.List;
 
 /**
- * Created by Daniele on 01/06/2017.
+ *  Created by Daniele on 01/06/2017.
  */
 
 public class EquipmentShopAdapter extends BaseAdapter {
@@ -35,7 +35,7 @@ public class EquipmentShopAdapter extends BaseAdapter {
     private int level;
 
     private Equipment equipment_actual;
-    DatabaseHandler db;
+    private DatabaseHandler db;
 
     public EquipmentShopAdapter(Activity a, List<Equipment> d, DatabaseHandler db) {
         activity = a;
@@ -86,17 +86,17 @@ public class EquipmentShopAdapter extends BaseAdapter {
         name.setText(equipment_actual.getName());
         minLevel.setText(String.format(activity.getResources().getString(R.string.shop_min_level),equipment_actual.getMinLevel()));
         if(equipment_actual.getAtk()>=0)
-            attack.setText("+"+String.valueOf(equipment_actual.getAtk()));
+            attack.setText(String.format(activity.getResources().getString(R.string.value_with_plus_label),equipment_actual.getAtk()));
         else
             attack.setText(String.valueOf(equipment_actual.getAtk()));
 
         if(equipment_actual.getDef()>=0)
-            defense.setText("+"+String.valueOf(equipment_actual.getDef()));
+            defense.setText(String.format(activity.getResources().getString(R.string.value_with_plus_label),equipment_actual.getDef()));
         else
             defense.setText(String.valueOf(equipment_actual.getDef()));
 
         if(equipment_actual.getMgc()>=0)
-            magic.setText("+"+String.valueOf(equipment_actual.getMgc()));
+            magic.setText(String.format(activity.getResources().getString(R.string.value_with_plus_label),equipment_actual.getMgc()));
         else
             magic.setText(String.valueOf(equipment_actual.getMgc()));
         price.setText(String.format(activity.getResources().getString(R.string.money_label),equipment_actual.getPrice()));

@@ -1,12 +1,9 @@
 package com.comincini_micheli.quest4run.adapter;
 
-/**
- * Created by Gianmaria on 19/05/2017.
- */
+
 
 import android.app.Activity;
 import android.content.Context;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +19,10 @@ import com.comincini_micheli.quest4run.objects.Task;
 import com.comincini_micheli.quest4run.other.Constants;
 import com.comincini_micheli.quest4run.other.DatabaseHandler;
 
+/**
+ *  Created by Gianmaria on 19/05/2017.
+ */
+
 public class TaskAdapter extends BaseAdapter
 {
 
@@ -32,7 +33,7 @@ public class TaskAdapter extends BaseAdapter
     private String [][] task_goal;
     private String [][] task_reward;
     private Task task_actual;
-    DatabaseHandler db;
+    private DatabaseHandler db;
 
     public TaskAdapter(Activity a, List<Task> d, String [] task_type, String [][] task_goal, String [][] task_reward, DatabaseHandler db) {
         activity = a;
@@ -87,13 +88,13 @@ public class TaskAdapter extends BaseAdapter
         {
             String goalString = task_goal[task_actual.getIdTaskType()][task_actual.getGoal()];
             double goalValue = Double.parseDouble(goalString.substring(0, goalString.length() - 3));
-            percentage.setText(Math.round(task_actual.getProgress()/(goalValue*Constants.M_IN_KM)*100) + "%");
+            percentage.setText(String.format(activity.getResources().getString(R.string.percentage_label),Math.round(task_actual.getProgress()/(goalValue*Constants.M_IN_KM)*100)));
         }
         else if(task_actual.getIdTaskType() == Constants.CONSTANCE_TYPE_TASK)
         {
             String goalString = task_goal[task_actual.getIdTaskType()][task_actual.getGoal()];
             double goalValue = Double.parseDouble(goalString.substring(0, goalString.length() - 7));
-            percentage.setText(Math.round(task_actual.getProgress()/goalValue*100) + "%");
+            percentage.setText(String.format(activity.getResources().getString(R.string.percentage_label),Math.round(task_actual.getProgress()/goalValue*100)));
         }
 
 

@@ -2,31 +2,22 @@ package com.comincini_micheli.quest4run.adapter;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.SharedPreferences;
-import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
-import android.widget.RadioButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.comincini_micheli.quest4run.R;
-import com.comincini_micheli.quest4run.objects.Character;
 import com.comincini_micheli.quest4run.objects.Quest;
-import com.comincini_micheli.quest4run.other.Constants;
-import com.comincini_micheli.quest4run.other.DatabaseHandler;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
 /**
- * Created by Daniele on 27/06/2017.
+ *  Created by Daniele on 27/06/2017.
  */
 
 public class QuestHistoryAdapter extends BaseAdapter
@@ -34,8 +25,6 @@ public class QuestHistoryAdapter extends BaseAdapter
     private Activity activity;
     private List<Quest> data;
     private static LayoutInflater inflater=null;
-
-    private Quest questActual;
 
     public QuestHistoryAdapter(Activity a, List<Quest> d) {
         activity = a;
@@ -66,7 +55,7 @@ public class QuestHistoryAdapter extends BaseAdapter
         TextView expReward = (TextView) vi.findViewById(R.id.quest_history_exp_reward);
         TextView dateFinish = (TextView) vi.findViewById(R.id.quest_history_date_finish);
 
-        questActual = data.get(position);
+        Quest questActual = data.get(position);
 
         int id = activity.getResources().getIdentifier(questActual.getIcon(),"drawable", activity.getPackageName());
         icon.setImageResource(id);
@@ -82,7 +71,7 @@ public class QuestHistoryAdapter extends BaseAdapter
 
         // Setting all values in listview
         title.setText(questActual.getTitle());
-        expReward.setText(questActual.getExpReward() + activity.getResources().getString(R.string.exp_label));
+        expReward.setText(String.format(activity.getResources().getString(R.string.exp_label),questActual.getExpReward()));
         Date date = new Date(questActual.getDateFinish());
         SimpleDateFormat sdf = new SimpleDateFormat(activity.getResources().getString(R.string.date_format));
         dateFinish.setText(sdf.format(date));

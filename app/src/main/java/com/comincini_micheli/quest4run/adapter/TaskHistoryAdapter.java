@@ -2,8 +2,6 @@ package com.comincini_micheli.quest4run.adapter;
 
 import android.app.Activity;
 import android.content.Context;
-import android.graphics.Color;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,7 +17,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * Created by Gianmaria on 29/05/2017.
+ *  Created by Gianmaria on 29/05/2017.
  */
 
 public class TaskHistoryAdapter extends BaseAdapter
@@ -31,7 +29,6 @@ public class TaskHistoryAdapter extends BaseAdapter
     private String [] task_type;
     private String [][] task_goal;
     private String [][] task_reward;
-    private Task task_actual;
 
     public TaskHistoryAdapter(Activity a, List<Task> d, String [] task_type, String [][] task_goal, String [][] task_reward) {
         activity = a;
@@ -67,7 +64,7 @@ public class TaskHistoryAdapter extends BaseAdapter
         TextView reward = (TextView)vi.findViewById(R.id.task_reward_completed);
         TextView dateComplete = (TextView)vi.findViewById(R.id.text_view_date_completed);
 
-        task_actual = data.get(position);
+        Task task_actual = data.get(position);
 
         // Setting all values in listview
         name.setText(task_actual.getName());

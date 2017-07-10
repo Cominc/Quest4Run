@@ -7,24 +7,20 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.SystemClock;
 import android.support.v7.app.AlertDialog;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.comincini_micheli.quest4run.R;
-import com.comincini_micheli.quest4run.activity.QuestDetailActivity;
 import com.comincini_micheli.quest4run.objects.Character;
 import com.comincini_micheli.quest4run.objects.Quest;
 import com.comincini_micheli.quest4run.other.AlarmNotificationReceiver;
@@ -35,7 +31,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Created by Gianmaria on 08/06/2017.
+ *  Created by Gianmaria on 08/06/2017.
  */
 
 public class QuestAdapter extends BaseAdapter
@@ -46,7 +42,6 @@ public class QuestAdapter extends BaseAdapter
 
     private Quest questActual;
     private int indexActiveQuest;
-    private int idCharacter;
 
     private int myAttack;
     private int myDefense;
@@ -56,8 +51,8 @@ public class QuestAdapter extends BaseAdapter
 
     private CountDownTimer myTimer = null;
 
-    DatabaseHandler db;
-    Quest previusActiveQuest;
+    private DatabaseHandler db;
+    private Quest previusActiveQuest;
 
     public QuestAdapter(Activity a, List<Quest> d, DatabaseHandler db) {
         activity = a;
@@ -67,7 +62,7 @@ public class QuestAdapter extends BaseAdapter
         indexActiveQuest = -1;
         previusActiveQuest = null;
         SharedPreferences settings = activity.getSharedPreferences(Constants.NAME_PREFS, Context.MODE_PRIVATE);
-        idCharacter = settings.getInt(Constants.CHAR_ID_PREFERENCE,-1);
+        int idCharacter = settings.getInt(Constants.CHAR_ID_PREFERENCE, -1);
         Character character = db.getCharacter(idCharacter);
         myAttack = character.getAttack();
         myDefense = character.getDefense();
@@ -99,7 +94,7 @@ public class QuestAdapter extends BaseAdapter
         TextView defense = (TextView)vi.findViewById(R.id.quest_min_defense);
         TextView magic = (TextView)vi.findViewById(R.id.quest_min_magic);
         TextView expReward = (TextView) vi.findViewById(R.id.quest_exp_reward);
-        RadioButton active = (RadioButton)vi.findViewById(R.id.quest_active_radiobutton);
+        final RadioButton active = (RadioButton)vi.findViewById(R.id.quest_active_radiobutton);
 
         final TextView countdown = (TextView)vi.findViewById(R.id.quest_timer);
 
@@ -122,7 +117,7 @@ public class QuestAdapter extends BaseAdapter
         attack.setText(String.valueOf(questActual.getMinAttack()));
         defense.setText(String.valueOf(questActual.getMinDefense()));
         magic.setText(String.valueOf(questActual.getMinMagic()));
-        expReward.setText(questActual.getExpReward() + activity.getResources().getString(R.string.exp_label));
+        expReward.setText(String.format(activity.getResources().getString(R.string.exp_label),questActual.getExpReward()));
 
         if(!questActual.isActive()){
                 countdown.setText("");
@@ -158,7 +153,7 @@ public class QuestAdapter extends BaseAdapter
 
                 @Override
                 public void onFinish() {
-                    countdown.setText("00:00:00");
+                    countdown.setText(activity.getResources().getString(R.string.countdown_finish_label));
                     data.remove(indexActiveQuest);
                     indexActiveQuest = -1;
                     notifyDataSetChanged();

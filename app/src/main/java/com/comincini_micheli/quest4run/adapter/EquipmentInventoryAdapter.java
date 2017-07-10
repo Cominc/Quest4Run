@@ -26,7 +26,7 @@ import com.comincini_micheli.quest4run.other.DatabaseHandler;
 import java.util.List;
 
 /**
- * Created by Daniele on 01/06/2017.
+ *  Created by Daniele on 01/06/2017.
  */
 
 public class EquipmentInventoryAdapter extends BaseAdapter {
@@ -37,7 +37,7 @@ public class EquipmentInventoryAdapter extends BaseAdapter {
     private Equipment equipment_actual;
     private int indexEquipmentEquipped;
     private int idCharacter;
-    DatabaseHandler db;
+    private DatabaseHandler db;
 
     public EquipmentInventoryAdapter(Activity a, List<Equipment> d, DatabaseHandler db) {
         activity = a;
