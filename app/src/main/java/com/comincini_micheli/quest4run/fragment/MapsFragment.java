@@ -21,6 +21,7 @@ import android.widget.Chronometer;
 import android.widget.TextView;
 
 import com.comincini_micheli.quest4run.R;
+import com.comincini_micheli.quest4run.activity.MainActivity;
 import com.comincini_micheli.quest4run.objects.Gps;
 
 import com.comincini_micheli.quest4run.other.Constants;
@@ -107,6 +108,8 @@ public class MapsFragment extends Fragment {
 
                     // Setting Icon to Dialog
                     //alertDialog.setIcon(R.drawable.tick);
+
+                    alertDialog.setCancelable(false);
 
                     // Setting OK Button
                     alertDialog.setButton(DialogInterface.BUTTON_POSITIVE,getResources().getString(R.string.alert_btn_positive_label), new DialogInterface.OnClickListener() {

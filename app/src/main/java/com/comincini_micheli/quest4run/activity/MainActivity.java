@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private boolean firstOpen;
+    int lastFragmentListId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +55,7 @@ public class MainActivity extends AppCompatActivity
             fragmentTransaction.commit();
             this.setTitle(getResources().getString(R.string.nav_quest));
             navigationView.setCheckedItem(R.id.nav_quest);
+            lastFragmentListId = R.id.nav_quest;
             Intent i = new Intent(this, QuestHistoryActivity.class);
             startActivity(i);
         }
@@ -65,6 +67,7 @@ public class MainActivity extends AppCompatActivity
             fragmentTransaction.commit();
             this.setTitle(getResources().getString(R.string.nav_run));
             navigationView.setCheckedItem(R.id.nav_run);
+            lastFragmentListId = R.id.nav_run;
 
             SharedPreferences firstLaunchSetting = getSharedPreferences(Constants.NAME_PREFS, MODE_PRIVATE);
             firstOpen = firstLaunchSetting.getBoolean(Constants.INFO_START_MAIN, true);
@@ -118,6 +121,21 @@ public class MainActivity extends AppCompatActivity
         Fragment fragment = null;
         String title = "";
 
+        if(idNavigationItemSelected != R.id.nav_about_us && idNavigationItemSelected != R.id.nav_faq)
+        {
+            if(idNavigationItemSelected == R.id.nav_path)
+            {
+                SharedPreferences firstLaunchSetting = getSharedPreferences(Constants.NAME_PREFS, MODE_PRIVATE);
+                float distance = firstLaunchSetting.getFloat(Constants.LAST_DISTANCE, 0);
+                if(distance > 0)
+                    lastFragmentListId = idNavigationItemSelected;
+                else
+                    lastFragmentListId = R.id.nav_run;
+            }
+            else
+                lastFragmentListId = idNavigationItemSelected;
+        }
+
         switch(idNavigationItemSelected)
         {
             case R.id.nav_run:
@@ -145,10 +163,14 @@ public class MainActivity extends AppCompatActivity
                 title = getResources().getString(R.string.nav_character);
                 break;
             case R.id.nav_about_us:
-                startActivity(new Intent(MainActivity.this, AboutUsActivity.class));
+                //startActivity(new Intent(MainActivity.this, AboutUsActivity.class));
+                Intent intent = new Intent(this, AboutUsActivity.class);
+                startActivityForResult(intent, Constants.OPEN_ABOUT_US_ACTIVITY);
                 break;
             case R.id.nav_faq:
-                startActivity(new Intent(MainActivity.this, FaqActivity.class));
+                //startActivity(new Intent(MainActivity.this, FaqActivity.class));
+                Intent intent2 = new Intent(this, FaqActivity.class);
+                startActivityForResult(intent2, Constants.OPEN_FAQ_ACTIVITY);
                 break;
             default:
                 fragment = new RunFragment();
@@ -168,5 +190,13 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setCheckedItem(lastFragmentListId);
+        super.onActivityResult(requestCode, resultCode, data);
     }
 }

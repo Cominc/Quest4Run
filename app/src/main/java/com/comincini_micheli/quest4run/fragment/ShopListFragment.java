@@ -131,7 +131,7 @@ public class ShopListFragment extends Fragment {
                         }
                         break;
                 }
-                return true;
+                return false;
             }
         });
 
