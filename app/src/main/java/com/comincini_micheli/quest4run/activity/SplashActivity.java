@@ -28,9 +28,6 @@ public class SplashActivity extends AppCompatActivity {
                 int characterId = firstLaunchSetting.getInt(Constants.CHAR_ID_PREFERENCE, -1);
                 if(characterId == -1)
                 {
-                    DatabaseHandler db = new DatabaseHandler(getApplicationContext());
-                    db.loadEquipmentfromXml();
-                    db.loadQuestfromXml();
                     Intent i = new Intent(SplashActivity.this, CreateCharacterActivity.class);
                     startActivity(i);
                 }

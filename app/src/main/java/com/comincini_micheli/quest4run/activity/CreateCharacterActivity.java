@@ -25,7 +25,7 @@ import com.comincini_micheli.quest4run.R;
 import com.comincini_micheli.quest4run.objects.Character;
 import com.comincini_micheli.quest4run.other.Constants;
 import com.comincini_micheli.quest4run.other.DatabaseHandler;
-
+//TODO controllare creazione db se non si completa creazione personaggio
 public class CreateCharacterActivity extends AppCompatActivity
 {
     private int[] femaleAvatar = {
@@ -181,6 +181,8 @@ public class CreateCharacterActivity extends AppCompatActivity
                     Log.w("avatarId", avatarIndex+"");
 
                     DatabaseHandler db = new DatabaseHandler(getApplicationContext());
+                    db.loadEquipmentfromXml();
+                    db.loadQuestfromXml();
                     int newCharacterID = db.addCharacter(newCharacter);
                     SharedPreferences.Editor firstLaunchSetting = getSharedPreferences(Constants.NAME_PREFS, MODE_PRIVATE).edit();
                     firstLaunchSetting.putInt(Constants.CHAR_ID_PREFERENCE, newCharacterID);
