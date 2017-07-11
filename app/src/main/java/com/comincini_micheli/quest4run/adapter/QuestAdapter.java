@@ -182,7 +182,7 @@ public class QuestAdapter extends BaseAdapter
                 }
             });
 
-            active.
+            active.setAlpha(1f);
 
             active.setOnTouchListener(new View.OnTouchListener()
             {
@@ -279,7 +279,7 @@ public class QuestAdapter extends BaseAdapter
                 db.updateQuest(questActual);
             }
 
-            active.setAlpha(1f);
+            active.setAlpha(0.5f);
 
             active.setOnTouchListener(new View.OnTouchListener()
             {
