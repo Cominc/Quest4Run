@@ -96,7 +96,7 @@ public class ShopFragment extends Fragment
                         }
                         break;
                 }
-                return false;
+                return true;
             }
         });
         return view;
