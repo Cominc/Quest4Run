@@ -91,7 +91,7 @@
     <string name="menu_complete">Completa</string>
     <string name="menu_delete">Cancella</string>
     <string name="task_delete">Obiettivo rimosso</string>
-    <string name="percentage_label">%d\%</string>
+    <string name="percentage_label">%d%%</string>
 
     <!-- Option Menu TaskList -->
     <string name="delete_all_task">Cancella tutto</string>

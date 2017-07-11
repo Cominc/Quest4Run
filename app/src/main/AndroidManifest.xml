@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--TODO  android:launchMode="singleTop" 2 casi-->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.comincini_micheli.quest4run">
 
