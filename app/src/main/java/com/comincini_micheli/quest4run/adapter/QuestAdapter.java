@@ -69,8 +69,12 @@ public class QuestAdapter extends BaseAdapter
         myMagic = character.getMagic();
     }
 
+
     public int getCount() {
-        return data.size();
+        if(data==null)
+            return 0;
+        else
+            return data.size();
     }
 
     public Object getItem(int position) {
@@ -153,17 +157,19 @@ public class QuestAdapter extends BaseAdapter
 
                 @Override
                 public void onFinish() {
-                    countdown.setText(activity.getResources().getString(R.string.countdown_finish_label));
-                    data.remove(indexActiveQuest);
-                    indexActiveQuest = -1;
-                    notifyDataSetChanged();
+                    if(indexActiveQuest!=-1){
+                        countdown.setText(activity.getResources().getString(R.string.countdown_finish_label));
+                        data.remove(indexActiveQuest);
+                        indexActiveQuest = -1;
+                        notifyDataSetChanged();
+                    }
                 }
             }.start();
         }
 
+        active.setChecked(questActual.isActive());
         if((questActual.getMinAttack()<= myAttack) && (questActual.getMinDefense() <= myDefense) && (questActual.getMinMagic() <= myMagic))
         {
-            active.setChecked(questActual.isActive());
             if(questActual.isActive())
                 indexActiveQuest = position;
 
