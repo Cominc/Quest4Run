@@ -594,7 +594,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     // Getting All EQUIPMENTS
     public List<Equipment> getAllEquipments() {
-        List<Equipment> equipmentList = new ArrayList<Equipment>();
+        List<Equipment> equipmentList = new ArrayList<>();
         // Select All Query
         String selectQuery = "SELECT  * FROM " + TABLE_EQUIPMENT;
 
@@ -627,7 +627,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     }
 
     public List<Equipment> getAllEquipments(int idType, boolean bought) {
-        List<Equipment> equipmentList = new ArrayList<Equipment>();
+        List<Equipment> equipmentList = new ArrayList<>();
         int _bought;
         if(bought)
             _bought = 1;
@@ -753,7 +753,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     // Getting All tasks
     public List<Quest> getAllQuests() {
-        List<Quest> questList = new ArrayList<Quest>();
+        List<Quest> questList = new ArrayList<>();
         // Select All Query
         String selectQuery = "SELECT  * FROM " + TABLE_QUEST;
 
@@ -814,7 +814,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     }
 
     public List<Quest> getQuests(boolean show_completed) {
-        List<Quest> questList = new ArrayList<Quest>();
+        List<Quest> questList = new ArrayList<>();
         int _completed;
         if(show_completed)
             _completed = 1;
@@ -936,7 +936,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     // Getting All tasks
     public List<Gps> getAllGps() {
-        List<Gps> gpsList = new ArrayList<Gps>();
+        List<Gps> gpsList = new ArrayList<>();
         // Select All Query
         String selectQuery = "SELECT  * FROM " + TABLE_GPS;
 

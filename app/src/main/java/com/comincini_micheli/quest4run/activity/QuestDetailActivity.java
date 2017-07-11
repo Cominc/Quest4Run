@@ -52,9 +52,9 @@ public class QuestDetailActivity extends AppCompatActivity {
         title.setText(quest.getTitle());
         description.setText(quest.getDescription());
         reward.setText(String.format(getResources().getString(R.string.quest_detail_reward),quest.getExpReward()));
-        attack.setText(quest.getMinAttack()+"");
-        defense.setText(quest.getMinDefense()+"");
-        magic.setText(quest.getMinMagic()+"");
+        attack.setText(String.valueOf(quest.getMinAttack()));
+        defense.setText(String.valueOf(quest.getMinDefense()));
+        magic.setText(String.valueOf(quest.getMinMagic()));
         duration.setText(quest.getDurationString());
         countdown.setVisibility(View.GONE);
         if(quest.getDateStart()!=Quest.DEFAUL_EMPTY_DATE_VALUE) {
