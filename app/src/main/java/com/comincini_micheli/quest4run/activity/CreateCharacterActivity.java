@@ -45,7 +45,7 @@ public class CreateCharacterActivity extends AppCompatActivity
     private TextView nameTextEdit;
 
 
-    //ProgressDialog nDialog;
+    //private ProgressDialog nDialog;
     private AlertDialog dialog;
     private Context context;
 
@@ -150,15 +150,18 @@ public class CreateCharacterActivity extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
+
                 dialog = new AlertDialog.Builder(context).create();
                 dialog.setMessage(getResources().getString(R.string.loading));
                 dialog.show();
-                /*nDialog = new ProgressDialog(context);
+                /*
+                nDialog = new ProgressDialog(context);
                 nDialog.setMessage(getResources().getString(R.string.loading));
-                nDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+                nDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
                 nDialog.setIndeterminate(true);
                 nDialog.setCancelable(false);
-                nDialog.show();*/
+                nDialog.show();
+                */
 
                 String newCharacterName = nameTextEdit.getText().toString().trim();
                 if(newCharacterName.length() != 0)
@@ -185,7 +188,6 @@ public class CreateCharacterActivity extends AppCompatActivity
                         Intent i = new Intent(CreateCharacterActivity.this, MainActivity.class);
                         startActivity(i);
                         finish();
-                        //nDialog.dismiss();
                     }
                 }
                 else
@@ -230,4 +232,9 @@ public class CreateCharacterActivity extends AppCompatActivity
         alert.show();
     }
 
+    @Override
+    protected void onDestroy() {
+        dialog.dismiss();
+        super.onDestroy();
+    }
 }
