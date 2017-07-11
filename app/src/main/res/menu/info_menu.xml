@@ -3,7 +3,7 @@
 
     <item android:id="@+id/info_button"
           android:icon="@drawable/info_100"
-          android:title="info"
+          android:title="@string/info_label"
           app:showAsAction="always"/>
 
 </menu>

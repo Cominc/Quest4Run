@@ -53,7 +53,7 @@ public class XMLParser
         return xml;
     }*/
 
-    public String getStringfromXml(InputStream inputStream)
+    public String getStringFromXml(InputStream inputStream)
     {
         ByteArrayOutputStream streamResult = new ByteArrayOutputStream();
         byte[] buffer = new byte[1024];
@@ -82,7 +82,7 @@ public class XMLParser
     }
 
     public Document getDomElement(String xml){
-        Document doc = null;
+        Document doc;
         DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
         try {
 

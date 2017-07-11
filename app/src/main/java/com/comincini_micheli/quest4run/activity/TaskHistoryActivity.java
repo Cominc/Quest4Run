@@ -15,9 +15,9 @@ import java.util.List;
 
 public class TaskHistoryActivity extends AppCompatActivity
 {
-    List<Task> taskList;
-    ListView list;
-    TaskHistoryAdapter adapter;
+    private List<Task> taskList;
+    private ListView list;
+    private TaskHistoryAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)

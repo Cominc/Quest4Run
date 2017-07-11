@@ -88,7 +88,7 @@ public class MapsFragment extends Fragment {
                 List<Gps> gpsList = db.getAllGps();
 
                 PolylineOptions line= new PolylineOptions().width(5).color(getResources().getColor(R.color.colorPrimary));
-                LatLng point = null;
+                LatLng point;
 
                 if(gpsList.isEmpty()){
                     AlertDialog alertDialog = new AlertDialog.Builder(

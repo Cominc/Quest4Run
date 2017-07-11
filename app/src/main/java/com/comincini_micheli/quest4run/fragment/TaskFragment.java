@@ -32,10 +32,10 @@ import static android.app.Activity.RESULT_OK;
 
 public class TaskFragment extends Fragment
 {
-    ListView list;
-    TaskAdapter adapter;
-    List<Task> taskList;
-    DatabaseHandler db;
+    private ListView list;
+    private TaskAdapter adapter;
+    private List<Task> taskList;
+    private DatabaseHandler db;
 
     public TaskFragment()
     {

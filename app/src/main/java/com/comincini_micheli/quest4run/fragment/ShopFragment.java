@@ -17,9 +17,9 @@ import com.comincini_micheli.quest4run.other.Constants;
 
 public class ShopFragment extends Fragment
 {
-    float x1 = 0;
-    float x2 = 0;
-    int width;
+    private float x1 = 0;
+    private float x2 = 0;
+    private int width;
 
     public ShopFragment()
     {

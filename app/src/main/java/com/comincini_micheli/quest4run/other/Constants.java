@@ -24,7 +24,7 @@ public class Constants
 
    public static final int MY_PERMISSION_REQUEST_LOCATION = 99;
 
-   public static final long MIN_TIME_BETEWEEN_UPDATE = 1000;
+   public static final long MIN_TIME_BETWEEN_UPDATE = 1000;
 
    public static final int ID_TYPE_ATTACK = 0;
    public static final int ID_TYPE_DEFENSE = 1;

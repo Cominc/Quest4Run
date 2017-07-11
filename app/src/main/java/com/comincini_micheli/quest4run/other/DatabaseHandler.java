@@ -137,10 +137,10 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         db.execSQL(CREATE_GPS_TABLE);
     }
 
-    public void loadEquipmentfromXml()
+    public void loadEquipmentFromXml()
     {
         XMLParser parser = new XMLParser();
-        String equipmentXml = parser.getStringfromXml(context.getResources().openRawResource(R.raw.equipment));
+        String equipmentXml = parser.getStringFromXml(context.getResources().openRawResource(R.raw.equipment));
         Document equipmentDoc = parser.getDomElement(equipmentXml);
 
         NodeList nl = equipmentDoc.getElementsByTagName("equipment");
@@ -163,10 +163,10 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         }
     }
 
-    public void loadQuestfromXml()
+    public void loadQuestFromXml()
     {
         XMLParser parser = new XMLParser();
-        String questXml = parser.getStringfromXml(context.getResources().openRawResource(R.raw.quest));
+        String questXml = parser.getStringFromXml(context.getResources().openRawResource(R.raw.quest));
         Document questDoc = parser.getDomElement(questXml);
 
         NodeList nl = questDoc.getElementsByTagName("quest");
@@ -529,7 +529,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     public void equipEquipment(Equipment equipment, int idCharacter)
     {
-        SQLiteDatabase db = this.getWritableDatabase();
         updateEquipment(equipment);
         Character me = getCharacter(idCharacter);
         me.setAttack(me.getAttack()+equipment.getAtk());
@@ -808,9 +807,14 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             quest.setDateStart(Long.parseLong(cursor.getString(10)));
             quest.setDateFinish(Long.parseLong(cursor.getString(11)));
             quest.setIcon(cursor.getString(12));
+            cursor.close();
             return quest;
         }
-        else return null;
+        else
+        {
+            cursor.close();
+            return null;
+        }
     }
 
     public List<Quest> getQuests(boolean show_completed) {

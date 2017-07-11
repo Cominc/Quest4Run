@@ -7,7 +7,6 @@ import android.content.SharedPreferences;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -24,13 +23,13 @@ import com.comincini_micheli.quest4run.other.DatabaseHandler;
 
 public class CreateCharacterActivity extends AppCompatActivity
 {
-    private int[] femaleAvatar = {
+    private final int[] femaleAvatar = {
             R.drawable.f_0,
             R.drawable.f_1,
             R.drawable.f_2,
     };
 
-    private int[] maleAvatar = {
+    private final int[] maleAvatar = {
             R.drawable.m_0,
             R.drawable.m_1,
             R.drawable.m_2,
@@ -43,12 +42,12 @@ public class CreateCharacterActivity extends AppCompatActivity
     private String[] avatarTag;
     private int avatarIndex;
 
-    TextView nameTextEdit;
+    private TextView nameTextEdit;
 
 
     //ProgressDialog nDialog;
-    AlertDialog dialog;
-    Context context;
+    private AlertDialog dialog;
+    private Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -62,7 +61,7 @@ public class CreateCharacterActivity extends AppCompatActivity
         avatarTag = maleAvatarTag;
         avatarIndex = 0;
 
-        ImageButton btn_left = (ImageButton) findViewById(R.id.update_characher_left_btn);
+        ImageButton btn_left = (ImageButton) findViewById(R.id.update_character_left_btn);
         ImageButton btn_right = (ImageButton) findViewById(R.id.update_character_right_btn);
 
         btn_left.setOnClickListener(new View.OnClickListener()
@@ -174,11 +173,10 @@ public class CreateCharacterActivity extends AppCompatActivity
 
 
                     Character newCharacter = new Character(newCharacterName, gender, avatarIndex);
-                    Log.w("avatarId", avatarIndex+"");
 
                     DatabaseHandler db = new DatabaseHandler(getApplicationContext());
-                    db.loadEquipmentfromXml();
-                    db.loadQuestfromXml();
+                    db.loadEquipmentFromXml();
+                    db.loadQuestFromXml();
                     int newCharacterID = db.addCharacter(newCharacter);
                     SharedPreferences.Editor firstLaunchSetting = getSharedPreferences(Constants.NAME_PREFS, MODE_PRIVATE).edit();
                     firstLaunchSetting.putInt(Constants.CHAR_ID_PREFERENCE, newCharacterID);
@@ -188,10 +186,6 @@ public class CreateCharacterActivity extends AppCompatActivity
                         startActivity(i);
                         finish();
                         //nDialog.dismiss();
-                    }
-                    else
-                    {
-                        Log.w("Errore","Salvataggio non riuscito");
                     }
                 }
                 else

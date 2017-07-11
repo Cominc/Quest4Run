@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private boolean firstOpen;
-    int lastFragmentListId;
+    private int lastFragmentListId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,8 +111,7 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-    //TODO cos'è?
-    @SuppressWarnings("StatementWithEmptyBody")
+
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.

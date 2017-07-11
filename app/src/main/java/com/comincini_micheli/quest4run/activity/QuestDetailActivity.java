@@ -15,13 +15,14 @@ import com.comincini_micheli.quest4run.other.DatabaseHandler;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
 public class QuestDetailActivity extends AppCompatActivity {
 
-    long countTime;
-    Quest quest;
-    DatabaseHandler db;
+    private long countTime;
+    private Quest quest;
+    private DatabaseHandler db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,18 +58,18 @@ public class QuestDetailActivity extends AppCompatActivity {
         magic.setText(String.valueOf(quest.getMinMagic()));
         duration.setText(quest.getDurationString());
         countdown.setVisibility(View.GONE);
-        if(quest.getDateStart()!=Quest.DEFAUL_EMPTY_DATE_VALUE) {
+        if(quest.getDateStart()!=Quest.DEFAULT_EMPTY_DATE_VALUE) {
             Date date = new Date(quest.getDateStart());
-            SimpleDateFormat sdf = new SimpleDateFormat(getResources().getString(R.string.datetime_format));
+            SimpleDateFormat sdf = new SimpleDateFormat(getResources().getString(R.string.datetime_format), Locale.ITALY);
             dateStart.setText(sdf.format(date));
         }
         else{
             findViewById(R.id.quest_detail_date_start_label).setVisibility(View.GONE);
             dateStart.setText("");
         }
-        if(quest.getDateFinish()!=Quest.DEFAUL_EMPTY_DATE_VALUE) {
+        if(quest.getDateFinish()!=Quest.DEFAULT_EMPTY_DATE_VALUE) {
             Date date = new Date(quest.getDateFinish());
-            SimpleDateFormat sdf = new SimpleDateFormat(getResources().getString(R.string.datetime_format));
+            SimpleDateFormat sdf = new SimpleDateFormat(getResources().getString(R.string.datetime_format), Locale.ITALY);
             dateFinish.setText(sdf.format(date));
         }
         else{

@@ -38,7 +38,7 @@
         android:layout_toEndOf="@+id/create_character_avatar_img"/>
 
     <ImageButton
-        android:id="@+id/update_characher_left_btn"
+        android:id="@+id/update_character_left_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/update_character_right_btn"

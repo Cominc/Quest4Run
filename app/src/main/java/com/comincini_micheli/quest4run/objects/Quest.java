@@ -10,7 +10,7 @@ import java.util.concurrent.TimeUnit;
 
 public class Quest implements Comparable
 {
-    public static long DEFAUL_EMPTY_DATE_VALUE = -1;
+    public static final long DEFAULT_EMPTY_DATE_VALUE = -1;
 
     private int id;
     private String title;
@@ -55,16 +55,16 @@ public class Quest implements Comparable
         this.duration = duration;
         this.completed = false;
         this.active = false;
-        this.dateStart = DEFAUL_EMPTY_DATE_VALUE;
-        this.dateFinish = DEFAUL_EMPTY_DATE_VALUE;
+        this.dateStart = DEFAULT_EMPTY_DATE_VALUE;
+        this.dateFinish = DEFAULT_EMPTY_DATE_VALUE;
     }
 
     public Quest()
     {
         this.completed = false;
         this.active = false;
-        this.dateStart = DEFAUL_EMPTY_DATE_VALUE;
-        this.dateFinish = DEFAUL_EMPTY_DATE_VALUE;
+        this.dateStart = DEFAULT_EMPTY_DATE_VALUE;
+        this.dateFinish = DEFAULT_EMPTY_DATE_VALUE;
     }
 
     public int getId()

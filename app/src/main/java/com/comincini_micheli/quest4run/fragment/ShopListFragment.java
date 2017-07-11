@@ -23,13 +23,14 @@ import java.util.List;
 
 public class ShopListFragment extends Fragment {
     private int equipmentTypeId;
-    ListView list;
-    EquipmentShopAdapter adapter;
-    List<Equipment> equipmentList;
-    DatabaseHandler db;
+    private ListView list;
+    private EquipmentShopAdapter adapter;
+    private List<Equipment> equipmentList;
+    private DatabaseHandler db;
 
-    float x1,x2;
-    int width;
+    private float x1;
+    private float x2;
+    private int width;
 
     public ShopListFragment() {
         // Required empty public constructor

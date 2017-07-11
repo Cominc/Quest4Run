@@ -52,7 +52,7 @@ public class QuestAdapter extends BaseAdapter
     private CountDownTimer myTimer = null;
 
     private DatabaseHandler db;
-    private Quest previusActiveQuest;
+    private Quest previousActiveQuest;
 
     public QuestAdapter(Activity a, List<Quest> d, DatabaseHandler db) {
         activity = a;
@@ -60,7 +60,7 @@ public class QuestAdapter extends BaseAdapter
         this.db = db;
         inflater = (LayoutInflater)activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         indexActiveQuest = -1;
-        previusActiveQuest = null;
+        previousActiveQuest = null;
         SharedPreferences settings = activity.getSharedPreferences(Constants.NAME_PREFS, Context.MODE_PRIVATE);
         int idCharacter = settings.getInt(Constants.CHAR_ID_PREFERENCE, -1);
         Character character = db.getCharacter(idCharacter);
@@ -179,17 +179,17 @@ public class QuestAdapter extends BaseAdapter
                         {
                             if(indexActiveQuest != -1)
                             {
-                                previusActiveQuest = data.get(indexActiveQuest);
+                                previousActiveQuest = data.get(indexActiveQuest);
                                 AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-                                String request = String.format(activity.getResources().getString(R.string.request_change_active_quest),previusActiveQuest.getTitle());
+                                String request = String.format(activity.getResources().getString(R.string.request_change_active_quest), previousActiveQuest.getTitle());
                                 builder.setMessage(request)
                                         .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
                                             public void onClick(DialogInterface dialog, int id)
                                             {
-                                                previusActiveQuest.setActive(false);
-                                                previusActiveQuest.setDateStart(Quest.DEFAUL_EMPTY_DATE_VALUE);
-                                                db.updateQuest(previusActiveQuest);
-                                                data.set(indexActiveQuest,previusActiveQuest);
+                                                previousActiveQuest.setActive(false);
+                                                previousActiveQuest.setDateStart(Quest.DEFAULT_EMPTY_DATE_VALUE);
+                                                db.updateQuest(previousActiveQuest);
+                                                data.set(indexActiveQuest, previousActiveQuest);
 
                                                 questActual = data.get(position);
                                                 questActual.setActive(true);
@@ -224,16 +224,16 @@ public class QuestAdapter extends BaseAdapter
                         }
                         else
                         {
-                            previusActiveQuest = data.get(position);
+                            previousActiveQuest = data.get(position);
                             AlertDialog.Builder builder = new AlertDialog.Builder(activity);
                             builder.setMessage(R.string.request_deactive_quest)
                                     .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
                                         public void onClick(DialogInterface dialog, int id)
                                         {
-                                            previusActiveQuest.setActive(false);
-                                            previusActiveQuest.setDateStart(Quest.DEFAUL_EMPTY_DATE_VALUE);
-                                            db.updateQuest(previusActiveQuest);
-                                            data.set(indexActiveQuest,previusActiveQuest);
+                                            previousActiveQuest.setActive(false);
+                                            previousActiveQuest.setDateStart(Quest.DEFAULT_EMPTY_DATE_VALUE);
+                                            db.updateQuest(previousActiveQuest);
+                                            data.set(indexActiveQuest, previousActiveQuest);
                                             indexActiveQuest = -1;
                                             myTimer.cancel();
                                             notifyDataSetChanged();
@@ -258,7 +258,7 @@ public class QuestAdapter extends BaseAdapter
             if(questActual.isActive())
             {
                 questActual.setActive(false);
-                questActual.setDateStart(Quest.DEFAUL_EMPTY_DATE_VALUE);
+                questActual.setDateStart(Quest.DEFAULT_EMPTY_DATE_VALUE);
                 db.updateQuest(questActual);
             }
 

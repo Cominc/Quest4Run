@@ -27,11 +27,11 @@ import java.util.List;
 
 public class AddTaskActivity extends AppCompatActivity
 {
-    Spinner spinnerType;
-    Spinner spinnerGoal;
-    Spinner spinnerReward;
-    Button createButton;
-    TextView nameTextEdit;
+    private Spinner spinnerType;
+    private Spinner spinnerGoal;
+    private Spinner spinnerReward;
+    private Button createButton;
+    private TextView nameTextEdit;
 
     private boolean firstOpen;
 

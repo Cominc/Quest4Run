@@ -11,7 +11,7 @@ import com.comincini_micheli.quest4run.other.Constants;
 
 public class SplashActivity extends AppCompatActivity {
 
-    int TIMEOUT_SPLASH = 1000;
+    private final int TIMEOUT_SPLASH = 1000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

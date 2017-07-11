@@ -50,6 +50,7 @@ import com.google.android.gms.maps.model.PolylineOptions;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 
 public class RunFragment extends Fragment {
@@ -213,7 +214,7 @@ public class RunFragment extends Fragment {
                         db.deleteAllGps();
                         //Toast.makeText( getContext(),"Cancellati tutti i GPS points ("+db.getGpsCount()+")",Toast.LENGTH_SHORT).show();
 
-                        locationManager.requestLocationUpdates(provider, Constants.MIN_TIME_BETEWEEN_UPDATE, 0, locationListener);
+                        locationManager.requestLocationUpdates(provider, Constants.MIN_TIME_BETWEEN_UPDATE, 0, locationListener);
                         progressDialog.show();
 
                         previousLocation = null;
@@ -315,7 +316,7 @@ public class RunFragment extends Fragment {
                         Date yesterdayDate = new Date(finishTime - Constants.MILLISECONDS_A_DAY);
 
                         Date today = new Date(finishTime);
-                        SimpleDateFormat sdf = new SimpleDateFormat(getResources().getString(R.string.date_format));
+                        SimpleDateFormat sdf = new SimpleDateFormat(getResources().getString(R.string.date_format), Locale.ITALY);
 
                         if (sdf.format(yesterdayDate).equals(sdf.format(lastExecDate))) {
                             int progress = (int) tasks_constance.get(i).getProgress() + 1;

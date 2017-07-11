@@ -15,6 +15,7 @@ import com.comincini_micheli.quest4run.objects.Task;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 /**
  *  Created by Gianmaria on 29/05/2017.
@@ -78,7 +79,7 @@ public class TaskHistoryAdapter extends BaseAdapter
         icon_coin.setColorFilter(activity.getResources().getColor(R.color.gold));
 
         Date date = new Date(task_actual.getExecDate());
-        SimpleDateFormat sdf = new SimpleDateFormat(activity.getResources().getString(R.string.date_format));
+        SimpleDateFormat sdf = new SimpleDateFormat(activity.getResources().getString(R.string.date_format), Locale.ITALY);
         dateComplete.setText(sdf.format(date));
 
         return vi;
