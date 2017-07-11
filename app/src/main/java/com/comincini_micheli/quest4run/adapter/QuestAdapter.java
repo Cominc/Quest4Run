@@ -173,6 +173,15 @@ public class QuestAdapter extends BaseAdapter
             if(questActual.isActive())
                 indexActiveQuest = position;
 
+            active.setOnClickListener(new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View v)
+                {
+
+                }
+            });
+
             active.setOnTouchListener(new View.OnTouchListener()
             {
                 @Override
@@ -269,6 +278,16 @@ public class QuestAdapter extends BaseAdapter
             }
 
             active.setAlpha(0.5f);
+
+            active.setOnTouchListener(new View.OnTouchListener()
+            {
+                @Override
+                public boolean onTouch(View v, MotionEvent event)
+                {
+                    return false;
+                }
+            });
+
             active.setOnClickListener(new View.OnClickListener()
             {
                 @Override
