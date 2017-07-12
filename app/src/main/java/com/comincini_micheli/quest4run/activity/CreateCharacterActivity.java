@@ -166,14 +166,11 @@ public class CreateCharacterActivity extends AppCompatActivity
                 String newCharacterName = nameTextEdit.getText().toString().trim();
                 if(newCharacterName.length() != 0)
                 {
-
-
                     int gender;
                     if(radioGroup.getCheckedRadioButtonId() == R.id.create_character_male_radiobtn)
                         gender = 0;
                     else
                         gender = 1;
-
 
                     Character newCharacter = new Character(newCharacterName, gender, avatarIndex);
 
