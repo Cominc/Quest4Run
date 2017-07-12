@@ -32,6 +32,7 @@ public class SplashActivity extends AppCompatActivity {
                 else
                 {
                     Intent i = new Intent(SplashActivity.this, MainActivity.class);
+                    i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
                     Bundle b = getIntent().getExtras();
                     if(b != null)
