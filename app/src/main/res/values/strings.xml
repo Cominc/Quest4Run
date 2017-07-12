@@ -46,8 +46,8 @@
     <string name="release_year">2017</string>
 
     <!--Main Activity Alert -->
-    <string name="title_alert_start">Benvenuto!</string>
-    <string name="content_alert_start">Benvenuto in Quest4Run! Per cominciare inizia subito a creare i tuoi obbiettivi e parti per la corsa! Per informazioni più dettagliate sulle varie sezioni, consulta le Faq. Buon divertimento!</string>
+    <string name="title_alert_start">Benvenuto/a!</string>
+    <string name="content_alert_start">Benvenuto/a in Quest4Run! Per cominciare inizia subito a creare i tuoi obbiettivi e parti per la corsa! Per informazioni più dettagliate sulle varie sezioni, consulta le Faq. Buon divertimento!</string>
 
     <!--Faq-->
     <string name="faq_title">Domande Frequenti</string>
